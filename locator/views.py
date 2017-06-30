@@ -1,5 +1,6 @@
 #-*- coding:utf-8 -*-
 from django.shortcuts import render
+from django.shortcuts import HttpResponseRedirect
 from locator import models
 
 # Create your views here.
@@ -37,6 +38,13 @@ def login(request):
 
 
     if flag:
+        request.session["username"] = username
+        request.session["password"] = password
         return render(request, 'index.html')
     else:
         return render(request, 'login.html', {"validate": validate})
+
+def logout(request):
+    del request.session['username']  # 删除session
+    del request.session['password']
+    return HttpResponseRedirect('/locator/index/')
