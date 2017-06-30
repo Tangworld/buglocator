@@ -34,12 +34,12 @@
 	  <div id="login-page">
 	  	<div class="container">
 	  	
-		      <form class="form-login" action="{% url 'locator:login' %}">
+		      <form class="form-login" action="{% url 'locator:login' %}" method="post">
 		        <h2 class="form-login-heading">登录</h2>
 		        <div class="login-wrap">
-		            <input type="text" class="form-control" placeholder="用户名" autofocus>
-		            <br>
-		            <input type="password" class="form-control" placeholder="密码">
+		            <input type="text" class="form-control" name="username" placeholder="用户名" autofocus>{{ validate.v1 }}
+		            <br><br>
+		            <input type="password" class="form-control" name="password" placeholder="密码">{{ validate.v2 }}
 		            <label class="checkbox">
 		                <span class="pull-right">
 		                    <a data-toggle="modal" href="login.html#myModal"> 忘记密码?</a>
