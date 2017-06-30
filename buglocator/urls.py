@@ -19,5 +19,5 @@ from locator import views
 
 urlpatterns = [
     #url(r'^admin/', include(admin.site.urls)),
-    url(r'^index/', views.login),
+    url(r'^locator/', include('locator.urls', namespace='locator')),
 ]

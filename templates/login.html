@@ -7,7 +7,7 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>DASHGUM - Bootstrap Admin Template</title>
+    <title>BugLocator</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.css" rel="stylesheet">
@@ -34,7 +34,7 @@
 	  <div id="login-page">
 	  	<div class="container">
 	  	
-		      <form class="form-login" action="index.html">
+		      <form class="form-login" action="{% url 'locator:login' %}">
 		        <h2 class="form-login-heading">登录</h2>
 		        <div class="login-wrap">
 		            <input type="text" class="form-control" placeholder="用户名" autofocus>
@@ -46,7 +46,7 @@
 		
 		                </span>
 		            </label>
-		            <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i> 登录</button>
+		            <button class="btn btn-theme btn-block" href="{% url 'locator:login' %}" type="submit"><i class="fa fa-lock"></i> 登录</button>
 		            <hr>
 		            
 		            <div class="login-social-link centered">
