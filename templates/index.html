@@ -202,7 +202,7 @@
           <ul class="sidebar-menu" id="nav-accordion">
             
            <p class="centered"><a href="profile.html"><img src="/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
-           <h5 class="centered">Marcel Newman</h5>
+           <h5 class="centered">{{ request.session.username }}</h5>
            
            <li class="mt">
             <a class="active" href="index.html">
@@ -478,31 +478,31 @@
         <li><span>0</span></li>
       </ul>
       <div class="bar">
-        <div class="title">JAN</div>
+        <div class="title" id="7">JAN</div>
         <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top">85%</div>
       </div>
       <div class="bar ">
-        <div class="title">FEB</div>
+        <div class="title" id="6">FEB</div>
         <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>
       </div>
       <div class="bar ">
-        <div class="title">MAR</div>
+        <div class="title" id="5">MAR</div>
         <div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>
       </div>
       <div class="bar ">
-        <div class="title">APR</div>
+        <div class="title" id="4">APR</div>
         <div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>
       </div>
       <div class="bar">
-        <div class="title">MAY</div>
+        <div class="title" id="3">MAY</div>
         <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">32%</div>
       </div>
       <div class="bar ">
-        <div class="title">JUN</div>
+        <div class="title" id="2">JUN</div>
         <div class="value tooltips" data-original-title="6.200" data-toggle="tooltip" data-placement="top">62%</div>
       </div>
       <div class="bar">
-        <div class="title">JUL</div>
+        <div class="title" id="1">JUL</div>
         <div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>
       </div>
     </div>
@@ -692,7 +692,7 @@
             // (string | mandatory) the heading of the notification
             title: 'Welcome to BugLocator!',
             // (string | mandatory) the text inside the notification
-            text: '我们将努力为你提供更好的缺陷定位服务！Free version for <a href="http://blacktie.co" target="_blank" style="color:#ffd777">BlackTie.co</a>.',
+            text: '这是一个功能强大的工具，我们将努力为你提供更好的缺陷定位服务！',
             // (string | optional) the image to display on the left
             image: '/assets/img/ui-sam.jpg',
             // (bool | optional) if you want it to fade out on its own or just sit there
@@ -741,7 +741,31 @@
       console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
     }
   </script>
-  
+  <script>
+      var map={
+          1:'JAN',
+          2:'FEB',
+          3:'MAR',
+          4:'APR',
+          5:'MAY',
+          6:'JUN',
+          7:'JUL',
+          8:'AUG',
+          9:'SEP',
+          10:'OCT',
+          11:'NOV',
+          12:'DEC'
+      };
+      var date = new Date();
+      var m = date.getMonth();
+      document.getElementById('1').innerHTML = map[(m+15)%13];
+      document.getElementById('2').innerHTML = map[(m+14)%13];
+      document.getElementById('3').innerHTML = map[(m+13)%13];
+      document.getElementById('4').innerHTML = map[(m+12)%13];
+      document.getElementById('5').innerHTML = map[(m+11)%13];
+      document.getElementById('6').innerHTML = map[(m+10)%13];
+      document.getElementById('7').innerHTML = map[(m+9)%13];
+  </script>
 
 </body>
 </html>

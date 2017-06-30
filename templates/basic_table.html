@@ -197,19 +197,19 @@
               <ul class="sidebar-menu" id="nav-accordion">
               
               	  <p class="centered"><a href="profile.html"><img src="/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
-              	  <h5 class="centered">Marcel Newman</h5>
+              	  <h5 class="centered">{{ request.session.username }}</h5>
               	  	
                   <li class="mt">
                       <a href="index.html">
                           <i class="fa fa-dashboard"></i>
-                          <span>Dashboard</span>
+                          <span>我的项目</span>
                       </a>
                   </li>
 
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-desktop"></i>
-                          <span>UI Elements</span>
+                          <span>已修复缺陷</span>
                       </a>
                       <ul class="sub">
                           <li><a  href="general.html">General</a></li>
@@ -221,7 +221,7 @@
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-cogs"></i>
-                          <span>Components</span>
+                          <span>待修复缺陷</span>
                       </a>
                       <ul class="sub">
                           <li><a  href="calendar.html">Calendar</a></li>
@@ -232,7 +232,7 @@
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-book"></i>
-                          <span>Extra Pages</span>
+                          <span>个人信息管理</span>
                       </a>
                       <ul class="sub">
                           <li><a  href="blank.html">Blank Page</a></li>
@@ -243,7 +243,7 @@
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-tasks"></i>
-                          <span>Forms</span>
+                          <span>提交缺陷报告</span>
                       </a>
                       <ul class="sub">
                           <li><a  href="form_component.html">Form Components</a></li>

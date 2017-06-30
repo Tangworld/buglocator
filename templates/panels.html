@@ -10,15 +10,15 @@
     <title>DASHGUM - Bootstrap Admin Template</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap.css" rel="stylesheet">
     <!--external css-->
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
         
     <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/style-responsive.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/style-responsive.css" rel="stylesheet">
 
-    <script src="assets/js/chart-master/Chart.js"></script>
+    <script src="/assets/js/chart-master/Chart.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -39,7 +39,7 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <!--logo start-->
-            <a href="index.html" class="logo"><b>DASHGUM FREE</b></a>
+            <a href="index.html" class="logo"><b>BUG LOCATOR</b></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
@@ -126,7 +126,7 @@
                             </li>
                             <li>
                                 <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="assets/img/ui-zac.jpg"></span>
+                                    <span class="photo"><img alt="avatar" src="/assets/img/ui-zac.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Zac Snider</span>
                                     <span class="time">Just now</span>
@@ -138,7 +138,7 @@
                             </li>
                             <li>
                                 <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="assets/img/ui-divya.jpg"></span>
+                                    <span class="photo"><img alt="avatar" src="/assets/img/ui-divya.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Divya Manian</span>
                                     <span class="time">40 mins.</span>
@@ -150,7 +150,7 @@
                             </li>
                             <li>
                                 <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="assets/img/ui-danro.jpg"></span>
+                                    <span class="photo"><img alt="avatar" src="/assets/img/ui-danro.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Dan Rogers</span>
                                     <span class="time">2 hrs.</span>
@@ -162,7 +162,7 @@
                             </li>
                             <li>
                                 <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="assets/img/ui-sherman.jpg"></span>
+                                    <span class="photo"><img alt="avatar" src="/assets/img/ui-sherman.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Dj Sherman</span>
                                     <span class="time">4 hrs.</span>
@@ -183,7 +183,7 @@
             </div>
             <div class="top-menu">
             	<ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="login.html">Logout</a></li>
+                    <li><a class="logout" href="{% url 'locator:logout' %}">Logout</a></li>
             	</ul>
             </div>
         </header>
@@ -198,20 +198,20 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
               
-              	  <p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
-              	  <h5 class="centered">Marcel Newman</h5>
+              	  <p class="centered"><a href="profile.html"><img src="/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+              	  <h5 class="centered">{{ request.session.username }}</h5>
               	  	
                   <li class="mt">
                       <a href="index.html">
                           <i class="fa fa-dashboard"></i>
-                          <span>Dashboard</span>
+                          <span>我的项目</span>
                       </a>
                   </li>
 
                   <li class="sub-menu">
                       <a class="active" href="javascript:;" >
                           <i class="fa fa-desktop"></i>
-                          <span>UI Elements</span>
+                          <span>已修复缺陷</span>
                       </a>
                       <ul class="sub">
                           <li><a  href="general.html">General</a></li>
@@ -223,7 +223,7 @@
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-cogs"></i>
-                          <span>Components</span>
+                          <span>待修复缺陷</span>
                       </a>
                       <ul class="sub">
                           <li><a  href="calendar.html">Calendar</a></li>
@@ -234,7 +234,7 @@
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-book"></i>
-                          <span>Extra Pages</span>
+                          <span>个人信息管理</span>
                       </a>
                       <ul class="sub">
                           <li><a  href="blank.html">Blank Page</a></li>
@@ -245,7 +245,7 @@
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-tasks"></i>
-                          <span>Forms</span>
+                          <span>提交缺陷报告</span>
                       </a>
                       <ul class="sub">
                           <li><a  href="form_component.html">Form Components</a></li>
@@ -305,7 +305,7 @@
 								<div class="white-header">
 									<h5>TOP USER</h5>
 								</div>
-								<p><img src="assets/img/ui-zac.jpg" class="img-circle" width="50"></p>
+								<p><img src="/assets/img/ui-zac.jpg" class="img-circle" width="50"></p>
 								<p><b>Zac Snider</b></p>
 									<div class="row">
 										<div class="col-md-6">
@@ -368,7 +368,7 @@
 							<div class="content-panel pn">
 								<div id="profile-02">
 									<div class="user">
-										<img src="assets/img/friends/fr-06.jpg" class="img-circle" width="80">
+										<img src="/assets/img/friends/fr-06.jpg" class="img-circle" width="80">
 										<h4>DJ SHERMAN</h4>
 									</div>
 								</div>
@@ -387,7 +387,7 @@
 						<div class="col-lg-4 col-md-4 col-sm-4 mb">
 							<div class="product-panel-2 pn">
 								<div class="badge badge-hot">HOT</div>
-								<img src="assets/img/product.jpg" width="200" alt="">
+								<img src="/assets/img/product.jpg" width="200" alt="">
 								<h5 class="mt">Flat Pack Heritage</h5>
 								<h6>TOTAL SALES: 1388</h6>
 								<button class="btn btn-small btn-theme04">FULL REPORT</button>
@@ -594,7 +594,7 @@
 									</div>
 								</div><!-- /weather-2 header -->
 								<div class="row centered">
-									<img src="assets/img/ny.jpg" class="img-circle" width="120">			
+									<img src="/assets/img/ny.jpg" class="img-circle" width="120">
 								</div>
 								<div class="row data">
 									<div class="col-sm-6 col-xs-6 goleft">
@@ -652,18 +652,18 @@
   </section>
 
     <!-- js placed at the end of the document so the pages load faster -->
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
-    <script src="assets/js/jquery.scrollTo.min.js"></script>
-    <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-    <script src="assets/js/jquery.sparkline.js"></script>
+    <script src="/assets/js/jquery.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="/assets/js/jquery.scrollTo.min.js"></script>
+    <script src="/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="/assets/js/jquery.sparkline.js"></script>
 
     <!--common script for all pages-->
-    <script src="assets/js/common-scripts.js"></script>
+    <script src="/assets/js/common-scripts.js"></script>
 
     <!--script for this page-->
-    <script src="assets/js/sparkline-chart.js"></script>    
+    <script src="/assets/js/sparkline-chart.js"></script>
     
     
   <script>
