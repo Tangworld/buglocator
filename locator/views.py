@@ -80,3 +80,34 @@ def main(request):
     :return: 进入主页
     """
     return render(request, 'index.html')
+
+def edit(request):
+    """
+    进入编辑新密码页面
+    :param request: 
+    :return: 
+    """
+    return render(request, 'editprofile.html')
+
+def confirm(request):
+    flag = True
+    infomation = ""
+    username = request.session['username']
+    inputPassword = request.POST.get('password', None)
+    inputPassword2 = request.POST.get('password2', None)
+    if inputPassword == "":
+        flag = False
+        infomation = "密码不能为空！"
+    if inputPassword2 == "":
+        flag = False
+        infomation = "确认密码不能为空！"
+    if inputPassword != inputPassword2:
+        flag = False
+        infomation = "两次密码不一致！"
+    if flag:
+        user = models.User.objects.get(username=username)  # 查询该条记录
+        user.password = inputPassword  # 修改
+        user.save()
+        return render(request, 'profile.html', {'success': '修改成功！'})
+    else:
+        return render(request, 'editprofile.html', {'infomation': infomation})
