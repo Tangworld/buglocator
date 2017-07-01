@@ -235,7 +235,7 @@
                           <span>个人信息管理</span>
                       </a>
                       <ul class="sub">
-                          <li class="active"><a  href="blank.html">Blank Page</a></li>
+                          <li class="active"><a  href="info.html">Blank Page</a></li>
                           <li><a  href="login.html">Login</a></li>
                           <li><a  href="lock_screen.html">Lock Screen</a></li>
                       </ul>
@@ -282,10 +282,24 @@
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper site-min-height">
-          	<h3><i class="fa fa-angle-right"></i> Blank Page</h3>
-          	<div class="row mt">
-          		<div class="col-lg-12">
-          		<p>Place your content here.</p>
+          	<div style="height: 700px;margin-top: 80px">
+          		<div style="height: 80%">
+                    <div style="text-align: center;margin: 0 auto;width: 60%;height: 100%" >
+							<div class="darkblue-panel pn">
+								<div id="profile-02">
+									<div class="user">
+										<img src="/assets/img/ui-sam.jpg" class="img-circle" width="80">
+										<h4>DJ SHERMAN</h4><br>
+									</div>
+                                    <h4>用户名：{{ request.session.username }}</h4><br />
+                                    <h4>邮&nbsp;&nbsp;&nbsp;&nbsp;箱：{{ request.session.username }}</h4>
+								</div>
+                                <div class="steps pn">
+							    <input type='submit' value='All Done!' id='submit'/>
+							</div>
+							</div><! --/panel -->
+						</div><!--/ col-md-4 -->
+
           		</div>
           	</div>
 			
@@ -297,7 +311,7 @@
       <footer class="site-footer">
           <div class="text-center">
               2014 - Alvarez.is
-              <a href="blank.html#" class="go-top">
+              <a href="info.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>

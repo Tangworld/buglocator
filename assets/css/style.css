@@ -257,7 +257,7 @@ ul.top-menu > li > .logout {
     height:17px;
     width:17px;
     display:inline-block;
-    background: url("../img/nav-expand.png") no-repeat top;
+    background: url("/assets/img/nav-expand.png") no-repeat top;
     border-radius:3px;
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
@@ -985,7 +985,7 @@ PANELS CONFIGURATIONS
 /*Panel Size*/
 
 .pn {
-	height: 250px;
+	/*height: 100%;*/
 	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 
@@ -1535,11 +1535,11 @@ PANELS CONFIGURATIONS
 
 /* Profile 02*/
 #profile-02 {
-	background: url(../img/profile-02.jpg) no-repeat center top;
+	background:  no-repeat center top;
 	margin-top: -15px;
 	background-attachment: relative;
 	background-position: center center;
-	min-height: 200px;
+	min-height: 674px;
 	width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
