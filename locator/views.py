@@ -49,5 +49,5 @@ def logout(request):
     del request.session['password']
     return HttpResponseRedirect('/locator/index/')
 
-def info(request):
-    return render(request, 'info.html')
+def profile(request):
+    return render(request, 'profile.html')

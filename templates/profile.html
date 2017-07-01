@@ -230,15 +230,11 @@
                       </ul>
                   </li>
                   <li class="sub-menu">
-                      <a class="active" href="javascript:;" >
+                      <a class="active" href="{% url 'locator:profile'%}" >
                           <i class="fa fa-book"></i>
                           <span>个人信息管理</span>
                       </a>
-                      <ul class="sub">
-                          <li class="active"><a  href="info.html">Blank Page</a></li>
-                          <li><a  href="login.html">Login</a></li>
-                          <li><a  href="lock_screen.html">Lock Screen</a></li>
-                      </ul>
+
                   </li>
                   <li class="sub-menu">
                       <a href="javascript:;" >
@@ -295,7 +291,7 @@
                                     <h4>邮&nbsp;&nbsp;&nbsp;&nbsp;箱：{{ request.session.username }}</h4>
 								</div>
                                 <div class="steps pn">
-							    <input type='submit' value='All Done!' id='submit'/>
+							    <input type='submit' value='修改密码' id='submit'/>
 							</div>
 							</div><! --/panel -->
 						</div><!--/ col-md-4 -->
@@ -310,8 +306,8 @@
       <!--footer start-->
       <footer class="site-footer">
           <div class="text-center">
-              2014 - Alvarez.is
-              <a href="info.html#" class="go-top">
+              2017 - NJU
+              <a href="profile.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>
