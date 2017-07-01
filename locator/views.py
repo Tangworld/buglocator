@@ -6,9 +6,19 @@ from locator import models
 # Create your views here.
 
 def index(request):
+    """
+    系统启动入口
+    :param request: 
+    :return: 进入登录页面
+    """
     return render(request, 'login.html', )
 
 def login(request):
+    """
+    登录验证方法，若通过验证则进入主页，否则返回登录页面并显示提示信息
+    :param request: 
+    :return: 
+    """
     validate = {}
     v1 = ""
     v2 = ""
@@ -45,9 +55,28 @@ def login(request):
         return render(request, 'login.html', {"validate": validate})
 
 def logout(request):
+    """
+    退出方法，删除当前用户的session并返回登录页面
+    :param request: 
+    :return: 登录页面
+    """
     del request.session['username']  # 删除session
     del request.session['password']
     return HttpResponseRedirect('/locator/index/')
 
 def profile(request):
+    """
+    进入个人信息页面
+    :param request: 
+    :return: 个人信息页面
+    """
     return render(request, 'profile.html')
+
+def main(request):
+    """
+    由于login方法中涉及session操作，重复调用会导致错误，
+    因此用这个方法作为系统内部进入主页的接口
+    :param request: 
+    :return: 进入主页
+    """
+    return render(request, 'index.html')

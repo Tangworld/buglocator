@@ -200,7 +200,7 @@
               	  <h5 class="centered">{{ request.session.username }}</h5>
               	  	
                   <li class="mt">
-                      <a href="index.html">
+                      <a href="{% url 'locator:main' %}">
                           <i class="fa fa-dashboard"></i>
                           <span>我的项目</span>
                       </a>
@@ -285,7 +285,7 @@
 								<div id="profile-02">
 									<div class="user">
 										<img src="/assets/img/ui-sam.jpg" class="img-circle" width="80">
-										<h4>DJ SHERMAN</h4><br>
+										<h4>{{ request.session.username }}</h4><br><br><br>
 									</div>
                                     <h4>用户名：{{ request.session.username }}</h4><br />
                                     <h4>邮&nbsp;&nbsp;&nbsp;&nbsp;箱：{{ request.session.username }}</h4>
