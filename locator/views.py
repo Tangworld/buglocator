@@ -24,6 +24,8 @@ def login(request):
     v2 = ""
     flag = True
     validatepassword = ""
+    username = ""
+    password = ""
 
     if request.method == "POST":
         username = request.POST.get('username', None)
@@ -50,6 +52,7 @@ def login(request):
     if flag:
         request.session["username"] = username
         request.session["password"] = password
+        request.session['email'] = validatepassword.email
         return render(request, 'index.html')
     else:
         return render(request, 'login.html', {"validate": validate})

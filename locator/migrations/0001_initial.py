@@ -16,6 +16,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('username', models.CharField(max_length=32)),
                 ('password', models.CharField(max_length=32)),
+                ('email', models.CharField(default=b'123@qq.com', max_length=32)),
                 ('mybugs', models.CharField(max_length=32)),
             ],
         ),

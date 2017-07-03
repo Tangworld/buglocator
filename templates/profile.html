@@ -7,7 +7,7 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>DASHGUM - Bootstrap Admin Template</title>
+    <title>BugLocator</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.css" rel="stylesheet">
@@ -37,7 +37,7 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <!--logo start-->
-            <a href="index.html" class="logo"><b>BUG LOCATOR</b></a>
+            <a href="{% url 'locator:main' %}" class="logo"><b>BUG LOCATOR</b></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
@@ -196,7 +196,7 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
               
-              	  <p class="centered"><a href="profile.html"><img src="/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+              	  <p class="centered"><a href="{% url 'locator:profile' %}"><img src="/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
               	  <h5 class="centered">{{ request.session.username }}</h5>
               	  	
                   <li class="mt">
@@ -288,7 +288,7 @@
 										<h4>{{ request.session.username }}</h4><br><br><br>
 									</div>
                                     <h4>用户名：{{ request.session.username }}</h4><br />
-                                    <h4>邮&nbsp;&nbsp;&nbsp;&nbsp;箱：{{ request.session.username }}</h4><br>
+                                    <h4>邮&nbsp;&nbsp;&nbsp;&nbsp;箱：{{ request.session.email }}</h4><br>
                                     <h3>{{ success }}</h3>
 								</div>
                                 <div class="steps pn">
