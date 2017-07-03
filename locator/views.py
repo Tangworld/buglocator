@@ -21,6 +21,8 @@ def login(request):
     :param request: 
     :return: 
     """
+    if authority(request) == False:
+        return HttpResponseRedirect('/locator/lock')
     validate = {}
     v1 = ""
     v2 = ""
@@ -29,26 +31,25 @@ def login(request):
     username = ""
     password = ""
 
-    if request.method == "POST":
-        username = request.POST.get('username', None)
-        password = request.POST.get('password', None)
-        try:
-            validatepassword = models.User.objects.get(username=username)
-            if validatepassword.password != password:
-                v2 = "密码错误！"
-                flag = False
-            print validatepassword
-        except Exception, e:
+    username = request.POST.get('username', None)
+    password = request.POST.get('password', None)
+    try:
+        validatepassword = models.User.objects.get(username=username)
+        if validatepassword.password != password:
             v2 = "密码错误！"
             flag = False
+        print validatepassword
+    except Exception, e:
+        v2 = "密码错误！"
+        flag = False
 
-        if username == "":
-            v1 = "用户名不能为空！"
-            flag = False
-        if password == "":
-            v2 = "密码不能为空！"
-            flag = False
-        validate = {"v1": v1, "v2": v2}
+    if username == "":
+        v1 = "用户名不能为空！"
+        flag = False
+    if password == "":
+        v2 = "密码不能为空！"
+        flag = False
+    validate = {"v1": v1, "v2": v2}
 
 
     if flag:
@@ -77,6 +78,8 @@ def profile(request):
     :param request: 
     :return: 个人信息页面
     """
+    if authority(request) == False:
+        return HttpResponseRedirect('/locator/lock')
     return render(request, 'profile.html')
 
 
@@ -87,6 +90,8 @@ def main(request):
     :param request: 
     :return: 进入主页
     """
+    if authority(request) == False:
+        return HttpResponseRedirect('/locator/lock')
     return render(request, 'index.html')
 
 
@@ -96,6 +101,9 @@ def edit(request):
     :param request: 
     :return: 
     """
+    if authority(request) == False:
+        return HttpResponseRedirect('/locator/lock')
+
     return render(request, 'editprofile.html')
 
 
@@ -105,6 +113,8 @@ def confirm(request):
     :param request: 
     :return: 
     """
+    if authority(request) == False:
+        return HttpResponseRedirect('/locator/lock')
     flag = True
     infomation = ""
     username = request.session['username']
@@ -134,6 +144,7 @@ def lock(request):
     :param request: 
     :return: 
     """
+    request.session['lock'] = 'lock'
     return render(request, 'lock_screen.html')
 
 
@@ -143,9 +154,18 @@ def unlock(request):
     :param request: 
     :return: 
     """
+    request.session['lock'] = 'unlock'
     password = request.POST.get('password', None)
     realpassword = request.session['password']
     if password == realpassword:
         return HttpResponseRedirect('/locator/main/')
     else:
-        return render(request, 'lock_screen.html')
+        return render(request, 'lock_screen.html')\
+
+def authority(request):
+    username = ""
+    lock = request.session['lock']
+    if lock == 'unlock':
+        return True
+    else:
+        return False
