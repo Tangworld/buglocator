@@ -754,13 +754,37 @@
       };
       var date = new Date();
       var m = date.getMonth();
-      document.getElementById('1').innerHTML = map[(m+15)%13];
-      document.getElementById('2').innerHTML = map[(m+14)%13];
-      document.getElementById('3').innerHTML = map[(m+13)%13];
-      document.getElementById('4').innerHTML = map[(m+12)%13];
-      document.getElementById('5').innerHTML = map[(m+11)%13];
-      document.getElementById('6').innerHTML = map[(m+10)%13];
-      document.getElementById('7').innerHTML = map[(m+9)%13];
+      document.getElementById('1').innerHTML = map[m+1];
+      if(m<=0){
+          document.getElementById('2').innerHTML = map[m+12];
+      }else{
+          document.getElementById('2').innerHTML = map[m];
+      }
+      if((m-1)<=0){
+          document.getElementById('3').innerHTML = map[m+11];
+      }else{
+          document.getElementById('3').innerHTML = map[m-1];
+      }
+      if((m-2)<=0){
+          document.getElementById('4').innerHTML = map[m+10];
+      }else{
+          document.getElementById('4').innerHTML = map[m-2];
+      }
+      if((m-3)<=0){
+          document.getElementById('5').innerHTML = map[m+9];
+      }else{
+          document.getElementById('5').innerHTML = map[m-3];
+      }
+      if((m-4)<=0){
+          document.getElementById('6').innerHTML = map[m+8];
+      }else{
+          document.getElementById('6').innerHTML = map[m-4];
+      }
+      if((m-5)<=0){
+          document.getElementById('7').innerHTML = map[m+7];
+      }else{
+          document.getElementById('7').innerHTML = map[m-5];
+      }
   </script>
 
 </body>
