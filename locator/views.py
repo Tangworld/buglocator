@@ -5,6 +5,7 @@ from locator import models
 
 # Create your views here.
 
+
 def index(request):
     """
     系统启动入口
@@ -12,6 +13,7 @@ def index(request):
     :return: 进入登录页面
     """
     return render(request, 'login.html', )
+
 
 def login(request):
     """
@@ -57,6 +59,7 @@ def login(request):
     else:
         return render(request, 'login.html', {"validate": validate})
 
+
 def logout(request):
     """
     退出方法，删除当前用户的session并返回登录页面
@@ -67,6 +70,7 @@ def logout(request):
     del request.session['password']
     return HttpResponseRedirect('/locator/index/')
 
+
 def profile(request):
     """
     进入个人信息页面
@@ -74,6 +78,7 @@ def profile(request):
     :return: 个人信息页面
     """
     return render(request, 'profile.html')
+
 
 def main(request):
     """
@@ -84,6 +89,7 @@ def main(request):
     """
     return render(request, 'index.html')
 
+
 def edit(request):
     """
     进入编辑新密码页面
@@ -92,7 +98,13 @@ def edit(request):
     """
     return render(request, 'editprofile.html')
 
+
 def confirm(request):
+    """
+    修改密码
+    :param request: 
+    :return: 
+    """
     flag = True
     infomation = ""
     username = request.session['username']
@@ -114,3 +126,26 @@ def confirm(request):
         return render(request, 'profile.html', {'success': '修改成功！'})
     else:
         return render(request, 'editprofile.html', {'infomation': infomation})
+
+
+def lock(request):
+    """
+    锁定页面
+    :param request: 
+    :return: 
+    """
+    return render(request, 'lock_screen.html')
+
+
+def unlock(request):
+    """
+    解锁页面
+    :param request: 
+    :return: 
+    """
+    password = request.POST.get('password', None)
+    realpassword = request.session['password']
+    if password == realpassword:
+        return HttpResponseRedirect('/locator/main/')
+    else:
+        return render(request, 'lock_screen.html')

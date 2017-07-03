@@ -11,4 +11,6 @@ urlpatterns = [
     url(r'^main/$', views.main, name='main'),
     url(r'^edit/$', views.edit, name='edit'),
     url(r'^confirm/$', views.confirm, name='confirm'),
+    url(r'^lock/$', views.lock, name='lock'),
+    url(r'^unlock/$', views.unlock, name='unlock'),
 ]
