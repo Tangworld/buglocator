@@ -160,7 +160,12 @@ def unlock(request):
     if password == realpassword:
         return HttpResponseRedirect('/locator/main/')
     else:
-        return render(request, 'lock_screen.html')\
+        return render(request, 'lock_screen.html')
+
+
+def newreport(request):
+    return render(request, 'newreport.html')
+
 
 def authority(request):
     username = ""
