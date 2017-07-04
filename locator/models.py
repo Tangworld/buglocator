@@ -2,11 +2,13 @@ from django.db import models
 
 # Create your models here.
 
+
 class User(models.Model):
     username = models.CharField(max_length=32, null=True, blank=True)
     password = models.CharField(max_length=32, null=True, blank=True)
     email = models.CharField(max_length=32, null=True, blank=True)
     mybugs = models.CharField(max_length=32, null=True, blank=True)
+
 
 class Report(models.Model):
     summary = models.CharField(max_length=50, null=True, blank=True)
@@ -25,3 +27,13 @@ class Report(models.Model):
     os = models.CharField(max_length=32, null=True, blank=True)
     priority = models.CharField(max_length=32, null=True, blank=True)
     severity = models.CharField(max_length=32, null=True, blank=True)
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=32, null=True, blank=True)
+    description = models.CharField(max_length=200, null=True, blank=True)
+
+
+class ProUser(models.Model):
+    product_id = models.CharField(max_length=32)
+    user_id = models.CharField(max_length=32)
