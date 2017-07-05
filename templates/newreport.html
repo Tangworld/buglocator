@@ -298,56 +298,56 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>模块</h4></label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" >
+                                            <input name="component" type="text" class="form-control" >
                                         </div>
                                     </div>
                                     <br><br>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>版本</h4></label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" >
+                                            <input name="version" type="text" class="form-control" >
                                         </div>
                                     </div>
                                     <br><br>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>平台</h4></label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" >
+                                            <input name="platform" type="text" class="form-control" >
                                         </div>
                                     </div>
                                     <br><br>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>操作系统</h4></label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" >
+                                            <input name="os" type="text" class="form-control" >
                                         </div>
                                     </div>
                                     <br><br>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>优先级</h4></label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" >
+                                            <input name="priority" type="text" class="form-control" >
                                         </div>
                                     </div>
                                     <br><br>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>严重性</h4></label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" >
+                                            <input name="severity" type="text" class="form-control" >
                                         </div>
                                     </div>
                                     <br><br>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>提交人</h4></label>
                                         <div class="col-sm-10">
-                                            <input class="form-control" id="disabledInput" type="text" value="{{ request.session.username }}" disabled>
+                                            <input name="reporter" class="form-control" id="disabledInput" type="text" value="{{ request.session.username }}" disabled>
                                         </div>
                                     </div>
                                     <br><br>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>分配给</h4></label>
                                         <div id="main_demo" class="col-sm-10">
-                                            <select id="edu" name="edu" style="width: 100%">
+                                            <select id="assignee" name="assignee" style="width: 100%">
                                               <option value="0">Yaojing Wang</option>
                                               <option value="1">Shengqu Xi</option>
                                               <option value="2">Xiaofei Zhang</option>
@@ -360,6 +360,11 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>所属项目</h4></label>
                                         <div id="main_demo" class="col-sm-10">
+                                            <select id="product" name="product">
+                                              <option value="1">AspectJ</option>
+                                              <option value="2">Eclipse</option>
+                                              <option value="3">IDEA</option>
+                                            </select>
                                             <!--<select id="edu" name="edu" style="width: 100%">
                                               <option value="0">初中</option>
                                               <option value="1">高中</option>
@@ -378,7 +383,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>状态</h4></label>
                                         <div class="col-sm-10">
-                                            <input class="form-control" id="disabledInput" type="text" value="未分配" disabled>
+                                            <input name="status" class="form-control" id="disabledInput" type="text" value="未分配" disabled>
                                         </div>
                                     </div>
                                     <br><br>
@@ -395,7 +400,7 @@
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>详述</h4></label>
                                         <div class="form-group">
                                               <div class="col-sm-10">
-                                                  <textarea rows="3" class="form-control"></textarea>
+                                                  <textarea name="description" rows="3" class="form-control"></textarea>
                                               </div>
                                         </div>
                                     </div>

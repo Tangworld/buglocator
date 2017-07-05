@@ -2,6 +2,7 @@
 from django.shortcuts import render
 from django.shortcuts import HttpResponseRedirect
 from locator import models
+import time
 
 # Create your views here.
 
@@ -56,6 +57,7 @@ def login(request):
         request.session["username"] = username
         request.session["password"] = password
         request.session['email'] = validatepassword.email
+        request.session['userid'] = validatepassword.id
         return render(request, 'index.html')
     else:
         return render(request, 'login.html', {"validate": validate})
@@ -164,14 +166,54 @@ def unlock(request):
 
 
 def newreport(request):
+    """
+    跳转到提交报告页面
+    :param request: 
+    :return: 
+    """
     authority(request)
     return render(request, 'newreport.html')
 
 
 def savereport(request):
+    """
+    存储新的缺陷报告
+    status 参数 ：open代表未分配，unfix代表未修复，fixed代表已修复
+    :param request: 
+    :return: 
+    """
     authority(request)
     summary = request.POST.get('summary')
+    description = request.POST.get('description')
+    reporter = request.session['userid']
+    assignee = request.POST.get('assignee')
+    productid = request.POST.get('product')
+    status = 'open'
+    opendate = time.strftime("%Y-%d-%m")
+    component = request.POST.get('component')
+    version = request.POST.get('version')
+    platform = request.POST.get('platform')
+    os = request.POST.get('os')
+    priority = request.POST.get('priority')
+    severity = request.POST.get('severity')
     print summary
+    print description
+    print reporter
+    print assignee
+    print status
+    print opendate
+    print component
+    print version
+    print platform
+    print os
+    print priority
+    print severity
+    print productid
+
+    models.Report.objects.create(summary=summary, description=description, reporter=reporter,
+                                 assignee=assignee, status=status, opendate=opendate,
+                                 component=component, version=version, platform=platform, os=os,
+                                 priority=priority, severity=severity, productid=productid)
     return HttpResponseRedirect('/locator/main')
     #TODO 获取页面form表单中的所有信息并存入数据库
 
