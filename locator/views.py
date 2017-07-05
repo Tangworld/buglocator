@@ -21,8 +21,8 @@ def login(request):
     :param request: 
     :return: 
     """
-    if authority(request) == False:
-        return HttpResponseRedirect('/locator/lock')
+    #if authority(request) == False:
+    #    return HttpResponseRedirect('/locator/lock')
     validate = {}
     v1 = ""
     v2 = ""
@@ -78,8 +78,8 @@ def profile(request):
     :param request: 
     :return: 个人信息页面
     """
-    if authority(request) == False:
-        return HttpResponseRedirect('/locator/lock')
+    #if authority(request) == False:
+    #    return HttpResponseRedirect('/locator/lock')
     return render(request, 'profile.html')
 
 
@@ -90,8 +90,8 @@ def main(request):
     :param request: 
     :return: 进入主页
     """
-    if authority(request) == False:
-        return HttpResponseRedirect('/locator/lock')
+    #if authority(request) == False:
+    #    return HttpResponseRedirect('/locator/lock')
     return render(request, 'index.html')
 
 
@@ -101,8 +101,8 @@ def edit(request):
     :param request: 
     :return: 
     """
-    if authority(request) == False:
-        return HttpResponseRedirect('/locator/lock')
+    #if authority(request) == False:
+    #    return HttpResponseRedirect('/locator/lock')
 
     return render(request, 'editprofile.html')
 
@@ -113,8 +113,8 @@ def confirm(request):
     :param request: 
     :return: 
     """
-    if authority(request) == False:
-        return HttpResponseRedirect('/locator/lock')
+    #if authority(request) == False:
+    #    return HttpResponseRedirect('/locator/lock')
     flag = True
     infomation = ""
     username = request.session['username']
@@ -165,7 +165,7 @@ def unlock(request):
 def authority(request):
     username = ""
     lock = request.session['lock']
-    if lock == 'unlock':
-        return True
-    else:
+    if lock == 'lock':
         return False
+    else:
+        return True
