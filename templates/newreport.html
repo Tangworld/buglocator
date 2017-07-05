@@ -348,11 +348,9 @@
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>分配给</h4></label>
                                         <div id="main_demo" class="col-sm-10">
                                             <select id="assignee" name="assignee" style="width: 100%">
-                                              <option value="0">Yaojing Wang</option>
-                                              <option value="1">Shengqu Xi</option>
-                                              <option value="2">Xiaofei Zhang</option>
-                                              <option value="3">Lun Zhao</option>
-
+                                                {% for user in users %}
+                                                    <option value="0">{{ user }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                     </div>
@@ -361,9 +359,9 @@
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>所属项目</h4></label>
                                         <div id="main_demo" class="col-sm-10">
                                             <select id="product" name="product">
-                                              <option value="1">AspectJ</option>
-                                              <option value="2">Eclipse</option>
-                                              <option value="3">IDEA</option>
+                                                {% for product in products %}
+                                                    <option value="0">{{ product }}</option>
+                                                {% endfor %}
                                             </select>
                                             <!--<select id="edu" name="edu" style="width: 100%">
                                               <option value="0">初中</option>
