@@ -22,8 +22,8 @@ def login(request):
     :param request: 
     :return: 
     """
-    if authority(request) == False:
-        return HttpResponseRedirect('/locator/lock')
+    #if authority(request) == False:
+    #    return HttpResponseRedirect('/locator/lock')
     validate = {}
     v1 = ""
     v2 = ""
@@ -80,8 +80,8 @@ def profile(request):
     :param request: 
     :return: 个人信息页面
     """
-    if authority(request) == False:
-        return HttpResponseRedirect('/locator/lock')
+    #if authority(request) == False:
+    #    return HttpResponseRedirect('/locator/lock')
     return render(request, 'profile.html')
 
 
@@ -92,8 +92,8 @@ def main(request):
     :param request: 
     :return: 进入主页
     """
-    if authority(request) == False:
-        return HttpResponseRedirect('/locator/lock')
+    #if authority(request) == False:
+    #    return HttpResponseRedirect('/locator/lock')
     return render(request, 'index.html')
 
 
@@ -103,8 +103,8 @@ def edit(request):
     :param request: 
     :return: 
     """
-    if authority(request) == False:
-        return HttpResponseRedirect('/locator/lock')
+    #if authority(request) == False:
+    #    return HttpResponseRedirect('/locator/lock')
 
     return render(request, 'editprofile.html')
 
@@ -115,8 +115,8 @@ def confirm(request):
     :param request: 
     :return: 
     """
-    if authority(request) == False:
-        return HttpResponseRedirect('/locator/lock')
+    #if authority(request) == False:
+    #    return HttpResponseRedirect('/locator/lock')
     flag = True
     infomation = ""
     username = request.session['username']
@@ -171,7 +171,7 @@ def newreport(request):
     :param request: 
     :return: 
     """
-    authority(request)
+    #authority(request)
 
     current = request.session['username']
     finalusers = []
@@ -195,7 +195,7 @@ def savereport(request):
     :param request: 
     :return: 
     """
-    authority(request)
+    #authority(request)
     summary = request.POST.get('summary')
     description = request.POST.get('description')
     reporter = request.session['userid']
