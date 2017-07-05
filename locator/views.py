@@ -164,7 +164,16 @@ def unlock(request):
 
 
 def newreport(request):
+    authority(request)
     return render(request, 'newreport.html')
+
+
+def savereport(request):
+    authority(request)
+    summary = request.POST.get('summary')
+    print summary
+    return HttpResponseRedirect('/locator/main')
+    #TODO 获取页面form表单中的所有信息并存入数据库
 
 
 def authority(request):
