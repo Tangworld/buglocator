@@ -233,7 +233,7 @@ def savereport(request):
 def authority(request):
     username = ""
     lock = request.session['lock']
-    if lock == 'unlock':
-        return True
-    else:
+    if lock == 'lock':
         return False
+    else:
+        return True
