@@ -15,4 +15,6 @@ urlpatterns = [
     url(r'^unlock/$', views.unlock, name='unlock'),
     url(r'^newreport/$', views.newreport, name='newreport'),
     url(r'^savereport/$', views.savereport, name='savereport'),
+    url(r'^unfixed/$',views.unfixed,name='unfixed'),
+    url(r'^fixed/$', views.fixed, name='fixed'),
 ]
