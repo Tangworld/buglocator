@@ -202,14 +202,14 @@
                   <li class="mt">
                       <a href="{% url 'locator:main' %}">
                           <i class="fa fa-dashboard"></i>
-                          <span>我的项目</span>
+                          <span>Overview</span>
                       </a>
                   </li>
 
                   <li class="sub-menu">
                       <a href="{% url 'locator:fixed' %}" >
                           <i class="fa fa-desktop"></i>
-                          <span>已修复缺陷</span>
+                          <span>Fixed Bugs</span>
                       </a>
 
                   </li>
@@ -217,27 +217,27 @@
                   <li class="sub-menu">
                       <a href="{% url 'locator:unfixed' %}" >
                           <i class="fa fa-cogs"></i>
-                          <span>待修复缺陷</span>
+                          <span>Unfixed Bugs</span>
                       </a>
                   </li>
                   <li class="sub-menu">
                       <a class="active" href="{% url 'locator:profile'%}" >
                           <i class="fa fa-book"></i>
-                          <span>个人信息管理</span>
+                          <span>Profile</span>
                       </a>
 
                   </li>
                   <li class="sub-menu">
                       <a href="{% url 'locator:newreport'%}" >
                           <i class="fa fa-tasks"></i>
-                          <span>提交缺陷报告</span>
+                          <span>Report</span>
                       </a>
 
                   </li>
                   <li class="sub-menu">
                       <a href="{% url 'locator:lock' %}" >
                           <i class="fa fa-th"></i>
-                          <span>锁定</span>
+                          <span>Lock</span>
                       </a>
                       <!--<ul class="sub">
                           <li><a  href="basic_table.html">Basic Table</a></li>
@@ -276,13 +276,15 @@
 										<img src="/assets/img/ui-sam.jpg" class="img-circle" width="80">
 										<h4>{{ request.session.username }}</h4><br><br><br>
 									</div>
-                                    <h4>用户名：{{ request.session.username }}</h4><br />
-                                    <h4>邮&nbsp;&nbsp;&nbsp;&nbsp;箱：{{ request.session.email }}</h4><br>
-                                    <h3>{{ success }}</h3>
+                                    <div style="text-align: left;width: 30%;margin: 0 auto;">
+                                        <h4>Username：{{ request.session.username }}</h4><br />
+                                        <h4>Password：{{ request.session.email }}</h4><br>
+                                        <h3>{{ success }}</h3>
+                                    </div>
 								</div>
                                 <div class="steps pn">
                                     <form action="{% url 'locator:edit' %}">
-                                        <input href="{% url 'locator:edit' %}" type='submit' value='修改密码' id='submit'/>
+                                        <input href="{% url 'locator:edit' %}" type='submit' value='Modify Password' id='submit'/>
                                     </form>
 							</div>
 							</div><! --/panel -->
