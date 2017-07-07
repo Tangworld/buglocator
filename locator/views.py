@@ -37,18 +37,18 @@ def login(request):
     try:
         validatepassword = models.User.objects.get(username=username)
         if validatepassword.password != password:
-            v2 = "密码错误！"
+            v2 = "Incorrect password！"
             flag = False
         print validatepassword
     except Exception, e:
-        v2 = "密码错误！"
+        v2 = "Incorrect password！"
         flag = False
 
     if username == "":
-        v1 = "用户名不能为空！"
+        v1 = "Username cannot be empty！"
         flag = False
     if password == "":
-        v2 = "密码不能为空！"
+        v2 = "Password cannot be empty！"
         flag = False
     validate = {"v1": v1, "v2": v2}
 
@@ -124,18 +124,18 @@ def confirm(request):
     inputPassword2 = request.POST.get('password2', None)
     if inputPassword == "":
         flag = False
-        infomation = "密码不能为空！"
+        infomation = "Password cannot be empty！"
     if inputPassword2 == "":
         flag = False
-        infomation = "确认密码不能为空！"
+        infomation = "Confirm cannot be empty！"
     if inputPassword != inputPassword2:
         flag = False
-        infomation = "两次密码不一致！"
+        infomation = "Password and confirm password must be consistent!"
     if flag:
         user = models.User.objects.get(username=username)  # 查询该条记录
         user.password = inputPassword  # 修改
         user.save()
-        return render(request, 'profile.html', {'success': '修改成功！'})
+        return render(request, 'profile.html', {'success': 'Success！'})
     else:
         return render(request, 'editprofile.html', {'infomation': infomation})
 
