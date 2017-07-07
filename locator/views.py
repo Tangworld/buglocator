@@ -58,7 +58,11 @@ def login(request):
         request.session["password"] = password
         request.session['email'] = validatepassword.email
         request.session['userid'] = validatepassword.id
-        return render(request, 'index.html')
+        request.session['isadmin'] = validatepassword.isadmin
+        if validatepassword.isadmin == 'yes':
+            return render(request, 'index_admin.html')
+        else:
+            return render(request, 'index.html')
     else:
         return render(request, 'login.html', {"validate": validate})
 
@@ -80,9 +84,10 @@ def profile(request):
     :param request: 
     :return: 个人信息页面
     """
-    #if authority(request) == False:
-    #    return HttpResponseRedirect('/locator/lock')
-    return render(request, 'profile.html')
+    if request.session['isadmin'] == 'yes':
+        return render(request, 'profile_admin.html')
+    else:
+        return render(request, 'profile.html')
 
 
 def main(request):
@@ -94,7 +99,10 @@ def main(request):
     """
     #if authority(request) == False:
     #    return HttpResponseRedirect('/locator/lock')
-    return render(request, 'index.html')
+    if request.session['isadmin'] == 'yes':
+        return render(request, 'index_admin.html')
+    else:
+        return render(request, 'index.html')
 
 
 def edit(request):
@@ -240,25 +248,50 @@ def authority(request):
 
 def unfixed(request):
     #待修复页面
-    current = request.session['username']
+    current_name = request.session['username']
+    current_isadmin = request.session['isadmin']
     reports = models.Report.objects.all()
     disContent = []
-    for report in reports:
-        if report.assignee == current and report.status == 'unfixed':
-            tmpContent = (report.bugid, report.summary, report.reporter, report.opendate)
-            disContent.append(tmpContent)
 
-    return render(request, 'defects_not_resolved.html', {'contents' : disContent})
+    if current_isadmin == 'yes':
+        for report in reports:
+            if report.status == 'unfixed':
+                tmpContent = (report.bugid, report.summary, report.reporter, report.opendate, report.assignee)
+                disContent.append(tmpContent)
+        return render(request, 'defects_not_resolved_admin.html', {'contents':disContent})
+    else:
+        for report in reports:
+            if report.assignee == current_name and report.status == 'unfixed':
+                tmpContent = (report.bugid, report.summary, report.reporter, report.opendate)
+                disContent.append(tmpContent)
+        return render(request, 'defects_not_resolved.html', {'contents' : disContent})
 
 def fixed(request):
     # 已修复页面
-    current = request.session['username']
+    current_name = request.session['username']
+    current_isadmin = request.session['isadmin']
     reports = models.Report.objects.all()
     disContent = []
-    for report in reports:
-        if report.assignee == current and report.status == 'fixed':
-            print "YES"
-            tmpContent = (report.bugid, report.summary, report.reporter, report.opendate, report.fixdate)
-            disContent.append(tmpContent)
 
-    return render(request, 'defects_resolved.html', {'contents' : disContent})
+    if current_isadmin == 'yes':
+        for report in reports:
+            if report.status == 'fixed':
+                tmpContent = (report.bugid, report.summary, report.reporter, report.opendate, report.fixdate)
+                disContent.append(tmpContent)
+        return render(request, 'defects_resolved_admin.html', {'contents':disContent})
+    else:
+        for report in reports:
+            if report.assignee == current_name and report.status == 'fixed':
+                tmpContent = (report.bugid, report.summary, report.reporter, report.opendate, report.fixdate)
+                disContent.append(tmpContent)
+        return render(request, 'defects_resolved.html', {'contents' : disContent})
+
+def not_assigned(request):
+    reports = models.Report.objects.all()
+    disContent = []
+
+    for report in reports:
+        if report.status == 'open':
+            tmpContent = (report.bugid, report.summary, report.reporter, report.opendate)
+            disContent.append(tmpContent)
+    return render(request, 'defects_not_assigned.html', {'contents':disContent})

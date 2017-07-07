@@ -206,50 +206,59 @@
                 <h5 class="centered">{{ request.session.username }}</h5>
 
                 <li class="mt">
-                    <a href="{% url 'locator:main' %}">
-                        <i class="fa fa-dashboard"></i>
-                        <span>我的项目</span>
-                    </a>
-                </li>
+            <a href="{% url 'locator:main' %}">
+              <i class="fa fa-dashboard"></i>
+              <span>Overview</span>
+            </a>
+          </li>
 
-                <li class="sub-menu">
-                    <a class="active" href="{% url 'locator:fixed' %}">
-                        <i class="fa fa-desktop"></i>
-                        <span>已修复缺陷</span>
-                    </a>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-desktop"></i>
+              <span>已分配缺陷</span>
+            </a>
+              <ul class="sub" style="overflow: hidden; display: block;">
+                  <li><a  href="{% url 'locator:fixed_admin' %}">已修复缺陷</a></li>
+                  <li><a  href="{% url 'locator:unfixed_admin' %}">未修复缺陷</a></li>
+              </ul>
+           <!--     <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>已修复缺陷</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="general.html">General</a></li>
+                          <li><a  href="buttons.html">Buttons</a></li>
+                          <li><a  href="panels.html">Panels</a></li>
+                      </ul>
+                  </li>
+           -->
+          <li class="sub-menu">
+            <a class="active" href="{% url 'locator:not_assigned' %}" >
+              <i class="fa fa-cogs"></i>
+              <span>待分配缺陷</span>
+            </a>
+          </li>
+          <li class="sub-menu">
+            <a href="{% url 'locator:profile' %}" >
+              <i class="fa fa-book"></i>
+                <span>个人信息管理</span>
+            </a>
 
-                </li>
+          </li>
+          <li class="sub-menu">
+            <a href="{% url 'locator:newreport' %}" >
+              <i class="fa fa-tasks"></i>
+              <span>提交缺陷报告</span>
+            </a>
+          </li>
+          <li class="sub-menu">
+            <a href="{% url 'locator:lock' %}" >
+              <i class="fa fa-th"></i>
+              <span>锁定</span>
+            </a>
 
-                <li class="sub-menu">
-                    <a href="{% url 'locator:unfixed' %}">
-                        <i class="fa fa-cogs"></i>
-                        <span>待修复缺陷</span>
-                    </a>
-
-                </li>
-                <li class="sub-menu">
-                    <a  href="{% url 'locator:profile' %}">
-                        <i class="fa fa-book"></i>
-                        <span>个人信息管理</span>
-                    </a>
-
-                </li>
-                <li class="sub-menu">
-                    <a href="{% url 'locator:newreport' %}">
-                        <i class="fa fa-tasks"></i>
-                        <span>提交缺陷报告</span>
-                    </a>
-                    <!--<ul class="sub">
-                        <li><a href="form_component.html">Form Components</a></li>
-                    </ul>-->
-                </li>
-                <li class="sub-menu">
-                    <a href="{% url 'locator:lock' %}" >
-                        <i class="fa fa-th"></i>
-                        <span>锁定</span>
-                    </a>
-
-                </li>
+          </li>
 
             </ul>
             <!-- sidebar menu end-->
@@ -269,15 +278,15 @@
                   <div class="col-md-12">
                       <div class="content-panel">
                           <table class="table table-striped table-advance table-hover">
-	                  	  	  <h4><i class="fa fa-angle-right"></i> 已修复缺陷</h4>
+	                  	  	  <h4><i class="fa fa-angle-right"></i> 待分配缺陷</h4>
 	                  	  	  <hr>
                               <thead>
                               <tr>
                                   <th><i class="fa fa-bars"></i> Bug ID</th>
                                   <th class="hidden-phone"><i class="fa fa-question-circle"></i> Summary</th>
                                   <th><i class="fa fa-user" aria-hidden="true"></i> Reporter</th>
-                                  <th><i class=" fa fa-thumbs-o-down"></i> Report Date</th>
-                                  <th><i class=" fa fa-thumbs-o-up"></i> Fix Date</th>
+                                  <th><i class=" fa fa-bug"></i> Report Date</th>
+                                  <th><i class=" fa fa-paper-plane"></i> Operation</th>
                               </tr>
                               </thead>
                               <tbody>
@@ -287,7 +296,11 @@
                                   <td class="hidden-phone">{{ content.1 }}</td>
                                   <td>{{ content.2 }}</td>
                                   <td>{{ content.3 }}</td>
-                                  <td>{{ content.4 }}</td>
+                                  <td>
+                                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                  </td>
                               </tr>
                               {% endfor %}
 
