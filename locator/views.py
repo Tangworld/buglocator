@@ -237,3 +237,28 @@ def authority(request):
         return False
     else:
         return True
+
+def unfixed(request):
+    #待修复页面
+    current = request.session['username']
+    reports = models.Report.objects.all()
+    disContent = []
+    for report in reports:
+        if report.assignee == current and report.status == 'unfixed':
+            tmpContent = (report.bugid, report.summary, report.reporter, report.opendate)
+            disContent.append(tmpContent)
+
+    return render(request, 'defects_not_resolved.html', {'contents' : disContent})
+
+def fixed(request):
+    # 已修复页面
+    current = request.session['username']
+    reports = models.Report.objects.all()
+    disContent = []
+    for report in reports:
+        if report.assignee == current and report.status == 'fixed':
+            print "YES"
+            tmpContent = (report.bugid, report.summary, report.reporter, report.opendate, report.fixdate)
+            disContent.append(tmpContent)
+
+    return render(request, 'defects_resolved.html', {'contents' : disContent})
