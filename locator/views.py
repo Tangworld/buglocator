@@ -41,6 +41,7 @@ def login(request):
             flag = False
         print validatepassword
     except Exception, e:
+        print e
         v2 = "Incorrect password！"
         flag = False
 
