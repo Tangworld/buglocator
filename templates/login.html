@@ -35,22 +35,22 @@
 	  	<div class="container">
 	  	
 		      <form class="form-login" action="{% url 'locator:login' %}" method="post">
-		        <h2 class="form-login-heading">登录</h2>
+		        <h2 class="form-login-heading">SIGN IN NOW</h2>
 		        <div class="login-wrap">
-		            <input type="text" class="form-control" name="username" placeholder="用户名" autofocus>{{ validate.v1 }}
+		            <input type="text" class="form-control" name="username" placeholder="Username" autofocus>{{ validate.v1 }}
 		            <br><br>
-		            <input type="password" class="form-control" name="password" placeholder="密码">{{ validate.v2 }}
+		            <input type="password" class="form-control" name="password" placeholder="Password">{{ validate.v2 }}
 		            <label class="checkbox">
 		                <span class="pull-right">
-		                    <a data-toggle="modal" href="login.html#myModal"> 忘记密码?</a>
+		                    <a data-toggle="modal" href="login.html#myModal"> Forgot Password?</a>
 		
 		                </span>
 		            </label>
-		            <button class="btn btn-theme btn-block" href="{% url 'locator:login' %}" type="submit"><i class="fa fa-lock"></i> 登录</button>
+		            <button class="btn btn-theme btn-block" href="{% url 'locator:login' %}" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
 		            <hr>
 		            
 		            <div class="login-social-link centered">
-		            <p>通过社交账号登录</p>
+		            <p>or you can sign in via your social network</p>
 		                <button class="btn btn-facebook" type="submit"><i class="fa fa-facebook"></i> Facebook</button>
 		                <button class="btn btn-twitter" type="submit"><i class="fa fa-twitter"></i> Twitter</button>
 		            </div>
@@ -69,16 +69,16 @@
 		                  <div class="modal-content">
 		                      <div class="modal-header">
 		                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		                          <h4 class="modal-title">忘记密码 ?</h4>
+		                          <h4 class="modal-title">Forget Password ?</h4>
 		                      </div>
 		                      <div class="modal-body">
-		                          <p>输入你的邮箱来重设密码</p>
+		                          <p>Enter your e-mail address below to reset your password</p>
 		                          <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
 		
 		                      </div>
 		                      <div class="modal-footer">
-		                          <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-		                          <button class="btn btn-theme" type="button">提交</button>
+		                          <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+		                          <button class="btn btn-theme" type="button">Submit</button>
 		                      </div>
 		                  </div>
 		              </div>
