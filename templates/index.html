@@ -39,10 +39,31 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
+
+    <style>
+        * { margin: 0;padding: 0; list-style: none;box-sizing: border-box;  }
+        .click_pop {display: block;height: 40px;width: 160px;margin: 100px auto;line-height: 40px;text-align: center;
+                          border-radius: 20px;background-color: #60A1C9;color: #fff;font-weight: bold;text-decoration: none;}
+        .bgPop{ display: none;position: absolute;z-index: 9;left: 0;top: 0;width: 100%;height: 100%;background: rgba(0,0,0,.2);  }
+        #pop {  display: none;width: 500px;height: 300px;position: absolute; top: 0;left: 0;bottom: 0;right: 0;margin: auto;padding: 50px;
+                  z-index: 10;border-radius: 35px;background-color: #ffe; box-shadow: 0 3px 18px rgba(0, 0, 0, .5); }
+        .cancel, .ok {  position: absolute;bottom: 30px;left: 280px;width: 80px;height: 30px;
+                               border: none;border-radius: 15px;background-color: #00BA98;color: #fff;cursor:pointer; }
+        .cancel {  background-color: #999;left: 150px;   }
+        input:focus{outline:none}
+    </style>
 </head>
 
 <body>
-
+<div id="pop">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Asperiores aut deserunt dolorem doloribus ex exercitationem
+        explicabo facere iure iusto nihil nulla, obcaecati odio pariatur,
+        quasi, quos sapiente tempore tenetur voluptas.</p>
+    <input type="button" value="Cancel" onclick="closeDiv()" class="cancel"/>
+    <input type="button" value="OK" onclick="closeDiv()" class="ok"/>
+ </div>
+<div id="bg" style="display:none;background-color: black;width: 100%;position:absolute;height: 100%;opacity: 0.5;z-index: 1;"></div>
 <section id="container">
     <!-- **********************************************************************************************************************************************************
     TOP BAR CONTENT & NOTIFICATIONS
@@ -574,62 +595,60 @@
                     <!-- First Member -->
                     <div class="desc">
                         <div class="thumb">
-                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-divya.jpg"
-                                 alt="">
-                            {#                            <img class="img-circle" src="/assets/img/ui-divya.jpg" width="35px" height="35px" align="">#}
+                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-divya.jpg" alt="">
                         </div>
                         <div class="details">
-                            <p><a class="fancybox" class="img-circle" style="width:35px;height: 35px"
-                                  href="/assets/img/ui-divya.jpg">DIVYA MANIAN</a><br>
+                            <p><a  style="width:35px;height:35px" onclick="showDiv()" href="javascript:void(0)" class="img-circle" >DIVYA MANIAN</a><br>
                                 <muted>Available</muted>
                             </p>
                         </div>
                     </div>
-                    <!-- Second Member -->
+
                     <div class="desc">
                         <div class="thumb">
-                            <img class="img-circle" src="/assets/img/ui-sherman.jpg" width="35px" height="35px"
-                                 align="">
+                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-sherman.jpg" alt="">
                         </div>
                         <div class="details">
-                            <p><a href="#">DJ SHERMAN</a><br/>
+                            <p><a  style="width:35px;height:35px" onclick="showDiv()" href="javascript:void(0)" class="img-circle" >DJ SHERMAN</a><br>
                                 <muted>I am Busy</muted>
                             </p>
                         </div>
                     </div>
-                    <!-- Third Member -->
+
                     <div class="desc">
                         <div class="thumb">
-                            <img class="img-circle" src="/assets/img/ui-danro.jpg" width="35px" height="35px" align="">
+                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-danro.jpg" alt="">
                         </div>
                         <div class="details">
-                            <p><a href="#">DAN ROGERS</a><br/>
+                            <p><a  style="width:35px;height:35px" onclick="showDiv()" href="javascript:void(0)" class="img-circle" >DAN ROGERS</a><br>
                                 <muted>Available</muted>
                             </p>
                         </div>
                     </div>
-                    <!-- Fourth Member -->
+
                     <div class="desc">
                         <div class="thumb">
-                            <img class="img-circle" src="/assets/img/ui-zac.jpg" width="35px" height="35px" align="">
+                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-zac.jpg" alt="">
                         </div>
                         <div class="details">
-                            <p><a href="#">Zac Sniders</a><br/>
+                            <p><a  style="width:35px;height:35px" onclick="showDiv()" href="javascript:void(0)" class="img-circle" >Zac Sniders</a><br>
                                 <muted>Available</muted>
                             </p>
                         </div>
                     </div>
-                    <!-- Fifth Member -->
+
                     <div class="desc">
                         <div class="thumb">
-                            <img class="img-circle" src="/assets/img/ui-sam.jpg" width="35px" height="35px" align="">
+                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-sam.jpg" alt="">
                         </div>
                         <div class="details">
-                            <p><a href="#">Marcel Newman</a><br/>
+                            <p><a  style="width:35px;height:35px" onclick="showDiv()" href="javascript:void(0)" class="img-circle" >Marcel Newman</a><br>
                                 <muted>Available</muted>
                             </p>
                         </div>
                     </div>
+
+                    <!-- Second Member -->
 
                     <!-- CALENDAR-->
                     <div id="calendar" class="mb">
@@ -848,12 +867,16 @@
 
 </script>
 <script type="text/javascript">
-    $(function () {
-        //    fancybox
-        jQuery(".fancybox").fancybox();
-    });
+        function showDiv() {
+            document.getElementById('pop').style.display = 'block';
+            document.getElementById('bg').style.display = 'block';
+        }
+        function closeDiv() {
+            document.getElementById('pop').style.display = 'none';
+            document.getElementById('bg').style.display = 'none';
+        }
+    </script>
 
-</script>
 
 
 </body>
