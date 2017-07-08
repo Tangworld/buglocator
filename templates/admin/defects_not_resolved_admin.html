@@ -201,54 +201,55 @@
             <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
 
-                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="/assets/img/ui-sam.jpg" class="img-circle"
+                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="/assets/img/ui-sam.jpg"
+                                                                               class="img-circle"
                                                                                width="60"></a></p>
                 <h5 class="centered">{{ request.session.username }}</h5>
 
                 <li class="mt">
-            <a href="{% url 'locator:main' %}">
-              <i class="fa fa-dashboard"></i>
-              <span>Overview</span>
-            </a>
-          </li>
+                    <a href="{% url 'locator:main' %}">
+                        <i class="fa fa-dashboard"></i>
+                        <span>Overview</span>
+                    </a>
+                </li>
 
-          <li class="sub-menu" >
-            <a href="javascript:;">
-              <i class="fa fa-desktop"></i>
-              <span>Assigned Bugs</span>
-            </a>
-          </li>
-              <ul class="sub">
-                  <li><a  href="{% url 'locator:fixed_admin' %}">Fixed Bugs</a></li>
-                  <li><a class="active" href="{% url 'locator:unfixed_admin' %}">Unfixed Bugs</a></li>
-              </ul>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-desktop"></i>
+                        <span>Assigned Bugs</span>
+                    </a>
+                </li>
+                <ul class="sub">
+                    <li><a href="{% url 'locator:fixed_admin' %}">Fixed Bugs</a></li>
+                    <li><a class="active" href="{% url 'locator:unfixed_admin' %}">Unfixed Bugs</a></li>
+                </ul>
 
-          <li class="sub-menu">
-            <a href="{% url 'locator:not_assigned' %}" >
-              <i class="fa fa-cogs"></i>
-              <span>Unassigned Bugs</span>
-            </a>
-          </li>
-          <li class="sub-menu">
-            <a href="{% url 'locator:profile' %}" >
-              <i class="fa fa-book"></i>
-                <span>Profile</span>
-            </a>
+                <li class="sub-menu">
+                    <a href="{% url 'locator:not_assigned' %}">
+                        <i class="fa fa-cogs"></i>
+                        <span>Unassigned Bugs</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="{% url 'locator:profile' %}">
+                        <i class="fa fa-book"></i>
+                        <span>Profile</span>
+                    </a>
 
-          </li>
-{#          <li class="sub-menu">#}
-{#            <a href="{% url 'locator:newreport' %}" >#}
-{#              <i class="fa fa-tasks"></i>#}
-{#              <span>提交缺陷报告</span>#}
-{#            </a>#}
-{#          </li>#}
-          <li class="sub-menu">
-            <a href="{% url 'locator:lock' %}" >
-              <i class="fa fa-th"></i>
-              <span>Lock</span>
-            </a>
+                </li>
+                {#          <li class="sub-menu">#}
+                {#            <a href="{% url 'locator:newreport' %}" >#}
+                {#              <i class="fa fa-tasks"></i>#}
+                {#              <span>提交缺陷报告</span>#}
+                {#            </a>#}
+                {#          </li>#}
+                <li class="sub-menu">
+                    <a href="{% url 'locator:lock' %}">
+                        <i class="fa fa-th"></i>
+                        <span>Lock</span>
+                    </a>
 
-          </li>
+                </li>
 
             </ul>
             <!-- sidebar menu end-->
@@ -264,37 +265,37 @@
         <section class="wrapper site-min-height">
             <div style="height: 1100px;margin-top: 80px">
                 <div style="height: 100%">
-                <div class="row mt">
-                  <div class="col-md-12">
-                      <div class="content-panel">
-                          <table class="table table-striped table-advance table-hover">
-	                  	  	  <h4><i class="fa fa-angle-right"></i> Unfixed Bugs</h4>
-	                  	  	  <hr>
-                              <thead>
-                              <tr>
-                                  <th><i class="fa fa-bars"></i> Bug ID</th>
-                                  <th class="hidden-phone"><i class="fa fa-question-circle"></i> Summary</th>
-                                  <th><i class="fa fa-user" aria-hidden="true"></i> Reporter</th>
-                                  <th><i class=" fa fa-bug"></i> Report Date</th>
-                                  <th><i class=" fa fa-user"></i> Assigned to</th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                              {% for content in contents %}
-                              <tr>
-                                  <td ><a href="../basic_table.html#">{{ content.0 }}</a></td>
-                                  <td class="hidden-phone">{{ content.1 }}</td>
-                                  <td>{{ content.2 }}</td>
-                                  <td>{{ content.3 }}</td>
-                                  <td>{{ content.4 }}</td>
-                              </tr>
-                              {% endfor %}
+                    <div class="row mt">
+                        <div class="col-md-12">
+                            <div class="content-panel">
+                                <table class="table table-striped table-advance table-hover">
+                                    <h4><i class="fa fa-angle-right"></i> Unfixed Bugs</h4>
+                                    <hr>
+                                    <thead>
+                                    <tr>
+                                        <th><i class="fa fa-bars"></i> Bug ID</th>
+                                        <th class="hidden-phone"><i class="fa fa-question-circle"></i> Summary</th>
+                                        <th><i class="fa fa-user" aria-hidden="true"></i> Reporter</th>
+                                        <th><i class=" fa fa-bug"></i> Report Date</th>
+                                        <th><i class=" fa fa-user"></i> Assigned to</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for content in contents %}
+                                        <tr>
+                                            <td><a href="../basic_table.html#">{{ content.0 }}</a></td>
+                                            <td class="hidden-phone">{{ content.1 }}</td>
+                                            <td>{{ content.2 }}</td>
+                                            <td>{{ content.3 }}</td>
+                                            <td>{{ content.4 }}</td>
+                                        </tr>
+                                    {% endfor %}
 
-                              </tbody>
-                          </table>
-                      </div><!-- /content-panel -->
-                  </div><!-- /col-md-12 -->
-              </div><!-- /row -->
+                                    </tbody>
+                                </table>
+                            </div><!-- /content-panel -->
+                        </div><!-- /col-md-12 -->
+                    </div><!-- /row -->
 
                 </div>
             </div>
@@ -327,12 +328,12 @@
 <script src="/assets/js/jquery-1.9.1.min.js"></script>
 <script src="/assets/js/jquery.selectlist.js"></script>
 <script type="text/javascript">
-	$(function(){
-		$('select').selectlist({
-			zIndex: 10,
-			height: 34
-		});
-	})
+    $(function () {
+        $('select').selectlist({
+            zIndex: 10,
+            height: 34
+        });
+    })
 </script>
 
 
