@@ -295,4 +295,4 @@ def not_assigned(request):
         if report.status == 'open':
             tmpContent = (report.bugid, report.summary, report.reporter, report.opendate)
             disContent.append(tmpContent)
-    return render(request, 'admin/defects_not_assigned.html', {'contents':disContent})
+    return render(request, 'admin/defects_not_assigned_admin.html', {'contents': disContent})
