@@ -200,8 +200,9 @@
             <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
 
-                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="/assets/img/ui-sam.jpg" class="img-circle"
-                                                                width="60"></a></p>
+                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="/assets/img/ui-sam.jpg"
+                                                                               class="img-circle"
+                                                                               width="60"></a></p>
                 <h5 class="centered">{{ request.session.username }}</h5>
 
                 <li class="mt">
@@ -231,15 +232,15 @@
                     </a>
 
                 </li>
-{#                <li class="sub-menu">#}
-{#                    <a href="{% url 'locator:newreport' %}">#}
-{#                        <i class="fa fa-tasks"></i>#}
-{#                        <span>Report</span>#}
-{#                    </a>#}
-{##}
-{#                </li>#}
+                {#                <li class="sub-menu">#}
+                {#                    <a href="{% url 'locator:newreport' %}">#}
+                {#                        <i class="fa fa-tasks"></i>#}
+                {#                        <span>Report</span>#}
+                {#                    </a>#}
+                {##}
+                {#                </li>#}
                 <li class="sub-menu">
-                    <a href="{% url 'locator:lock' %}" >
+                    <a href="{% url 'locator:lock' %}">
                         <i class="fa fa-th"></i>
                         <span>Lock</span>
                     </a>
@@ -300,14 +301,16 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>New Password</h4></label>
                                         <div class="col-sm-10">
-                                            <input name="password" type="password" class="form-control" placeholder="New Password">
+                                            <input name="password" type="password" class="form-control"
+                                                   placeholder="New Password">
                                         </div>
                                     </div>
                                     <br><br>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>Confirm </h4></label>
                                         <div class="col-sm-10">
-                                            <input name="password2" type="password" class="form-control" placeholder="Confirm Password">
+                                            <input name="password2" type="password" class="form-control"
+                                                   placeholder="Confirm Password">
                                         </div>
                                         <br>
                                         <h3>{{ infomation }}</h3>

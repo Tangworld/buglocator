@@ -1,8 +1,9 @@
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 from django.shortcuts import render
 from django.shortcuts import HttpResponseRedirect
 from locator import models
 import time
+
 
 # Create your views here.
 
@@ -22,7 +23,7 @@ def login(request):
     :param request: 
     :return: 
     """
-    #if authority(request) == False:
+    # if authority(request) == False:
     #    return HttpResponseRedirect('/locator/lock')
     validate = {}
     v1 = ""
@@ -52,7 +53,6 @@ def login(request):
         v2 = "Password cannot be empty！"
         flag = False
     validate = {"v1": v1, "v2": v2}
-
 
     if flag:
         request.session["username"] = username
@@ -98,7 +98,7 @@ def main(request):
     :param request: 
     :return: 进入主页
     """
-    #if authority(request) == False:
+    # if authority(request) == False:
     #    return HttpResponseRedirect('/locator/lock')
     if request.session['isadmin'] == 'yes':
         return render(request, 'admin/index_admin.html')
@@ -112,7 +112,7 @@ def edit(request):
     :param request: 
     :return: 
     """
-    #if authority(request) == False:
+    # if authority(request) == False:
     #    return HttpResponseRedirect('/locator/lock')
 
     return render(request, 'editprofile.html')
@@ -124,7 +124,7 @@ def confirm(request):
     :param request: 
     :return: 
     """
-    #if authority(request) == False:
+    # if authority(request) == False:
     #    return HttpResponseRedirect('/locator/lock')
     flag = True
     infomation = ""
@@ -180,7 +180,7 @@ def newreport(request):
     :param request: 
     :return: 
     """
-    #authority(request)
+    # authority(request)
 
     current = request.session['username']
     finalusers = []
@@ -204,7 +204,7 @@ def savereport(request):
     :param request: 
     :return: 
     """
-    #authority(request)
+    # authority(request)
     summary = request.POST.get('summary')
     description = request.POST.get('description')
     reporter = request.session['userid']
@@ -218,19 +218,19 @@ def savereport(request):
     os = request.POST.get('os')
     priority = request.POST.get('priority')
     severity = request.POST.get('severity')
-    #print summary
-    #print description
-    #print reporter
-    #print assignee
-    #print status
-    #print opendate
-    #print component
-    #print version
-    #print platform
-    #print os
-    #print priority
-    #print severity
-    #print productid
+    # print summary
+    # print description
+    # print reporter
+    # print assignee
+    # print status
+    # print opendate
+    # print component
+    # print version
+    # print platform
+    # print os
+    # print priority
+    # print severity
+    # print productid
 
     models.Report.objects.create(summary=summary, description=description, reporter=reporter,
                                  assignee=assignee, status=status, opendate=opendate,
@@ -247,8 +247,9 @@ def authority(request):
     else:
         return True
 
+
 def unfixed(request):
-    #待修复页面
+    # 待修复页面
     current_name = request.session['username']
     current_isadmin = request.session['isadmin']
     reports = models.Report.objects.all()
@@ -259,13 +260,14 @@ def unfixed(request):
             if report.status == 'unfixed':
                 tmpContent = (report.bugid, report.summary, report.reporter, report.opendate, report.assignee)
                 disContent.append(tmpContent)
-        return render(request, 'admin/defects_not_resolved_admin.html', {'contents':disContent})
+        return render(request, 'admin/defects_not_resolved_admin.html', {'contents': disContent})
     else:
         for report in reports:
             if report.assignee == current_name and report.status == 'unfixed':
                 tmpContent = (report.bugid, report.summary, report.reporter, report.opendate)
                 disContent.append(tmpContent)
-        return render(request, 'defects_not_resolved.html', {'contents' : disContent})
+        return render(request, 'defects_not_resolved.html', {'contents': disContent})
+
 
 def fixed(request):
     # 已修复页面
@@ -279,13 +281,14 @@ def fixed(request):
             if report.status == 'fixed':
                 tmpContent = (report.bugid, report.summary, report.reporter, report.opendate, report.fixdate)
                 disContent.append(tmpContent)
-        return render(request, 'admin/defects_resolved_admin.html', {'contents':disContent})
+        return render(request, 'admin/defects_resolved_admin.html', {'contents': disContent})
     else:
         for report in reports:
             if report.assignee == current_name and report.status == 'fixed':
                 tmpContent = (report.bugid, report.summary, report.reporter, report.opendate, report.fixdate)
                 disContent.append(tmpContent)
-        return render(request, 'defects_resolved.html', {'contents' : disContent})
+        return render(request, 'defects_resolved.html', {'contents': disContent})
+
 
 def not_assigned(request):
     reports = models.Report.objects.all()

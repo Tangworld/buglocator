@@ -226,7 +226,7 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a  href="{% url 'locator:profile' %}">
+                    <a href="{% url 'locator:profile' %}">
                         <i class="fa fa-book"></i>
                         <span>个人信息管理</span>
                     </a>
@@ -242,7 +242,7 @@
                     </ul>-->
                 </li>
                 <li class="sub-menu">
-                    <a href="{% url 'locator:lock' %}" >
+                    <a href="{% url 'locator:lock' %}">
                         <i class="fa fa-th"></i>
                         <span>锁定</span>
                     </a>
@@ -288,49 +288,50 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>模块</h4></label>
                                         <div class="col-sm-10">
-                                            <input name="component" type="text" class="form-control" >
+                                            <input name="component" type="text" class="form-control">
                                         </div>
                                     </div>
                                     <br><br>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>版本</h4></label>
                                         <div class="col-sm-10">
-                                            <input name="version" type="text" class="form-control" >
+                                            <input name="version" type="text" class="form-control">
                                         </div>
                                     </div>
                                     <br><br>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>平台</h4></label>
                                         <div class="col-sm-10">
-                                            <input name="platform" type="text" class="form-control" >
+                                            <input name="platform" type="text" class="form-control">
                                         </div>
                                     </div>
                                     <br><br>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>操作系统</h4></label>
                                         <div class="col-sm-10">
-                                            <input name="os" type="text" class="form-control" >
+                                            <input name="os" type="text" class="form-control">
                                         </div>
                                     </div>
                                     <br><br>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>优先级</h4></label>
                                         <div class="col-sm-10">
-                                            <input name="priority" type="text" class="form-control" >
+                                            <input name="priority" type="text" class="form-control">
                                         </div>
                                     </div>
                                     <br><br>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>严重性</h4></label>
                                         <div class="col-sm-10">
-                                            <input name="severity" type="text" class="form-control" >
+                                            <input name="severity" type="text" class="form-control">
                                         </div>
                                     </div>
                                     <br><br>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>提交人</h4></label>
                                         <div class="col-sm-10">
-                                            <input name="reporter" class="form-control" id="disabledInput" type="text" value="{{ request.session.username }}" disabled>
+                                            <input name="reporter" class="form-control" id="disabledInput" type="text"
+                                                   value="{{ request.session.username }}" disabled>
                                         </div>
                                     </div>
                                     <br><br>
@@ -371,25 +372,26 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>状态</h4></label>
                                         <div class="col-sm-10">
-                                            <input name="status" class="form-control" id="disabledInput" type="text" value="未分配" disabled>
+                                            <input name="status" class="form-control" id="disabledInput" type="text"
+                                                   value="未分配" disabled>
                                         </div>
                                     </div>
                                     <br><br>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>简述</h4></label>
                                         <div class="form-group">
-                                              <div class="col-sm-10">
-                                                  <textarea name="summary" rows="2" class="form-control"></textarea>
-                                              </div>
+                                            <div class="col-sm-10">
+                                                <textarea name="summary" rows="2" class="form-control"></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                     <br><br><br><br>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label"><h4>详述</h4></label>
                                         <div class="form-group">
-                                              <div class="col-sm-10">
-                                                  <textarea name="description" rows="3" class="form-control"></textarea>
-                                              </div>
+                                            <div class="col-sm-10">
+                                                <textarea name="description" rows="3" class="form-control"></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                     <br><br><br><br><br><br><br><br>
@@ -435,12 +437,12 @@
 <script src="/assets/js/jquery-1.9.1.min.js"></script>
 <script src="/assets/js/jquery.selectlist.js"></script>
 <script type="text/javascript">
-	$(function(){
-		$('select').selectlist({
-			zIndex: 10,
-			height: 34
-		});
-	})
+    $(function () {
+        $('select').selectlist({
+            zIndex: 10,
+            height: 34
+        });
+    })
 </script>
 
 
@@ -460,7 +462,7 @@
 <script>
     function save() {
         alert('提交成功！');
-        window.location.href='{% url 'locator:savereport' %}';
+        window.location.href = '{% url 'locator:savereport' %}';
     }
 </script>
 
