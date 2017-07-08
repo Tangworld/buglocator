@@ -61,7 +61,7 @@ def login(request):
         request.session['userid'] = validatepassword.id
         request.session['isadmin'] = validatepassword.isadmin
         if validatepassword.isadmin == 'yes':
-            return render(request, 'index_admin.html')
+            return render(request, 'admin/index_admin.html')
         else:
             return render(request, 'index.html')
     else:
@@ -86,7 +86,7 @@ def profile(request):
     :return: 个人信息页面
     """
     if request.session['isadmin'] == 'yes':
-        return render(request, 'profile_admin.html')
+        return render(request, 'admin/profile_admin.html')
     else:
         return render(request, 'profile.html')
 
@@ -101,7 +101,7 @@ def main(request):
     #if authority(request) == False:
     #    return HttpResponseRedirect('/locator/lock')
     if request.session['isadmin'] == 'yes':
-        return render(request, 'index_admin.html')
+        return render(request, 'admin/index_admin.html')
     else:
         return render(request, 'index.html')
 
@@ -259,7 +259,7 @@ def unfixed(request):
             if report.status == 'unfixed':
                 tmpContent = (report.bugid, report.summary, report.reporter, report.opendate, report.assignee)
                 disContent.append(tmpContent)
-        return render(request, 'defects_not_resolved_admin.html', {'contents':disContent})
+        return render(request, 'admin/defects_not_resolved_admin.html', {'contents':disContent})
     else:
         for report in reports:
             if report.assignee == current_name and report.status == 'unfixed':
@@ -279,7 +279,7 @@ def fixed(request):
             if report.status == 'fixed':
                 tmpContent = (report.bugid, report.summary, report.reporter, report.opendate, report.fixdate)
                 disContent.append(tmpContent)
-        return render(request, 'defects_resolved_admin.html', {'contents':disContent})
+        return render(request, 'admin/defects_resolved_admin.html', {'contents':disContent})
     else:
         for report in reports:
             if report.assignee == current_name and report.status == 'fixed':
@@ -295,4 +295,4 @@ def not_assigned(request):
         if report.status == 'open':
             tmpContent = (report.bugid, report.summary, report.reporter, report.opendate)
             disContent.append(tmpContent)
-    return render(request, 'defects_not_assigned.html', {'contents':disContent})
+    return render(request, 'admin/defects_not_assigned.html', {'contents':disContent})

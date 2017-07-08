@@ -38,14 +38,14 @@
             <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
         </div>
         <!--logo start-->
-        <a href="index.html" class="logo"><b>BUG LOCATOR</b></a>
+        <a href="../index.html" class="logo"><b>BUG LOCATOR</b></a>
         <!--logo end-->
         <div class="nav notify-row" id="top_menu">
             <!--  notification start -->
             <ul class="nav top-menu">
                 <!-- settings start -->
                 <li class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="../index.html#">
                         <i class="fa fa-tasks"></i>
                         <span class="badge bg-theme">4</span>
                     </a>
@@ -55,7 +55,7 @@
                             <p class="green">You have 4 pending tasks</p>
                         </li>
                         <li>
-                            <a href="index.html#">
+                            <a href="../index.html#">
                                 <div class="task-info">
                                     <div class="desc">DashGum Admin Panel</div>
                                     <div class="percent">40%</div>
@@ -69,7 +69,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="index.html#">
+                            <a href="../index.html#">
                                 <div class="task-info">
                                     <div class="desc">Database Update</div>
                                     <div class="percent">60%</div>
@@ -83,7 +83,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="index.html#">
+                            <a href="../index.html#">
                                 <div class="task-info">
                                     <div class="desc">Product Development</div>
                                     <div class="percent">80%</div>
@@ -97,7 +97,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="index.html#">
+                            <a href="../index.html#">
                                 <div class="task-info">
                                     <div class="desc">Payments Sent</div>
                                     <div class="percent">70%</div>
@@ -118,7 +118,7 @@
                 <!-- settings end -->
                 <!-- inbox dropdown start-->
                 <li id="header_inbox_bar" class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="../index.html#">
                         <i class="fa fa-envelope-o"></i>
                         <span class="badge bg-theme">5</span>
                     </a>
@@ -128,7 +128,7 @@
                             <p class="green">You have 5 new messages</p>
                         </li>
                         <li>
-                            <a href="index.html#">
+                            <a href="../index.html#">
                                 <span class="photo"><img alt="avatar" src="/assets/img/ui-zac.jpg"></span>
                                 <span class="subject">
                                     <span class="from">Zac Snider</span>
@@ -140,7 +140,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="index.html#">
+                            <a href="../index.html#">
                                 <span class="photo"><img alt="avatar" src="/assets/img/ui-divya.jpg"></span>
                                 <span class="subject">
                                     <span class="from">Divya Manian</span>
@@ -152,7 +152,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="index.html#">
+                            <a href="../index.html#">
                                 <span class="photo"><img alt="avatar" src="/assets/img/ui-danro.jpg"></span>
                                 <span class="subject">
                                     <span class="from">Dan Rogers</span>
@@ -164,7 +164,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="index.html#">
+                            <a href="../index.html#">
                                 <span class="photo"><img alt="avatar" src="/assets/img/ui-sherman.jpg"></span>
                                 <span class="subject">
                                     <span class="from">Dj Sherman</span>
@@ -176,7 +176,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="index.html#">See all messages</a>
+                            <a href="../index.html#">See all messages</a>
                         </li>
                     </ul>
                 </li>
@@ -202,7 +202,7 @@
             <ul class="sidebar-menu" id="nav-accordion">
 
                 <p class="centered"><a href="{% url 'locator:profile' %}"><img src="/assets/img/ui-sam.jpg" class="img-circle"
-                                                                width="60"></a></p>
+                                                                               width="60"></a></p>
                 <h5 class="centered">{{ request.session.username }}</h5>
 
                 <li class="mt">
@@ -212,29 +212,19 @@
             </a>
           </li>
 
-          <li class="sub-menu">
+          <li class="sub-menu" >
             <a href="javascript:;">
               <i class="fa fa-desktop"></i>
               <span>已分配缺陷</span>
             </a>
-              <ul class="sub" style="overflow: hidden; display: block;">
+          </li>
+              <ul class="sub">
                   <li><a  href="{% url 'locator:fixed_admin' %}">已修复缺陷</a></li>
-                  <li><a  href="{% url 'locator:unfixed_admin' %}">未修复缺陷</a></li>
+                  <li><a class="active" href="{% url 'locator:unfixed_admin' %}">未修复缺陷</a></li>
               </ul>
-           <!--     <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-desktop"></i>
-                          <span>已修复缺陷</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="general.html">General</a></li>
-                          <li><a  href="buttons.html">Buttons</a></li>
-                          <li><a  href="panels.html">Panels</a></li>
-                      </ul>
-                  </li>
-           -->
+
           <li class="sub-menu">
-            <a class="active" href="{% url 'locator:not_assigned' %}" >
+            <a href="{% url 'locator:not_assigned' %}" >
               <i class="fa fa-cogs"></i>
               <span>待分配缺陷</span>
             </a>
@@ -278,7 +268,7 @@
                   <div class="col-md-12">
                       <div class="content-panel">
                           <table class="table table-striped table-advance table-hover">
-	                  	  	  <h4><i class="fa fa-angle-right"></i> 待分配缺陷</h4>
+	                  	  	  <h4><i class="fa fa-angle-right"></i> 未修复缺陷</h4>
 	                  	  	  <hr>
                               <thead>
                               <tr>
@@ -286,21 +276,17 @@
                                   <th class="hidden-phone"><i class="fa fa-question-circle"></i> Summary</th>
                                   <th><i class="fa fa-user" aria-hidden="true"></i> Reporter</th>
                                   <th><i class=" fa fa-bug"></i> Report Date</th>
-                                  <th><i class=" fa fa-paper-plane"></i> Operation</th>
+                                  <th><i class=" fa fa-user"></i> Assigned to</th>
                               </tr>
                               </thead>
                               <tbody>
                               {% for content in contents %}
                               <tr>
-                                  <td ><a href="basic_table.html#">{{ content.0 }}</a></td>
+                                  <td ><a href="../basic_table.html#">{{ content.0 }}</a></td>
                                   <td class="hidden-phone">{{ content.1 }}</td>
                                   <td>{{ content.2 }}</td>
                                   <td>{{ content.3 }}</td>
-                                  <td>
-                                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                  </td>
+                                  <td>{{ content.4 }}</td>
                               </tr>
                               {% endfor %}
 
@@ -322,7 +308,7 @@
     <footer class="site-footer">
         <div class="text-center">
             2017 - NJU
-            <a href="profile.html#" class="go-top">
+            <a href="../profile.html#" class="go-top">
                 <i class="fa fa-angle-up"></i>
             </a>
         </div>
