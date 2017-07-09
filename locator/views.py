@@ -279,13 +279,13 @@ def unfixed(request):
     if current_isadmin == 'yes':
         for report in reports:
             if report.status == 'unfixed':
-                tmpContent = (report.bugid, report.summary, report.reporter, report.opendate, report.assignee)
+                tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), report.assignee)
                 disContent.append(tmpContent)
         return render(request, 'admin/defects_not_resolved_admin.html', {'contents': disContent})
     else:
         for report in reports:
             if report.assignee == current_name and report.status == 'unfixed':
-                tmpContent = (report.bugid, report.summary, report.reporter, report.opendate)
+                tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))))
                 disContent.append(tmpContent)
         return render(request, 'defects_not_resolved.html', {'contents': disContent})
 
@@ -300,13 +300,13 @@ def fixed(request):
     if current_isadmin == 'yes':
         for report in reports:
             if report.status == 'fixed':
-                tmpContent = (report.bugid, report.summary, report.reporter, report.opendate, report.fixdate)
+                tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), report.fixdate)
                 disContent.append(tmpContent)
         return render(request, 'admin/defects_resolved_admin.html', {'contents': disContent})
     else:
         for report in reports:
             if report.assignee == current_name and report.status == 'fixed':
-                tmpContent = (report.bugid, report.summary, report.reporter, report.opendate, report.fixdate)
+                tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), report.fixdate)
                 disContent.append(tmpContent)
         return render(request, 'defects_resolved.html', {'contents': disContent})
 
@@ -317,6 +317,6 @@ def not_assigned(request):
 
     for report in reports:
         if report.status == 'open':
-            tmpContent = (report.bugid, report.summary, report.reporter, report.opendate)
+            tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))))
             disContent.append(tmpContent)
     return render(request, 'admin/defects_not_assigned_admin.html', {'contents': disContent})
