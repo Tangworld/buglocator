@@ -221,7 +221,7 @@
             <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
 
-                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="/assets/img/ui-sam.jpg"
+                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="{{ request.session.avatarloc }}"
                                                                                class="img-circle" width="60"></a></p>
                 <h5 class="centered">{{ request.session.username }}</h5>
 
@@ -651,7 +651,7 @@
             // (string | mandatory) the text inside the notification
             text: 'This is a powerful tool and we will try our best to provide you with better bug location services!',
             // (string | optional) the image to display on the left
-            image: '/assets/img/ui-sam.jpg',
+            image: '{{ request.session.avatarloc }}',
             // (bool | optional) if you want it to fade out on its own or just sit there
             sticky: true,
             // (int | optional) the time you want it to be alive for before fading out

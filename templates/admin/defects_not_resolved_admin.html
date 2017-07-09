@@ -200,7 +200,7 @@
             <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
 
-                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="{{ request.session.avatarloc }}" class="img-circle" width="60"></a></p>
                 <h5 class="centered">{{ request.session.username }}</h5>
 
                 <li class="mt">
@@ -216,7 +216,7 @@
                         <span>Assigned Bugs</span>
                     </a>
                     <ul class="sub">
-                        <li ><a href="{% url 'locator:fixed_admin' %}">Fixed Bugs</a></li>
+                        <li><a href="{% url 'locator:fixed_admin' %}">Fixed Bugs</a></li>
                         <li class="active"><a href="{% url 'locator:unfixed_admin' %}">Unfixed Bugs</a></li>
                     </ul>
                 </li>
@@ -254,7 +254,8 @@
     MAIN CONTENT
     *********************************************************************************************************************************************************** -->
     <!--main content start-->
-    <<section id="main-content">
+    <
+    <section id="main-content">
         <section class="wrapper site-min-height">
             <div style="height: 1100px;margin-top: 80px">
                 <div style="height: 100%">

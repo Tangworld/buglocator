@@ -1,8 +1,9 @@
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 from django.shortcuts import render
 from django.shortcuts import HttpResponseRedirect
 from locator import models
 import time
+
 
 # Create your views here.
 
@@ -22,7 +23,7 @@ def login(request):
     :param request: 
     :return: 
     """
-    #if authority(request) == False:
+    # if authority(request) == False:
     #    return HttpResponseRedirect('/locator/lock')
     validate = {}
     v1 = ""
@@ -54,17 +55,27 @@ def login(request):
     validate = {"v1": v1, "v2": v2}
     testclass=100
 
-
     if flag:
         request.session["username"] = username
         request.session["password"] = password
         request.session['email'] = validatepassword.email
         request.session['userid'] = validatepassword.id
         request.session['isadmin'] = validatepassword.isadmin
+        request.session['avatarloc'] = validatepassword.avatarloc
         if validatepassword.isadmin == 'yes':
             return render(request, 'admin/index_admin.html')
         else:
-            return render(request, 'index.html')
+            members = []
+            try:
+                productobj = models.ProUser.objects.get(user_id=validatepassword.id)
+                productId = int(productobj.product_id)
+                userids = models.ProUser.objects.filter(product_id=productId)
+                for userid in userids:
+                    member = models.User.objects.get(id=userid.user_id)
+                    members.append(member)
+            except Exception, e:
+                print e
+            return render(request, 'index.html', {'members': members})
     else:
         return render(request, 'login.html', {"validate": validate, "testclass":testclass})
 
@@ -99,12 +110,22 @@ def main(request):
     :param request: 
     :return: 进入主页
     """
-    #if authority(request) == False:
+    # if authority(request) == False:
     #    return HttpResponseRedirect('/locator/lock')
     if request.session['isadmin'] == 'yes':
         return render(request, 'admin/index_admin.html')
     else:
-        return render(request, 'index.html')
+        members = []
+        try:
+            productobj = models.ProUser.objects.get(user_id=request.session['userid'])
+            productId = int(productobj.product_id)
+            userids = models.ProUser.objects.filter(product_id=productId)
+            for userid in userids:
+                member = models.User.objects.get(id=userid.user_id)
+                members.append(member)
+        except Exception, e:
+            print e
+        return render(request, 'index.html', {'members': members})
 
 
 def edit(request):
@@ -113,7 +134,7 @@ def edit(request):
     :param request: 
     :return: 
     """
-    #if authority(request) == False:
+    # if authority(request) == False:
     #    return HttpResponseRedirect('/locator/lock')
 
     return render(request, 'editprofile.html')
@@ -125,7 +146,7 @@ def confirm(request):
     :param request: 
     :return: 
     """
-    #if authority(request) == False:
+    # if authority(request) == False:
     #    return HttpResponseRedirect('/locator/lock')
     flag = True
     infomation = ""
@@ -181,7 +202,7 @@ def newreport(request):
     :param request: 
     :return: 
     """
-    #authority(request)
+    # authority(request)
 
     current = request.session['username']
     finalusers = []
@@ -205,7 +226,7 @@ def savereport(request):
     :param request: 
     :return: 
     """
-    #authority(request)
+    # authority(request)
     summary = request.POST.get('summary')
     description = request.POST.get('description')
     reporter = request.session['userid']
@@ -219,19 +240,19 @@ def savereport(request):
     os = request.POST.get('os')
     priority = request.POST.get('priority')
     severity = request.POST.get('severity')
-    #print summary
-    #print description
-    #print reporter
-    #print assignee
-    #print status
-    #print opendate
-    #print component
-    #print version
-    #print platform
-    #print os
-    #print priority
-    #print severity
-    #print productid
+    # print summary
+    # print description
+    # print reporter
+    # print assignee
+    # print status
+    # print opendate
+    # print component
+    # print version
+    # print platform
+    # print os
+    # print priority
+    # print severity
+    # print productid
 
     models.Report.objects.create(summary=summary, description=description, reporter=reporter,
                                  assignee=assignee, status=status, opendate=opendate,
@@ -248,8 +269,9 @@ def authority(request):
     else:
         return True
 
+
 def unfixed(request):
-    #待修复页面
+    # 待修复页面
     current_name = request.session['username']
     current_isadmin = request.session['isadmin']
     reports = models.Report.objects.all()
@@ -258,15 +280,16 @@ def unfixed(request):
     if current_isadmin == 'yes':
         for report in reports:
             if report.status == 'unfixed':
-                tmpContent = (report.bugid, report.summary, report.reporter, report.opendate, report.assignee)
+                tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), report.assignee)
                 disContent.append(tmpContent)
-        return render(request, 'admin/defects_not_resolved_admin.html', {'contents':disContent})
+        return render(request, 'admin/defects_not_resolved_admin.html', {'contents': disContent})
     else:
         for report in reports:
             if report.assignee == current_name and report.status == 'unfixed':
-                tmpContent = (report.bugid, report.summary, report.reporter, report.opendate)
+                tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))))
                 disContent.append(tmpContent)
-        return render(request, 'defects_not_resolved.html', {'contents' : disContent})
+        return render(request, 'defects_not_resolved.html', {'contents': disContent})
+
 
 def fixed(request):
     # 已修复页面
@@ -278,15 +301,16 @@ def fixed(request):
     if current_isadmin == 'yes':
         for report in reports:
             if report.status == 'fixed':
-                tmpContent = (report.bugid, report.summary, report.reporter, report.opendate, report.fixdate)
+                tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), report.fixdate)
                 disContent.append(tmpContent)
-        return render(request, 'admin/defects_resolved_admin.html', {'contents':disContent})
+        return render(request, 'admin/defects_resolved_admin.html', {'contents': disContent})
     else:
         for report in reports:
             if report.assignee == current_name and report.status == 'fixed':
-                tmpContent = (report.bugid, report.summary, report.reporter, report.opendate, report.fixdate)
+                tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), report.fixdate)
                 disContent.append(tmpContent)
-        return render(request, 'defects_resolved.html', {'contents' : disContent})
+        return render(request, 'defects_resolved.html', {'contents': disContent})
+
 
 def not_assigned(request):
     reports = models.Report.objects.all()
@@ -294,6 +318,6 @@ def not_assigned(request):
 
     for report in reports:
         if report.status == 'open':
-            tmpContent = (report.bugid, report.summary, report.reporter, report.opendate)
+            tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))))
             disContent.append(tmpContent)
     return render(request, 'admin/defects_not_assigned_admin.html', {'contents': disContent})
