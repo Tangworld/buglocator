@@ -269,6 +269,15 @@ $.fn.zabuto_calendar = function (options) {
                         var dateId = $calendarElement.attr('id') + '_' + dateAsString(year, month, currDayOfMonth);
                         var dayId = dateId + '_day';
 
+                        //  获取今日时间
+                         var date = new Date();
+                          var y = date.getFullYear();
+                         var m = date.getMonth() + 1;
+                         var d = date.getUTCDate();
+                         if(m<10) m = "0" + m;
+                         if(d<10) d = "0" + d;
+                        var days = y + "-" + m + "-" + d;
+
                         var $dayElement = $('<div id="' + dayId + '" class="day" >' + currDayOfMonth + '</div>');
                         $dayElement.data('day', currDayOfMonth);
 
@@ -279,7 +288,13 @@ $.fn.zabuto_calendar = function (options) {
                         }
 
                         var $dowElement = $('<td id="' + dateId + '"></td>');
+                        if(days == dateAsString(year, month, currDayOfMonth))
+                        $dowElement.addClass("today");
                         $dowElement.append($dayElement);
+
+                        $dayElement.click(function(){
+                            addAlert();
+                        });
 
                         $dowElement.data('date', dateAsString(year, month, currDayOfMonth));
                         $dowElement.data('hasEvent', false);
@@ -306,6 +321,54 @@ $.fn.zabuto_calendar = function (options) {
             return $tableObj;
         }
 
+ //  生成遮幕层、弹窗、关闭按钮
+function addAlert(){
+
+    var h = $(document).height(); 
+     var w = $(document).width();     
+     var gray =  $("<div id='gray'></div>").css({
+            "background-color":"black",
+            "opacity":0.6,
+            "z-index":2000,
+            "position":"absolute",
+            "top":0,
+            "left": 0,
+            "height":h,
+            "width":w
+           });
+    $("body").prepend(gray);
+
+    var boxH = "200px";
+    var boxW = "500px";
+    var t = ( parseInt($(window).height()) - parseInt(boxH) ) / 2;
+    var l = ( parseInt($(window).width()) - parseInt(boxW) ) / 2;
+    var alert =  $("<div id='alert'></div>").css({
+            "background-color":"white",
+            "z-index":3000,
+            "position":"fixed",
+            "opacity":1,
+            "top":t,
+            "left":l,
+            "border-radius":"10px",
+            "height":boxH,
+            "width":boxH,
+           });
+    $(gray).after(alert);
+
+    var close = $("<div id='close' class='closeX' ></div>").text("X");
+    $(alert).append(close);
+
+    var conta = $("<div id='conta' class='conta' ></div>");
+    var msg = $(".testclass").text()
+    conta.text(msg)
+    $(alert).append(conta);
+
+    $("#close").click(function(){
+          $("div").remove("#alert");
+          $("div").remove("#gray");
+    });
+
+}
         /* ----- Modal functions ----- */
 
         function createModal(id, title, body, footer) {

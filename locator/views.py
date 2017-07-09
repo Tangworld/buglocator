@@ -22,8 +22,8 @@ def login(request):
     :param request: 
     :return: 
     """
-    if authority(request) == False:
-        return HttpResponseRedirect('/locator/lock')
+    #if authority(request) == False:
+    #    return HttpResponseRedirect('/locator/lock')
     validate = {}
     v1 = ""
     v2 = ""
@@ -37,20 +37,22 @@ def login(request):
     try:
         validatepassword = models.User.objects.get(username=username)
         if validatepassword.password != password:
-            v2 = "密码错误！"
+            v2 = "Incorrect password！"
             flag = False
         print validatepassword
     except Exception, e:
-        v2 = "密码错误！"
+        print e
+        v2 = "Incorrect password！"
         flag = False
 
     if username == "":
-        v1 = "用户名不能为空！"
+        v1 = "Username cannot be empty！"
         flag = False
     if password == "":
-        v2 = "密码不能为空！"
+        v2 = "Password cannot be empty！"
         flag = False
     validate = {"v1": v1, "v2": v2}
+    testclass=100
 
 
     if flag:
@@ -58,9 +60,13 @@ def login(request):
         request.session["password"] = password
         request.session['email'] = validatepassword.email
         request.session['userid'] = validatepassword.id
-        return render(request, 'index.html')
+        request.session['isadmin'] = validatepassword.isadmin
+        if validatepassword.isadmin == 'yes':
+            return render(request, 'admin/index_admin.html')
+        else:
+            return render(request, 'index.html')
     else:
-        return render(request, 'login.html', {"validate": validate})
+        return render(request, 'login.html', {"validate": validate, "testclass":testclass})
 
 
 def logout(request):
@@ -80,9 +86,10 @@ def profile(request):
     :param request: 
     :return: 个人信息页面
     """
-    if authority(request) == False:
-        return HttpResponseRedirect('/locator/lock')
-    return render(request, 'profile.html')
+    if request.session['isadmin'] == 'yes':
+        return render(request, 'admin/profile_admin.html')
+    else:
+        return render(request, 'profile.html')
 
 
 def main(request):
@@ -92,9 +99,12 @@ def main(request):
     :param request: 
     :return: 进入主页
     """
-    if authority(request) == False:
-        return HttpResponseRedirect('/locator/lock')
-    return render(request, 'index.html')
+    #if authority(request) == False:
+    #    return HttpResponseRedirect('/locator/lock')
+    if request.session['isadmin'] == 'yes':
+        return render(request, 'admin/index_admin.html')
+    else:
+        return render(request, 'index.html')
 
 
 def edit(request):
@@ -103,8 +113,8 @@ def edit(request):
     :param request: 
     :return: 
     """
-    if authority(request) == False:
-        return HttpResponseRedirect('/locator/lock')
+    #if authority(request) == False:
+    #    return HttpResponseRedirect('/locator/lock')
 
     return render(request, 'editprofile.html')
 
@@ -115,8 +125,8 @@ def confirm(request):
     :param request: 
     :return: 
     """
-    if authority(request) == False:
-        return HttpResponseRedirect('/locator/lock')
+    #if authority(request) == False:
+    #    return HttpResponseRedirect('/locator/lock')
     flag = True
     infomation = ""
     username = request.session['username']
@@ -124,18 +134,18 @@ def confirm(request):
     inputPassword2 = request.POST.get('password2', None)
     if inputPassword == "":
         flag = False
-        infomation = "密码不能为空！"
+        infomation = "Password cannot be empty！"
     if inputPassword2 == "":
         flag = False
-        infomation = "确认密码不能为空！"
+        infomation = "Confirm cannot be empty！"
     if inputPassword != inputPassword2:
         flag = False
-        infomation = "两次密码不一致！"
+        infomation = "Password and confirm password must be consistent!"
     if flag:
         user = models.User.objects.get(username=username)  # 查询该条记录
         user.password = inputPassword  # 修改
         user.save()
-        return render(request, 'profile.html', {'success': '修改成功！'})
+        return render(request, 'profile.html', {'success': 'Success！'})
     else:
         return render(request, 'editprofile.html', {'infomation': infomation})
 
@@ -171,7 +181,7 @@ def newreport(request):
     :param request: 
     :return: 
     """
-    authority(request)
+    #authority(request)
 
     current = request.session['username']
     finalusers = []
@@ -195,7 +205,7 @@ def savereport(request):
     :param request: 
     :return: 
     """
-    authority(request)
+    #authority(request)
     summary = request.POST.get('summary')
     description = request.POST.get('description')
     reporter = request.session['userid']
@@ -233,7 +243,57 @@ def savereport(request):
 def authority(request):
     username = ""
     lock = request.session['lock']
-    if lock == 'unlock':
-        return True
-    else:
+    if lock == 'lock':
         return False
+    else:
+        return True
+
+def unfixed(request):
+    #待修复页面
+    current_name = request.session['username']
+    current_isadmin = request.session['isadmin']
+    reports = models.Report.objects.all()
+    disContent = []
+
+    if current_isadmin == 'yes':
+        for report in reports:
+            if report.status == 'unfixed':
+                tmpContent = (report.bugid, report.summary, report.reporter, report.opendate, report.assignee)
+                disContent.append(tmpContent)
+        return render(request, 'admin/defects_not_resolved_admin.html', {'contents':disContent})
+    else:
+        for report in reports:
+            if report.assignee == current_name and report.status == 'unfixed':
+                tmpContent = (report.bugid, report.summary, report.reporter, report.opendate)
+                disContent.append(tmpContent)
+        return render(request, 'defects_not_resolved.html', {'contents' : disContent})
+
+def fixed(request):
+    # 已修复页面
+    current_name = request.session['username']
+    current_isadmin = request.session['isadmin']
+    reports = models.Report.objects.all()
+    disContent = []
+
+    if current_isadmin == 'yes':
+        for report in reports:
+            if report.status == 'fixed':
+                tmpContent = (report.bugid, report.summary, report.reporter, report.opendate, report.fixdate)
+                disContent.append(tmpContent)
+        return render(request, 'admin/defects_resolved_admin.html', {'contents':disContent})
+    else:
+        for report in reports:
+            if report.assignee == current_name and report.status == 'fixed':
+                tmpContent = (report.bugid, report.summary, report.reporter, report.opendate, report.fixdate)
+                disContent.append(tmpContent)
+        return render(request, 'defects_resolved.html', {'contents' : disContent})
+
+def not_assigned(request):
+    reports = models.Report.objects.all()
+    disContent = []
+
+    for report in reports:
+        if report.status == 'open':
+            tmpContent = (report.bugid, report.summary, report.reporter, report.opendate)
+            disContent.append(tmpContent)
+    return render(request, 'admin/defects_not_assigned_admin.html', {'contents': disContent})

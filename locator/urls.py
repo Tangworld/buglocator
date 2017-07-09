@@ -15,4 +15,12 @@ urlpatterns = [
     url(r'^unlock/$', views.unlock, name='unlock'),
     url(r'^newreport/$', views.newreport, name='newreport'),
     url(r'^savereport/$', views.savereport, name='savereport'),
+    url(r'^unfixed/$',views.unfixed,name='unfixed'),
+    url(r'^fixed/$', views.fixed, name='fixed'),
+
+    url(r'^index_admin/$', views.login, name='index_admin'),
+    url(r'^profile_admin/$', views.profile, name='profile_admin'),
+    url(r'^fixed_admin$', views.fixed, name='fixed_admin'),
+    url(r'^unfixed_admin$', views.unfixed, name='unfixed_admin'),
+    url(r'^not_assigned$', views.not_assigned, name='not_assigned'),
 ]
