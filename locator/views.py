@@ -66,10 +66,11 @@ def login(request):
         else:
             members = []
             try:
-                productId = models.ProUser.objects.get(user_id=validatepassword.id).product_id
-                userids = models.ProUser.objects.get(product_id=productId)
+                productobj = models.ProUser.objects.get(user_id=validatepassword.id)
+                productId = int(productobj.product_id)
+                userids = models.ProUser.objects.filter(product_id=productId)
                 for userid in userids:
-                    member = models.User.objects.get(id=userid)
+                    member = models.User.objects.get(id=userid.user_id)
                     members.append(member)
             except Exception, e:
                 print e
@@ -113,7 +114,17 @@ def main(request):
     if request.session['isadmin'] == 'yes':
         return render(request, 'admin/index_admin.html')
     else:
-        return render(request, 'index.html')
+        members = []
+        try:
+            productobj = models.ProUser.objects.get(user_id=request.session['userid'])
+            productId = int(productobj.product_id)
+            userids = models.ProUser.objects.filter(product_id=productId)
+            for userid in userids:
+                member = models.User.objects.get(id=userid.user_id)
+                members.append(member)
+        except Exception, e:
+            print e
+        return render(request, 'index.html', {'members': members})
 
 
 def edit(request):

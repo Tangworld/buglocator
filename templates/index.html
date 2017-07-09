@@ -41,6 +41,33 @@
       <![endif]-->
 
     <style>
+        .close {
+            /* still bad on picking color */
+            background: gray;
+            color: black;
+            /* make a round button */
+            border-radius: 20px;
+            /* center text */
+            line-height: 27px;
+            text-align: center;
+            height: 30px;
+            width: 30px;
+            font-size: 18px;
+            padding: 1px;
+        }
+
+        /* use cross as close button */
+        .close::before {
+            content: "\2716";
+        }
+
+        /* place the button on top-right */
+        .close {
+            top: -10px;
+            right: -10px;
+            position: absolute;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -86,8 +113,7 @@
             padding: 50px;
             z-index: 10;
             border-radius: 35px;
-            background-color: #ffe;
-            box-shadow: 0 3px 18px rgba(0, 0, 0, .5);
+        {#            background-color: #797979;#}{#            box-shadow: 0 3px 18px rgba(0, 0, 0, .5);#}
         }
 
         .cancel, .ok {
@@ -115,14 +141,29 @@
 </head>
 
 <body>
-<div id="pop">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        Asperiores aut deserunt dolorem doloribus ex exercitationem
-        explicabo facere iure iusto nihil nulla, obcaecati odio pariatur,
-        quasi, quos sapiente tempore tenetur voluptas.</p>
-    <input type="button" value="Cancel" onclick="closeDiv()" class="cancel"/>
-    <input type="button" value="OK" onclick="closeDiv()" class="ok"/>
-</div>
+<div id="pop" class="col-md-4 mb">
+    <!-- WHITE PANEL - TOP USER -->
+    <div class="white-panel pn">
+        <div class="white-header">
+            <div style="height: 0px; width: 398.25px; position: relative;">
+                <span class="close" onclick="closeDiv()"></span>
+            </div>
+            <h5>MEMBER</h5>
+        </div>
+        <p><img id="avatar" src="/assets/img/ui-zac.jpg" class="img-circle" width="80"></p>
+        <p><b>Zac Snider</b></p>
+        <div class="row">
+            <div class="col-md-6">
+                <p class="small mt">MEMBER SINCE</p>
+                <p>2012</p>
+            </div>
+            <div class="col-md-6">
+                <p class="small mt">TOTAL SPEND</p>
+                <p>$ 47,60</p>
+            </div>
+        </div>
+    </div>
+</div><!-- /col-md-4 -->
 <div id="bg"
      style="display:none;background-color: black;width: 100%;position:absolute;height: 100%;opacity: 0.5;z-index: 1;"></div>
 <section id="container">
@@ -654,70 +695,85 @@
                     <!-- USERS ONLINE SECTION -->
                     <h3>TEAM MEMBERS</h3>
                     <!-- First Member -->
-                    <div class="desc">
-                        <div class="thumb">
-                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-divya.jpg"
-                                 alt="">
-                        </div>
-                        <div class="details">
-                            <p><a style="width:35px;height:35px" onclick="showDiv()" href="javascript:void(0)"
-                                  class="img-circle">DIVYA MANIAN</a><br>
-                                <muted>Available</muted>
-                            </p>
-                        </div>
-                    </div>
 
-                    <div class="desc">
-                        <div class="thumb">
-                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-sherman.jpg"
-                                 alt="">
+                    {% for member in members %}
+                        <div class="desc">
+                            <div class="thumb">
+                                <img width="35px" height="35px" align="" class="img-circle" src="{{ member.avatarloc }}"
+                                     alt="">
+                            </div>
+                            <div class="details">
+                                <p><a style="width:35px;height:35px" onclick="showDiv('{{ member.avatarloc }}')" href="javascript:void(0)"
+                                      class="img-circle">{{ member.username }}</a><br>
+                                    <muted>{{ member.email }}</muted>
+                                </p>
+                            </div>
                         </div>
-                        <div class="details">
-                            <p><a style="width:35px;height:35px" onclick="showDiv()" href="javascript:void(0)"
-                                  class="img-circle">DJ SHERMAN</a><br>
-                                <muted>I am Busy</muted>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="desc">
-                        <div class="thumb">
-                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-danro.jpg"
-                                 alt="">
-                        </div>
-                        <div class="details">
-                            <p><a style="width:35px;height:35px" onclick="showDiv()" href="javascript:void(0)"
-                                  class="img-circle">DAN ROGERS</a><br>
-                                <muted>Available</muted>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="desc">
-                        <div class="thumb">
-                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-zac.jpg"
-                                 alt="">
-                        </div>
-                        <div class="details">
-                            <p><a style="width:35px;height:35px" onclick="showDiv()" href="javascript:void(0)"
-                                  class="img-circle">Zac Sniders</a><br>
-                                <muted>Available</muted>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="desc">
-                        <div class="thumb">
-                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-sam.jpg"
-                                 alt="">
-                        </div>
-                        <div class="details">
-                            <p><a style="width:35px;height:35px" onclick="showDiv()" href="javascript:void(0)"
-                                  class="img-circle">Marcel Newman</a><br>
-                                <muted>Available</muted>
-                            </p>
-                        </div>
-                    </div>
+                    {% endfor %}
+                    {#                    <div class="desc">#}
+                    {#                        <div class="thumb">#}
+                    {#                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-divya.jpg"#}
+                    {#                                 alt="">#}
+                    {#                        </div>#}
+                    {#                        <div class="details">#}
+                    {#                            <p><a style="width:35px;height:35px" onclick="showDiv()" href="javascript:void(0)"#}
+                    {#                                  class="img-circle">DIVYA MANIAN</a><br>#}
+                    {#                                <muted>Available</muted>#}
+                    {#                            </p>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {##}
+                    {#                    <div class="desc">#}
+                    {#                        <div class="thumb">#}
+                    {#                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-sherman.jpg"#}
+                    {#                                 alt="">#}
+                    {#                        </div>#}
+                    {#                        <div class="details">#}
+                    {#                            <p><a style="width:35px;height:35px" onclick="showDiv()" href="javascript:void(0)"#}
+                    {#                                  class="img-circle">DJ SHERMAN</a><br>#}
+                    {#                                <muted>I am Busy</muted>#}
+                    {#                            </p>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {##}
+                    {#                    <div class="desc">#}
+                    {#                        <div class="thumb">#}
+                    {#                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-danro.jpg"#}
+                    {#                                 alt="">#}
+                    {#                        </div>#}
+                    {#                        <div class="details">#}
+                    {#                            <p><a style="width:35px;height:35px" onclick="showDiv()" href="javascript:void(0)"#}
+                    {#                                  class="img-circle">DAN ROGERS</a><br>#}
+                    {#                                <muted>Available</muted>#}
+                    {#                            </p>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {##}
+                    {#                    <div class="desc">#}
+                    {#                        <div class="thumb">#}
+                    {#                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-zac.jpg"#}
+                    {#                                 alt="">#}
+                    {#                        </div>#}
+                    {#                        <div class="details">#}
+                    {#                            <p><a style="width:35px;height:35px" onclick="showDiv()" href="javascript:void(0)"#}
+                    {#                                  class="img-circle">Zac Sniders</a><br>#}
+                    {#                                <muted>Available</muted>#}
+                    {#                            </p>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {##}
+                    {#                    <div class="desc">#}
+                    {#                        <div class="thumb">#}
+                    {#                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-sam.jpg"#}
+                    {#                                 alt="">#}
+                    {#                        </div>#}
+                    {#                        <div class="details">#}
+                    {#                            <p><a style="width:35px;height:35px" onclick="showDiv()" href="javascript:void(0)"#}
+                    {#                                  class="img-circle">Marcel Newman</a><br>#}
+                    {#                                <muted>Available</muted>#}
+                    {#                            </p>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
 
                     <!-- Second Member -->
 
@@ -938,9 +994,10 @@
 
 </script>
 <script type="text/javascript">
-    function showDiv() {
+    function showDiv(avat) {
         document.getElementById('pop').style.display = 'block';
         document.getElementById('bg').style.display = 'block';
+        document.getElementById('avatar').src = avat;
     }
     function closeDiv() {
         document.getElementById('pop').style.display = 'none';
