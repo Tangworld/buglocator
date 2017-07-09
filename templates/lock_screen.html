@@ -50,7 +50,7 @@ MAIN CONTENT
                         </div>
                         <form action="{% url 'locator:unlock' %}" method="post">
                             <div class="modal-body">
-                                <p class="centered"><img class="img-circle" width="80" src="/assets/img/ui-sam.jpg"></p>
+                                <p class="centered"><img class="img-circle" width="80" src="{{ request.session.avatarloc }}"></p>
                                 <input type="password" name="password" placeholder="Password" autocomplete="off"
                                        class="form-control placeholder-no-fix">
 

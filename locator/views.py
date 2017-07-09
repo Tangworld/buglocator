@@ -60,10 +60,20 @@ def login(request):
         request.session['email'] = validatepassword.email
         request.session['userid'] = validatepassword.id
         request.session['isadmin'] = validatepassword.isadmin
+        request.session['avatarloc'] = validatepassword.avatarloc
         if validatepassword.isadmin == 'yes':
             return render(request, 'admin/index_admin.html')
         else:
-            return render(request, 'index.html')
+            members = []
+            try:
+                productId = models.ProUser.objects.get(user_id=validatepassword.id).product_id
+                userids = models.ProUser.objects.get(product_id=productId)
+                for userid in userids:
+                    member = models.User.objects.get(id=userid)
+                    members.append(member)
+            except Exception, e:
+                print e
+            return render(request, 'index.html', {'members': members})
     else:
         return render(request, 'login.html', {"validate": validate})
 
