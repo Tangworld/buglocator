@@ -151,7 +151,7 @@
             <h5>MEMBER</h5>
         </div>
         <p><img id="avatar" src="/assets/img/ui-zac.jpg" class="img-circle" width="80"></p>
-        <p><b>Zac Snider</b></p>
+        <p><b id="name">Zac Snider</b></p>
         <div class="row">
             <div class="col-md-6">
                 <p class="small mt">MEMBER SINCE</p>
@@ -703,7 +703,7 @@
                                      alt="">
                             </div>
                             <div class="details">
-                                <p><a style="width:35px;height:35px" onclick="showDiv('{{ member.avatarloc }}')" href="javascript:void(0)"
+                                <p><a style="width:35px;height:35px" onclick="showDiv('{{ member.avatarloc }}','{{ member.username }}')" href="javascript:void(0)"
                                       class="img-circle">{{ member.username }}</a><br>
                                     <muted>{{ member.email }}</muted>
                                 </p>
@@ -850,7 +850,7 @@
             // (string | mandatory) the text inside the notification
             text: 'This is a powerful tool and we will try our best to provide you with better bug location services!',
             // (string | optional) the image to display on the left
-            image: '/assets/img/ui-sam.jpg',
+            image: '{{ request.session.avatarloc }}',
             // (bool | optional) if you want it to fade out on its own or just sit there
             sticky: true,
             // (int | optional) the time you want it to be alive for before fading out
@@ -994,10 +994,11 @@
 
 </script>
 <script type="text/javascript">
-    function showDiv(avat) {
+    function showDiv(avat,name) {
         document.getElementById('pop').style.display = 'block';
         document.getElementById('bg').style.display = 'block';
         document.getElementById('avatar').src = avat;
+        document.getElementById('name').innerHTML = name;
     }
     function closeDiv() {
         document.getElementById('pop').style.display = 'none';
