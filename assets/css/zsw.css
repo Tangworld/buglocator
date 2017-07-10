@@ -1,6 +1,6 @@
 .today{
     color:#666;
-    background-color: orange;
+    background-color: #47a3da;
 }
 .closeX{
         background-color:#000;
@@ -28,7 +28,7 @@
         top:-5px;
         left:25px;
         border-radius:0px;
-        height:180px;
-        width:440px;
+        height:100px;
+        width:100px;
         cursor:pointer;
 }

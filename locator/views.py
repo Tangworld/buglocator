@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.shortcuts import HttpResponseRedirect
 from locator import models
 import time
+import json
 
 
 # Create your views here.
@@ -53,7 +54,7 @@ def login(request):
         v2 = "Password cannot be empty！"
         flag = False
     validate = {"v1": v1, "v2": v2}
-    testclass=100
+    testclass = "Hello world."
 
     if flag:
         request.session["username"] = username
@@ -75,9 +76,9 @@ def login(request):
                     members.append(member)
             except Exception, e:
                 print e
-            return render(request, 'index.html', {'members': members})
+            return render(request, 'index.html', {'members': members, 'testclass': json.dumps(testclass)})
     else:
-        return render(request, 'login.html', {"validate": validate, "testclass":testclass})
+        return render(request, 'login.html', {"validate": validate})
 
 
 def logout(request):
