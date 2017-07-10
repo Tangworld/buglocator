@@ -58,6 +58,7 @@ class Migration(migrations.Migration):
                 ('password', models.CharField(max_length=32, null=True, blank=True)),
                 ('email', models.CharField(max_length=32, null=True, blank=True)),
                 ('mybugs', models.CharField(max_length=32, null=True, blank=True)),
+                ('avatarloc', models.CharField(max_length=32, null=True, blank=True)),
                 ('isadmin', models.CharField(max_length=32, null=True, blank=True)),
             ],
         ),

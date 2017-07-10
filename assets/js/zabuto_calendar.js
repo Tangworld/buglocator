@@ -322,7 +322,7 @@ $.fn.zabuto_calendar = function (options) {
         }
 
  //  生成遮幕层、弹窗、关闭按钮
-function addAlert(){
+/*function addAlert(){
 
     var h = $(document).height(); 
      var w = $(document).width();     
@@ -346,7 +346,7 @@ function addAlert(){
             "background-color":"white",
             "z-index":3000,
             "position":"fixed",
-            "opacity":1,
+            "opacity":0.6,
             "top":t,
             "left":l,
             "border-radius":"10px",
@@ -359,7 +359,7 @@ function addAlert(){
     $(alert).append(close);
 
     var conta = $("<div id='conta' class='conta' ></div>");
-    var msg = $(".testclass").text()
+    var msg = $(".context").text()
     conta.text(msg)
     $(alert).append(conta);
 
@@ -368,7 +368,7 @@ function addAlert(){
           $("div").remove("#gray");
     });
 
-}
+}*/
         /* ----- Modal functions ----- */
 
         function createModal(id, title, body, footer) {
