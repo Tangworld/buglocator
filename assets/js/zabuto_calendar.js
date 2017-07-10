@@ -293,6 +293,7 @@ $.fn.zabuto_calendar = function (options) {
                         $dowElement.append($dayElement);
 
                         $dayElement.click(function(){
+                            /*alert("点击");*/
                             addAlert();
                         });
 
