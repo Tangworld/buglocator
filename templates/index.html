@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -7,8 +7,9 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <meta charset="utf-8">
-    {#    <link rel="icon" href="https://static.jianshukeji.com/highcharts/images/favicon.ico">#}
-    {#    <meta name="viewport" content="width=device-width, initial-scale=1">#}
+    <link rel="icon" href="https://static.jianshukeji.com/highcharts/images/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
 
     <title>BugLocator</title>
 
@@ -39,6 +40,16 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/component.css">
 
     <script src="/assets/js/chart-master/Chart.js"></script>
+
+     <script src="https://img.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+
+        <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+
+        <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
+
+        <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+
+        <script src="https://img.hcharts.cn/highcharts/themes/sand-signika.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -764,6 +775,10 @@
 <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
 <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
 <script src="https://img.hcharts.cn/highcharts/themes/sand-signika.js"></script>
+<script src="https://img.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+
+
+
 
 <script src="/assets/js/fancybox/jquery.fancybox.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
@@ -792,9 +807,9 @@
             // (string | optional) the image to display on the left
             image: '{{ request.session.avatarloc }}',
             // (bool | optional) if you want it to fade out on its own or just sit there
-            sticky: true,
+            sticky: false,
             // (int | optional) the time you want it to be alive for before fading out
-            time: '',
+            time: '1000',
             // (string | optional) the class name you want to apply to that specific message
             class_name: 'my-sticky-class'
         });
@@ -890,47 +905,65 @@
 
 <script type="text/javascript">
 
-    var chart = new Highcharts.Chart('highcharts', {
+    $(function () {
+        var chart = new Highcharts.Chart('highcharts', {
+        chart: {
+            type: 'area'
+        },
         title: {
-            text: 'RECENT CONTRIBUTIONS',
-            x: -20
+            text: 'RECENT CONTRIBUTIONS'
+        },
+        subtitle: {
+            text: ''
         },
         xAxis: {
-            categories: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL']
+            categories: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
+            tickmarkPlacement: 'on',
+            title: {
+                enabled: false
+            }
         },
         yAxis: {
             title: {
                 text: 'Number'
             },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
+            labels: {
+                formatter: function () {
+                    return this.value;
+                }
+            }
         },
         tooltip: {
+            split: true,
             valueSuffix: ''
         },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0
-        },
-        credits: {
-            enabled: false
-        },
-        exporting: {
-            enabled: false
+        plotOptions: {
+            area: {
+                stacking: 'normal',
+                lineColor: '#666666',
+                lineWidth: 1,
+                marker: {
+                    lineWidth: 1,
+                    lineColor: '#666666'
+                }
+            }
         },
         series: [{
-            name: 'Bugs',
-            data: [7.0, 6.0, 9.0, 14.0, 18.0, 21.0, 3.0]
-        }, {
             name: 'Files',
-            data: [10.0, 8.0, 10.0, 15.0, 20.0, 22.0, 5.0]
-        }]
+            data: [5, 13, 15, 20, 24, 24, 30]
+        }, {
+            name: 'Bugs',
+            data: [2, 5, 6, 13, 15, 15, 19]
+        }],
+        credits: {
+          enabled:false
+        },
+        exporting: {
+            enabled:false
+        }
     });
+});
+
 
 </script>
 <script type="text/javascript">
@@ -948,3 +981,4 @@
 
 </body>
 </html>
+
