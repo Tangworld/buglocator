@@ -207,14 +207,14 @@
 
                 <li class="mt">
                     <a href="{% url 'locator:main' %}">
-                        <i class="fa fa-dashboard"></i>
+                        <i class="fa fa-file-text"></i>
                         <span>Overview</span>
                     </a>
                 </li>
 
                 <li class="sub-menu">
                     <a href="{% url 'locator:fixed' %}">
-                        <i class="fa fa-desktop"></i>
+                        <i class="fa fa-check-square-o"></i>
                         <span>Fixed Bugs</span>
                     </a>
 
@@ -222,15 +222,15 @@
 
                 <li class="sub-menu">
                     <a class="active" href="{% url 'locator:unfixed' %}">
-                        <i class="fa fa-cogs"></i>
+                        <i class="fa fa-wrench"></i>
                         <span>Unfixed Bugs</span>
                     </a>
 
                 </li>
                 <li class="sub-menu">
                     <a href="{% url 'locator:profile' %}">
-                        <i class="fa fa-book"></i>
-                        <span>Profile</span>
+                        <i class="fa fa-user"></i>
+                        <span>User Profile</span>
                     </a>
 
                 </li>
@@ -243,7 +243,7 @@
                 {#                </li>#}
                 <li class="sub-menu">
                     <a href="{% url 'locator:lock' %}">
-                        <i class="fa fa-th"></i>
+                        <i class="fa fa-lock"></i>
                         <span>Lock</span>
                     </a>
                     <!--<ul class="sub">
@@ -280,14 +280,14 @@
                         <div class="col-md-12">
                             <div class="content-panel">
                                 <table class="table table-striped table-advance table-hover">
-                                    <h4><i class="fa fa-angle-right"></i>Unfixed Bugs</h4>
+                                    <h3 style="font-weight: bold">&nbsp Unfixed Bugs</h3>
                                     <hr>
                                     <thead>
                                     <tr>
-                                        <th><i class="fa fa-bars"></i> Bug ID</th>
+                                        <th><i class="fa fa-bullhorn"></i> Bug ID</th>
                                         <th class="hidden-phone"><i class="fa fa-question-circle"></i> Summary</th>
                                         <th><i class="fa fa-user" aria-hidden="true"></i> Reporter</th>
-                                        <th><i class=" fa fa-thumbs-o-down"></i> Report Date</th>
+                                        <th><i class=" fa fa-calendar"></i> Report Date</th>
                                         <th></th>
                                     </tr>
                                     </thead>

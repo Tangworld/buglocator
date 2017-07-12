@@ -216,7 +216,6 @@
                         <i class="fa fa-magnet"></i>
                         <span>Assigned Bugs</span>
                     </a>
-
                     <ul class="sub">
                         <li><a href="{% url 'locator:fixed_admin' %}"><i class="fa fa-check-square-o"></i>Fixed Bugs</a></li>
                         <li><a href="{% url 'locator:unfixed_admin' %}"><i class="fa fa-wrench"></i>Unfixed Bugs</a></li>
@@ -265,23 +264,50 @@
                 <div style="height: 80%">
                     <div style="text-align: center;margin: 0 auto;width: 60%;height: 100%">
                         <div class="darkblue-panel pn">
-                            <div id="profile-02">
-                                <div class="user">
-                                    <img src="/assets/img/ui-sam.jpg" class="img-circle" width="80">
-                                    <h4>{{ request.session.username }}</h4><br><br><br>
+                            <form action="{% url 'locator:confirm' %}" method="post">
+                                <div id="profile-02">
+                                    <div class="user">
+                                        <img src="/assets/img/ui-sam.jpg" class="img-circle" width="80">
+                                        <h4>{{ request.session.username }}</h4><br><br><br>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label"><h4>Username</h4></label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" placeholder="Username"
+                                                   value="{{ request.session.username }}">
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label"><h4>Email</h4></label>
+                                        <div class="col-sm-10">
+                                            <input type="email" class="form-control" placeholder="Email"
+                                                   value="{{ request.session.email }}">
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label"><h4>New Password</h4></label>
+                                        <div class="col-sm-10">
+                                            <input name="password" type="password" class="form-control"
+                                                   placeholder="New Password">
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label"><h4>Confirm </h4></label>
+                                        <div class="col-sm-10">
+                                            <input name="password2" type="password" class="form-control"
+                                                   placeholder="Confirm Password">
+                                        </div>
+                                        <br>
+                                        <h3>{{ infomation }}</h3>
+                                    </div>
                                 </div>
-                                <div style="text-align: left;width: 30%;margin: 0 auto;">
-                                    <h4>Username：{{ request.session.username }}</h4><br/>
-                                    <h4>Email：{{ request.session.email }}</h4><br>
-                                    <h3>{{ success }}</h3>
+                                <div class="steps pn">
+                                    <input type='submit' value='Submit' id='submit'/>
                                 </div>
-                            </div>
-                            <div class="steps pn">
-                                <form action="{% url 'locator:editprofile_admin' %}">
-                                    <input href="{% url 'locator:editprofile_admin' %}" type='submit' value='Modify Password'
-                                           id='submit'/>
-                                </form>
-                            </div>
+                            </form>
                         </div>
                         <! --/panel -->
                     </div><!--/ col-md-4 -->

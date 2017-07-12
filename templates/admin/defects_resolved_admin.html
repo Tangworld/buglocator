@@ -205,39 +205,39 @@
 
                 <li class="mt">
                     <a href="{% url 'locator:main' %}">
-                        <i class="fa fa-dashboard"></i>
+                        <i class="fa fa-file-text"></i>
                         <span>Overview</span>
                     </a>
                 </li>
 
                 <li class="sub-menu">
                     <a class="active" href="javascript:;">
-                        <i class="fa fa-desktop"></i>
+                        <i class="fa fa-magnet"></i>
                         <span>Assigned Bugs</span>
                     </a>
                     <ul class="sub">
-                        <li class="active"><a href="{% url 'locator:fixed_admin' %}">Fixed Bugs</a></li>
-                        <li><a href="{% url 'locator:unfixed_admin' %}">Unfixed Bugs</a></li>
+                        <li class="active"><a href="{% url 'locator:fixed_admin' %}"><i class="fa fa-check-square-o"></i>Fixed Bugs</a></li>
+                        <li><a href="{% url 'locator:unfixed_admin' %}"><i class="fa fa-wrench"></i>Unfixed Bugs</a></li>
                     </ul>
                 </li>
 
                 <li class="sub-menu">
                     <a href="{% url 'locator:not_assigned' %}">
-                        <i class="fa fa-cogs"></i>
+                        <i class="fa fa-spinner"></i>
                         <span>Unassigned Bugs</span>
                     </a>
 
                 </li>
                 <li class="sub-menu">
                     <a href="{% url 'locator:profile' %}">
-                        <i class="fa fa-book"></i>
-                        <span>Profile</span>
+                        <i class="fa fa-user"></i>
+                        <span>User Profile</span>
                     </a>
 
                 </li>
                 <li class="sub-menu">
                     <a href="{% url 'locator:lock' %}">
-                        <i class="fa fa-tasks"></i>
+                        <i class="fa fa-lock"></i>
                         <span>Lock</span>
                     </a>
 

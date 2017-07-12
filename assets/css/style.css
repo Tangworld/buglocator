@@ -13,10 +13,10 @@ Premium: http://www.gridgum.com
 body {
     color: #797979;
 	background: #f2f2f2;
-    font-family: 'Ruda', sans-serif;
+    font-family:  "Helvetica Neue", Helvetica, Arial, sans-serif;/*"Open Sans", Arial, sans-serif;*/
     padding: 0px !important;
     margin: 0px !important;
-    font-size:13px;
+    font-size:15px;
 }
 
 ul li {
@@ -164,7 +164,7 @@ hr {
   margin-top: 20px;
   margin-bottom: 20px;
   border: 0;
-  border-top: 1px solid #797979;
+  border-top: 1.5px solid #797979;
 }
 
 
@@ -354,7 +354,7 @@ ul.sidebar-menu li a{
     text-decoration: none;
     display: block;
     padding: 15px 0 15px 10px;
-    font-size: 12px;
+    font-size: 16px;
     outline: none;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
@@ -766,7 +766,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 
 .ds {
 	background: #ffffff;
-	padding-top: 20px;
+	padding-top: 43px;
 }
 
 .ds h4 {
@@ -777,7 +777,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 .ds h3 {
 	color: #ffffff;
 	font-size: 16px;
-	padding: 0 10px;
+	padding: 0 9px;
 	line-height: 60px;
 	height: 60px;
 	margin: 0;
@@ -1156,7 +1156,7 @@ PANELS CONFIGURATIONS
 	background: #ffffff;
 	box-shadow: 0px 3px 2px #aab2bd;
 	padding-top: 15px;
-	padding-bottom: 5px;
+	padding-bottom: 10px;
 }
 .content-panel h4 {
 	margin-left: 10px;

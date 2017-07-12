@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^fixed_admin$', views.fixed, name='fixed_admin'),
     url(r'^unfixed_admin$', views.unfixed, name='unfixed_admin'),
     url(r'^not_assigned$', views.not_assigned, name='not_assigned'),
+    url(r'^editprofile_admin$', views.edit, name='editprofile_admin'),
 ]

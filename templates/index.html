@@ -351,27 +351,27 @@
 
                 <li class="mt">
                     <a class="active" href="{% url 'locator:main' %}">
-                        <i class="fa fa-dashboard"></i>
+                        <i class="fa fa-file-text"></i>
                         <span>Overview</span>
                     </a>
                 </li>
 
                 <li class="sub-menu">
                     <a href="{% url 'locator:fixed' %}">
-                        <i class="fa fa-desktop"></i>
+                        <i class="fa fa-check-square-o"></i>
                         <span>Fixed Bugs</span>
                     </a>
 
                 <li class="sub-menu">
                     <a href="{% url 'locator:unfixed' %}">
-                        <i class="fa fa-cogs"></i>
+                        <i class="fa fa-wrench"></i>
                         <span>Unfixed Bugs</span>
                     </a>
                 </li>
                 <li class="sub-menu">
                     <a href="{% url 'locator:profile' %}">
-                        <i class="fa fa-book"></i>
-                        <span>Profile</span>
+                        <i class="fa fa-user"></i>
+                        <span>User Profile</span>
                     </a>
 
                 </li>
@@ -383,7 +383,7 @@
                 {#                </li>#}
                 <li class="sub-menu">
                     <a href="{% url 'locator:lock' %}">
-                        <i class="fa fa-th"></i>
+                        <i class="fa fa-lock"></i>
                         <span>Lock</span>
                     </a>
 
@@ -415,12 +415,13 @@
                     -webkit-transform: matrix(-1,0,0,1,0,0); /* Safari and Chrome */
                     -o-transform: matrix(-1,0,0,1,0,0); /* Opera */
                 }
-                #time{
+                #time1{
                     transform: matrix(-1,0,0,1,0,0);
                     -ms-transform: matrix(-1,0,0,1,0,0); /* IE 9 */
                     -moz-transform: matrix(-1,0,0,1,0,0); /* Firefox */
                     -webkit-transform: matrix(-1,0,0,1,0,0); /* Safari and Chrome */
                     -o-transform: matrix(-1,0,0,1,0,0); /* Opera */
+
 
                 }
 
@@ -434,12 +435,12 @@
 
             </style>
             <div class="row">
-                <div class="col-lg-9 main-chart">
+                <div class="col-lg-9 main-chart" style="padding-top: 0px;">
                     <div class="row mt">
                         <!-- SERVER STATUS PANELS -->
                         <div class="col-md-6 col-sm-6 mb">
                             <div>
-                                <h3 align="left" ><font color="#989898">Recent Fixes</font></h3>
+                                <h3 align="left" style="background: #ff865c; padding: 15px"><font color="#fff">Recent Fixes</font></h3>
                             </div>
                             <div class="content-panel" style="position:relative; height: 500px; overflow:auto">
                                 <div class="main">
@@ -447,8 +448,8 @@
                                             {% for i in '123456'|make_list %}
                                             <li>
                                                 <time class="cbp_tmtime" datetime="2013-05-10 18:30">
-                                                    <span id="time">11/10/13</span>
-                                                    <span id="time">18:30</span>
+                                                    <span id="time1">11/10/13</span>
+                                                    <span id="time1">18:30</span>
                                                 </time>
                                                 <div class="cbp_tmicon cbp_tmicon-phone"></div>
                                                 <div class="cbp_tmlabel" id="div1">
@@ -480,14 +481,17 @@
 
                         <div class="col-md-6 col-sm-6 mb">
                             <div>
-                                <h3 align="left"><font color="#989898">Recent Reports</font></h3>
+                                <h3 align="left" style="background: #ff865c; padding: 15px"><font color="#fff">Recent Reports</font></h3>
                             </div>
                             <div class="content-panel" style="position:relative; height: 500px; overflow:auto">
                                 	<div class="main">
                                         <ul class="cbp_tmtimeline">
                                             {% for i in '123456'|make_list %}
                                             <li>
-                                                <time class="cbp_tmtime1" datetime="2013-04-10 18:30"><span>4/10/13</span><span>18:30</span></time>
+                                                <time class="cbp_tmtime1" datetime="2013-04-10 18:30" >
+                                                    <span>4/10/13</span>
+                                                    <span>18:30</span>
+                                                </time>
                                                 <div class="cbp_tmicon cbp_tmicon-phone"></div>
                                                 <div class="cbp_tmlabel">
                                                     <h4><a href="javascript:;" style="font-style: italic">
@@ -522,7 +526,7 @@
                         <div class="border-head">
                             <h3>RECENT CONTRIBUTIONS</h3>
                         </div>
-                        <div id="highcharts" style="min-width:400px;height:400px"></div>
+                        <div id="highcharts" style="min-width:400px;height:400px;background"></div>
                         {#    <div class="custom-bar-chart">#}
                         {#      <ul class="y-axis">#}
                         {#        <li><span>10.000</span></li>#}

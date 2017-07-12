@@ -137,8 +137,10 @@ def edit(request):
     """
     # if authority(request) == False:
     #    return HttpResponseRedirect('/locator/lock')
-
-    return render(request, 'editprofile.html')
+    if request.session['isadmin']=='yes':
+        return render(request, 'admin/editprofile_admin.html')
+    else:
+        return render(request, 'editprofile.html')
 
 
 def confirm(request):
@@ -319,6 +321,6 @@ def not_assigned(request):
 
     for report in reports:
         if report.status == 'open':
-            tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))))
+            tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(float(report.opendate))))
             disContent.append(tmpContent)
     return render(request, 'admin/defects_not_assigned_admin.html', {'contents': disContent})
