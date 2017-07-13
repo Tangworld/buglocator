@@ -33,11 +33,13 @@
     <link href="/assets/css/style.css" rel="stylesheet">
     <link href="/assets/css/style-responsive.css" rel="stylesheet">
 
-    <!-- 这里加了三个link-->
+    <!-- 这里加了三个link
     <link rel="stylesheet" type="text/css" href="/assets/css/default.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/zsw.css">
-    <!--必要样式-->
-    <link rel="stylesheet" type="text/css" href="/assets/css/component.css">
+    <!--必要样式
+    <link rel="stylesheet" type="text/css" href="/assets/css/component.css">-->
+    <!--这里是时间轴CSS-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/style_timeline.css">
 
     <script src="/assets/js/chart-master/Chart.js"></script>
 
@@ -410,130 +412,69 @@
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
-            <style>
-                .cbp_tmtimeline{
-                }
-                .cbp_tmtime.span{}
-                .cbp_tmlabel{}
-
-
-                #ul1{
-                    transform: matrix(-1,0,0,1,0,0);
-                    -ms-transform: matrix(-1,0,0,1,0,0); /* IE 9 */
-                    -moz-transform: matrix(-1,0,0,1,0,0); /* Firefox */
-                    -webkit-transform: matrix(-1,0,0,1,0,0); /* Safari and Chrome */
-                    -o-transform: matrix(-1,0,0,1,0,0); /* Opera */
-                }
-                #time1{
-                    transform: matrix(-1,0,0,1,0,0);
-                    -ms-transform: matrix(-1,0,0,1,0,0); /* IE 9 */
-                    -moz-transform: matrix(-1,0,0,1,0,0); /* Firefox */
-                    -webkit-transform: matrix(-1,0,0,1,0,0); /* Safari and Chrome */
-                    -o-transform: matrix(-1,0,0,1,0,0); /* Opera */
-
-
-                }
-
-                #div1{
-                    transform: matrix(-1,0,0,1,0,0);
-                    -ms-transform: matrix(-1,0,0,1,0,0); /* IE 9 */
-                    -moz-transform: matrix(-1,0,0,1,0,0); /* Firefox */
-                    -webkit-transform: matrix(-1,0,0,1,0,0); /* Safari and Chrome */
-                    -o-transform: matrix(-1,0,0,1,0,0); /* Opera */
-                }
-
-            </style>
             <div class="row">
                 <div class="col-lg-9 main-chart" style="padding-top: 0px;">
-                    <div class="row mt">
+                    <h3 style="background:#ff865c; padding: 16px;"><font color="#fff" size="5">My Updates</font></h3>
+                    <div class="content-panel" style="position:relative; height: 542px; overflow:auto">
                         <!-- SERVER STATUS PANELS -->
-                        <div class="col-md-6 col-sm-6 mb">
-                            <div>
-                                <h3 align="left" style="background: #ff865c; padding: 15px"><font color="#fff">Recent Fixes</font></h3>
-                            </div>
-                            <div class="content-panel" style="position:relative; height: 500px; overflow:auto">
-                                <div class="main">
-                                        <ul class="cbp_tmtimeline" id="ul1" >
-                                            {% for i in '123456'|make_list %}
-                                            <li>
-                                                <time class="cbp_tmtime" datetime="2013-05-10 18:30">
-                                                    <span id="time1">11/10/13</span>
-                                                    <span id="time1">18:30</span>
-                                                </time>
-                                                <div class="cbp_tmicon cbp_tmicon-phone"></div>
-                                                <div class="cbp_tmlabel" id="div1">
-                                                    <h4>
-                                                        <a href="javascript:;" style="font-style: italic">
-                                                            Somebody </a>
-                                                        &nbsp fixed defect
-                                                        <a href="javascript:;" style="font-style: italic">
-                                                            BUGID </a>
-                                                    </h4>
-                                                    <p>Summary: blablabla...
-                                                    <Br/>
-                                                        <a href="javascript:;" style="font-style: italic"> See details...</a>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            {% endfor %}
-
-                                        </ul>
-                                    <div class="timeline_shrink" align="right">
-                                        <a href="javascript:;">
-                                            <font color="#1e90ff">See More...</font>>
-                                        </a>
+                        <ul class="timeline">
+                            {% for i in '0'|make_list %}
+                            <!-- Item 1 -->
+                            <li>
+                                <div class="direction-r">
+                                    <div class="flag-wrapper">
+                                        <span class="flag" style="background: #99CCCC">Report</span>
+                                        <span class="time-wrapper"><span class="time">Sometime</span></span>
+                                    </div>
+                                    <div class="desc">You reported Bug &nbsp;<a href="javascript:;">BugID</a>.
+                                    </br>
+                                        Summary:blabla...
+                                        <a href="javascript:;">See details</a>
                                     </div>
                                 </div>
+                            </li>
 
-                            </div>
-                        </div><!-- /col-md-6-->
-
-                        <div class="col-md-6 col-sm-6 mb">
-                            <div>
-                                <h3 align="left" style="background: #ff865c; padding: 15px"><font color="#fff">Recent Reports</font></h3>
-                            </div>
-                            <div class="content-panel" style="position:relative; height: 500px; overflow:auto">
-                                	<div class="main">
-                                        <ul class="cbp_tmtimeline">
-                                            {% for i in '123456'|make_list %}
-                                            <li>
-                                                <time class="cbp_tmtime1" datetime="2013-04-10 18:30" >
-                                                    <span>4/10/13</span>
-                                                    <span>18:30</span>
-                                                </time>
-                                                <div class="cbp_tmicon cbp_tmicon-phone"></div>
-                                                <div class="cbp_tmlabel">
-                                                    <h4><a href="javascript:;" style="font-style: italic">
-                                                            Somebody </a>
-                                                        &nbsp reported defect
-                                                        <a href="javascript:;" style="font-style: italic">
-                                                            BUGID </a></h4>
-                                                    <p>Summary: blablabla...
-                                                    <Br/>
-                                                        <a href="javascript:;" style="font-style: italic"> See details...</a>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            {% endfor %}
-                                        </ul>
-                                    <div class="timeline_shrink" align="right">
-                                        <a href="javascript:;">
-                                            <font color="#1e90ff">See More...</font>>
-                                        </a>
+                            <!-- Item 2 -->
+                            <li>
+                                <div class="direction-l">
+                                    <div class="flag-wrapper">
+                                        <span class="flag" style="background: #CCFFCC">Fix</span>
+                                        <span class="time-wrapper"><span class="time">Sometime</span></span>
                                     </div>
-
+                                    <div class="desc">
+                                        You fixed Bug &nbsp; <a href="javascript:;">BugID</a>.
+                                    </br>
+                                        Summary:blabla...
+                                        <a href="javascript:;">See details</a>
                                     </div>
-                            </div>
-                        </div><!-- /col-md-6 -->
+                                </div>
+                            </li>
+                                <li>
+                                    <div class="direction-r">
+                                    <div class="flag-wrapper">
+                                        <span class="flag" style="background: #FFFFCC">Assigned</span>
+                                        <span class="time-wrapper"><span class="time">Sometime</span></span>
+                                    </div>
+                                    <div class="desc">
+                                        Bug &nbsp; <a href="javascript:;">BugID</a> &nbsp;was assigned to you.
+                                    </br>
+                                        Summary:blabla...
+                                        <a href="javascript:;">See details</a>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        <div align="right" style="padding: 10px;"><a href="javascript:;">See more...</a></div>
 
 
-
-                    </div><!-- /row -->
+                        </ul>
+                    </div><!-- /panel -->
 
                     <div class="row mt">
                         <!--CUSTOM CHART START -->
                         <div class="border-head">
-                            <h3>RECENT CONTRIBUTIONS</h3>
+                            <h3 style="padding: 18px; background: #ff865c;font-weight:500;font-size: 20px;">
+                            <font color="#fff">Recent Contribution</font></h3>
                         </div>
 
                         <div id="highcharts" style="min-width:400px;height:400px;margin-right: 15px;margin-left: 15px"></div>
@@ -587,7 +528,7 @@
                 RIGHT SIDEBAR CONTENT
                 *********************************************************************************************************************************************************** -->
 
-                <div class="col-lg-3 ds">
+                <div class="col-lg-3 ds" style="margin-top: 7px; padding:10px">
                     <!--COMPLETED ACTIONS DONUTS CHART-->
                     <!-- <h3>NOTIFICATIONS</h3> -->
 
@@ -648,7 +589,7 @@
                            </div> -->
 
                     <!-- USERS ONLINE SECTION -->
-                    <h3>TEAM MEMBERS</h3>
+                    <h3>Team Members</h3>
                     <!-- First Member -->
 
                     {% for member in members %}
@@ -733,8 +674,8 @@
 
                     <!-- CALENDAR-->
 
-                    <div id="calendar" class="mb" style="margin-top: 209px">
-                        <h3>GRAVITY</h3>
+                    <div id="donut chart" class="mb" style="margin-top: 82px">
+                        <h3>Contribution Ratio</h3>
                         <div id="circle" style="min-width:100%;height:400px;float: right;"></div>
                     </div><!-- / calendar -->
 
@@ -748,7 +689,7 @@
     <!--main content end-->
     <!--footer start-->
     <footer class="site-footer">
-        <div class="text-center">
+        <div class="text-center" align="center">
             2017 - NJU
             <a href="{% url 'locator:main' %}" class="go-top">
                 <i class="fa fa-angle-up"></i>
@@ -985,7 +926,7 @@ $(function () {
         },
         title: {
             floating:true,
-            text: 'Gravity of Bugs'
+            text: 'Fixed Bugs'
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
