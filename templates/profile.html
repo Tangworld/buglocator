@@ -10,19 +10,42 @@
     <title>BugLocator</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
     <!--external css-->
-    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
 
     <!-- Custom styles for this template -->
-    <link href="/assets/css/style.css" rel="stylesheet">
-    <link href="/assets/css/style-responsive.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+
+
+
+
+    <!--Basic Styles-->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link id="bootstrap-rtl-link" href="" rel="stylesheet" type="text/css"/>
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/css/weather-icons.min.css" rel="stylesheet" type="text/css"/>
+
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300" rel="stylesheet" type="text/css">
+
+    <!--Beyond styles-->
+    <link href="/assets/css/beyond.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/css/demo.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/css/typicons.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/css/animate.min.css" rel="stylesheet" type="text/css"/>
+    <link id="skin-link" href="" rel="stylesheet" type="text/css" />
+
+    <!--Skin Script: Place this script in head to load scripts for skins and rtl support-->
+    <script src="/assets/js/skins.min.js"></script>
 </head>
 
 <body>
@@ -231,33 +254,13 @@
                     </a>
 
                 </li>
-                {#                  <li class="sub-menu">#}
-                {#                      <a href="{% url 'locator:newreport'%}" >#}
-                {#                          <i class="fa fa-tasks"></i>#}
-                {#                          <span>Report</span>#}
-                {#                      </a>#}
-                {##}
-                {#                  </li>#}
                 <li class="sub-menu">
                     <a href="{% url 'locator:lock' %}">
                         <i class="fa fa-lock"></i>
                         <span>Lock</span>
                     </a>
-                    <!--<ul class="sub">
-                        <li><a  href="basic_table.html">Basic Table</a></li>
-                        <li><a  href="responsive_table.html">Responsive Table</a></li>
-                    </ul>-->
+
                 </li>
-                <!--<li class="sub-menu">
-                    <a href="javascript:;" >
-                        <i class=" fa fa-bar-chart-o"></i>
-                        <span>Charts</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a  href="morris.html">Morris</a></li>
-                        <li><a  href="chartjs.html">Chartjs</a></li>
-                    </ul>
-                </li>-->
 
             </ul>
             <!-- sidebar menu end-->
@@ -271,37 +274,118 @@
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper site-min-height">
-            <div style="height: 700px;margin-top: 80px">
-                <div style="height: 80%">
-                    <div style="text-align: center;margin: 0 auto;width: 60%;height: 100%">
-                        <div class="darkblue-panel pn">
-                            <div id="profile-02">
-                                <div class="user">
-                                    <img src="{{ request.session.avatarloc }}" class="img-circle" width="80">
-                                    <h4>{{ request.session.username }}</h4><br><br><br>
+
+            <div style="height: 700px">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="profile-container">
+                                <div class="profile-header row">
+                                    <div class="col-lg-2 col-md-4 col-sm-12 text-center">
+                                        <img src="/assets/img/avatars/divyia.jpg" alt="" class="header-avatar" />
+                                    </div>
+                                    <div class="col-lg-5 col-md-8 col-sm-12 profile-info">
+                                        <div class="header-fullname">Kim Ryder</div>
+                                        <a href="#" class="btn btn-palegreen btn-sm  btn-follow">
+                                            <i class="fa fa-check"></i>
+                                            Following
+                                        </a>
+                                        <div class="header-information">
+                                            Kim is a software developer in Microsoft. She works in ASP.NET MVC Team and collaborates with other teams.
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 profile-stats">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 stats-col">
+                                                <div class="stats-value pink">284</div>
+                                                <div class="stats-title">FOLLOWING</div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 stats-col">
+                                                <div class="stats-value pink">803</div>
+                                                <div class="stats-title">FOLLOWERS</div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 stats-col">
+                                                <div class="stats-value pink">1207</div>
+                                                <div class="stats-title">POSTS</div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
+                                                <i class="glyphicon glyphicon-map-marker"></i> Boston
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
+                                                Rate: <strong>$250</strong>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
+                                                Age: <strong>24</strong>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="text-align: left;width: 30%;margin: 0 auto;">
-                                    <h4>Username：{{ request.session.username }}</h4><br/>
-                                    <h4>Email：{{ request.session.email }}</h4><br>
-                                    <h3>{{ success }}</h3>
+                                <div class="profile-body">
+                                    <div class="col-lg-12">
+                                        <div class="tabbable">
+                                            <div class="tab-content tabs-flat">
+                                                <div id="contacts" class="tab-pane" style="display: block">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="profile-contacts">
+
+                                                                <div class="profile-badge orange"><i class="fa fa-phone orange"></i><span>Contacts</span></div>
+                                                                <div class="contact-info">
+                                                                    <p>
+                                                                        Phone	: +1 1 2345 6789 <br>
+                                                                        Cell		: +1 9 876 5432
+                                                                    </p>
+                                                                    <p>
+                                                                        Email		: kim@gmail.com
+                                                                        <br>
+                                                                        Skype		: kim.ryder
+                                                                    </p>
+                                                                    <p>
+                                                                        Facebook	: facebook.com/Kim.Ryder
+                                                                        <br>
+                                                                        Twitter	: @KimRyder
+                                                                    </p>
+                                                                </div>
+                                                                <div class="profile-badge azure">
+                                                                    <i class="fa fa-map-marker azure"></i><span>Location</span>
+                                                                </div>
+                                                                <div class="contact-info">
+                                                                    <p>
+                                                                        Address<br>
+                                                                        Department 98<br>
+                                                                        44-46 Morningside Road<br>
+                                                                        Toronto, Canada
+                                                                    </p>
+                                                                    <p>
+                                                                        Office<br>
+                                                                        44-46 Morningside Road<br>
+                                                                        Toronto, Canada
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div id="contact-map" class="animated flipInY"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="steps pn">
-                                <form action="{% url 'locator:edit' %}">
-                                    <input href="{% url 'locator:edit' %}" type='submit' value='Modify Password'
-                                           id='submit'/>
-                                </form>
                             </div>
                         </div>
-                        <! --/panel -->
-                    </div><!--/ col-md-4 -->
-
+                    </div>
                 </div>
             </div>
 
         </section>
         <! --/wrapper -->
     </section><!-- /MAIN CONTENT -->
+    <!-- Page Body -->
+
 
     <!--main content end-->
     <!--footer start-->
@@ -328,6 +412,12 @@
 
 <!--common script for all pages-->
 <script src="/assets/js/common-scripts.js"></script>
+
+
+
+
+
+
 
 <!--script for this page-->
 
