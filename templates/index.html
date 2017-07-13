@@ -418,12 +418,12 @@
                     <div class="content-panel" style="position:relative; height: 542px; overflow:auto">
                         <!-- SERVER STATUS PANELS -->
                         <ul class="timeline">
-                            {% for i in '01234'|make_list %}
+                            {% for i in '0'|make_list %}
                             <!-- Item 1 -->
                             <li>
                                 <div class="direction-r">
                                     <div class="flag-wrapper">
-                                        <span class="flag">Report</span>
+                                        <span class="flag" style="background: #99CCCC">Report</span>
                                         <span class="time-wrapper"><span class="time">Sometime</span></span>
                                     </div>
                                     <div class="desc">You reported Bug &nbsp;<a href="javascript:;">BugID</a>.
@@ -438,11 +438,25 @@
                             <li>
                                 <div class="direction-l">
                                     <div class="flag-wrapper">
-                                        <span class="flag">Fix</span>
+                                        <span class="flag" style="background: #CCFFCC">Fix</span>
                                         <span class="time-wrapper"><span class="time">Sometime</span></span>
                                     </div>
                                     <div class="desc">
                                         You fixed Bug &nbsp; <a href="javascript:;">BugID</a>.
+                                    </br>
+                                        Summary:blabla...
+                                        <a href="javascript:;">See details</a>
+                                    </div>
+                                </div>
+                            </li>
+                                <li>
+                                    <div class="direction-r">
+                                    <div class="flag-wrapper">
+                                        <span class="flag" style="background: #FFFFCC">Assigned</span>
+                                        <span class="time-wrapper"><span class="time">Sometime</span></span>
+                                    </div>
+                                    <div class="desc">
+                                        Bug &nbsp; <a href="javascript:;">BugID</a> &nbsp;was assigned to you.
                                     </br>
                                         Summary:blabla...
                                         <a href="javascript:;">See details</a>
@@ -459,8 +473,8 @@
                     <div class="row mt">
                         <!--CUSTOM CHART START -->
                         <div class="border-head">
-                            <h3 style="padding: 20px; background: #ff865c;font-weight:500">
-                            <font color="#fff">RECENT CONTRIBUTIONS</font></h3>
+                            <h3 style="padding: 18px; background: #ff865c;font-weight:500;font-size: 20px;">
+                            <font color="#fff">Recent Contribution</font></h3>
                         </div>
 
                         <div id="highcharts" style="min-width:400px;height:400px;margin-right: 15px;margin-left: 15px"></div>
@@ -575,7 +589,7 @@
                            </div> -->
 
                     <!-- USERS ONLINE SECTION -->
-                    <h3>TEAM MEMBERS</h3>
+                    <h3>Team Members</h3>
                     <!-- First Member -->
 
                     {% for member in members %}
@@ -660,8 +674,8 @@
 
                     <!-- CALENDAR-->
 
-                    <div id="gravity chart" class="mb" style="margin-top: 82px">
-                        <h3>GRAVITY</h3>
+                    <div id="donut chart" class="mb" style="margin-top: 82px">
+                        <h3>Contribution Ratio</h3>
                         <div id="circle" style="min-width:100%;height:400px;float: right;"></div>
                     </div><!-- / calendar -->
 
@@ -912,7 +926,7 @@ $(function () {
         },
         title: {
             floating:true,
-            text: 'Gravity of Bugs'
+            text: 'Fixed Bugs'
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
