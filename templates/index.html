@@ -43,13 +43,13 @@
 
     <script src="/assets/js/chart-master/Chart.js"></script>
 
-     <script src="https://img.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+    <script src="https://img.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
 
-        <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+    <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
 
-        <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
+    <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
 
-        <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+    <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -92,31 +92,6 @@
             box-sizing: border-box;
         }
 
-        .click_pop {
-            display: block;
-            height: 40px;
-            width: 160px;
-            margin: 100px auto;
-            line-height: 40px;
-            text-align: center;
-            border-radius: 20px;
-            background-color: #60A1C9;
-            color: #fff;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        .bgPop {
-            display: none;
-            position: absolute;
-            z-index: 9;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, .2);
-        }
-
         #pop {
             display: none;
             width: 700px;
@@ -133,24 +108,6 @@
         {#            background-color: #797979;#}{#            box-shadow: 0 3px 18px rgba(0, 0, 0, .5);#}
         }
 
-        .cancel, .ok {
-            position: absolute;
-            bottom: 30px;
-            left: 280px;
-            width: 80px;
-            height: 30px;
-            border: none;
-            border-radius: 15px;
-            background-color: #00BA98;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        .cancel {
-            background-color: #999;
-            left: 150px;
-        }
-
         input:focus {
             outline: none
         }
@@ -163,15 +120,15 @@
         <span class="close" onclick="closeDiv()"></span>
     </div>
     <div id="Histogram" style="min-width: 400px; height: 400px; margin: 0 auto;"></div>
-<table id="datatable" style="display: none">
-    <thead>
+    <table id="datatable" style="display: none">
+        <thead>
         <tr>
             <th></th>
             <th>Me</th>
             <th id="other"></th>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
         <tr>
             <th>JAN</th>
             <td>3</td>
@@ -197,22 +154,21 @@
             <td>2</td>
             <td>4</td>
         </tr>
-    <tr>
+        <tr>
             <th>JUN</th>
             <td>4</td>
             <td>8</td>
         </tr>
-    <tr>
+        <tr>
             <th>JUL</th>
             <td>1</td>
             <td>2</td>
         </tr>
-    </tbody>
-</table>
+        </tbody>
+    </table>
 
 </div><!-- /col-md-4 -->
-<div id="bg"
-     style="display:none;background-color: black;width: 100%;position:absolute;height: 100%;opacity: 0.5;z-index: 1;"></div>
+<div id="bg" style="display:none;background-color: black;width: 100%;position:absolute;height: 100%;opacity: 0.5;z-index: 1;"></div>
 <section id="container">
     <!-- **********************************************************************************************************************************************************
     TOP BAR CONTENT & NOTIFICATIONS
@@ -316,48 +272,40 @@
                             <a href="index.html#">
                                 <span class="photo"><img alt="avatar" src="/assets/img/ui-zac.jpg"></span>
                                 <span class="subject">
-                      <span class="from">Zac Snider</span>
-                      <span class="time">Just now</span>
-                    </span>
-                                <span class="message">
-                      Hi mate, how is everything?
-                    </span>
+                                  <span class="from">Zac Snider</span>
+                                  <span class="time">Just now</span>
+                                </span>
+                                <span class="message">Hi mate, how is everything?</span>
                             </a>
                         </li>
                         <li>
                             <a href="index.html#">
                                 <span class="photo"><img alt="avatar" src="/assets/img/ui-divya.jpg"></span>
                                 <span class="subject">
-                      <span class="from">Divya Manian</span>
-                      <span class="time">40 mins.</span>
-                    </span>
-                                <span class="message">
-                     Hi, I need your help with this.
-                   </span>
+                                  <span class="from">Divya Manian</span>
+                                  <span class="time">40 mins.</span>
+                                </span>
+                                <span class="message">Hi, I need your help with this.</span>
                             </a>
                         </li>
                         <li>
                             <a href="index.html#">
                                 <span class="photo"><img alt="avatar" src="/assets/img/ui-danro.jpg"></span>
                                 <span class="subject">
-                    <span class="from">Dan Rogers</span>
-                    <span class="time">2 hrs.</span>
-                  </span>
-                                <span class="message">
-                    Love your new Dashboard.
-                  </span>
+                                    <span class="from">Dan Rogers</span>
+                                    <span class="time">2 hrs.</span>
+                                </span>
+                                <span class="message">Love your new Dashboard.</span>
                             </a>
                         </li>
                         <li>
                             <a href="index.html#">
                                 <span class="photo"><img alt="avatar" src="/assets/img/ui-sherman.jpg"></span>
                                 <span class="subject">
-                    <span class="from">Dj Sherman</span>
-                    <span class="time">4 hrs.</span>
-                  </span>
-                                <span class="message">
-                    Please, answer asap.
-                  </span>
+                                    <span class="from">Dj Sherman</span>
+                                    <span class="time">4 hrs.</span>
+                                </span>
+                                <span class="message">Please, answer asap.</span>
                             </a>
                         </li>
                         <li>
@@ -386,8 +334,7 @@
             <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
 
-                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="{{ request.session.avatarloc }}"
-                                                                               class="img-circle" width="60"></a></p>
+                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="{{ request.session.avatarloc }}" class="img-circle" width="60"></a></p>
                 <h5 class="centered">{{ request.session.username }}</h5>
 
                 <li class="mt">
@@ -416,12 +363,6 @@
                     </a>
 
                 </li>
-                {#                <li class="sub-menu">#}
-                {#                    <a href="{% url 'locator:newreport' %}">#}
-                {#                        <i class="fa fa-tasks"></i>#}
-                {#                        <span>Report</span>#}
-                {#                    </a>#}
-                {#                </li>#}
                 <li class="sub-menu">
                     <a href="{% url 'locator:lock' %}">
                         <i class="fa fa-lock"></i>
@@ -449,52 +390,52 @@
                         <!-- SERVER STATUS PANELS -->
                         <ul class="timeline">
                             {% for i in '0'|make_list %}
-                            <!-- Item 1 -->
-                            <li>
-                                <div class="direction-r">
-                                    <div class="flag-wrapper">
-                                        <span class="flag" style="background: #99CCCC">Report</span>
-                                        <span class="time-wrapper"><span class="time">Sometime</span></span>
-                                    </div>
-                                    <div class="desc">You reported Bug &nbsp;<a href="javascript:;">BugID</a>.
-                                    </br>
-                                        Summary:blabla...
-                                        <a href="javascript:;">See details</a>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <!-- Item 2 -->
-                            <li>
-                                <div class="direction-l">
-                                    <div class="flag-wrapper">
-                                        <span class="flag" style="background: #CCFFCC">Fix</span>
-                                        <span class="time-wrapper"><span class="time">Sometime</span></span>
-                                    </div>
-                                    <div class="desc">
-                                        You fixed Bug &nbsp; <a href="javascript:;">BugID</a>.
-                                    </br>
-                                        Summary:blabla...
-                                        <a href="javascript:;">See details</a>
-                                    </div>
-                                </div>
-                            </li>
+                                <!-- Item 1 -->
                                 <li>
                                     <div class="direction-r">
-                                    <div class="flag-wrapper">
-                                        <span class="flag" style="background: #FFFFCC">Assigned</span>
-                                        <span class="time-wrapper"><span class="time">Sometime</span></span>
+                                        <div class="flag-wrapper">
+                                            <span class="flag" style="background: #99CCCC">Report</span>
+                                            <span class="time-wrapper"><span class="time">Sometime</span></span>
+                                        </div>
+                                        <div class="desc">You reported Bug &nbsp;<a href="javascript:;">BugID</a>.
+                                            </br>
+                                            Summary:blabla...
+                                            <a href="javascript:;">See details</a>
+                                        </div>
                                     </div>
-                                    <div class="desc">
-                                        Bug &nbsp; <a href="javascript:;">BugID</a> &nbsp;was assigned to you.
-                                    </br>
-                                        Summary:blabla...
-                                        <a href="javascript:;">See details</a>
+                                </li>
+
+                                <!-- Item 2 -->
+                                <li>
+                                    <div class="direction-l">
+                                        <div class="flag-wrapper">
+                                            <span class="flag" style="background: #CCFFCC">Fix</span>
+                                            <span class="time-wrapper"><span class="time">Sometime</span></span>
+                                        </div>
+                                        <div class="desc">
+                                            You fixed Bug &nbsp; <a href="javascript:;">BugID</a>.
+                                            </br>
+                                            Summary:blabla...
+                                            <a href="javascript:;">See details</a>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
+                                <li>
+                                    <div class="direction-r">
+                                        <div class="flag-wrapper">
+                                            <span class="flag" style="background: #FFFFCC">Assigned</span>
+                                            <span class="time-wrapper"><span class="time">Sometime</span></span>
+                                        </div>
+                                        <div class="desc">
+                                            Bug &nbsp; <a href="javascript:;">BugID</a> &nbsp;was assigned to you.
+                                            </br>
+                                            Summary:blabla...
+                                            <a href="javascript:;">See details</a>
+                                        </div>
+                                    </div>
+                                </li>
                             {% endfor %}
-                        <div align="right" style="padding: 10px;"><a href="javascript:;">See more...</a></div>
+                            <div align="right" style="padding: 10px;"><a href="javascript:;">See more...</a></div>
 
 
                         </ul>
@@ -502,51 +443,14 @@
 
                     <div class="row mt" style="margin-right: 0px">
                         <!--CUSTOM CHART START -->
-                        <div class="border-head" >
+                        <div class="border-head">
                             <h3 style="padding: 18px; background: #ff865c;font-weight:500;font-size: 20px;width: 98.8%">
-                            <font color="#fff">Recent Contribution</font></h3>
+                                <font color="#fff">Recent Contribution</font></h3>
                         </div>
 
-                        <div id="highcharts" style="min-width:400px;height:400px;margin-right: 0px;margin-left: 15px"></div>
+                        <div id="highcharts"
+                             style="min-width:400px;height:400px;margin-right: 0px;margin-left: 15px"></div>
 
-                        {#    <div class="custom-bar-chart">#}
-                        {#      <ul class="y-axis">#}
-                        {#        <li><span>10.000</span></li>#}
-                        {#        <li><span>8.000</span></li>#}
-                        {#        <li><span>6.000</span></li>#}
-                        {#        <li><span>4.000</span></li>#}
-                        {#        <li><span>2.000</span></li>#}
-                        {#        <li><span>0</span></li>#}
-                        {#      </ul>#}
-                        {#      <div class="bar">#}
-                        {#        <div class="title" id="7">JAN</div>#}
-                        {#        <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top">85%</div>#}
-                        {#      </div>#}
-                        {#      <div class="bar ">#}
-                        {#        <div class="title" id="6">FEB</div>#}
-                        {#        <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>#}
-                        {#      </div>#}
-                        {#      <div class="bar ">#}
-                        {#        <div class="title" id="5">MAR</div>#}
-                        {#        <div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>#}
-                        {#      </div>#}
-                        {#      <div class="bar ">#}
-                        {#        <div class="title" id="4">APR</div>#}
-                        {#        <div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>#}
-                        {#      </div>#}
-                        {#      <div class="bar">#}
-                        {#        <div class="title" id="3">MAY</div>#}
-                        {#        <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">32%</div>#}
-                        {#      </div>#}
-                        {#      <div class="bar ">#}
-                        {#        <div class="title" id="2">JUN</div>#}
-                        {#        <div class="value tooltips" data-original-title="6.200" data-toggle="tooltip" data-placement="top">62%</div>#}
-                        {#      </div>#}
-                        {#      <div class="bar">#}
-                        {#        <div class="title" id="1">JUL</div>#}
-                        {#        <div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>#}
-                        {#      </div>#}
-                        {#    </div>#}
 
                         <!--custom chart end-->
                     </div><!-- /row -->
@@ -559,64 +463,7 @@
                 *********************************************************************************************************************************************************** -->
 
                 <div class="col-lg-3 ds" style="margin-top: 7px; padding:10px">
-                    <!--COMPLETED ACTIONS DONUTS CHART-->
-                    <!-- <h3>NOTIFICATIONS</h3> -->
 
-                    <!-- First Action -->
-                    <!-- <div class="desc">
-                        <div class="thumb">
-                            <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                        </div>
-                        <div class="details">
-                            <p><muted>2 Minutes Ago</muted><br/>
-                               <a href="#">James Brown</a> subscribed to your newsletter.<br/>
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Second Action -->
-                    <!--     <div class="desc">
-                            <div class="thumb">
-                                <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                            </div>
-                            <div class="details">
-                                <p><muted>3 Hours Ago</muted><br/>
-                                   <a href="#">Diana Kennedy</a> purchased a year subscription.<br/>
-                                </p>
-                            </div>
-                        </div> -->
-                    <!-- Third Action -->
-                    <!--    <div class="desc">
-                           <div class="thumb">
-                               <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                           </div>
-                           <div class="details">
-                               <p><muted>7 Hours Ago</muted><br/>
-                                  <a href="#">Brandon Page</a> purchased a year subscription.<br/>
-                               </p>
-                           </div>
-                       </div> -->
-                    <!-- Fourth Action -->
-                    <!--     <div class="desc">
-                            <div class="thumb">
-                                <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                            </div>
-                            <div class="details">
-                                <p><muted>11 Hours Ago</muted><br/>
-                                   <a href="#">Mark Twain</a> commented your post.<br/>
-                                </p>
-                            </div>
-                        </div> -->
-                    <!-- Fifth Action -->
-                    <!--        <div class="desc">
-                               <div class="thumb">
-                                   <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                               </div>
-                               <div class="details">
-                                   <p><muted>18 Hours Ago</muted><br/>
-                                      <a href="#">Daniel Pratt</a> purchased a wallet in your store.<br/>
-                                   </p>
-                               </div>
-                           </div> -->
 
                     <!-- USERS ONLINE SECTION -->
                     <h3>Team Members</h3>
@@ -629,78 +476,14 @@
                                      alt="">
                             </div>
                             <div class="details">
-                                <p><a style="width:35px;height:35px" onclick="showDiv('{{ member.avatarloc }}','{{ member.username }}')" href="javascript:void(0)" class="img-circle">{{ member.username }}</a><br>
+                                <p><a style="width:35px;height:35px"
+                                      onclick="showDiv('{{ member.avatarloc }}','{{ member.username }}')"
+                                      href="javascript:void(0)" class="img-circle">{{ member.username }}</a><br>
                                     <muted>{{ member.email }}</muted>
                                 </p>
                             </div>
                         </div>
                     {% endfor %}
-                    {#                    <div class="desc">#}
-                    {#                        <div class="thumb">#}
-                    {#                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-divya.jpg"#}
-                    {#                                 alt="">#}
-                    {#                        </div>#}
-                    {#                        <div class="details">#}
-                    {#                            <p><a style="width:35px;height:35px" onclick="showDiv()" href="javascript:void(0)"#}
-                    {#                                  class="img-circle">DIVYA MANIAN</a><br>#}
-                    {#                                <muted>Available</muted>#}
-                    {#                            </p>#}
-                    {#                        </div>#}
-                    {#                    </div>#}
-                    {##}
-                    {#                    <div class="desc">#}
-                    {#                        <div class="thumb">#}
-                    {#                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-sherman.jpg"#}
-                    {#                                 alt="">#}
-                    {#                        </div>#}
-                    {#                        <div class="details">#}
-                    {#                            <p><a style="width:35px;height:35px" onclick="showDiv()" href="javascript:void(0)"#}
-                    {#                                  class="img-circle">DJ SHERMAN</a><br>#}
-                    {#                                <muted>I am Busy</muted>#}
-                    {#                            </p>#}
-                    {#                        </div>#}
-                    {#                    </div>#}
-                    {##}
-                    {#                    <div class="desc">#}
-                    {#                        <div class="thumb">#}
-                    {#                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-danro.jpg"#}
-                    {#                                 alt="">#}
-                    {#                        </div>#}
-                    {#                        <div class="details">#}
-                    {#                            <p><a style="width:35px;height:35px" onclick="showDiv()" href="javascript:void(0)"#}
-                    {#                                  class="img-circle">DAN ROGERS</a><br>#}
-                    {#                                <muted>Available</muted>#}
-                    {#                            </p>#}
-                    {#                        </div>#}
-                    {#                    </div>#}
-                    {##}
-                    {#                    <div class="desc">#}
-                    {#                        <div class="thumb">#}
-                    {#                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-zac.jpg"#}
-                    {#                                 alt="">#}
-                    {#                        </div>#}
-                    {#                        <div class="details">#}
-                    {#                            <p><a style="width:35px;height:35px" onclick="showDiv()" href="javascript:void(0)"#}
-                    {#                                  class="img-circle">Zac Sniders</a><br>#}
-                    {#                                <muted>Available</muted>#}
-                    {#                            </p>#}
-                    {#                        </div>#}
-                    {#                    </div>#}
-                    {##}
-                    {#                    <div class="desc">#}
-                    {#                        <div class="thumb">#}
-                    {#                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-sam.jpg"#}
-                    {#                                 alt="">#}
-                    {#                        </div>#}
-                    {#                        <div class="details">#}
-                    {#                            <p><a style="width:35px;height:35px" onclick="showDiv()" href="javascript:void(0)"#}
-                    {#                                  class="img-circle">Marcel Newman</a><br>#}
-                    {#                                <muted>Available</muted>#}
-                    {#                            </p>#}
-                    {#                        </div>#}
-                    {#                    </div>#}
-
-                    <!-- Second Member -->
 
                     <!-- CALENDAR-->
 
@@ -744,8 +527,6 @@
 
 <script src="https://img.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
 <script src="https://img.hcharts.cn/highcharts/modules/data.js"></script>
-
-
 
 
 <script src="/assets/js/fancybox/jquery.fancybox.js"></script>
@@ -875,100 +656,100 @@
 
     $(function () {
         var chart = new Highcharts.Chart('highcharts', {
-        chart: {
-            type: 'area'
-        },
-        title: {
-            text: 'RECENT CONTRIBUTIONS'
-        },
-        subtitle: {
-            text: ''
-        },
-        xAxis: {
-            categories: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
-            tickmarkPlacement: 'on',
+            chart: {
+                type: 'area'
+            },
             title: {
+                text: 'RECENT CONTRIBUTIONS'
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                categories: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL'],
+                tickmarkPlacement: 'on',
+                title: {
+                    enabled: false
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Number'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value;
+                    }
+                }
+            },
+            tooltip: {
+                split: true,
+                valueSuffix: ''
+            },
+            plotOptions: {
+                area: {
+                    stacking: 'normal',
+                    lineColor: '#666666',
+                    lineWidth: 1,
+                    marker: {
+                        lineWidth: 1,
+                        lineColor: '#666666'
+                    }
+                }
+            },
+            series: [{
+                name: 'Files',
+                data: [5, 13, 15, 20, 24, 24, 30]
+            }, {
+                name: 'Bugs',
+                data: [2, 5, 6, 13, 15, 15, 19]
+            }],
+            credits: {
+                enabled: false
+            },
+            exporting: {
                 enabled: false
             }
-        },
-        yAxis: {
-            title: {
-                text: 'Number'
-            },
-            labels: {
-                formatter: function () {
-                    return this.value;
-                }
-            }
-        },
-        tooltip: {
-            split: true,
-            valueSuffix: ''
-        },
-        plotOptions: {
-            area: {
-                stacking: 'normal',
-                lineColor: '#666666',
-                lineWidth: 1,
-                marker: {
-                    lineWidth: 1,
-                    lineColor: '#666666'
-                }
-            }
-        },
-        series: [{
-            name: 'Files',
-            data: [5, 13, 15, 20, 24, 24, 30]
-        }, {
-            name: 'Bugs',
-            data: [2, 5, 6, 13, 15, 15, 19]
-        }],
-        credits: {
-          enabled:false
-        },
-        exporting: {
-            enabled:false
-        }
+        });
     });
-});
 
 
 </script>
 <script type="text/javascript">
-    function showDiv(avat,name) {
+    function showDiv(avat, name) {
         document.getElementById('other').innerHTML = name;
         $(function () {
-    var chart = new Highcharts.Chart('Histogram', {
-        data: {
-            table: 'datatable'
-        },
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Contrast'
-        },
-        yAxis: {
-            allowDecimals: true,
-            title: {
-                text: 'Number',
-                rotation: 0
-            }
-        },
-        credits: {
-          enabled:false
-        },
-        exporting: {
-            enabled:false
-        },
-        tooltip: {
-            formatter: function () {
-                return '<b>' + this.series.name + '</b><br/>' +
-                    this.point.y + 'bugs';
-            }
-        }
-    });
-});
+            var chart = new Highcharts.Chart('Histogram', {
+                data: {
+                    table: 'datatable'
+                },
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Contrast'
+                },
+                yAxis: {
+                    allowDecimals: true,
+                    title: {
+                        text: 'Number',
+                        rotation: 0
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                exporting: {
+                    enabled: false
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '<b>' + this.series.name + '</b><br/>' +
+                            this.point.y + 'bugs';
+                    }
+                }
+            });
+        });
 
         document.getElementById('pop').style.display = 'block';
         document.getElementById('bg').style.display = 'block';
@@ -981,81 +762,81 @@
     }
 </script>
 <script type="text/javascript">
-$(function () {
-    var chart = new Highcharts.Chart('circle', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            spacing : [100, 0 , 40, 0]
-        },
-        title: {
-            floating:true,
-            text: 'Fixed Bugs'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    }
-                },
-                point: {
-                    events: {
-                        mouseOver: function(e) {  // 鼠标滑过时动态更新标题
-                            // 标题更新函数，API 地址：https://api.hcharts.cn/highcharts#Chart.setTitle
-                            chart.setTitle({
-                                text: e.target.name+ '\t'+ e.target.y + ' %'
-                            });
+    $(function () {
+        var chart = new Highcharts.Chart('circle', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                spacing: [100, 0, 40, 0]
+            },
+            title: {
+                floating: true,
+                text: 'Fixed Bugs'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                         }
-                        //,
-                        // click: function(e) { // 同样的可以在点击事件里处理
-                        //     chart.setTitle({
-                        //         text: e.point.name+ '\t'+ e.point.y + ' %'
-                        //     });
-                        // }
-                    }
-                },
-            }
-        },
-        credits: {
-          enabled:false
-        },
-        exporting: {
-            enabled:false
-        },
-        series: [{
-            type: 'pie',
-            innerSize: '80%',
-            name: 'Gravity',
-            data: [
-                {name:'Me',   y: 25.0, url : 'http://bbs.hcharts.cn'},
-                {
-                    name: 'Others',
-                    y: 75.0,
-                    sliced: true,
-                    selected: true,
-                    url: 'http://www.hcharts.cn'
+                    },
+                    point: {
+                        events: {
+                            mouseOver: function (e) {  // 鼠标滑过时动态更新标题
+                                // 标题更新函数，API 地址：https://api.hcharts.cn/highcharts#Chart.setTitle
+                                chart.setTitle({
+                                    text: e.target.name + '\t' + e.target.y + ' %'
+                                });
+                            }
+                            //,
+                            // click: function(e) { // 同样的可以在点击事件里处理
+                            //     chart.setTitle({
+                            //         text: e.point.name+ '\t'+ e.point.y + ' %'
+                            //     });
+                            // }
+                        }
+                    },
                 }
-            ]
-        }]
-    }, function(c) {
-        // 环形图圆心
-        var centerY = c.series[0].center[1],
-            titleHeight = parseInt(c.title.styles.fontSize);
-        c.setTitle({
-            y:centerY + titleHeight/2
+            },
+            credits: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
+            },
+            series: [{
+                type: 'pie',
+                innerSize: '80%',
+                name: 'Gravity',
+                data: [
+                    {name: 'Me', y: 25.0, url: 'http://bbs.hcharts.cn'},
+                    {
+                        name: 'Others',
+                        y: 75.0,
+                        sliced: true,
+                        selected: true,
+                        url: 'http://www.hcharts.cn'
+                    }
+                ]
+            }]
+        }, function (c) {
+            // 环形图圆心
+            var centerY = c.series[0].center[1],
+                titleHeight = parseInt(c.title.styles.fontSize);
+            c.setTitle({
+                y: centerY + titleHeight / 2
+            });
+            chart = c;
         });
-        chart = c;
     });
-});
 </script>
 
 <script type="text/javascript">
