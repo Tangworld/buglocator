@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.shortcuts import HttpResponseRedirect
 from locator import models
 import time
-import json
+import types
 
 
 # Create your views here.
@@ -54,7 +54,6 @@ def login(request):
         v2 = "Password cannot be empty！"
         flag = False
     validate = {"v1": v1, "v2": v2}
-    testclass = "Hello world."
 
     if flag:
         request.session["username"] = username
@@ -63,20 +62,48 @@ def login(request):
         request.session['userid'] = validatepassword.id
         request.session['isadmin'] = validatepassword.isadmin
         request.session['avatarloc'] = validatepassword.avatarloc
+
         if validatepassword.isadmin == 'yes':
             return render(request, 'admin/index_admin.html')
         else:
             members = []
+            dis_reports = []
             try:
                 productobj = models.ProUser.objects.get(user_id=validatepassword.id)
                 productId = int(productobj.product_id)
                 userids = models.ProUser.objects.filter(product_id=productId)
+
+                reports1 = models.Report.objects.filter(reporter=username)
+                reports2 = models.Report.objects.filter(assignee=username)
+                for report in reports1:
+                    time_local = time.localtime(float(report.opendate))
+                    dt = time.strftime("%Y-%m-%d %H:%M:%S",time_local)
+                    tmp = [dt, '1', report.bugid, report.summary]
+                    dis_reports.append(tmp)
+                for report in reports2:
+                    time_local = time.localtime(float(report.opendate))
+                    dt = time.strftime("%Y-%m-%d %H:%M:%S",time_local)
+                    if report.status == 'fixed':
+                        tmp = [dt, '2', report.bugid, report.summary]
+                        dis_reports.append(tmp)
+                    elif report.status == 'unfixed':
+                        tmp = [dt, '3', report.bugid, report.summary]
+                        dis_reports.append(tmp)
+                dis_reports.sort(lambda x, y: cmp(x[0], y[0]))
+                dis_content = []
+                for i in range(len(dis_reports)-1,len(dis_reports)-10,-1):
+                    if i >= 0:
+                        dis_content.append(dis_reports[i])
+                    else:
+                        break
+
                 for userid in userids:
                     member = models.User.objects.get(id=userid.user_id)
                     members.append(member)
             except Exception, e:
                 print e
-            return render(request, 'index.html', {'members': members, 'testclass': json.dumps(testclass)})
+            return render(request, 'index.html',
+                          {'members': members, 'dis_reports': dis_content})
     else:
         return render(request, 'login.html', {"validate": validate})
 
@@ -117,16 +144,41 @@ def main(request):
         return render(request, 'admin/index_admin.html')
     else:
         members = []
+        dis_reports = []
         try:
             productobj = models.ProUser.objects.get(user_id=request.session['userid'])
             productId = int(productobj.product_id)
             userids = models.ProUser.objects.filter(product_id=productId)
+
+            reports1 = models.Report.objects.filter(reporter=request.session['username'])
+            reports2 = models.Report.objects.filter(assignee=request.session['username'])
+            for report in reports1:
+                time_local = time.localtime(float(report.opendate))
+                dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
+                tmp = [dt, '1', report.bugid, report.summary]
+                dis_reports.append(tmp)
+            for report in reports2:
+                time_local = time.localtime(float(report.opendate))
+                dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
+                if report.status == 'fixed':
+                    tmp = [dt, '2', report.bugid, report.summary]
+                    dis_reports.append(tmp)
+                elif report.status == 'unfixed':
+                    tmp = [dt, '3', report.bugid, report.summary]
+                    dis_reports.append(tmp)
+            dis_reports.sort(lambda x, y: cmp(x[0], y[0]))
+            dis_content = []
+            for i in range(len(dis_reports) - 1, len(dis_reports) - 10, -1):
+                if i >= 0:
+                    dis_content.append(dis_reports[i])
+                else:
+                    break
             for userid in userids:
                 member = models.User.objects.get(id=userid.user_id)
                 members.append(member)
         except Exception, e:
             print e
-        return render(request, 'index.html', {'members': members})
+        return render(request, 'index.html', {'members': members, 'dis_reports': dis_content})
 
 
 def edit(request):

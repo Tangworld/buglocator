@@ -418,54 +418,75 @@
                     <div class="content-panel" style="position:relative; height: 542px; overflow:auto">
                         <!-- SERVER STATUS PANELS -->
                         <ul class="timeline">
-                            {% for i in '0'|make_list %}
-                            <!-- Item 1 -->
-                            <li>
-                                <div class="direction-r">
+                            {% for report in dis_reports %}
+                                {% if report.1 == '1'%}
+                                    <!-- Report -->
+                                    <li>
+                                    {% if forloop.counter0|divisibleby:2 == 0 %}
+                                        <div class="direction-r">
+                                    {% else %}
+                                        <div class="direction-l">
+                                    {% endif %}
                                     <div class="flag-wrapper">
                                         <span class="flag" style="background: #99CCCC">Report</span>
-                                        <span class="time-wrapper"><span class="time">Sometime</span></span>
+                                        <span class="time-wrapper"><span class="time">{{ report.0 }}</span></span>
                                     </div>
-                                    <div class="desc">You reported Bug &nbsp;<a href="javascript:;">BugID</a>.
+                                    <div class="desc">You reported Bug &nbsp;<a href="javascript:;">{{ report.2 }}</a>.
                                     </br>
-                                        Summary:blabla...
+                                        Summary:{{ report.3 }}
                                         <a href="javascript:;">See details</a>
                                     </div>
-                                </div>
-                            </li>
+                                        </div>
+                                    </li>
 
-                            <!-- Item 2 -->
-                            <li>
-                                <div class="direction-l">
-                                    <div class="flag-wrapper">
-                                        <span class="flag" style="background: #CCFFCC">Fix</span>
-                                        <span class="time-wrapper"><span class="time">Sometime</span></span>
-                                    </div>
-                                    <div class="desc">
-                                        You fixed Bug &nbsp; <a href="javascript:;">BugID</a>.
-                                    </br>
-                                        Summary:blabla...
-                                        <a href="javascript:;">See details</a>
-                                    </div>
-                                </div>
-                            </li>
-                                <li>
-                                    <div class="direction-r">
+                                {% elif report.1 == '2' %}
+                                    <!-- Fix -->
+                                    <li>
+                                        {% if forloop.counter0|divisibleby:2 == 0 %}
+                                            <div class="direction-r">
+                                        {% else %}
+                                            <div class="direction-l">
+                                        {% endif %}
+                                        <div class="flag-wrapper">
+                                            <span class="flag" style="background: #CCFFCC">Fix</span>
+                                            <span class="time-wrapper"><span class="time">{{ report.0 }}</span></span>
+                                        </div>
+                                        <div class="desc">
+                                            You fixed Bug &nbsp; <a href="javascript:;">{{ report.2 }}</a>.
+                                            </br>
+                                            Summary:{{ report.3 }}
+                                            <a href="javascript:;">See details</a>
+                                        </div>
+                                        </div>
+                                    </li>
+
+                                {% elif report.1 == '3' %}
+                                    <!--Assigned-->
+                                    <li>
+                                    {% if forloop.counter0|divisibleby:2 == 0 %}
+                                        <div class="direction-r">
+                                    {% else %}
+                                        <div class="direction-l">
+                                    {% endif %}
                                     <div class="flag-wrapper">
                                         <span class="flag" style="background: #FFFFCC">Assigned</span>
-                                        <span class="time-wrapper"><span class="time">Sometime</span></span>
+                                        <span class="time-wrapper"><span class="time">{{ report.0 }}</span></span>
                                     </div>
                                     <div class="desc">
-                                        Bug &nbsp; <a href="javascript:;">BugID</a> &nbsp;was assigned to you.
+                                        Bug &nbsp; <a href="javascript:;">{{ report.2 }}</a> &nbsp;was assigned to you.
                                     </br>
-                                        Summary:blabla...
+                                        Summary:{{ report.3 }}
                                         <a href="javascript:;">See details</a>
                                     </div>
                                 </div>
                             </li>
-                            {% endfor %}
-                        <div align="right" style="padding: 10px;"><a href="javascript:;">See more...</a></div>
 
+                                {% endif %}
+
+                            {% endfor %}
+                        <div align="right" style="padding: 10px;">
+                            <a href="javascript:;">See more...</a>
+                        </div>
 
                         </ul>
                     </div><!-- /panel -->
