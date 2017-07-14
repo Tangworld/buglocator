@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -7,8 +7,9 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <meta charset="utf-8">
-{#    <link rel="icon" href="https://static.jianshukeji.com/highcharts/images/favicon.ico">#}
-{#    <meta name="viewport" content="width=device-width, initial-scale=1">#}
+    <link rel="icon" href="https://static.jianshukeji.com/highcharts/images/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
 
     <title>BugLocator</title>
 
@@ -16,14 +17,14 @@
     <link href="/assets/css/bootstrap.css" rel="stylesheet">
     <!--external css-->
     <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="/assets/css/zabuto_calendar.css">
+
     <link rel="stylesheet" type="text/css" href="/assets/js/gritter/css/jquery.gritter.css"/>
     <link rel="stylesheet" type="text/css" href="/assets/lineicons/style.css">
 
-     <link href="/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap.css" rel="stylesheet">
     <!--external css-->
-    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="/assets/js/fancybox/jquery.fancybox.css" rel="stylesheet" />
+    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link href="/assets/js/fancybox/jquery.fancybox.css" rel="stylesheet"/>
     <!-- Custom styles for this template -->
     <link href="/assets/css/style.css" rel="stylesheet">
     <link href="/assets/css/style-responsive.css" rel="stylesheet">
@@ -32,22 +33,142 @@
     <link href="/assets/css/style.css" rel="stylesheet">
     <link href="/assets/css/style-responsive.css" rel="stylesheet">
 
-    <!-- 这里加了两个link-->
+    <!-- 这里加了三个link
     <link rel="stylesheet" type="text/css" href="/assets/css/default.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/zsw.css">
+    <!--必要样式
+    <link rel="stylesheet" type="text/css" href="/assets/css/component.css">-->
+    <!--这里是时间轴CSS-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/style_timeline.css">
 
-    <!--必要样式-->
-    <link rel="stylesheet" type="text/css" href="/assets/css/component.css">
     <script src="/assets/js/chart-master/Chart.js"></script>
+
+    <script src="https://img.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+
+    <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+
+    <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
+
+    <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
+
+    <style>
+        .close {
+            /* still bad on picking color */
+            background: black;
+            color: white;
+            /* make a round button */
+            border-radius: 20px;
+            /* center text */
+            line-height: 27px;
+            text-align: center;
+            height: 30px;
+            width: 30px;
+            font-size: 18px;
+            padding: 1px;
+        }
+
+        /* use cross as close button */
+        .close::before {
+            content: "\2716";
+        }
+
+        /* place the button on top-right */
+        .close {
+            top: -10px;
+            right: -10px;
+            position: absolute;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            box-sizing: border-box;
+        }
+
+        #pop {
+            display: none;
+            width: 700px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            padding: 50px;
+            z-index: 10;
+            border-radius: 35px;
+        {#            background-color: #797979;#}{#            box-shadow: 0 3px 18px rgba(0, 0, 0, .5);#}
+        }
+
+        input:focus {
+            outline: none
+        }
+    </style>
 </head>
 
 <body>
+<div id="pop" class="col-md-4 mb">
+    <div style="height: 0px; width: 600px; position: absolute;z-index: 5555">
+        <span class="close" onclick="closeDiv()"></span>
+    </div>
+    <div id="Histogram" style="min-width: 400px; height: 400px; margin: 0 auto;"></div>
+    <table id="datatable" style="display: none">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Me</th>
+            <th id="other"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>JAN</th>
+            <td>3</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <th>FEB</th>
+            <td>2</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <th>MAR</th>
+            <td>5</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <th>APR</th>
+            <td>3</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <th>MAY</th>
+            <td>2</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <th>JUN</th>
+            <td>4</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <th>JUL</th>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        </tbody>
+    </table>
 
+</div><!-- /col-md-4 -->
+<div id="bg" style="display:none;background-color: black;width: 100%;position:absolute;height: 100%;opacity: 0.5;z-index: 1;"></div>
 <section id="container">
     <!-- **********************************************************************************************************************************************************
     TOP BAR CONTENT & NOTIFICATIONS
@@ -65,7 +186,7 @@
             <ul class="nav top-menu">
                 <!-- settings start -->
                 <li class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="index_admin.html#">
                         <i class="fa fa-tasks"></i>
                         <span class="badge bg-theme">4</span>
                     </a>
@@ -75,7 +196,7 @@
                             <p class="green">You have 4 pending tasks</p>
                         </li>
                         <li>
-                            <a href="index.html#">
+                            <a href="index_admin.html#">
                                 <div class="task-info">
                                     <div class="desc">DashGum Admin Panel</div>
                                     <div class="percent">40%</div>
@@ -89,7 +210,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="index.html#">
+                            <a href="index_admin.html#">
                                 <div class="task-info">
                                     <div class="desc">Database Update</div>
                                     <div class="percent">60%</div>
@@ -103,7 +224,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="index.html#">
+                            <a href="index_admin.html#">
                                 <div class="task-info">
                                     <div class="desc">Product Development</div>
                                     <div class="percent">80%</div>
@@ -117,7 +238,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="index.html#">
+                            <a href="index_admin.html#">
                                 <div class="task-info">
                                     <div class="desc">Payments Sent</div>
                                     <div class="percent">70%</div>
@@ -138,7 +259,7 @@
                 <!-- settings end -->
                 <!-- inbox dropdown start-->
                 <li id="header_inbox_bar" class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="index_admin.html#">
                         <i class="fa fa-envelope-o"></i>
                         <span class="badge bg-theme">5</span>
                     </a>
@@ -148,55 +269,47 @@
                             <p class="green">You have 5 new messages</p>
                         </li>
                         <li>
-                            <a href="index.html#">
+                            <a href="index_admin.html#">
                                 <span class="photo"><img alt="avatar" src="/assets/img/ui-zac.jpg"></span>
                                 <span class="subject">
-                      <span class="from">Zac Snider</span>
-                      <span class="time">Just now</span>
-                    </span>
-                                <span class="message">
-                      Hi mate, how is everything?
-                    </span>
+                                  <span class="from">Zac Snider</span>
+                                  <span class="time">Just now</span>
+                                </span>
+                                <span class="message">Hi mate, how is everything?</span>
                             </a>
                         </li>
                         <li>
-                            <a href="index.html#">
+                            <a href="index_admin.html#">
                                 <span class="photo"><img alt="avatar" src="/assets/img/ui-divya.jpg"></span>
                                 <span class="subject">
-                      <span class="from">Divya Manian</span>
-                      <span class="time">40 mins.</span>
-                    </span>
-                                <span class="message">
-                     Hi, I need your help with this.
-                   </span>
+                                  <span class="from">Divya Manian</span>
+                                  <span class="time">40 mins.</span>
+                                </span>
+                                <span class="message">Hi, I need your help with this.</span>
                             </a>
                         </li>
                         <li>
-                            <a href="index.html#">
+                            <a href="index_admin.html#">
                                 <span class="photo"><img alt="avatar" src="/assets/img/ui-danro.jpg"></span>
                                 <span class="subject">
-                    <span class="from">Dan Rogers</span>
-                    <span class="time">2 hrs.</span>
-                  </span>
-                                <span class="message">
-                    Love your new Dashboard.
-                  </span>
+                                    <span class="from">Dan Rogers</span>
+                                    <span class="time">2 hrs.</span>
+                                </span>
+                                <span class="message">Love your new Dashboard.</span>
                             </a>
                         </li>
                         <li>
-                            <a href="index.html#">
+                            <a href="index_admin.html#">
                                 <span class="photo"><img alt="avatar" src="/assets/img/ui-sherman.jpg"></span>
                                 <span class="subject">
-                    <span class="from">Dj Sherman</span>
-                    <span class="time">4 hrs.</span>
-                  </span>
-                                <span class="message">
-                    Please, answer asap.
-                  </span>
+                                    <span class="from">Dj Sherman</span>
+                                    <span class="time">4 hrs.</span>
+                                </span>
+                                <span class="message">Please, answer asap.</span>
                             </a>
                         </li>
                         <li>
-                            <a href="index.html#">See all messages</a>
+                            <a href="index_admin.html#">See all messages</a>
                         </li>
                     </ul>
                 </li>
@@ -221,8 +334,7 @@
             <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
 
-                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="{{ request.session.avatarloc }}"
-                                                                               class="img-circle" width="60"></a></p>
+                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="{{ request.session.avatarloc }}" class="img-circle" width="60"></a></p>
                 <h5 class="centered">{{ request.session.username }}</h5>
 
                 <li class="mt">
@@ -233,19 +345,15 @@
                 </li>
 
                 <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-magnet"></i>
-                        <span>Assigned Bugs</span>
+                    <a href="{% url 'locator:fixed' %}">
+                        <i class="fa fa-check-square-o"></i>
+                        <span>Fixed Bugs</span>
                     </a>
-                    <ul class="sub">
-                        <li><a href="{% url 'locator:fixed_admin' %}"><i class="fa fa-check-square-o"></i>Fixed Bugs</a></li>
-                        <li><a href="{% url 'locator:unfixed_admin' %}"><i class="fa fa-wrench"></i>Unfixed Bugs</a></li>
-                    </ul>
-                </li>
+
                 <li class="sub-menu">
-                    <a href="{% url 'locator:not_assigned' %}">
-                        <i class="fa fa-spinner"></i>
-                        <span>Unassigned Bugs</span>
+                    <a href="{% url 'locator:unfixed' %}">
+                        <i class="fa fa-wrench"></i>
+                        <span>Unfixed Bugs</span>
                     </a>
                 </li>
                 <li class="sub-menu">
@@ -255,12 +363,6 @@
                     </a>
 
                 </li>
-                {#          <li class="sub-menu">#}
-                {#            <a href="{% url 'locator:newreport' %}" >#}
-                {#              <i class="fa fa-tasks"></i>#}
-                {#              <span>提交缺陷报告</span>#}
-                {#            </a>#}
-                {#          </li>#}
                 <li class="sub-menu">
                     <a href="{% url 'locator:lock' %}">
                         <i class="fa fa-lock"></i>
@@ -268,7 +370,6 @@
                     </a>
 
                 </li>
-
 
             </ul>
             <!-- sidebar menu end-->
@@ -282,170 +383,95 @@
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
-            <style>
-                .cbp_tmtimeline{
-                }
-                .cbp_tmtime.span{}
-                .cbp_tmlabel{}
-
-
-                #ul1{
-                    transform: matrix(-1,0,0,1,0,0);
-                    -ms-transform: matrix(-1,0,0,1,0,0); /* IE 9 */
-                    -moz-transform: matrix(-1,0,0,1,0,0); /* Firefox */
-                    -webkit-transform: matrix(-1,0,0,1,0,0); /* Safari and Chrome */
-                    -o-transform: matrix(-1,0,0,1,0,0); /* Opera */
-                }
-                #time{
-                    transform: matrix(-1,0,0,1,0,0);
-                    -ms-transform: matrix(-1,0,0,1,0,0); /* IE 9 */
-                    -moz-transform: matrix(-1,0,0,1,0,0); /* Firefox */
-                    -webkit-transform: matrix(-1,0,0,1,0,0); /* Safari and Chrome */
-                    -o-transform: matrix(-1,0,0,1,0,0); /* Opera */
-
-                }
-
-                #div1{
-                    transform: matrix(-1,0,0,1,0,0);
-                    -ms-transform: matrix(-1,0,0,1,0,0); /* IE 9 */
-                    -moz-transform: matrix(-1,0,0,1,0,0); /* Firefox */
-                    -webkit-transform: matrix(-1,0,0,1,0,0); /* Safari and Chrome */
-                    -o-transform: matrix(-1,0,0,1,0,0); /* Opera */
-                }
-
-            </style>
-
             <div class="row">
-               <div class="col-lg-9 main-chart">
-                    <div class="row mt">
+                <div class="col-lg-9 main-chart" style="padding-top: 0px;">
+                    <h3 style="background:#ff865c; padding: 16px;"><font color="#fff" size="5">My Updates</font></h3>
+                    <div class="content-panel" style="position:relative; height: 542px; overflow:auto">
                         <!-- SERVER STATUS PANELS -->
-                        <div class="col-md-6 col-sm-6 mb">
-                            <div>
-                                <h3 align="left" ><font color="#989898">Recent Fixes</font></h3>
-                            </div>
-                            <div class="content-panel" style="position:relative; height: 500px; overflow:auto">
-                                <div class="main">
-                                        <ul class="cbp_tmtimeline" id="ul1" >
-                                            {% for i in '123456'|make_list %}
-                                            <li>
-                                                <time class="cbp_tmtime" datetime="2013-05-10 18:30">
-                                                    <span id="time">11/10/13</span>
-                                                    <span id="time">18:30</span>
-                                                </time>
-                                                <div class="cbp_tmicon cbp_tmicon-phone"></div>
-                                                <div class="cbp_tmlabel" id="div1">
-                                                    <h4>
-                                                        <a href="javascript:;" style="font-style: italic">
-                                                            Somebody </a>
-                                                        &nbsp fixed defect
-                                                        <a href="javascript:;" style="font-style: italic">
-                                                            BUGID </a>
-                                                    </h4>
-                                                    <p>Summary: blablabla...
-                                                    <Br/>
-                                                        <a href="javascript:;" style="font-style: italic"> See details...</a>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            {% endfor %}
+                        <ul class="timeline">
+                            {% for report in dis_reports %}
+                                {% if report.1 == '1'%}
+                                    <!-- Report -->
+                                    <li>
+                                    {% if forloop.counter0|divisibleby:2 == 0 %}
+                                        <div class="direction-r">
+                                    {% else %}
+                                        <div class="direction-l">
+                                    {% endif %}
+                                    <div class="flag-wrapper">
+                                        <span class="flag" style="background: #99CCCC">Report</span>
+                                        <span class="time-wrapper"><span class="time">{{ report.0 }}</span></span>
+                                    </div>
+                                    <div class="desc">You reported Bug &nbsp;<a href="javascript:;">{{ report.2 }}</a>.
+                                    </br>
+                                        Summary:{{ report.3 }}
+                                        <a href="javascript:;">See details</a>
+                                    </div>
+                                        </div>
+                                    </li>
 
-                                        </ul>
-                                    <div class="timeline_shrink" align="right">
-                                        <a href="javascript:;">
-                                            <font color="#1e90ff">See More...</font>>
-                                        </a>
+                                {% elif report.1 == '2' %}
+                                    <!-- Fix -->
+                                    <li>
+                                        {% if forloop.counter0|divisibleby:2 == 0 %}
+                                            <div class="direction-r">
+                                        {% else %}
+                                            <div class="direction-l">
+                                        {% endif %}
+                                        <div class="flag-wrapper">
+                                            <span class="flag" style="background: #CCFFCC">Fix</span>
+                                            <span class="time-wrapper"><span class="time">{{ report.0 }}</span></span>
+                                        </div>
+                                        <div class="desc">
+                                            You fixed Bug &nbsp; <a href="javascript:;">{{ report.2 }}</a>.
+                                            </br>
+                                            Summary:{{ report.3 }}
+                                            <a href="javascript:;">See details</a>
+                                        </div>
+                                        </div>
+                                    </li>
+
+                                {% elif report.1 == '3' %}
+                                    <!--Assigned-->
+                                    <li>
+                                    {% if forloop.counter0|divisibleby:2 == 0 %}
+                                        <div class="direction-r">
+                                    {% else %}
+                                        <div class="direction-l">
+                                    {% endif %}
+                                    <div class="flag-wrapper">
+                                        <span class="flag" style="background: #FFFFCC">Assigned</span>
+                                        <span class="time-wrapper"><span class="time">{{ report.0 }}</span></span>
+                                    </div>
+                                    <div class="desc">
+                                        Bug &nbsp; <a href="javascript:;">{{ report.2 }}</a> &nbsp;was assigned to you.
+                                    </br>
+                                        Summary:{{ report.3 }}
+                                        <a href="javascript:;">See details</a>
                                     </div>
                                 </div>
+                            </li>
 
-                            </div>
-                        </div><!-- /col-md-6-->
+                                {% endif %}
 
-                        <div class="col-md-6 col-sm-6 mb">
-                            <div>
-                                <h3 align="left"><font color="#989898">Recent Reports</font></h3>
-                            </div>
-                            <div class="content-panel" style="position:relative; height: 500px; overflow:auto">
-                                	<div class="main">
-                                        <ul class="cbp_tmtimeline">
-                                            {% for i in '123456'|make_list %}
-                                            <li>
-                                                <time class="cbp_tmtime1" datetime="2013-04-10 18:30"><span>4/10/13</span><span>18:30</span></time>
-                                                <div class="cbp_tmicon cbp_tmicon-phone"></div>
-                                                <div class="cbp_tmlabel">
-                                                    <h4><a href="javascript:;" style="font-style: italic">
-                                                            Somebody </a>
-                                                        &nbsp reported defect
-                                                        <a href="javascript:;" style="font-style: italic">
-                                                            BUGID </a></h4>
-                                                    <p>Summary: blablabla...
-                                                    <Br/>
-                                                        <a href="javascript:;" style="font-style: italic"> See details...</a>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            {% endfor %}
-                                        </ul>
-                                    <div class="timeline_shrink" align="right">
-                                        <a href="javascript:;">
-                                            <font color="#1e90ff">See More...</font>>
-                                        </a>
-                                    </div>
+                            {% endfor %}
+                        <div align="right" style="padding: 10px;">
+                            <a href="javascript:;">See more...</a>
+                        </div>
 
-                                    </div>
-                            </div>
-                        </div><!-- /col-md-6 -->
+                        </ul>
+                    </div><!-- /panel -->
 
-
-
-                    </div><!-- /row -->
-
-
-
-
-                    <div class="row mt">
+                    <div class="row mt" style="margin-right: 0px">
                         <!--CUSTOM CHART START -->
                         <div class="border-head">
-                            <h3>RECENT CONTRIBUTIONS</h3>
+                            <h3 style="padding: 18px; background: #ff865c;font-weight:500;font-size: 20px;width: 98.8%">
+                                <font color="#fff">Recent Contribution</font></h3>
                         </div>
-                        <div id="highcharts" style="min-width:400px;height:400px"></div>
-                        {#    <div class="custom-bar-chart">#}
-                        {#      <ul class="y-axis">#}
-                        {#        <li><span>10.000</span></li>#}
-                        {#        <li><span>8.000</span></li>#}
-                        {#        <li><span>6.000</span></li>#}
-                        {#        <li><span>4.000</span></li>#}
-                        {#        <li><span>2.000</span></li>#}
-                        {#        <li><span>0</span></li>#}
-                        {#      </ul>#}
-                        {#      <div class="bar">#}
-                        {#        <div class="title" id="7">JAN</div>#}
-                        {#        <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top">85%</div>#}
-                        {#      </div>#}
-                        {#      <div class="bar ">#}
-                        {#        <div class="title" id="6">FEB</div>#}
-                        {#        <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>#}
-                        {#      </div>#}
-                        {#      <div class="bar ">#}
-                        {#        <div class="title" id="5">MAR</div>#}
-                        {#        <div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>#}
-                        {#      </div>#}
-                        {#      <div class="bar ">#}
-                        {#        <div class="title" id="4">APR</div>#}
-                        {#        <div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>#}
-                        {#      </div>#}
-                        {#      <div class="bar">#}
-                        {#        <div class="title" id="3">MAY</div>#}
-                        {#        <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">32%</div>#}
-                        {#      </div>#}
-                        {#      <div class="bar ">#}
-                        {#        <div class="title" id="2">JUN</div>#}
-                        {#        <div class="value tooltips" data-original-title="6.200" data-toggle="tooltip" data-placement="top">62%</div>#}
-                        {#      </div>#}
-                        {#      <div class="bar">#}
-                        {#        <div class="title" id="1">JUL</div>#}
-                        {#        <div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>#}
-                        {#      </div>#}
-                        {#    </div>#}
+
+                        <div id="highcharts"
+                             style="min-width:400px;height:400px;margin-right: 0px;margin-left: 15px"></div>
+
 
                         <!--custom chart end-->
                     </div><!-- /row -->
@@ -453,147 +479,42 @@
                 </div><!-- /col-lg-9 END SECTION MIDDLE -->
 
 
-
                 <!-- **********************************************************************************************************************************************************
                 RIGHT SIDEBAR CONTENT
                 *********************************************************************************************************************************************************** -->
 
-                <div class="col-lg-3 ds">
-                    <!--COMPLETED ACTIONS DONUTS CHART-->
-                    <!-- <h3>NOTIFICATIONS</h3> -->
+                <div class="col-lg-3 ds" style="margin-top: 7px; padding:10px">
 
-                    <!-- First Action -->
-                    <!-- <div class="desc">
-                        <div class="thumb">
-                            <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                        </div>
-                        <div class="details">
-                            <p><muted>2 Minutes Ago</muted><br/>
-                               <a href="#">James Brown</a> subscribed to your newsletter.<br/>
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Second Action -->
-                    <!--     <div class="desc">
-                            <div class="thumb">
-                                <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                            </div>
-                            <div class="details">
-                                <p><muted>3 Hours Ago</muted><br/>
-                                   <a href="#">Diana Kennedy</a> purchased a year subscription.<br/>
-                                </p>
-                            </div>
-                        </div> -->
-                    <!-- Third Action -->
-                    <!--    <div class="desc">
-                           <div class="thumb">
-                               <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                           </div>
-                           <div class="details">
-                               <p><muted>7 Hours Ago</muted><br/>
-                                  <a href="#">Brandon Page</a> purchased a year subscription.<br/>
-                               </p>
-                           </div>
-                       </div> -->
-                    <!-- Fourth Action -->
-                    <!--     <div class="desc">
-                            <div class="thumb">
-                                <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                            </div>
-                            <div class="details">
-                                <p><muted>11 Hours Ago</muted><br/>
-                                   <a href="#">Mark Twain</a> commented your post.<br/>
-                                </p>
-                            </div>
-                        </div> -->
-                    <!-- Fifth Action -->
-                    <!--        <div class="desc">
-                               <div class="thumb">
-                                   <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                               </div>
-                               <div class="details">
-                                   <p><muted>18 Hours Ago</muted><br/>
-                                      <a href="#">Daniel Pratt</a> purchased a wallet in your store.<br/>
-                                   </p>
-                               </div>
-                           </div> -->
 
                     <!-- USERS ONLINE SECTION -->
-                    <h3>TEAM MEMBERS</h3>
+                    <h3>Team Members</h3>
                     <!-- First Member -->
-                    <div class="desc">
-                        <div class="thumb">
-                            <img width="35px" height="35px" align="" class="img-circle" src="/assets/img/ui-divya.jpg" alt="">
-{#                            <img class="img-circle" src="/assets/img/ui-divya.jpg" width="35px" height="35px" align="">#}
-                        </div>
-                        <div class="details">
-                            <p><a class="fancybox" class="img-circle" style="width:35px;height: 35px" href="/assets/img/ui-divya.jpg">DIVYA MANIAN</a><br>
-                                <muted>Available</muted>
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Second Member -->
-                    <div class="desc">
-                        <div class="thumb">
-                            <img class="img-circle" src="/assets/img/ui-sherman.jpg" width="35px" height="35px"
-                                 align="">
-                        </div>
-                        <div class="details">
-                            <p><a href="#">DJ SHERMAN</a><br/>
-                                <muted>I am Busy</muted>
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Third Member -->
-                    <div class="desc">
-                        <div class="thumb">
-                            <img class="img-circle" src="/assets/img/ui-danro.jpg" width="35px" height="35px" align="">
-                        </div>
-                        <div class="details">
-                            <p><a href="#">DAN ROGERS</a><br/>
-                                <muted>Available</muted>
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Fourth Member -->
-                    <div class="desc">
-                        <div class="thumb">
-                            <img class="img-circle" src="/assets/img/ui-zac.jpg" width="35px" height="35px" align="">
-                        </div>
-                        <div class="details">
-                            <p><a href="#">Zac Sniders</a><br/>
-                                <muted>Available</muted>
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Fifth Member -->
-                    <div class="desc">
-                        <div class="thumb">
-                            <img class="img-circle" src="/assets/img/ui-sam.jpg" width="35px" height="35px" align="">
-                        </div>
-                        <div class="details">
-                            <p><a href="#">Marcel Newman</a><br/>
-                                <muted>Available</muted>
-                            </p>
-                        </div>
-                    </div>
 
-                    <!-- CALENDAR-->
-                    <div id="calendar" class="mb">
-                        <div class="panel green-panel no-margin">
-                            <div class="panel-body">
-                                <div id="date-popover" class="popover top"
-                                     style="cursor: pointer; disadding: block; margin-left: 33%; margin-top: -50px; width: 175px;">
-                                    <div class="arrow"></div>
-                                    <h3 class="popover-title" style="disadding: none;"></h3>
-                                    <div id="date-popover-content" class="popover-content"></div>
-                                </div>
-                                <div id="my-calendar"></div>
+                    {% for member in members %}
+                        <div class="desc">
+                            <div class="thumb">
+                                <img width="35px" height="35px" align="" class="img-circle" src="{{ member.avatarloc }}"
+                                     alt="">
+                            </div>
+                            <div class="details">
+                                <p><a style="width:35px;height:35px"
+                                      onclick="showDiv('{{ member.avatarloc }}','{{ member.username }}')"
+                                      href="javascript:void(0)" class="img-circle">{{ member.username }}</a><br>
+                                    <muted>{{ member.email }}</muted>
+                                </p>
                             </div>
                         </div>
+                    {% endfor %}
+
+                    <!-- CALENDAR-->
+
+                    <div id="donut chart" class="mb" style="margin-top: 82px">
+                        <h3 style="margin-bottom: 8px">Contribution Ratio</h3>
+                        <div id="circle" style="min-width:100%;height:400px;float: right;"></div>
                     </div><!-- / calendar -->
 
                 </div><!-- /col-lg-3 -->
+
             </div>
             <! --/row -->
         </section>
@@ -602,9 +523,9 @@
     <!--main content end-->
     <!--footer start-->
     <footer class="site-footer">
-        <div class="text-center">
+        <div class="text-center" align="center">
             2017 - NJU
-            <a href="index.html#" class="go-top">
+            <a href="{% url 'locator:main' %}" class="go-top">
                 <i class="fa fa-angle-up"></i>
             </a>
         </div>
@@ -624,7 +545,10 @@
 <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
 <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
 <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
-<script src="https://img.hcharts.cn/highcharts/themes/sand-signika.js"></script>
+
+<script src="https://img.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+<script src="https://img.hcharts.cn/highcharts/modules/data.js"></script>
+
 
 <script src="/assets/js/fancybox/jquery.fancybox.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
@@ -653,9 +577,9 @@
             // (string | optional) the image to display on the left
             image: '{{ request.session.avatarloc }}',
             // (bool | optional) if you want it to fade out on its own or just sit there
-            sticky: true,
+            sticky: false,
             // (int | optional) the time you want it to be alive for before fading out
-            time: '',
+            time: '1000',
             // (string | optional) the class name you want to apply to that specific message
             class_name: 'my-sticky-class'
         });
@@ -751,57 +675,215 @@
 
 <script type="text/javascript">
 
+    $(function () {
     var chart = new Highcharts.Chart('highcharts', {
+        chart: {
+            type: 'column'
+        },
         title: {
-            text: 'RECENT CONTRIBUTIONS',
-            x: -20
+            text: 'Members Contributions'
         },
         xAxis: {
             categories: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL']
         },
         yAxis: {
+            min: 0,
             title: {
-                text: 'Number'
+                text: 'Fixed Bugs'
             },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
-        },
-        tooltip: {
-            valueSuffix: ''
+            stackLabels: {
+                enabled: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
+            }
         },
         legend: {
-            layout: 'vertical',
             align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '</b><br/>' +
+                    this.series.name + ': ' + this.y + '<br/>' +
+                    'ALL: ' + this.point.stackTotal;
+            }
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                    style: {
+                        textShadow: '0 0 3px black'
+                    }
+                }
+            }
         },
         credits: {
-            enabled:false
+            enabled: false
         },
         exporting: {
-            enabled:false
+            enabled: false
         },
         series: [{
-            name: 'Bugs',
-            data: [7.0, 6.0, 9.0, 14.0, 18.0, 21.0, 3.0]
+            name: 'Roberto',
+            data: [5, 3, 4, 7, 2, 3, 10]
         }, {
-            name: 'Files',
-            data: [10.0, 8.0, 10.0, 15.0, 20.0, 22.0, 5.0]
+            name: 'Wes Isberg',
+            data: [2, 2, 3, 2, 1, 8, 7]
+        }, {
+            name: 'Davi Pires',
+            data: [3, 4, 4, 2, 5, 9, 3]
+        }, {
+            name: 'Andrew Clement',
+            data: [2, 3, 1, 6, 3, 9, 4]
         }]
     });
+});
+
+
 
 </script>
 <script type="text/javascript">
-      $(function() {
-        //    fancybox
-          jQuery(".fancybox").fancybox();
-      });
+    function showDiv(avat, name) {
+        document.getElementById('other').innerHTML = name;
+        $(function () {
+            var chart = new Highcharts.Chart('Histogram', {
+                data: {
+                    table: 'datatable'
+                },
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Contrast'
+                },
+                yAxis: {
+                    allowDecimals: true,
+                    title: {
+                        text: 'Number',
+                        rotation: 0
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                exporting: {
+                    enabled: false
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '<b>' + this.series.name + '</b><br/>' +
+                            this.point.y + 'bugs';
+                    }
+                }
+            });
+        });
 
-  </script>
+        document.getElementById('pop').style.display = 'block';
+        document.getElementById('bg').style.display = 'block';
+        document.getElementById('avatar').src = avat;
+        document.getElementById('name').innerHTML = name;
+    }
+    function closeDiv() {
+        document.getElementById('pop').style.display = 'none';
+        document.getElementById('bg').style.display = 'none';
+    }
+</script>
+<script type="text/javascript">
+    $(function () {
+        var chart = new Highcharts.Chart('circle', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                spacing: [100, 0, 40, 0]
+            },
+            title: {
+                floating: true,
+                text: 'Fixed Bugs'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    },
+                    point: {
+                        events: {
+                            mouseOver: function (e) {  // 鼠标滑过时动态更新标题
+                                // 标题更新函数，API 地址：https://api.hcharts.cn/highcharts#Chart.setTitle
+                                chart.setTitle({
+                                    text: e.target.name + '\t' + e.target.y + ' %'
+                                });
+                            }
+                            //,
+                            // click: function(e) { // 同样的可以在点击事件里处理
+                            //     chart.setTitle({
+                            //         text: e.point.name+ '\t'+ e.point.y + ' %'
+                            //     });
+                            // }
+                        }
+                    },
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
+            },
+            series: [{
+                type: 'pie',
+                innerSize: '80%',
+                name: 'Gravity',
+                data: [
+                    {name: 'Me', y: 21.0, url: 'http://bbs.hcharts.cn'},
+                    ['Roberto', 24.0],
+                    ['Wes Isberg', 17.5],
+                    ['Davi Pires', 28.5],
+                    {
+                        name: 'Andrew Clement',
+                        y: 10.0,
+                        sliced: true,
+                        selected: true,
+                        url: 'http://www.hcharts.cn'
+                    }
+                ]
+            }]
+        }, function (c) {
+            // 环形图圆心
+            var centerY = c.series[0].center[1],
+                titleHeight = parseInt(c.title.styles.fontSize);
+            c.setTitle({
+                y: centerY + titleHeight / 2
+            });
+            chart = c;
+        });
+    });
+</script>
 
+<script type="text/javascript">
+
+</script>
 
 
 </body>
