@@ -32,11 +32,11 @@
     <link href="/assets/css/style.css" rel="stylesheet">
     <link href="/assets/css/style-responsive.css" rel="stylesheet">
 
-    <!-- 这里加了两个link-->
-    <link rel="stylesheet" type="text/css" href="/assets/css/default.css">
+    <!-- 这里是时间轴CSS-->
+     <link rel="stylesheet" type="text/css" href="/assets/css/style_timeline.css">
 
     <!--必要样式-->
-    <link rel="stylesheet" type="text/css" href="/assets/css/component.css">
+
     <script src="/assets/js/chart-master/Chart.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -282,124 +282,88 @@
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
-            <style>
-                .cbp_tmtimeline{
-                }
-                .cbp_tmtime.span{}
-                .cbp_tmlabel{}
-
-
-                #ul1{
-                    transform: matrix(-1,0,0,1,0,0);
-                    -ms-transform: matrix(-1,0,0,1,0,0); /* IE 9 */
-                    -moz-transform: matrix(-1,0,0,1,0,0); /* Firefox */
-                    -webkit-transform: matrix(-1,0,0,1,0,0); /* Safari and Chrome */
-                    -o-transform: matrix(-1,0,0,1,0,0); /* Opera */
-                }
-                #time{
-                    transform: matrix(-1,0,0,1,0,0);
-                    -ms-transform: matrix(-1,0,0,1,0,0); /* IE 9 */
-                    -moz-transform: matrix(-1,0,0,1,0,0); /* Firefox */
-                    -webkit-transform: matrix(-1,0,0,1,0,0); /* Safari and Chrome */
-                    -o-transform: matrix(-1,0,0,1,0,0); /* Opera */
-
-                }
-
-                #div1{
-                    transform: matrix(-1,0,0,1,0,0);
-                    -ms-transform: matrix(-1,0,0,1,0,0); /* IE 9 */
-                    -moz-transform: matrix(-1,0,0,1,0,0); /* Firefox */
-                    -webkit-transform: matrix(-1,0,0,1,0,0); /* Safari and Chrome */
-                    -o-transform: matrix(-1,0,0,1,0,0); /* Opera */
-                }
-
-            </style>
-
             <div class="row">
                <div class="col-lg-9 main-chart">
-                    <div class="row mt">
+                    <h3 style="background:#ff865c; padding: 16px;"><font color="#fff" size="5">My Updates</font></h3>
+                    <div class="content-panel" style="position:relative; height: 542px; overflow:auto">
                         <!-- SERVER STATUS PANELS -->
-                        <div class="col-md-6 col-sm-6 mb">
-                            <div>
-                                <h3 align="left" ><font color="#989898">Recent Fixes</font></h3>
-                            </div>
-                            <div class="content-panel" style="position:relative; height: 500px; overflow:auto">
-                                <div class="main">
-                                        <ul class="cbp_tmtimeline" id="ul1" >
-                                            {% for i in '123456'|make_list %}
-                                            <li>
-                                                <time class="cbp_tmtime" datetime="2013-05-10 18:30">
-                                                    <span id="time">11/10/13</span>
-                                                    <span id="time">18:30</span>
-                                                </time>
-                                                <div class="cbp_tmicon cbp_tmicon-phone"></div>
-                                                <div class="cbp_tmlabel" id="div1">
-                                                    <h4>
-                                                        <a href="javascript:;" style="font-style: italic">
-                                                            Somebody </a>
-                                                        &nbsp fixed defect
-                                                        <a href="javascript:;" style="font-style: italic">
-                                                            BUGID </a>
-                                                    </h4>
-                                                    <p>Summary: blablabla...
-                                                    <Br/>
-                                                        <a href="javascript:;" style="font-style: italic"> See details...</a>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            {% endfor %}
+                        <ul class="timeline">
+                            {% for report in dis_reports %}
+                                {% if report.1 == '1'%}
+                                    <!-- Report -->
+                                    <li>
+                                    {% if forloop.counter0|divisibleby:2 == 0 %}
+                                        <div class="direction-r">
+                                    {% else %}
+                                        <div class="direction-l">
+                                    {% endif %}
+                                    <div class="flag-wrapper">
+                                        <span class="flag" style="background: #99CCCC">Report</span>
+                                        <span class="time-wrapper"><span class="time">{{ report.0 }}</span></span>
+                                    </div>
+                                    <div class="desc">
+                                        <a href="javascript:;">{{ report.4 }} </a> reported Bug &nbsp;
+                                        <a href="javascript:;">{{ report.2 }}</a>.
+                                    </br>
+                                        Summary:{{ report.3 }}
+                                        <a href="javascript:;" style="font-style:italic">See details...</a>
+                                    </div>
+                                        </div>
+                                    </li>
 
-                                        </ul>
-                                    <div class="timeline_shrink" align="right">
-                                        <a href="javascript:;">
-                                            <font color="#1e90ff">See More...</font>>
-                                        </a>
+                                {% elif report.1 == '2' %}
+                                    <!-- Fix -->
+                                    <li>
+                                        {% if forloop.counter0|divisibleby:2 == 0 %}
+                                            <div class="direction-r">
+                                        {% else %}
+                                            <div class="direction-l">
+                                        {% endif %}
+                                        <div class="flag-wrapper">
+                                            <span class="flag" style="background: #CCFFCC">Fix</span>
+                                            <span class="time-wrapper"><span class="time">{{ report.0 }}</span></span>
+                                        </div>
+                                        <div class="desc">
+                                            <a href="javascript:;">{{ report.4 }} </a>  fixed Bug
+                                            &nbsp; <a href="javascript:;">{{ report.2 }}</a>.
+                                            </br>
+                                            Summary:{{ report.3 }}
+                                            <a href="javascript:;" style="font-style:italic">See details...</a>
+                                        </div>
+                                        </div>
+                                    </li>
+
+                                {% elif report.1 == '3' %}
+                                    <!--Assigned-->
+                                    <li>
+                                    {% if forloop.counter0|divisibleby:2 == 0 %}
+                                        <div class="direction-r">
+                                    {% else %}
+                                        <div class="direction-l">
+                                    {% endif %}
+                                    <div class="flag-wrapper">
+                                        <span class="flag" style="background: #FFFFCC">Assigned</span>
+                                        <span class="time-wrapper"><span class="time">{{ report.0 }}</span></span>
+                                    </div>
+                                    <div class="desc">
+                                        Bug &nbsp; <a href="javascript:;">{{ report.2 }}</a> &nbsp;was assigned to
+                                        <a href="javascript:;">{{ report.4 }} </a> .
+                                    </br>
+                                        Summary:{{ report.3 }}
+                                        <a href="javascript:;" style="font-style:italic">See details...</a>
                                     </div>
                                 </div>
+                            </li>
 
-                            </div>
-                        </div><!-- /col-md-6-->
+                                {% endif %}
 
-                        <div class="col-md-6 col-sm-6 mb">
-                            <div>
-                                <h3 align="left"><font color="#989898">Recent Reports</font></h3>
-                            </div>
-                            <div class="content-panel" style="position:relative; height: 500px; overflow:auto">
-                                	<div class="main">
-                                        <ul class="cbp_tmtimeline">
-                                            {% for i in '123456'|make_list %}
-                                            <li>
-                                                <time class="cbp_tmtime1" datetime="2013-04-10 18:30"><span>4/10/13</span><span>18:30</span></time>
-                                                <div class="cbp_tmicon cbp_tmicon-phone"></div>
-                                                <div class="cbp_tmlabel">
-                                                    <h4><a href="javascript:;" style="font-style: italic">
-                                                            Somebody </a>
-                                                        &nbsp reported defect
-                                                        <a href="javascript:;" style="font-style: italic">
-                                                            BUGID </a></h4>
-                                                    <p>Summary: blablabla...
-                                                    <Br/>
-                                                        <a href="javascript:;" style="font-style: italic"> See details...</a>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            {% endfor %}
-                                        </ul>
-                                    <div class="timeline_shrink" align="right">
-                                        <a href="javascript:;">
-                                            <font color="#1e90ff">See More...</font>>
-                                        </a>
-                                    </div>
+                            {% endfor %}
+                        <div align="right" style="padding: 10px;">
+                            <a href="javascript:;">See more...</a>
+                        </div>
 
-                                    </div>
-                            </div>
-                        </div><!-- /col-md-6 -->
-
-
-
-                    </div><!-- /row -->
-
-
+                        </ul>
+                    </div><!-- /panel -->
 
 
                     <div class="row mt">
