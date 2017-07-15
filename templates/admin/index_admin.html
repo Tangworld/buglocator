@@ -346,14 +346,10 @@
                 </li>
 
                 <li class="sub-menu">
-                    <a href="javascript:;">
+                    <a href="{% url 'locator:fixed_admin' %}">
                         <i class="fa fa-magnet"></i>
                         <span>Assigned Bugs</span>
                     </a>
-                    <ul class="sub">
-                        <li><a href="{% url 'locator:fixed_admin' %}"><i class="fa fa-check-square-o"></i>Fixed Bugs</a></li>
-                        <li><a href="{% url 'locator:unfixed_admin' %}"><i class="fa fa-wrench"></i>Unfixed Bugs</a></li>
-                    </ul>
                 </li>
                 <li class="sub-menu">
                     <a href="{% url 'locator:not_assigned' %}">
