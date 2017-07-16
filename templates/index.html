@@ -131,38 +131,38 @@
         <tbody>
         <tr>
             <th>JAN</th>
-            <td>3</td>
-            <td>4</td>
+            <td>{{ currentuser.b1 }}</td>
+            <td id="other1">4</td>
         </tr>
         <tr>
             <th>FEB</th>
-            <td>2</td>
-            <td>8</td>
+            <td>{{ currentuser.b2 }}</td>
+            <td id="other2">8</td>
         </tr>
         <tr>
             <th>MAR</th>
-            <td>5</td>
-            <td>1</td>
+            <td>{{ currentuser.b3 }}</td>
+            <td id="other3">1</td>
         </tr>
         <tr>
             <th>APR</th>
-            <td>3</td>
-            <td>2</td>
+            <td>{{ currentuser.b4 }}</td>
+            <td id="other4">2</td>
         </tr>
         <tr>
             <th>MAY</th>
-            <td>2</td>
-            <td>4</td>
+            <td>{{ currentuser.b5 }}</td>
+            <td id="other5">4</td>
         </tr>
         <tr>
             <th>JUN</th>
-            <td>4</td>
-            <td>8</td>
+            <td>{{ currentuser.b6 }}</td>
+            <td id="other6">8</td>
         </tr>
         <tr>
             <th>JUL</th>
-            <td>1</td>
-            <td>2</td>
+            <td>{{ currentuser.b7 }}</td>
+            <td id="other7">2</td>
         </tr>
         </tbody>
     </table>
@@ -493,12 +493,12 @@
                     {% for member in members %}
                         <div class="desc">
                             <div class="thumb">
-                                <img width="35px" height="35px" align="" class="img-circle" src="{{ member.avatarloc }}"
+                                <img width="35px" height="35px" align="" class="img-circle" src="{{ member.avatar }}"
                                      alt="">
                             </div>
                             <div class="details">
                                 <p><a style="width:35px;height:35px"
-                                      onclick="showDiv('{{ member.avatarloc }}','{{ member.username }}')"
+                                      onclick="showDiv('{{ member.b1 }}','{{ member.b2 }}','{{ member.b3 }}','{{ member.b4 }}','{{ member.b5 }}','{{ member.b6 }}','{{ member.b7 }}','{{ member.username }}')"
                                       href="javascript:void(0)" class="img-circle">{{ member.username }}</a><br>
                                     <muted>{{ member.email }}</muted>
                                 </p>
@@ -737,7 +737,15 @@
 
 </script>
 <script type="text/javascript">
-    function showDiv(avat, name) {
+    function showDiv(b1,b2,b3,b4,b5,b6,b7,name) {
+        document.getElementById('other1').innerHTML = b1;
+        document.getElementById('other2').innerHTML = b2;
+        document.getElementById('other3').innerHTML = b3;
+        document.getElementById('other4').innerHTML = b4;
+        document.getElementById('other5').innerHTML = b5;
+        document.getElementById('other6').innerHTML = b6;
+        document.getElementById('other7').innerHTML = b7;
+
         document.getElementById('other').innerHTML = name;
         $(function () {
             var chart = new Highcharts.Chart('Histogram', {
@@ -774,8 +782,6 @@
 
         document.getElementById('pop').style.display = 'block';
         document.getElementById('bg').style.display = 'block';
-        document.getElementById('avatar').src = avat;
-        document.getElementById('name').innerHTML = name;
     }
     function closeDiv() {
         document.getElementById('pop').style.display = 'none';

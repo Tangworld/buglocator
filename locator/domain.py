@@ -130,3 +130,5 @@ class CurrentUser:
         self.f5 = f5
         self.f6 = f6
         self.f7 = f7
+
+
