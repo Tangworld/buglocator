@@ -4,7 +4,7 @@ from django.shortcuts import HttpResponseRedirect
 from locator import models
 import time
 import types
-from currentUser import CurrentUser
+from domain import CurrentUser
 
 # Create your views here.
 
@@ -241,6 +241,9 @@ def main(request):
     else:
         members = []
         dis_reports = []
+        currentuser = CurrentUser()
+        others = 0
+        current = 0
         try:
             productobj = models.ProUser.objects.get(user_id=request.session['userid'])
             productId = int(productobj.product_id)
@@ -270,11 +273,32 @@ def main(request):
                 else:
                     break
             for userid in userids:
-                member = models.User.objects.get(id=userid.user_id)
+                one = models.User.objects.get(id=userid.user_id)
+                graph = models.Record.objects.get(userid=userid.user_id)
+                member = {'id': one.id, 'username': one.username, 'email': one.email, 'mybugs': one.mybugs,
+                          'isadmin': one.isadmin, 'avatar': one.avatarloc,
+                          'b1': graph.b1, 'b2': graph.b2, 'b3': graph.b3, 'b4': graph.b4, 'b5': graph.b5,
+                          'b6': graph.b6, 'b7': graph.b7,
+                          'f1': graph.f1, 'f2': graph.f2, 'f3': graph.f3, 'f4': graph.f4, 'f5': graph.f5,
+                          'f6': graph.f6, 'f7': graph.f7}
+                if int(userid.user_id) == int(request.session['userid']):
+                    currentuser.setB(b1=graph.b1, b2=graph.b2, b3=graph.b3, b4=graph.b4, b5=graph.b5, b6=graph.b6,
+                                     b7=graph.b7)
+                    currentuser.setF(f1=graph.f1, f2=graph.f2, f3=graph.f3, f4=graph.f4, f5=graph.f5, f6=graph.f6,
+                                     f7=graph.f7)
+                    current += (
+                    int(graph.b1) + int(graph.b2) + int(graph.b3) + int(graph.b4) + int(graph.b5) + int(graph.b6) + int(
+                        graph.b7))
+                else:
+                    others += (
+                    int(graph.b1) + int(graph.b2) + int(graph.b3) + int(graph.b4) + int(graph.b5) + int(graph.b6) + int(
+                        graph.b7))
                 members.append(member)
         except Exception, e:
             print e
-        return render(request, 'index.html', {'members': members, 'dis_reports': dis_content})
+        currentuser.setMyall(current)
+        currentuser.setOthersall(others)
+        return render(request, 'index.html', {'members': members, 'dis_reports': dis_content, 'currentuser': currentuser})
 
 
 def edit(request):
