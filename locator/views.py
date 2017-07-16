@@ -149,9 +149,8 @@ def login(request):
                               'f1': graph.f1, 'f2': graph.f2, 'f3': graph.f3, 'f4': graph.f4, 'f5': graph.f5, 'f6': graph.f6, 'f7': graph.f7}
                     if int(userid.user_id) == int(validatepassword.id):
                         currentuser.setB(b1=graph.b1,b2=graph.b2,b3=graph.b3,b4=graph.b4,b5=graph.b5,b6=graph.b6,b7=graph.b7)
-                        print "enter"
+                        currentuser.setF(f1=graph.f1,f2=graph.f2,f3=graph.f3,f4=graph.f4,f5=graph.f5,f6=graph.f6,f7=graph.f7)
                         current += (int(graph.b1) + int(graph.b2) + int(graph.b3) + int(graph.b4) + int(graph.b5) + int(graph.b6) + int(graph.b7))
-                        print current
                     else:
                         others += (int(graph.b1) + int(graph.b2) + int(graph.b3) + int(graph.b4) + int(graph.b5) + int(graph.b6) + int(graph.b7))
                     members.append(member)

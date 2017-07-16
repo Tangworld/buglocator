@@ -6,6 +6,15 @@ class CurrentUser:
     b5 = 0
     b6 = 0
     b7 = 0
+
+    f1 = 0
+    f2 = 0
+    f3 = 0
+    f4 = 0
+    f5 = 0
+    f6 = 0
+    f7 = 0
+
     myall = 0
     othersall = 0
 
@@ -75,3 +84,49 @@ class CurrentUser:
         self.othersall = othersall
     def getOthersall(self):
         return self.othersall
+
+
+    def setF1(self,f1):
+        self.f1 = f1
+    def getF1(self):
+        return self.f1
+
+    def setF2(self,f2):
+        self.f2 = f2
+    def getF2(self):
+        return self.f2
+
+    def setF3(self,f3):
+        self.f3 = f3
+    def getF3(self):
+        return self.f3
+
+    def setF4(self,f4):
+        self.f4 = f4
+    def getF4(self):
+        return self.f4
+
+    def setF5(self,f5):
+        self.f5 = f5
+    def getF5(self):
+        return self.f5
+
+    def setF6(self,f6):
+        self.f6 = f6
+    def getF6(self):
+        return self.f6
+
+    def setF7(self,f7):
+        self.f7 = f7
+    def getF7(self):
+        return self.f7
+
+
+    def setF(self,f1,f2,f3,f4,f5,f6,f7):
+        self.f1 = f1
+        self.f2 = f2
+        self.f3 = f3
+        self.f4 = f4
+        self.f5 = f5
+        self.f6 = f6
+        self.f7 = f7
