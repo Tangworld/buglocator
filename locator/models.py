@@ -69,6 +69,8 @@ class Record(models.Model):
     f11 = models.CharField(max_length=20, null=True, blank=True)
     f12 = models.CharField(max_length=20, null=True, blank=True)
 
+
+    year = models.CharField(max_length=20, null=True, blank=True)
     userid = models.CharField(max_length=20, null=True, blank=True)
 
 
