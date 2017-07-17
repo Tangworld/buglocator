@@ -223,28 +223,27 @@
             <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
 
-                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="{{ request.session.avatarloc }}" class="img-circle" width="60"></a></p>
+                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="{{ request.session.avatarloc }}"
+                                                                               class="img-circle" width="60"></a></p>
                 <h5 class="centered">{{ request.session.username }}</h5>
 
                 <li class="mt">
-                    <a href="{% url 'locator:main' %}">
+                    <a  href="{% url 'locator:main' %}">
                         <i class="fa fa-file-text"></i>
                         <span>Overview</span>
                     </a>
                 </li>
 
                 <li class="sub-menu">
-                    <a href="{% url 'locator:fixed' %}">
-                        <i class="fa fa-check-square-o"></i>
-                        <span>Fixed Bugs</span>
+                    <a href="{% url 'locator:fixed_admin' %}">
+                        <i class="fa fa-magnet"></i>
+                        <span>Assigned Bugs</span>
                     </a>
-
                 </li>
-
                 <li class="sub-menu">
-                    <a href="{% url 'locator:unfixed' %}">
-                        <i class="fa fa-wrench"></i>
-                        <span>Unfixed Bugs</span>
+                    <a href="{% url 'locator:not_assigned' %}">
+                        <i class="fa fa-spinner"></i>
+                        <span>Unassigned Bugs</span>
                     </a>
                 </li>
                 <li class="sub-menu">
@@ -259,9 +258,7 @@
                         <i class="fa fa-lock"></i>
                         <span>Lock</span>
                     </a>
-
                 </li>
-
             </ul>
             <!-- sidebar menu end-->
         </div>
@@ -314,7 +311,7 @@
                                                 <i class="glyphicon glyphicon-map-marker"></i> Boston
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
-                                                Rate: <strong>$250</strong>
+                                                Language: <strong>C#/Java/Python</strong>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
                                                 Age: <strong>24</strong>

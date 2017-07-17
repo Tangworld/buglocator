@@ -4,7 +4,7 @@ from django.shortcuts import HttpResponseRedirect
 from locator import models
 import time
 import types
-
+from domain import CurrentUser
 
 # Create your views here.
 
@@ -63,7 +63,6 @@ def login(request):
         request.session['isadmin'] = validatepassword.isadmin
         request.session['avatarloc'] = validatepassword.avatarloc
 
-        # 暂时让普通用户和管理员使用相同数据作展示
 
 
 
@@ -99,7 +98,11 @@ def login(request):
                         break
 
                 for userid in userids:
-                    member = models.User.objects.get(id=userid.user_id)
+                    one = models.User.objects.get(id=userid.user_id)
+                    graph = models.Record.objects.get(userid=userid.user_id)
+                    member = {'id': one.id, 'username': one.username, 'email': one.email, 'mybugs': one.mybugs, 'isadmin': one.isadmin, 'avatar': one.avatarloc,
+                              'b1': graph.b1, 'b2': graph.b2, 'b3': graph.b3, 'b4': graph.b4, 'b5': graph.b5, 'b6': graph.b6, 'b7': graph.b7,
+                              'f1': graph.f1, 'f2': graph.f2, 'f3': graph.f3, 'f4': graph.f4, 'f5': graph.f5, 'f6': graph.f6, 'f7': graph.f7}
                     members.append(member)
             except Exception, e:
                 print e
@@ -108,6 +111,9 @@ def login(request):
         else:
             members = []
             dis_reports = []
+            currentuser = CurrentUser()
+            others = 0
+            current = 0
             try:
                 productobj = models.ProUser.objects.get(user_id=validatepassword.id)
                 productId = int(productobj.product_id)
@@ -137,13 +143,26 @@ def login(request):
                     else:
                         break
 
+                # 在构建members的同时将最近bugs数据加入进去
+                #TODO 目前暂时默认取1到7月数据，若考虑真实应用场景还要结合当前日期进行修改。
                 for userid in userids:
-                    member = models.User.objects.get(id=userid.user_id)
+                    one = models.User.objects.get(id=userid.user_id)
+                    graph = models.Record.objects.get(userid=userid.user_id)
+                    member = {'id': one.id, 'username': one.username, 'email': one.email, 'mybugs': one.mybugs, 'isadmin': one.isadmin, 'avatar': one.avatarloc,
+                              'b1': graph.b1, 'b2': graph.b2, 'b3': graph.b3, 'b4': graph.b4, 'b5': graph.b5, 'b6': graph.b6, 'b7': graph.b7,
+                              'f1': graph.f1, 'f2': graph.f2, 'f3': graph.f3, 'f4': graph.f4, 'f5': graph.f5, 'f6': graph.f6, 'f7': graph.f7}
+                    if int(userid.user_id) == int(validatepassword.id):
+                        currentuser.setB(b1=graph.b1,b2=graph.b2,b3=graph.b3,b4=graph.b4,b5=graph.b5,b6=graph.b6,b7=graph.b7)
+                        currentuser.setF(f1=graph.f1,f2=graph.f2,f3=graph.f3,f4=graph.f4,f5=graph.f5,f6=graph.f6,f7=graph.f7)
+                        current += (int(graph.b1) + int(graph.b2) + int(graph.b3) + int(graph.b4) + int(graph.b5) + int(graph.b6) + int(graph.b7))
+                    else:
+                        others += (int(graph.b1) + int(graph.b2) + int(graph.b3) + int(graph.b4) + int(graph.b5) + int(graph.b6) + int(graph.b7))
                     members.append(member)
             except Exception, e:
                 print e
-            return render(request, 'index.html',
-                          {'members': members, 'dis_reports': dis_content})
+            currentuser.setMyall(current)
+            currentuser.setOthersall(others)
+            return render(request, 'index.html', {'members': members, 'dis_reports': dis_content, 'currentuser': currentuser})
     else:
         return render(request, 'login.html', {"validate": validate})
 
@@ -217,7 +236,14 @@ def main(request):
                     break
 
             for userid in userids:
-                member = models.User.objects.get(id=userid.user_id)
+                one = models.User.objects.get(id=userid.user_id)
+                graph = models.Record.objects.get(userid=userid.user_id)
+                member = {'id': one.id, 'username': one.username, 'email': one.email, 'mybugs': one.mybugs,
+                          'isadmin': one.isadmin, 'avatar': one.avatarloc,
+                          'b1': graph.b1, 'b2': graph.b2, 'b3': graph.b3, 'b4': graph.b4, 'b5': graph.b5,
+                          'b6': graph.b6, 'b7': graph.b7,
+                          'f1': graph.f1, 'f2': graph.f2, 'f3': graph.f3, 'f4': graph.f4, 'f5': graph.f5,
+                          'f6': graph.f6, 'f7': graph.f7}
                 members.append(member)
         except Exception, e:
             print e
@@ -226,6 +252,9 @@ def main(request):
     else:
         members = []
         dis_reports = []
+        currentuser = CurrentUser()
+        others = 0
+        current = 0
         try:
             productobj = models.ProUser.objects.get(user_id=request.session['userid'])
             productId = int(productobj.product_id)
@@ -255,11 +284,32 @@ def main(request):
                 else:
                     break
             for userid in userids:
-                member = models.User.objects.get(id=userid.user_id)
+                one = models.User.objects.get(id=userid.user_id)
+                graph = models.Record.objects.get(userid=userid.user_id)
+                member = {'id': one.id, 'username': one.username, 'email': one.email, 'mybugs': one.mybugs,
+                          'isadmin': one.isadmin, 'avatar': one.avatarloc,
+                          'b1': graph.b1, 'b2': graph.b2, 'b3': graph.b3, 'b4': graph.b4, 'b5': graph.b5,
+                          'b6': graph.b6, 'b7': graph.b7,
+                          'f1': graph.f1, 'f2': graph.f2, 'f3': graph.f3, 'f4': graph.f4, 'f5': graph.f5,
+                          'f6': graph.f6, 'f7': graph.f7}
+                if int(userid.user_id) == int(request.session['userid']):
+                    currentuser.setB(b1=graph.b1, b2=graph.b2, b3=graph.b3, b4=graph.b4, b5=graph.b5, b6=graph.b6,
+                                     b7=graph.b7)
+                    currentuser.setF(f1=graph.f1, f2=graph.f2, f3=graph.f3, f4=graph.f4, f5=graph.f5, f6=graph.f6,
+                                     f7=graph.f7)
+                    current += (
+                    int(graph.b1) + int(graph.b2) + int(graph.b3) + int(graph.b4) + int(graph.b5) + int(graph.b6) + int(
+                        graph.b7))
+                else:
+                    others += (
+                    int(graph.b1) + int(graph.b2) + int(graph.b3) + int(graph.b4) + int(graph.b5) + int(graph.b6) + int(
+                        graph.b7))
                 members.append(member)
         except Exception, e:
             print e
-        return render(request, 'index.html', {'members': members, 'dis_reports': dis_content})
+        currentuser.setMyall(current)
+        currentuser.setOthersall(others)
+        return render(request, 'index.html', {'members': members, 'dis_reports': dis_content, 'currentuser': currentuser})
 
 
 def edit(request):

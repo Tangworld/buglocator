@@ -124,45 +124,37 @@
         <thead>
         <tr>
             <th></th>
-            <th>Me</th>
             <th id="other"></th>
         </tr>
         </thead>
         <tbody>
         <tr>
             <th>JAN</th>
-            <td>3</td>
-            <td>4</td>
+            <td id="other1">4</td>
         </tr>
         <tr>
             <th>FEB</th>
-            <td>2</td>
-            <td>8</td>
+            <td id="other2">8</td>
         </tr>
         <tr>
             <th>MAR</th>
-            <td>5</td>
-            <td>1</td>
+            <td id="other3">1</td>
         </tr>
         <tr>
             <th>APR</th>
-            <td>3</td>
-            <td>2</td>
+            <td id="other4">2</td>
         </tr>
         <tr>
             <th>MAY</th>
-            <td>2</td>
-            <td>4</td>
+            <td id="other5">4</td>
         </tr>
         <tr>
             <th>JUN</th>
-            <td>4</td>
-            <td>8</td>
+            <td id="other6">8</td>
         </tr>
         <tr>
             <th>JUL</th>
-            <td>1</td>
-            <td>2</td>
+            <td id="other7">2</td>
         </tr>
         </tbody>
     </table>
@@ -334,7 +326,8 @@
             <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
 
-                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="{{ request.session.avatarloc }}" class="img-circle" width="60"></a></p>
+                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="{{ request.session.avatarloc }}"
+                                                                               class="img-circle" width="60"></a></p>
                 <h5 class="centered">{{ request.session.username }}</h5>
 
                 <li class="mt">
@@ -345,15 +338,15 @@
                 </li>
 
                 <li class="sub-menu">
-                    <a href="{% url 'locator:fixed' %}">
-                        <i class="fa fa-check-square-o"></i>
-                        <span>Fixed Bugs</span>
+                    <a href="{% url 'locator:fixed_admin' %}">
+                        <i class="fa fa-magnet"></i>
+                        <span>Assigned Bugs</span>
                     </a>
-
+                </li>
                 <li class="sub-menu">
-                    <a href="{% url 'locator:unfixed' %}">
-                        <i class="fa fa-wrench"></i>
-                        <span>Unfixed Bugs</span>
+                    <a href="{% url 'locator:not_assigned' %}">
+                        <i class="fa fa-spinner"></i>
+                        <span>Unassigned Bugs</span>
                     </a>
                 </li>
                 <li class="sub-menu">
@@ -368,9 +361,7 @@
                         <i class="fa fa-lock"></i>
                         <span>Lock</span>
                     </a>
-
                 </li>
-
             </ul>
             <!-- sidebar menu end-->
         </div>
@@ -497,14 +488,14 @@
                     {% for member in members %}
                         <div class="desc">
                             <div class="thumb">
-                                <img width="35px" height="35px" align="" class="img-circle" src="{{ member.avatarloc }}"
+                                <img width="35px" height="35px" align="" class="img-circle" src="{{ member.avatar }}"
                                      alt="">
                             </div>
                             <div class="details">
-                                <p><a style="width:35px;height:35px"
-                                      onclick="showDiv('{{ member.avatarloc }}','{{ member.username }}')"
+                                <p style="width: 250px"><a style="width:35px;height:35px"
+                                      onclick="showDiv('{{ member.b1 }}','{{ member.b2 }}','{{ member.b3 }}','{{ member.b4 }}','{{ member.b5 }}','{{ member.b6 }}','{{ member.b7 }}','{{ member.username }}')"
                                       href="javascript:void(0)" class="img-circle">{{ member.username }}</a><br>
-                                    <muted>{{ member.email }}</muted>
+                                    <muted>{{ member.email }} <strong>recent fixed {{ member.b7 }} bugs</strong></muted>
                                 </p>
                             </div>
                         </div>
@@ -740,17 +731,17 @@
             enabled: false
         },
         series: [{
-            name: 'Roberto',
-            data: [5, 3, 4, 7, 2, 3, 10]
+            name: '{{ members.0.username }}',
+            data: [{{ members.0.b1 }}, {{ members.0.b2 }},{{ members.0.b3 }},{{ members.0.b4 }},{{ members.0.b5 }},{{ members.0.b6 }}, {{ members.0.b7 }}]
         }, {
-            name: 'Wes Isberg',
-            data: [2, 2, 3, 2, 1, 8, 7]
+            name: '{{ members.1.username }}',
+            data: [{{ members.1.b1 }}, {{ members.1.b2 }},{{ members.1.b3 }},{{ members.1.b4 }},{{ members.1.b5 }},{{ members.1.b6 }}, {{ members.1.b7 }}]
         }, {
-            name: 'Davi Pires',
-            data: [3, 4, 4, 2, 5, 9, 3]
+            name: '{{ members.2.username }}',
+            data: [{{ members.2.b1 }}, {{ members.2.b2 }},{{ members.2.b3 }},{{ members.2.b4 }},{{ members.2.b5 }},{{ members.2.b6 }}, {{ members.2.b7 }}]
         }, {
-            name: 'Andrew Clement',
-            data: [2, 3, 1, 6, 3, 9, 4]
+            name: '{{ members.4.username }}',
+            data: [{{ members.4.b1 }}, {{ members.4.b2 }},{{ members.4.b3 }},{{ members.4.b4 }},{{ members.4.b5 }},{{ members.4.b6 }}, {{ members.4.b7 }}]
         }]
     });
 });
@@ -759,7 +750,15 @@
 
 </script>
 <script type="text/javascript">
-    function showDiv(avat, name) {
+    function showDiv(b1,b2,b3,b4,b5,b6,b7,name) {
+        document.getElementById('other1').innerHTML = b1;
+        document.getElementById('other2').innerHTML = b2;
+        document.getElementById('other3').innerHTML = b3;
+        document.getElementById('other4').innerHTML = b4;
+        document.getElementById('other5').innerHTML = b5;
+        document.getElementById('other6').innerHTML = b6;
+        document.getElementById('other7').innerHTML = b7;
+
         document.getElementById('other').innerHTML = name;
         $(function () {
             var chart = new Highcharts.Chart('Histogram', {
@@ -796,8 +795,6 @@
 
         document.getElementById('pop').style.display = 'block';
         document.getElementById('bg').style.display = 'block';
-        document.getElementById('avatar').src = avat;
-        document.getElementById('name').innerHTML = name;
     }
     function closeDiv() {
         document.getElementById('pop').style.display = 'none';
@@ -860,13 +857,12 @@
                 innerSize: '80%',
                 name: 'Gravity',
                 data: [
-                    {name: 'Me', y: 21.0, url: 'http://bbs.hcharts.cn'},
-                    ['Roberto', 24.0],
-                    ['Wes Isberg', 17.5],
-                    ['Davi Pires', 28.5],
+                    {name: '{{ members.0.username }}', y: {{ members.0.b7 }}, url: 'http://bbs.hcharts.cn'},
+                    ['{{ members.1.username }}', {{ members.1.b7 }}],
+                    ['{{ members.2.username }}', {{ members.2.b7 }}],
                     {
-                        name: 'Andrew Clement',
-                        y: 10.0,
+                        name: '{{ members.4.username }}',
+                        y: {{ members.4.b7 }},
                         sliced: true,
                         selected: true,
                         url: 'http://www.hcharts.cn'

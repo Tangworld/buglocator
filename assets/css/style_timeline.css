@@ -37,7 +37,7 @@ body {
   background: -ms-linear-gradient(top, rgba(80,80,80,0) 0%, rgb(80,80,80) 8%, rgb(80,80,80) 92%, rgba(80,80,80,0) 100%);
   background: linear-gradient(to bottom, rgba(80,80,80,0) 0%, rgb(80,80,80) 8%, rgb(80,80,80) 92%, rgba(80,80,80,0) 100%);
   
-  z-index: 5;
+  /*z-index: 5;*/
 }
 
 .timeline li {
@@ -108,7 +108,7 @@ body {
   background: #fff;
   border-radius: 10px;
   border: 4px solid rgb(255,80,80);
-  z-index: 10;
+  /*z-index: 10;*/
 }
 
 .direction-r .flag:before {
@@ -205,7 +205,7 @@ body {
 
 .flag {
 	background: rgb(255,255,255);
-	z-index: 15;
+	/*z-index: 15;*/
 }
 
 .direction-l .flag:before,
@@ -221,7 +221,7 @@ body {
 	background: #fff;
 	border-radius: 10px;
 	border: 4px solid rgb(255,80,80);
-	z-index: 10;
+	/*z-index: 10;*/
 }
 
 .direction-l .flag:after,
@@ -243,7 +243,7 @@ body {
 	display: block;
 	position: relative;
 	margin: 4px 0 0 0;
-	z-index: 14;
+	/*z-index: 14;*/
 }
 
 .direction-l .time-wrapper {
@@ -263,7 +263,7 @@ body {
 	-moz-box-shadow: 0 0 1px rgba(0,0,0,0.20);
 	box-shadow: 0 0 1px rgba(0,0,0,0.20);
 	
-  z-index: 15;
+  /*z-index: 15;*/
 }
 
 .direction-l .desc,
@@ -272,7 +272,7 @@ body {
 	margin: 1em 1em 0 1em;
 	padding: 1em;
 	
-  z-index: 15;
+  /*z-index: 15;*/
 }
 
 }

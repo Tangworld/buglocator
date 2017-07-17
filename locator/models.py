@@ -41,3 +41,39 @@ class Product(models.Model):
 class ProUser(models.Model):
     product_id = models.CharField(max_length=32)
     user_id = models.CharField(max_length=32)
+
+class Record(models.Model):
+    b1 = models.CharField(max_length=20, null=True, blank=True)
+    b2 = models.CharField(max_length=20, null=True, blank=True)
+    b3 = models.CharField(max_length=20, null=True, blank=True)
+    b4 = models.CharField(max_length=20, null=True, blank=True)
+    b5 = models.CharField(max_length=20, null=True, blank=True)
+    b6 = models.CharField(max_length=20, null=True, blank=True)
+    b7 = models.CharField(max_length=20, null=True, blank=True)
+    b8 = models.CharField(max_length=20, null=True, blank=True)
+    b9 = models.CharField(max_length=20, null=True, blank=True)
+    b10 = models.CharField(max_length=20, null=True, blank=True)
+    b11 = models.CharField(max_length=20, null=True, blank=True)
+    b12 = models.CharField(max_length=20, null=True, blank=True)
+
+    f1 = models.CharField(max_length=20, null=True, blank=True)
+    f2 = models.CharField(max_length=20, null=True, blank=True)
+    f3 = models.CharField(max_length=20, null=True, blank=True)
+    f4 = models.CharField(max_length=20, null=True, blank=True)
+    f5 = models.CharField(max_length=20, null=True, blank=True)
+    f6 = models.CharField(max_length=20, null=True, blank=True)
+    f7 = models.CharField(max_length=20, null=True, blank=True)
+    f8 = models.CharField(max_length=20, null=True, blank=True)
+    f9 = models.CharField(max_length=20, null=True, blank=True)
+    f10 = models.CharField(max_length=20, null=True, blank=True)
+    f11 = models.CharField(max_length=20, null=True, blank=True)
+    f12 = models.CharField(max_length=20, null=True, blank=True)
+
+
+    year = models.CharField(max_length=20, null=True, blank=True)
+    userid = models.CharField(max_length=20, null=True, blank=True)
+
+
+
+
+
