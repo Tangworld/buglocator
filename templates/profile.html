@@ -291,7 +291,7 @@
                                             Modify Password
                                         </a>
                                         <div class="header-information">
-                                            {{ request.session.username }} is a software developer in Microsoft. She works in ASP.NET MVC Team and collaborates with other teams.
+                                            Email: {{ request.session.email }}
                                         </div>
                                     </div>
                                     <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 profile-stats">
@@ -331,39 +331,40 @@
                                                         <div class="col-md-6">
                                                             <div class="profile-contacts">
 
-                                                                <div class="profile-badge orange"><i class="fa fa-phone orange"></i><span>Contacts</span></div>
-                                                                <div class="contact-info">
-                                                                    <p>
-                                                                        Phone	: +1 1 2345 6789 <br>
-                                                                        Cell		: +1 9 876 5432
-                                                                    </p>
-                                                                    <p>
-                                                                        Email		: {{ request.session.email }}
-                                                                        <br>
-                                                                        Skype		: kim.ryder
-                                                                    </p>
-                                                                    <p>
-                                                                        Facebook	: facebook.com/Kim.Ryder
-                                                                        <br>
-                                                                        Twitter	: @KimRyder
-                                                                    </p>
-                                                                </div>
-                                                                <div class="profile-badge azure">
-                                                                    <i class="fa fa-map-marker azure"></i><span>Location</span>
-                                                                </div>
-                                                                <div class="contact-info">
-                                                                    <p>
-                                                                        Address<br>
-                                                                        Department 98<br>
-                                                                        44-46 Morningside Road<br>
-                                                                        Toronto, Canada
-                                                                    </p>
-                                                                    <p>
-                                                                        Office<br>
-                                                                        44-46 Morningside Road<br>
-                                                                        Toronto, Canada
-                                                                    </p>
-                                                                </div>
+                                                                <div id="spider" style="min-width: 400px; max-width: 600px; height: 400px; margin: 0 auto"></div>
+{#                                                                <div class="profile-badge orange"><i class="fa fa-phone orange"></i><span>Contacts</span></div>#}
+{#                                                                <div class="contact-info">#}
+{#                                                                    <p>#}
+{#                                                                        Phone	: +1 1 2345 6789 <br>#}
+{#                                                                        Cell		: +1 9 876 5432#}
+{#                                                                    </p>#}
+{#                                                                    <p>#}
+{#                                                                        Email		: {{ request.session.email }}#}
+{#                                                                        <br>#}
+{#                                                                        Skype		: kim.ryder#}
+{#                                                                    </p>#}
+{#                                                                    <p>#}
+{#                                                                        Facebook	: facebook.com/Kim.Ryder#}
+{#                                                                        <br>#}
+{#                                                                        Twitter	: @KimRyder#}
+{#                                                                    </p>#}
+{#                                                                </div>#}
+{#                                                                <div class="profile-badge azure">#}
+{#                                                                    <i class="fa fa-map-marker azure"></i><span>Location</span>#}
+{#                                                                </div>#}
+{#                                                                <div class="contact-info">#}
+{#                                                                    <p>#}
+{#                                                                        Address<br>#}
+{#                                                                        Department 98<br>#}
+{#                                                                        44-46 Morningside Road<br>#}
+{#                                                                        Toronto, Canada#}
+{#                                                                    </p>#}
+{#                                                                    <p>#}
+{#                                                                        Office<br>#}
+{#                                                                        44-46 Morningside Road<br>#}
+{#                                                                        Toronto, Canada#}
+{#                                                                    </p>#}
+{#                                                                </div>#}
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
@@ -413,7 +414,15 @@
 <!--common script for all pages-->
 <script src="/assets/js/common-scripts.js"></script>
 
+<script src="https://img.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
 
+        <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+
+        <script src="https://img.hcharts.cn/highcharts/highcharts-more.js"></script>
+
+        <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
+
+        <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
 
 
 
@@ -429,6 +438,56 @@
     });
 
 </script>
+<script type="text/javascript">
+    $(function () {
+    var chart = new Highcharts.Chart('spider', {
+        chart: {
+            polar: true,
+            type: 'line'
+        },
+        title: {
+            text: '预算与支出',
+            x: -80
+        },
+        pane: {
+            size: '80%'
+        },
+        xAxis: {
+            categories: ['销售', '市场营销', '发展', '客户支持',
+                         '信息技术', '行政管理'],
+            tickmarkPlacement: 'on',
+            lineWidth: 0
+        },
+        yAxis: {
+            gridLineInterpolation: 'polygon',
+            lineWidth: 0,
+            min: 0
+        },
+        tooltip: {
+            shared: true,
+            pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y:,.0f}</b><br/>'
+        },
+        legend: {
+            align: 'right',
+            verticalAlign: 'top',
+            y: 70,
+            layout: 'vertical'
+        },
+        series: [{
+            name: '预算拨款',
+            data: [43000, 19000, 60000, 35000, 17000, 10000],
+            pointPlacement: 'on'
+        }, {
+            name: '实际支出',
+            data: [50000, 39000, 42000, 31000, 26000, 14000],
+            pointPlacement: 'on'
+        }]
+    });
+});
+
+</script>
 
 </body>
 </html>
+
+
