@@ -247,7 +247,7 @@ def main(request):
                 members.append(member)
         except Exception, e:
             print e
-        print dis_content
+        # print dis_content
         return render(request, 'admin/index_admin.html', {'members': members, 'dis_reports': dis_content})
     else:
         members = []
