@@ -325,33 +325,34 @@
                                             Modify Password
                                         </a>
                                         <div class="header-information">
-                                            Email: {{ request.session.email }}
+                                            Email: {{ request.session.email }}<br>
+                                            <h4><strong>Thinking will not overcome fear but action will.</strong></h4>
                                         </div>
                                     </div>
                                     <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 profile-stats">
                                         <div class="row">
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 stats-col">
                                                 <div class="stats-value pink">28</div>
-                                                <div class="stats-title">BUGS</div>
+{#                                                <div class="stats-title">BUGS</div>#}
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 stats-col">
                                                 <div class="stats-value pink">72</div>
-                                                <div class="stats-title">FILES</div>
+{#                                                <div class="stats-title">FILES</div>#}
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 stats-col">
                                                 <div class="stats-value pink">66%</div>
-                                                <div class="stats-title">ACCURACY RATE</div>
+{#                                                <div class="stats-title">ACCURACY RATE</div>#}
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
-                                                <i class="glyphicon glyphicon-map-marker"></i> Boston
+                                                <strong>BUGS</strong>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
-                                                Language: <strong>C#/Java/Python</strong>
+                                                <strong>FILES</strong>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
-                                                Age: <strong>24</strong>
+                                                <strong>COMPLETION</strong>
                                             </div>
                                         </div>
                                     </div>
@@ -401,9 +402,13 @@
 {#                                                                </div>#}
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <div id="contact-map" class="animated flipInY" ><img src="/assets/img/desktop14.jpg" /> </div>
-                                                        </div>
+                                                        <h3>In the last six months, <br>you have fixed 6 software defects, <br>
+                                                            including the largest number of fixes in January,<br>
+                                                            and the fewest in June.
+{#                                                        <div class="col-md-6">#}
+{#                                                            <div id="contact-map" class="animated flipInY" ><img src="/assets/img/desktop14.jpg" /> </div>#}
+{#                                                        </div>#}
+                                                        </h3>
                                                     </div>
                                                 </div>
                                             </div>
@@ -527,11 +532,11 @@
         },
         series: [{
             name: 'Bugs',
-            data: [2, 3, 5, 8, 0, 10],
+            data: [2, 3, 5, 8, 0, 10, 11],
             pointPlacement: 'on'
         }, {
             name: 'Files',
-            data: [3, 4, 7, 10, 11, 9],
+            data: [3, 4, 7, 10, 11, 9, 15],
             pointPlacement: 'on'
         }]
     });
@@ -539,54 +544,7 @@
 
 </script>
 
-<script type="text/javascript">
-    var chart = new Highcharts.Chart('', {
-    title: {
-        text: '不同城市的月平均气温',
-        x: -20
-    },
-    subtitle: {
-        text: '数据来源: WorldClimate.com',
-        x: -20
-    },
-    xAxis: {
-        categories: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
-    },
-    yAxis: {
-        title: {
-            text: '温度 (°C)'
-        },
-        plotLines: [{
-            value: 0,
-            width: 1,
-            color: '#808080'
-        }]
-    },
-    tooltip: {
-        valueSuffix: '°C'
-    },
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle',
-        borderWidth: 0
-    },
-    series: [{
-        name: '东京',
-        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-    }, {
-        name: '纽约',
-        data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-    }, {
-        name: '柏林',
-        data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-    }, {
-        name: '伦敦',
-        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-    }]
-});
 
-</script>
 
 </body>
 </html>
