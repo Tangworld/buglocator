@@ -385,8 +385,12 @@
         <section class="wrapper">
             <div class="row">
                 <div class="col-lg-9 main-chart" style="padding-top: 0px;">
-                    <h3 style="background:#ff865c; padding: 16px;"><font color="#fff" size="5">My Updates</font></h3>
-                    <div class="content-panel" style="position:relative; height: 542px; overflow:auto">
+                    <!--时间轴区域-->
+                <div style="background: #ffffff; padding:10px; margin:7px; border:none">
+                <h3 style="background:#ff865c; padding: 16px; margin: 0px">
+                    <font color="#fff" size="5">Team Activities</font>
+                </h3>
+                    <div class="content-panel" style="position:relative; height: 520px; overflow:auto">
                         <!-- SERVER STATUS PANELS -->
                         <ul class="timeline">
                             {% for report in dis_reports %}
@@ -402,10 +406,12 @@
                                         <span class="flag" style="background: #99CCCC">Report</span>
                                         <span class="time-wrapper"><span class="time">{{ report.0 }}</span></span>
                                     </div>
-                                    <div class="desc">You reported Bug &nbsp;<a href="javascript:;">{{ report.2 }}</a>.
+                                    <div class="desc">
+                                        <a href="javascript:;">{{ report.4 }} </a> reported Bug &nbsp;
+                                        <a href="javascript:;">{{ report.2 }}</a>.
                                     </br>
                                         Summary:{{ report.3 }}
-                                        <a href="javascript:;">See details</a>
+                                        <a href="javascript:;" style="font-style:italic">See details...</a>
                                     </div>
                                         </div>
                                     </li>
@@ -423,10 +429,11 @@
                                             <span class="time-wrapper"><span class="time">{{ report.0 }}</span></span>
                                         </div>
                                         <div class="desc">
-                                            You fixed Bug &nbsp; <a href="javascript:;">{{ report.2 }}</a>.
+                                            <a href="javascript:;">{{ report.4 }} </a>  fixed Bug
+                                            &nbsp; <a href="javascript:;">{{ report.2 }}</a>.
                                             </br>
                                             Summary:{{ report.3 }}
-                                            <a href="javascript:;">See details</a>
+                                            <a href="javascript:;" style="font-style:italic">See details...</a>
                                         </div>
                                         </div>
                                     </li>
@@ -444,10 +451,11 @@
                                         <span class="time-wrapper"><span class="time">{{ report.0 }}</span></span>
                                     </div>
                                     <div class="desc">
-                                        Bug &nbsp; <a href="javascript:;">{{ report.2 }}</a> &nbsp;was assigned to you.
+                                        Bug &nbsp; <a href="javascript:;">{{ report.2 }}</a> &nbsp;was assigned to
+                                        <a href="javascript:;">{{ report.4 }} </a> .
                                     </br>
                                         Summary:{{ report.3 }}
-                                        <a href="javascript:;">See details</a>
+                                        <a href="javascript:;" style="font-style:italic">See details...</a>
                                     </div>
                                 </div>
                             </li>
@@ -461,35 +469,12 @@
 
                         </ul>
                     </div><!-- /panel -->
-
-                    <div class="row mt" style="margin-right: 0px">
-                        <!--CUSTOM CHART START -->
-                        <div class="border-head">
-                            <h3 style="padding: 18px; background: #ff865c;font-weight:500;font-size: 20px;width: 98.8%">
-                                <font color="#fff">Recent Contribution</font></h3>
-                        </div>
-
-                        <div id="highcharts"
-                             style="min-width:400px;height:400px;margin-right: 0px;margin-left: 15px"></div>
-
-
-                        <!--custom chart end-->
-                    </div><!-- /row -->
-
+                </div>
                 </div><!-- /col-lg-9 END SECTION MIDDLE -->
 
-
-                <!-- **********************************************************************************************************************************************************
-                RIGHT SIDEBAR CONTENT
-                *********************************************************************************************************************************************************** -->
-
                 <div class="col-lg-3 ds" style="margin-top: 7px; padding:10px">
-
-
-                    <!-- USERS ONLINE SECTION -->
-                    <h3>Team Members</h3>
-                    <!-- First Member -->
-
+                <!-- 项目组成员-->
+                    <h3><font size="5">Team Members</font></h3>
                     {% for member in members %}
                         <div class="desc">
                             <div class="thumb">
@@ -497,26 +482,38 @@
                                      alt="">
                             </div>
                             <div class="details">
-                                <p style="width: 250px;"><a style="width:35px;height:35px"
+                                <p style="width: 250px"><a style="width:35px;height:35px"
                                       onclick="showDiv('{{ member.b1 }}','{{ member.b2 }}','{{ member.b3 }}','{{ member.b4 }}','{{ member.b5 }}','{{ member.b6 }}','{{ member.b7 }}','{{ member.username }}')"
                                       href="javascript:void(0)" class="img-circle">{{ member.username }}</a><br>
-                                    <muted>{{ member.email }}  <strong>recent fixed {{ member.b7 }} bugs</strong></muted>
+                                    <muted>{{ member.email }} <strong>recent fixed {{ member.b7 }} bugs</strong></muted>
                                 </p>
                             </div>
                         </div>
                     {% endfor %}
-
-                    <!-- CALENDAR-->
-
-                    <div id="donut chart" class="mb" style="margin-top: 82px">
-                        <h3 style="margin-bottom: 8px">Contribution Ratio</h3>
-                        <div id="circle" style="min-width:100%;height:400px;float: right;"></div>
-                    </div><!-- / calendar -->
-
                 </div><!-- /col-lg-3 -->
-
             </div>
-            <! --/row -->
+            <!--/row -->
+        <div class="row" style="margin-left:8px;">
+            <!--图表区域 -->
+            <div class="col-lg-9" style="position:relative;background: #FFFFFF;padding-left:10px; padding-right:10px;width:73.3%">
+                <!--CUSTOM CHART START -->
+                    <h3 style="padding-top: 18px;padding-bottom:18px; background: #ff865c;font-weight:500;">
+                        <font color="#fff" size="5">&nbsp Recent Contribution</font></h3>
+                <div id="highcharts" style="min-width:400px;height:400px;;"></div>
+                        <!--custom chart end-->
+            </div><!-- /col-lg-9 -->
+            <!-- 环图-->
+            <div class="col-lg-3" style="background: #FFFFFF; margin-left:21px; width:25.3%">
+                <div id="donut chart" class="mb" style="border:none" >
+                    <h3 align="center" style="padding: 18px; background: #ff865c;font-weight:500;">
+                        <font color="#fff" size="5"> Contribution Ratio</font>
+                    </h3>
+                    <div id="circle" style="min-width:100%;height:400px;float: right;"></div>
+                </div><!-- / calendar -->
+            </div>
+
+        </div>
+
         </section>
     </section>
 
