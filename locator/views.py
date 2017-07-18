@@ -76,12 +76,14 @@ def login(request):
 
                 reports = models.Report.objects.all()
                 for report in reports:
-                    time_local = time.localtime(float(report.opendate))
-                    dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
                     if report.status == 'fixed':
+                        time_local = time.localtime(float(report.fixdate))
+                        dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
                         tmp = [dt, '2', report.bugid, report.summary, report.assignee]
                         dis_reports.append(tmp)
                     elif report.status == 'unfixed':
+                        time_local = time.localtime(float(report.opendate))
+                        dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
                         tmp = [dt, '3', report.bugid, report.summary, report.assignee]
                         dis_reports.append(tmp)
                 for report in reports:
@@ -127,12 +129,14 @@ def login(request):
                     tmp = [dt, '1', report.bugid, report.summary]
                     dis_reports.append(tmp)
                 for report in reports2:
-                    time_local = time.localtime(float(report.opendate))
-                    dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
                     if report.status == 'fixed':
+                        time_local = time.localtime(float(report.fixdate))
+                        dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
                         tmp = [dt, '2', report.bugid, report.summary]
                         dis_reports.append(tmp)
                     elif report.status == 'unfixed':
+                        time_local = time.localtime(float(report.opendate))
+                        dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
                         tmp = [dt, '3', report.bugid, report.summary]
                         dis_reports.append(tmp)
                 dis_reports.sort(lambda x, y: cmp(x[0], y[0]))
