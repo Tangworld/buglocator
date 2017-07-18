@@ -166,7 +166,7 @@
     TOP BAR CONTENT & NOTIFICATIONS
     *********************************************************************************************************************************************************** -->
     <!--header start-->
-    <header class="header black-bg">
+    <header class="header black-bg" style="background: black;border-bottom: 1px solid gray">
         <div class="sidebar-toggle-box">
             <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
         </div>
@@ -350,9 +350,9 @@
                     </a>
                 </li>
                 <li class="sub-menu">
-                    <a href="{% url 'locator:profile' %}">
-                        <i class="fa fa-user"></i>
-                        <span>User Profile</span>
+                    <a href="{% url 'locator:editprofile_admin' %}">
+                        <i class="fa fa-key"></i>
+                        <span>Modify Password</span>
                     </a>
 
                 </li>
@@ -378,7 +378,7 @@
                 <div class="col-lg-9 main-chart" style="padding-top: 0px;">
                     <!--时间轴区域-->
                 <div style="background: #ffffff; padding:10px; margin:7px; border:none">
-                <h3 style="background:#ff865c; padding: 16px; margin: 0px">
+                <h3 style="background:#5285fb; padding: 16px; margin: 0px">
                     <font color="#fff" size="5">Team Activities</font>
                 </h3>
                     <div class="content-panel" style="position:relative; height: 520px; overflow:auto">
@@ -465,7 +465,7 @@
 
                 <div class="col-lg-3 ds" style="margin-top: 7px; padding:10px">
                 <!-- 项目组成员-->
-                    <h3><font size="5">Team Members</font></h3>
+                    <h3 style="background: #5285fb"><font size="5">Team Members</font></h3>
                     {% for member in members %}
                         <div class="desc">
                             <div class="thumb">
@@ -488,7 +488,7 @@
             <!--图表区域 -->
             <div class="col-lg-9" style="position:relative;background: #FFFFFF;padding-left:10px; padding-right:10px;width:73.3%">
                 <!--CUSTOM CHART START -->
-                    <h3 style="padding-top: 18px;padding-bottom:18px; background: #ff865c;font-weight:500;">
+                    <h3 style="padding-top: 18px;padding-bottom:18px; background: #5285fb;font-weight:500;">
                         <font color="#fff" size="5">&nbsp Recent Contribution</font></h3>
                 <div id="highcharts" style="min-width:400px;height:400px;;"></div>
                         <!--custom chart end-->
@@ -496,7 +496,7 @@
             <!-- 环图-->
             <div class="col-lg-3" style="background: #FFFFFF; margin-left:21px; width:25.3%">
                 <div id="donut chart" class="mb" style="border:none" >
-                    <h3 align="center" style="padding: 18px;background: #ff865c;font-weight:500;">
+                    <h3 align="center" style="padding: 18px;background: #5285fb;font-weight:500;">
                         <font color="#fff" size="5"> Contribution Ratio</font>
                     </h3>
                     <div id="circle" style="min-width:100%;height:400px;float: right;"></div>
