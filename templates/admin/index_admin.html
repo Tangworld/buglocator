@@ -692,7 +692,7 @@
                             mouseOver: function (e) {  // 鼠标滑过时动态更新标题
                                 // 标题更新函数，API 地址：https://api.hcharts.cn/highcharts#Chart.setTitle
                                 chart.setTitle({
-                                    text: e.target.name + '\t' + e.target.y + ' %'
+                                    text: e.target.name + '\t' + e.target.y + ' Bugs'
                                 });
                             }
                             //,
@@ -716,12 +716,12 @@
                 innerSize: '80%',
                 name: 'Gravity',
                 data: [
-                    {name: '{{ members.0.username }}', y: {{ members.0.b7 }}, url: 'http://bbs.hcharts.cn'},
-                    ['{{ members.1.username }}', {{ members.1.b7 }}],
-                    ['{{ members.2.username }}', {{ members.2.b7 }}],
+                    {name: '{{ members.0.username }}', y: {{ members.0.b7 }}+{{ members.0.b6 }}+{{ members.0.b5 }}+{{ members.0.b4 }}+{{ members.0.b3 }}+{{ members.0.b2 }}+{{ members.0.b1 }}, url: 'http://bbs.hcharts.cn'},
+                    ['{{ members.1.username }}', {{ members.1.b7 }}+{{ members.1.b6 }}+{{ members.1.b5 }}+{{ members.1.b4 }}+{{ members.1.b3 }}+{{ members.1.b2 }}+{{ members.1.b1 }}],
+                    ['{{ members.2.username }}', {{ members.2.b7 }}+{{ members.2.b6 }}+{{ members.2.b5 }}+{{ members.2.b4 }}+{{ members.2.b3 }}+{{ members.2.b2 }}+{{ members.2.b1 }}],
                     {
                         name: '{{ members.4.username }}',
-                        y: {{ members.4.b7 }},
+                        y: {{ members.4.b7 }}+{{ members.4.b6 }}+{{ members.4.b5 }}+{{ members.4.b4 }}+{{ members.4.b3 }}+{{ members.4.b2 }}+{{ members.4.b1 }},
                         sliced: true,
                         selected: true,
                         url: 'http://www.hcharts.cn'
