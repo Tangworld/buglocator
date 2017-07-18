@@ -7,7 +7,7 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <meta charset="utf-8">
-    <link rel="icon" href="https://static.jianshukeji.com/highcharts/images/favicon.ico">
+    <link rel="icon" href="/assets/img/logo.jpg">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
@@ -309,7 +309,7 @@
     <section id="main-content">
         <section class="wrapper site-min-height">
 
-            <div style="height: 700px">
+            <div style="height: 100%">
                 <div class="page-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -365,8 +365,10 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="profile-contacts">
-
-                                                                <div id="spider" style="min-width: 400px; max-width: 600px; height: 400px; margin: 0 auto"></div>
+                                                                <h3 style="background:#ff865c; padding: 16px; margin: 0px">
+                                                                    <font color="#fff" size="5">Statistics</font>
+                                                                </h3>
+                                                                <div id="spider" style="min-width: 100%; max-width: 600px; height: 400px; margin: 0 auto"></div>
 {#                                                                <div class="profile-badge orange"><i class="fa fa-phone orange"></i><span>Contacts</span></div>#}
 {#                                                                <div class="contact-info">#}
 {#                                                                    <p>#}
@@ -401,7 +403,7 @@
 {#                                                                    </p>#}
 {#                                                                </div>#}
                                                             </div>
-                                                        </div><br><br>
+                                                        </div><br><br><br><br>
                                                         <h3>In the last seven months, <br><br>you have fixed <strong>{{ infomation.allbugs }}</strong> software defects, <br><br>
                                                             with the maximum fixes in <strong>{{ infomation.maxmonth }}</strong>,<br><br>
                                                             and the fewest fixes in <strong>{{ infomation.minmonth }}</strong>.
@@ -498,7 +500,7 @@
             type: 'area'
         },
         title: {
-            text: 'Statistics',
+            text: '',
             x: -80
         },
         pane: {
