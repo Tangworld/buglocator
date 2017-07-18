@@ -132,3 +132,45 @@ class CurrentUser:
         self.f7 = f7
 
 
+class Infomation:
+
+    allbugs = 0
+    allfiles = 0
+    maxmonth = ''
+    minmonth = ''
+
+    b1 = 0
+    b2 = 0
+    b3 = 0
+    b4 = 0
+    b5 = 0
+    b6 = 0
+    b7 = 0
+
+    f1 = 0
+    f2 = 0
+    f3 = 0
+    f4 = 0
+    f5 = 0
+    f6 = 0
+    f7 = 0
+
+    def setAll(self,allbugs,allfiles,maxmonth,minmonth,b1,b2,b3,b4,b5,b6,b7,f1,f2,f3,f4,f5,f6,f7):
+        self.allbugs = allbugs
+        self.allfiles = allfiles
+        self.maxmonth = maxmonth
+        self.minmonth = minmonth
+        self.b1 = b1
+        self.b2 = b2
+        self.b3 = b3
+        self.b4 = b4
+        self.b5 = b5
+        self.b6 = b6
+        self.b7 = b7
+        self.f1 = f1
+        self.f2 = f2
+        self.f3 = f3
+        self.f4 = f4
+        self.f5 = f5
+        self.f6 = f6
+        self.f7 = f7

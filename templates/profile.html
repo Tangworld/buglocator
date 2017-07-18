@@ -332,11 +332,11 @@
                                     <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 profile-stats">
                                         <div class="row">
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 stats-col">
-                                                <div class="stats-value pink">28</div>
+                                                <div class="stats-value pink">{{ infomation.allbugs }}</div>
 {#                                                <div class="stats-title">BUGS</div>#}
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 stats-col">
-                                                <div class="stats-value pink">72</div>
+                                                <div class="stats-value pink">{{ infomation.allfiles }}</div>
 {#                                                <div class="stats-title">FILES</div>#}
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 stats-col">
@@ -401,10 +401,10 @@
 {#                                                                    </p>#}
 {#                                                                </div>#}
                                                             </div>
-                                                        </div>
-                                                        <h3>In the last six months, <br>you have fixed 6 software defects, <br>
-                                                            including the largest number of fixes in January,<br>
-                                                            and the fewest in June.
+                                                        </div><br><br>
+                                                        <h3>In the last seven months, <br><br>you have fixed <strong>{{ infomation.allbugs }}</strong> software defects, <br><br>
+                                                            including the largest number of fixes in <strong>{{ infomation.maxmonth }}</strong>,<br><br>
+                                                            and the fewest in <strong>{{ infomation.minmonth }}</strong>.
 {#                                                        <div class="col-md-6">#}
 {#                                                            <div id="contact-map" class="animated flipInY" ><img src="/assets/img/desktop14.jpg" /> </div>#}
 {#                                                        </div>#}
@@ -531,12 +531,12 @@
             layout: 'vertical'
         },
         series: [{
-            name: 'Bugs',
-            data: [2, 3, 5, 8, 0, 10, 11],
+            name: 'Files',
+            data: [{{ infomation.f1 }}, {{ infomation.f2 }},{{ infomation.f3 }}, {{ infomation.f4 }}, {{ infomation.f5 }}, {{ infomation.f6 }}, {{ infomation.f7 }}],
             pointPlacement: 'on'
         }, {
-            name: 'Files',
-            data: [3, 4, 7, 10, 11, 9, 15],
+            name: 'Bugs',
+            data: [{{ infomation.b1 }}, {{ infomation.b2 }}, {{ infomation.b3 }}, {{ infomation.b4 }}, {{ infomation.b5 }}, {{ infomation.b6 }}, {{ infomation.b7 }}],
             pointPlacement: 'on'
         }]
     });

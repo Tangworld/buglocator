@@ -5,6 +5,7 @@ from locator import models
 import time
 import types
 from domain import CurrentUser
+from domain import Infomation
 
 # Create your views here.
 
@@ -188,10 +189,75 @@ def profile(request):
     :param request: 
     :return: 个人信息页面
     """
+    currentid = request.session['userid']
+    record = models.Record.objects.get(userid=currentid)
+    maxvalue = 0
+    minvalue = 1000
+    maxmonth = ''
+    minmonth = ''
+    allbugs = 0
+    allfiles =0
+    allbugs = (int(record.b1)+int(record.b2)+int(record.b3)+int(record.b4)+int(record.b5)+int(record.b6)+int(record.b7))
+    allfiles = (int(record.f1)+int(record.f2)+int(record.f3)+int(record.f4)+int(record.f5)+int(record.f6)+int(record.f7))
+    if int(record.b1) > maxvalue:
+        maxvalue = int(record.b1)
+        maxmonth = 'January'
+    if int(record.b1) < minvalue:
+        minvalue = int(record.b1)
+        minmonth = 'January'
+
+    if int(record.b2) > maxvalue:
+        maxvalue = int(record.b2)
+        maxmonth = 'February'
+    if int(record.b2) < minvalue:
+        minvalue = int(record.b2)
+        minmonth = 'February'
+
+    if int(record.b3) > maxvalue:
+        maxvalue = int(record.b3)
+        maxmonth = 'March'
+    if int(record.b3) < minvalue:
+        minvalue = int(record.b3)
+        minmonth = 'March'
+
+    if int(record.b4) > maxvalue:
+        maxvalue = int(record.b4)
+        maxmonth = 'April'
+    if int(record.b4) < minvalue:
+        minvalue = int(record.b4)
+        minmonth = 'April'
+
+    if int(record.b5) > maxvalue:
+        maxvalue = int(record.b5)
+        maxmonth = 'May'
+    if int(record.b5) < minvalue:
+        minvalue = int(record.b5)
+        minmonth = 'May'
+
+    if int(record.b6) > maxvalue:
+        maxvalue = int(record.b6)
+        maxmonth = 'June'
+    if int(record.b6) < minvalue:
+        minvalue = int(record.b6)
+        minmonth = 'June'
+
+    if int(record.b7) > maxvalue:
+        maxvalue = int(record.b7)
+        maxmonth = 'July'
+    if int(record.b7) < minvalue:
+        minvalue = int(record.b7)
+        minmonth = 'July'
+
+    print minvalue
+    print minmonth
+    infomation = Infomation()
+    infomation.setAll(allbugs=allbugs, allfiles=allfiles, maxmonth=maxmonth, minmonth=minmonth, b1=int(record.b1), b2=int(record.b2), b3=int(record.b3), b4=int(record.b4), b5=int(record.b5), b6=int(record.b6), b7=int(record.b7),
+                      f1=int(record.f1), f2=int(record.f2), f3=int(record.f3), f4=int(record.f4), f5=int(record.f5), f6=int(record.f6), f7=int(record.f7))
+
     if request.session['isadmin'] == 'yes':
         return render(request, 'admin/profile_admin.html')
     else:
-        return render(request, 'profile.html')
+        return render(request, 'profile.html', {'infomation': infomation})
 
 
 def main(request):
