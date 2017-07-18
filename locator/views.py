@@ -557,13 +557,13 @@ def fixed(request):
     if current_isadmin == 'yes':
         for report in reports:
             if report.status == 'fixed':
-                tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), report.fixdate)
+                tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.fixdate))))
                 disContent.append(tmpContent)
         return render(request, 'admin/defects_resolved_admin.html', {'contents': disContent})
     else:
         for report in reports:
             if report.assignee == current_name and report.status == 'fixed':
-                tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), report.fixdate)
+                tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.fixdate))))
                 disContent.append(tmpContent)
         return render(request, 'defects_resolved.html', {'contents': disContent})
 

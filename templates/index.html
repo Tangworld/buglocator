@@ -168,7 +168,7 @@
     </table>
 
 </div><!-- /col-md-4 -->
-<div id="bg" style="display:none;background-color: black;width: 100%;position:absolute;height: 1270px;opacity: 0.5;z-index: 1;"></div>
+<div id="bg" style="display:none;background-color: black;width: 100%;position:absolute;height: 100%;opacity: 0.5;z-index: 1;"></div>
 <section id="container">
     <!-- **********************************************************************************************************************************************************
     TOP BAR CONTENT & NOTIFICATIONS
@@ -176,10 +176,10 @@
     <!--header start-->
     <header class="header black-bg">
         <div class="sidebar-toggle-box">
-            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation" style="color: #797979"></div>
         </div>
         <!--logo start-->
-        <a href="{% url 'locator:main' %}" class="logo"><b>BUG LOCATOR</b></a>
+        <a href="{% url 'locator:main' %}" class="logo" style="margin-top: 19px"><b>BUG LOCATOR</b></a>
         <!--logo end-->
 {#        <div class="nav notify-row" id="top_menu">#}
 {#            <!--  notification start -->#}
@@ -754,7 +754,7 @@
                     type: 'column'
                 },
                 title: {
-                    text: 'Contrast'
+                    text: 'Compare'
                 },
                 yAxis: {
                     title: {
@@ -775,9 +775,12 @@
                 }
             });
         });
-
+        var doc = document.documentElement;
+        relHeight = (doc.clientHeight > doc.scrollHeight) ? doc.clientHeight : doc.scrollHeight;
+        document.getElementById('bg').style.height = relHeight+'px';
         document.getElementById('pop').style.display = 'block';
         document.getElementById('bg').style.display = 'block';
+
     }
     function closeDiv() {
         document.getElementById('pop').style.display = 'none';
@@ -816,7 +819,7 @@
                             mouseOver: function (e) {  // 鼠标滑过时动态更新标题
                                 // 标题更新函数，API 地址：https://api.hcharts.cn/highcharts#Chart.setTitle
                                 chart.setTitle({
-                                    text: e.target.name + '\t' + e.target.y + ' %'
+                                    text: e.target.name + '\t' + e.target.y + ' Bugs'
                                 });
                             }
                             //,
