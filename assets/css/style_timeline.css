@@ -99,7 +99,7 @@ body {
 .direction-r .flag:before {
   position: absolute;
   top: 50%;
-  right: -36px;
+  right: -37px;
   content: ' ';
   display: block;
   width: 15px;
@@ -112,7 +112,7 @@ body {
 }
 
 .direction-r .flag:before {
-  left: -38px;
+ left: -38px;
 }
 
 .direction-l .flag:after {
