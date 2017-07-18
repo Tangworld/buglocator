@@ -784,6 +784,9 @@
             });
         });
 
+        var doc = document.documentElement;
+        relHeight = (doc.clientHeight > doc.scrollHeight) ? doc.clientHeight : doc.scrollHeight;
+        document.getElementById('bg').style.height = relHeight+'px';
         document.getElementById('pop').style.display = 'block';
         document.getElementById('bg').style.display = 'block';
     }
