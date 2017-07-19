@@ -6,6 +6,7 @@ import time
 import types
 from domain import CurrentUser
 from domain import Infomation
+import json
 
 # Create your views here.
 
@@ -70,6 +71,8 @@ def login(request):
         if validatepassword.isadmin == 'yes':
             members = []
             dis_reports = []
+            highdata = []
+            circledata = []
             try:
                 productobj = models.ProUser.objects.get(user_id=validatepassword.id)
                 productId = int(productobj.product_id)
@@ -103,6 +106,9 @@ def login(request):
                 for userid in userids:
                     one = models.User.objects.get(id=userid.user_id)
                     graph = models.Record.objects.get(userid=userid.user_id)
+                    highdata.append({'name': one.username, 'data': [int(graph.b1), int(graph.b2), int(graph.b3), int(graph.b4), int(graph.b5), int(graph.b6), int(graph.b7)]})
+                    circledata.append({'name': one.username,
+                                       'y': int(graph.b1) + int(graph.b2) + int(graph.b3) + int(graph.b4) + int(graph.b5) +int(graph.b6) + int(graph.b7)})
                     member = {'id': one.id, 'username': one.username, 'email': one.email, 'mybugs': one.mybugs, 'isadmin': one.isadmin, 'avatar': one.avatarloc,
                               'b1': graph.b1, 'b2': graph.b2, 'b3': graph.b3, 'b4': graph.b4, 'b5': graph.b5, 'b6': graph.b6, 'b7': graph.b7,
                               'f1': graph.f1, 'f2': graph.f2, 'f3': graph.f3, 'f4': graph.f4, 'f5': graph.f5, 'f6': graph.f6, 'f7': graph.f7}
@@ -110,7 +116,7 @@ def login(request):
             except Exception, e:
                 print e
             # print dis_content
-            return render(request, 'admin/index_admin.html', {'members': members, 'dis_reports': dis_content})
+            return render(request, 'admin/index_admin.html', {'members': members, 'dis_reports': dis_content, 'series': json.dumps(highdata), 'data': json.dumps(circledata)})
         else:
             members = []
             dis_reports = []
@@ -277,6 +283,8 @@ def main(request):
     if request.session['isadmin'] == 'yes':
         members = []
         dis_reports = []
+        highdata = []
+        circledata = []
         try:
             productobj = models.ProUser.objects.get(user_id=request.session['userid'])
             productId = int(productobj.product_id)
@@ -308,6 +316,12 @@ def main(request):
             for userid in userids:
                 one = models.User.objects.get(id=userid.user_id)
                 graph = models.Record.objects.get(userid=userid.user_id)
+                highdata.append({'name': one.username,
+                                 'data': [int(graph.b1), int(graph.b2), int(graph.b3), int(graph.b4), int(graph.b5),
+                                          int(graph.b6), int(graph.b7)]})
+                circledata.append({'name': one.username,
+                                    'y': int(graph.b1)+int(graph.b2)+int(graph.b3)+int(graph.b4)+int(graph.b5)+
+                                          int(graph.b6)+int(graph.b7)})
                 member = {'id': one.id, 'username': one.username, 'email': one.email, 'mybugs': one.mybugs,
                           'isadmin': one.isadmin, 'avatar': one.avatarloc,
                           'b1': graph.b1, 'b2': graph.b2, 'b3': graph.b3, 'b4': graph.b4, 'b5': graph.b5,
@@ -318,7 +332,7 @@ def main(request):
         except Exception, e:
             print e
         # print dis_content
-        return render(request, 'admin/index_admin.html', {'members': members, 'dis_reports': dis_content})
+        return render(request, 'admin/index_admin.html', {'members': members, 'dis_reports': dis_content, 'series': json.dumps(highdata), 'data': json.dumps(circledata)})
     else:
         members = []
         dis_reports = []
