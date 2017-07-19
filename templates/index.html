@@ -115,11 +115,11 @@
 </head>
 
 <body>
-<div id="pop" class="col-md-4 mb">
+<div id="pop" class="col-md-4 mb" style="min-height: 0">
     <div style="height: 0px; width: 600px; position: absolute;z-index: 5555">
         <span class="close" onclick="closeDiv()"></span>
     </div>
-    <div id="Histogram" style="min-width: 400px; height: 400px; margin: 0 auto;"></div>
+    <div id="Histogram" style="height: 400px; margin: 0 auto;"></div>
     <table id="datatable" style="display: none">
         <thead>
         <tr>
@@ -504,7 +504,7 @@
                 <h3 style="background:#ff865c; padding: 16px; margin: 0px;margin-top: 10px;height: 60px">
                     <font color="#fff" size="5">&nbsp Recent Contribution</font>
                 </h3>
-                    <div id="highcharts" style="min-width:400px;height:400px;"></div>
+                    <div id="highcharts" style="height:400px;"></div>
 
                         <!--custom chart end-->
             </div><!-- /col-lg-9 -->
@@ -522,14 +522,14 @@
 
     <!--main content end-->
     <!--footer start-->
-    <footer class="site-footer">
-        <div class="text-center" align="center">
-            2017 - NJU
-            <a href="{% url 'locator:main' %}" class="go-top">
-                <i class="fa fa-angle-up"></i>
-            </a>
-        </div>
-    </footer>
+{#    <footer class="site-footer">#}
+{#        <div class="text-center" align="center">#}
+{#            2017 - NJU#}
+{#            <a href="{% url 'locator:main' %}" class="go-top">#}
+{#                <i class="fa fa-angle-up"></i>#}
+{#            </a>#}
+{#        </div>#}
+{#    </footer>#}
     <!--footer end-->
 </section>
 
@@ -682,7 +682,7 @@
                 type: 'area'
             },
             title: {
-                text: 'RECENT CONTRIBUTIONS'
+                text: ''
             },
             subtitle: {
                 text: ''

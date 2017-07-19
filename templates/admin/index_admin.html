@@ -113,13 +113,12 @@
         }
     </style>
 </head>
-
 <body>
 <div id="pop" class="col-md-4 mb">
     <div style="height: 0px; width: 600px; position: absolute;z-index: 5555">
         <span class="close" onclick="closeDiv()"></span>
     </div>
-    <div id="Histogram" style="min-width: 400px; height: 400px; margin: 0 auto;"></div>
+    <div id="Histogram" style="height: 400px; margin: 0 auto;"></div>
     <table id="datatable" style="display: none">
         <thead>
         <tr>
@@ -366,7 +365,7 @@
                 <h3 style="background:#5285fb; padding: 16px; margin: 0px;margin-top: 10px;height: 60px">
                     <font color="#fff" size="5">&nbsp Recent Contribution</font>
                 </h3>
-                    <div id="highcharts" style="min-width:400px;height:400px;"></div>
+                    <div id="highcharts" style="height:400px;"></div>
 
                         <!--custom chart end-->
             </div><!-- /col-lg-9 -->
@@ -389,14 +388,14 @@
 
     <!--main content end-->
     <!--footer start-->
-    <footer class="site-footer">
-        <div class="text-center" align="center">
-            2017 - NJU
-            <a href="{% url 'locator:main' %}" class="go-top">
-                <i class="fa fa-angle-up"></i>
-            </a>
-        </div>
-    </footer>
+{#    <footer class="site-footer">#}
+{#        <div class="text-center" align="center">#}
+{#            2017 - NJU#}
+{#            <a href="{% url 'locator:main' %}" class="go-top">#}
+{#                <i class="fa fa-angle-up"></i>#}
+{#            </a>#}
+{#        </div>#}
+{#    </footer>#}
     <!--footer end-->
 </section>
 
@@ -541,14 +540,13 @@
 
 
 <script type="text/javascript">
-
     $(function () {
     var chart = new Highcharts.Chart('highcharts', {
         chart: {
             type: 'column'
         },
         title: {
-            text: 'Members Contributions'
+            text: ''
         },
         xAxis: {
             categories: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL']
@@ -602,19 +600,7 @@
         exporting: {
             enabled: false
         },
-        series: [{
-            name: '{{ members.0.username }}',
-            data: [{{ members.0.b1 }}, {{ members.0.b2 }},{{ members.0.b3 }},{{ members.0.b4 }},{{ members.0.b5 }},{{ members.0.b6 }}, {{ members.0.b7 }}]
-        }, {
-            name: '{{ members.1.username }}',
-            data: [{{ members.1.b1 }}, {{ members.1.b2 }},{{ members.1.b3 }},{{ members.1.b4 }},{{ members.1.b5 }},{{ members.1.b6 }}, {{ members.1.b7 }}]
-        }, {
-            name: '{{ members.2.username }}',
-            data: [{{ members.2.b1 }}, {{ members.2.b2 }},{{ members.2.b3 }},{{ members.2.b4 }},{{ members.2.b5 }},{{ members.2.b6 }}, {{ members.2.b7 }}]
-        }, {
-            name: '{{ members.4.username }}',
-            data: [{{ members.4.b1 }}, {{ members.4.b2 }},{{ members.4.b3 }},{{ members.4.b4 }},{{ members.4.b5 }},{{ members.4.b6 }}, {{ members.4.b7 }}]
-        }]
+        series:{{series|safe}}
     });
 });
 
@@ -729,18 +715,7 @@
                 type: 'pie',
                 innerSize: '80%',
                 name: 'Gravity',
-                data: [
-                    {name: '{{ members.0.username }}', y: {{ members.0.b7 }}+{{ members.0.b6 }}+{{ members.0.b5 }}+{{ members.0.b4 }}+{{ members.0.b3 }}+{{ members.0.b2 }}+{{ members.0.b1 }}, url: 'http://bbs.hcharts.cn'},
-                    ['{{ members.1.username }}', {{ members.1.b7 }}+{{ members.1.b6 }}+{{ members.1.b5 }}+{{ members.1.b4 }}+{{ members.1.b3 }}+{{ members.1.b2 }}+{{ members.1.b1 }}],
-                    ['{{ members.2.username }}', {{ members.2.b7 }}+{{ members.2.b6 }}+{{ members.2.b5 }}+{{ members.2.b4 }}+{{ members.2.b3 }}+{{ members.2.b2 }}+{{ members.2.b1 }}],
-                    {
-                        name: '{{ members.4.username }}',
-                        y: {{ members.4.b7 }}+{{ members.4.b6 }}+{{ members.4.b5 }}+{{ members.4.b4 }}+{{ members.4.b3 }}+{{ members.4.b2 }}+{{ members.4.b1 }},
-                        sliced: true,
-                        selected: true,
-                        url: 'http://www.hcharts.cn'
-                    }
-                ]
+                data: {{ data|safe }}
             }]
         }, function (c) {
             // 环形图圆心
