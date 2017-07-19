@@ -382,7 +382,7 @@
     *********************************************************************************************************************************************************** -->
     <!--main content start-->
     <section id="main-content">
-        <section class="wrapper">
+        <section class="wrapper" style="padding-left:0px; padding-right:20px">
             <div class="row">
                 <div class="col-lg-9 main-chart" style="padding-top: 0px;padding-right:0px;">
                     <!--时间轴区域-->
@@ -472,24 +472,28 @@
                 </div>
                 </div><!-- /col-lg-9 END SECTION MIDDLE -->
 
-                <div class="col-lg-3 ds" style="margin-top: 7px; padding:10px">
+
+                <div class="col-lg-3 ds" style="margin-top: 7px; padding:10px";>
                 <!-- 项目组成员-->
                     <h3><font size="5">Team Members</font></h3>
+                <div class="content-panel" style="position:relative; height: 562px; overflow:auto">
                     {% for member in members %}
-                        <div class="desc">
-                            <div class="thumb">
+                        <div class="desc" style="margin:0">
+                            <div class="thumb" style="vertical-align: middle">
                                 <img width="35px" height="35px" align="" class="img-circle" src="{{ member.avatar }}"
                                      alt="">
                             </div>
-                            <div class="details">
-                                <p style="width: 250px"><a style="width:35px;height:35px"
+                            <div class="details" style="vertical-align: middle">
+                                <p style="width: 240px; margin:0">
+                                    <a style="width:35px;height:35px"
                                       onclick="showDiv('{{ member.b1 }}','{{ member.b2 }}','{{ member.b3 }}','{{ member.b4 }}','{{ member.b5 }}','{{ member.b6 }}','{{ member.b7 }}','{{ member.username }}')"
                                       href="javascript:void(0)" class="img-circle">{{ member.username }}</a><br>
-                                    <muted>{{ member.email }} <strong>recent fixed {{ member.b7 }} bugs</strong></muted>
+                                    <muted>{{ member.email }} <br><strong>Recently fixed {{ member.b7 }} bugs</strong></muted>
                                 </p>
                             </div>
                         </div>
                     {% endfor %}
+                </div>
                 </div><!-- /col-lg-3 -->
             </div>
             <!--/row -->
