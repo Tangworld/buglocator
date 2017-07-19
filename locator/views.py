@@ -577,3 +577,59 @@ def not_assigned(request):
             tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(float(report.opendate))))
             disContent.append(tmpContent)
     return render(request, 'admin/defects_not_assigned_admin.html', {'contents': disContent})
+
+def more_timeline(request):
+    current_isadmin = request.session['isadmin']
+    current_username = request.session['username']
+    dis_reports = []
+
+    if current_isadmin == 'yes':
+        reports = models.Report.objects.all()
+        #print len(reports)
+        for report in reports:
+            if report.status == 'fixed':
+                time_local = time.localtime(float(report.fixdate))
+                dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
+                tmp = [dt, '2', report.bugid, report.summary, report.assignee]
+                dis_reports.append(tmp)
+            elif report.status == 'unfixed':
+                time_local = time.localtime(float(report.opendate))
+                dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
+                tmp = [dt, '3', report.bugid, report.summary, report.assignee]
+                dis_reports.append(tmp)
+        for report in reports:
+            time_local = time.localtime(float(report.opendate))
+            dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
+            tmp = [dt, '1', report.bugid, report.summary, report.reporter]
+            dis_reports.append(tmp)
+
+        dis_reports.sort(lambda x, y: cmp(x[0], y[0]))
+        dis_content = []
+        for i in range(len(dis_reports) - 1, -1, -1):
+            dis_content.append(dis_reports[i])
+        return render(request, 'admin/timeline_admin.html',{'dis_reports': dis_content})
+    else:
+        reports1 = models.Report.objects.filter(reporter=current_username)
+        reports2 = models.Report.objects.filter(assignee=current_username)
+        for report in reports1:
+            time_local = time.localtime(float(report.opendate))
+            dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
+            tmp = [dt, '1', report.bugid, report.summary]
+            dis_reports.append(tmp)
+        for report in reports2:
+            if report.status == 'fixed':
+                time_local = time.localtime(float(report.fixdate))
+                dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
+                tmp = [dt, '2', report.bugid, report.summary]
+                dis_reports.append(tmp)
+            elif report.status == 'unfixed':
+                time_local = time.localtime(float(report.opendate))
+                dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
+                tmp = [dt, '3', report.bugid, report.summary]
+                dis_reports.append(tmp)
+        dis_reports.sort(lambda x, y: cmp(x[0], y[0]))
+        dis_content = []
+        for i in range(len(dis_reports) - 1, -1, -1):
+            dis_content.append(dis_reports[i])
+        return render(request,'timeline.html',{'dis_reports': dis_content})
+

@@ -1,0 +1,668 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <meta charset="utf-8">
+    <link rel="icon" href="/assets/img/logo.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <title>BugLocator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/assets/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+
+    <link rel="stylesheet" type="text/css" href="/assets/js/gritter/css/jquery.gritter.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/lineicons/style.css">
+
+    <link href="/assets/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link href="/assets/js/fancybox/jquery.fancybox.css" rel="stylesheet"/>
+    <!-- Custom styles for this template -->
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/style-responsive.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/style-responsive.css" rel="stylesheet">
+
+    <!-- 这里加了三个link
+    <link rel="stylesheet" type="text/css" href="/assets/css/default.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/zsw.css">
+    <!--必要样式
+    <link rel="stylesheet" type="text/css" href="/assets/css/component.css">-->
+    <!--这里是时间轴CSS-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/style_timeline.css">
+
+    <script src="/assets/js/chart-master/Chart.js"></script>
+
+    <script src="https://img.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+
+    <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+
+    <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
+
+    <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+
+    <style>
+        .close {
+            /* still bad on picking color */
+            background: black;
+            color: white;
+            /* make a round button */
+            border-radius: 20px;
+            /* center text */
+            line-height: 27px;
+            text-align: center;
+            height: 30px;
+            width: 30px;
+            font-size: 18px;
+            padding: 1px;
+        }
+
+        /* use cross as close button */
+        .close::before {
+            content: "\2716";
+        }
+
+        /* place the button on top-right */
+        .close {
+            top: -10px;
+            right: -10px;
+            position: absolute;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            box-sizing: border-box;
+        }
+
+        #pop {
+            display: none;
+            width: 700px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            padding: 50px;
+            z-index: 10;
+            border-radius: 35px;
+        {#            background-color: #797979;#}{#            box-shadow: 0 3px 18px rgba(0, 0, 0, .5);#}
+        }
+
+        input:focus {
+            outline: none
+        }
+    </style>
+</head>
+
+<body>
+
+
+<section id="container">
+    <!-- **********************************************************************************************************************************************************
+    TOP BAR CONTENT & NOTIFICATIONS
+    *********************************************************************************************************************************************************** -->
+    <!--header start-->
+    <header class="header black-bg" style="background: #ffd777;border-bottom: 1px solid gray">
+        <div class="sidebar-toggle-box">
+            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation" style="color: #797979"></div>
+        </div>
+        <!--logo start-->
+        <a href="{% url 'locator:main' %}" class="logo" style="margin-top: 19px"><b>BUG LOCATOR</b></a>
+        <!--logo end-->
+
+        <div class="top-menu">
+            <ul class="nav pull-right top-menu">
+                <li><a class="logout" href="{% url 'locator:logout' %}">Logout</a></li>
+            </ul>
+        </div>
+    </header>
+    <!--header end-->
+
+    <!-- **********************************************************************************************************************************************************
+    MAIN SIDEBAR MENU
+    *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar" class="nav-collapse ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu" id="nav-accordion">
+
+                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="{{ request.session.avatarloc }}" class="img-circle" width="60"></a></p>
+                <h5 class="centered">{{ request.session.username }}</h5>
+
+                <li class="mt">
+                    <a  href="{% url 'locator:main' %}">
+                        <i class="fa fa-desktop icon"></i>
+                        <span>Overview</span>
+                    </a>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="{% url 'locator:fixed' %}">
+                        <i class="fa fa-check-square-o"></i>
+                        <span>Fixed Bugs</span>
+                    </a>
+
+                <li class="sub-menu">
+                    <a href="{% url 'locator:unfixed' %}">
+                        <i class="fa fa-bell"></i>
+                        <span>Open Bugs</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="{% url 'locator:profile' %}">
+                        <i class="fa fa-user"></i>
+                        <span>User Profile</span>
+                    </a>
+
+                </li>
+                <li class="sub-menu">
+                    <a href="{% url 'locator:lock' %}">
+                        <i class="fa fa-lock"></i>
+                        <span>Lock</span>
+                    </a>
+
+                </li>
+
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
+    <!--sidebar end-->
+
+    <!-- **********************************************************************************************************************************************************
+    MAIN CONTENT
+    *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper" style="padding-left:15px; padding-right:15px">
+            <div class="row">
+                    <!--时间轴区域-->
+                <div style="background: #ffffff; padding:10px; margin:7px; border:none">
+                <h3 style="background:#ff865c; padding: 16px; margin: 0px">
+                    <font color="#fff" size="5">Activities</font>
+                </h3>
+                    <div class="content-panel" style="position:relative;height:880px;overflow: auto">
+                        <!-- SERVER STATUS PANELS -->
+                        <ul class="timeline">
+                            {% for report in dis_reports %}
+                                {% if report.1 == '1'%}
+                                    <!-- Report -->
+                                    <li>
+                                    {% if forloop.counter0|divisibleby:2 == 0 %}
+                                        <div class="direction-r">
+                                    {% else %}
+                                        <div class="direction-l">
+                                    {% endif %}
+                                    <div class="flag-wrapper">
+                                        <span class="flag" style="background: #99CCCC">Report</span>
+                                        <span class="time-wrapper"><span class="time">{{ report.0 }}</span></span>
+                                    </div>
+                                    <div class="desc">
+                                        You reported Bug &nbsp;
+                                        <a href="javascript:;">{{ report.2 }}</a>.
+                                    </br>
+                                        Summary:{{ report.3 }}
+                                        <!--  <a href="javascript:;" style="font-style:italic">See details...</a> -->
+                                    </div>
+                                        </div>
+                                    </li>
+
+                                {% elif report.1 == '2' %}
+                                    <!-- Fix -->
+                                    <li>
+                                        {% if forloop.counter0|divisibleby:2 == 0 %}
+                                            <div class="direction-r">
+                                        {% else %}
+                                            <div class="direction-l">
+                                        {% endif %}
+                                        <div class="flag-wrapper">
+                                            <span class="flag" style="background: #CCFFCC">Fix</span>
+                                            <span class="time-wrapper"><span class="time">{{ report.0 }}</span></span>
+                                        </div>
+                                        <div class="desc">
+                                            You fixed Bug
+                                            &nbsp; <a href="javascript:;">{{ report.2 }}</a>.
+                                            </br>
+                                            Summary:{{ report.3 }}
+                                            <!--  <a href="javascript:;" style="font-style:italic">See details...</a> -->
+                                        </div>
+                                        </div>
+                                    </li>
+
+                                {% elif report.1 == '3' %}
+                                    <!--Assigned-->
+                                    <li>
+                                    {% if forloop.counter0|divisibleby:2 == 0 %}
+                                        <div class="direction-r">
+                                    {% else %}
+                                        <div class="direction-l">
+                                    {% endif %}
+                                    <div class="flag-wrapper">
+                                        <span class="flag" style="background: #FFFFCC">Assigned</span>
+                                        <span class="time-wrapper"><span class="time">{{ report.0 }}</span></span>
+                                    </div>
+                                    <div class="desc">
+                                        Bug &nbsp; <a href="javascript:;">{{ report.2 }}</a> &nbsp;was assigned to
+                                        you.
+                                    </br>
+                                        Summary:{{ report.3 }}
+                                        <!--  <a href="javascript:;" style="font-style:italic">See details...</a> -->
+                                    </div>
+                                </div>
+                            </li>
+
+                                {% endif %}
+
+                            {% endfor %}
+                        <div align="right" style="padding: 10px;">
+                            <a href="{% url 'locator:timeline' %}">Go-Top</a>
+                        </div>
+                        </ul>
+
+                    </div><!-- /panel -->
+                </div>
+
+
+            </div>
+            <!--/row -->
+
+        </section>
+    </section>
+
+    <!--main content end-->
+    <!--footer start-->
+<!--
+    <footer class="site-footer">
+        <div class="text-center" align="center">
+            2017 - NJU
+            <a href="{% url 'locator:main' %}" class="go-top">
+                <i class="fa fa-angle-up"></i>
+            </a>
+        </div>
+    </footer>
+    -->
+    <!--footer end-->
+</section>
+
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/jquery-1.8.3.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script class="include" type="text/javascript" src="/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="/assets/js/jquery.scrollTo.min.js"></script>
+<script src="/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="/assets/js/jquery.sparkline.js"></script>
+
+<script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+<script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
+<script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+
+<script src="https://img.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+<script src="https://img.hcharts.cn/highcharts/modules/data.js"></script>
+
+
+<script src="/assets/js/fancybox/jquery.fancybox.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script class="include" type="text/javascript" src="/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="/assets/js/jquery.scrollTo.min.js"></script>
+<script src="/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+
+
+<!--common script for all pages-->
+<script src="/assets/js/common-scripts.js"></script>
+
+<script type="text/javascript" src="/assets/js/gritter/js/jquery.gritter.js"></script>
+<script type="text/javascript" src="/assets/js/gritter-conf.js"></script>
+
+<!--script for this page-->
+<script src="/assets/js/sparkline-chart.js"></script>
+<script src="/assets/js/zabuto_calendar.js"></script>
+<!--
+<script type="text/javascript">
+    $(document).ready(function () {
+        var unique_id = $.gritter.add({
+            // (string | mandatory) the heading of the notification
+            title: 'Welcome to BugLocator!',
+            // (string | mandatory) the text inside the notification
+            text: 'This is a powerful tool and we will try our best to provide you with better bug location services!',
+            // (string | optional) the image to display on the left
+            image: '{{ request.session.avatarloc }}',
+            // (bool | optional) if you want it to fade out on its own or just sit there
+            sticky: false,
+            // (int | optional) the time you want it to be alive for before fading out
+            time: '1200',
+            // (string | optional) the class name you want to apply to that specific message
+            class_name: 'my-sticky-class'
+        });
+
+        return false;
+    });
+</script>
+-->
+<script type="application/javascript">
+    $(document).ready(function () {
+        $("#date-popover").popover({html: true, trigger: "manual"});
+        $("#date-popover").hide();
+        $("#date-popover").click(function (e) {
+            $(this).hide();
+        });
+
+        $("#my-calendar").zabuto_calendar({
+            action: function () {
+                return myDateFunction(this.id, false);
+            },
+            action_nav: function () {
+                return myNavFunction(this.id);
+            },
+            ajax: {
+                url: "show_data.php?action=1",
+                modal: true
+            },
+            legend: [
+                {type: "text", label: "Special event", badge: "00"},
+                {type: "block", label: "Regular event",}
+            ]
+        });
+    });
+
+
+    function myNavFunction(id) {
+        $("#date-popover").hide();
+        var nav = $("#" + id).data("navigation");
+        var to = $("#" + id).data("to");
+        console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+    }
+</script>
+<script>
+    var map = {
+        1: 'JAN',
+        2: 'FEB',
+        3: 'MAR',
+        4: 'APR',
+        5: 'MAY',
+        6: 'JUN',
+        7: 'JUL',
+        8: 'AUG',
+        9: 'SEP',
+        10: 'OCT',
+        11: 'NOV',
+        12: 'DEC'
+    };
+    var date = new Date();
+    var m = date.getMonth();
+    document.getElementById('1').innerHTML = map[m + 1];
+    if (m <= 0) {
+        document.getElementById('2').innerHTML = map[m + 12];
+    } else {
+        document.getElementById('2').innerHTML = map[m];
+    }
+    if ((m - 1) <= 0) {
+        document.getElementById('3').innerHTML = map[m + 11];
+    } else {
+        document.getElementById('3').innerHTML = map[m - 1];
+    }
+    if ((m - 2) <= 0) {
+        document.getElementById('4').innerHTML = map[m + 10];
+    } else {
+        document.getElementById('4').innerHTML = map[m - 2];
+    }
+    if ((m - 3) <= 0) {
+        document.getElementById('5').innerHTML = map[m + 9];
+    } else {
+        document.getElementById('5').innerHTML = map[m - 3];
+    }
+    if ((m - 4) <= 0) {
+        document.getElementById('6').innerHTML = map[m + 8];
+    } else {
+        document.getElementById('6').innerHTML = map[m - 4];
+    }
+    if ((m - 5) <= 0) {
+        document.getElementById('7').innerHTML = map[m + 7];
+    } else {
+        document.getElementById('7').innerHTML = map[m - 5];
+    }
+</script>
+
+
+<script type="text/javascript">
+
+    $(function () {
+    var chart = new Highcharts.Chart('highcharts', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Members Contributions'
+        },
+        xAxis: {
+            categories: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL']
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Fixed Bugs'
+            },
+            stackLabels: {
+                enabled: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
+            }
+        },
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '</b><br/>' +
+                    this.series.name + ': ' + this.y + '<br/>' +
+                    'ALL: ' + this.point.stackTotal;
+            }
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                    style: {
+                        textShadow: '0 0 3px black'
+                    }
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        exporting: {
+            enabled: false
+        },
+        series: [{
+            name: '{{ members.0.username }}',
+            data: [{{ members.0.b1 }}, {{ members.0.b2 }},{{ members.0.b3 }},{{ members.0.b4 }},{{ members.0.b5 }},{{ members.0.b6 }}, {{ members.0.b7 }}]
+        }, {
+            name: '{{ members.1.username }}',
+            data: [{{ members.1.b1 }}, {{ members.1.b2 }},{{ members.1.b3 }},{{ members.1.b4 }},{{ members.1.b5 }},{{ members.1.b6 }}, {{ members.1.b7 }}]
+        }, {
+            name: '{{ members.2.username }}',
+            data: [{{ members.2.b1 }}, {{ members.2.b2 }},{{ members.2.b3 }},{{ members.2.b4 }},{{ members.2.b5 }},{{ members.2.b6 }}, {{ members.2.b7 }}]
+        }, {
+            name: '{{ members.4.username }}',
+            data: [{{ members.4.b1 }}, {{ members.4.b2 }},{{ members.4.b3 }},{{ members.4.b4 }},{{ members.4.b5 }},{{ members.4.b6 }}, {{ members.4.b7 }}]
+        }]
+    });
+});
+
+
+
+</script>
+<script type="text/javascript">
+    function showDiv(b1,b2,b3,b4,b5,b6,b7,name) {
+        document.getElementById('other1').innerHTML = b1;
+        document.getElementById('other2').innerHTML = b2;
+        document.getElementById('other3').innerHTML = b3;
+        document.getElementById('other4').innerHTML = b4;
+        document.getElementById('other5').innerHTML = b5;
+        document.getElementById('other6').innerHTML = b6;
+        document.getElementById('other7').innerHTML = b7;
+
+        document.getElementById('other').innerHTML = name;
+        $(function () {
+            var chart = new Highcharts.Chart('Histogram', {
+                data: {
+                    table: 'datatable'
+                },
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Contrast'
+                },
+                yAxis: {
+                    title: {
+                        text: 'Number',
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                exporting: {
+                    enabled: false
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '<b>' + this.series.name + '</b><br/>' +
+                            this.point.y + 'bugs';
+                    }
+                }
+            });
+        });
+
+        var doc = document.documentElement;
+        relHeight = (doc.clientHeight > doc.scrollHeight) ? doc.clientHeight : doc.scrollHeight;
+        document.getElementById('bg').style.height = relHeight+'px';
+        document.getElementById('pop').style.display = 'block';
+        document.getElementById('bg').style.display = 'block';
+    }
+    function closeDiv() {
+        document.getElementById('pop').style.display = 'none';
+        document.getElementById('bg').style.display = 'none';
+    }
+</script>
+<script type="text/javascript">
+    $(function () {
+        var chart = new Highcharts.Chart('circle', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                spacing: [100, 0, 40, 0]
+            },
+            title: {
+                floating: true,
+                text: 'Fixed Bugs'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    },
+                    point: {
+                        events: {
+                            mouseOver: function (e) {  // 鼠标滑过时动态更新标题
+                                // 标题更新函数，API 地址：https://api.hcharts.cn/highcharts#Chart.setTitle
+                                chart.setTitle({
+                                    text: e.target.name + '\t' + e.target.y + ' Bugs'
+                                });
+                            }
+                            //,
+                            // click: function(e) { // 同样的可以在点击事件里处理
+                            //     chart.setTitle({
+                            //         text: e.point.name+ '\t'+ e.point.y + ' %'
+                            //     });
+                            // }
+                        }
+                    },
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
+            },
+            series: [{
+                type: 'pie',
+                innerSize: '80%',
+                name: 'Gravity',
+                data: [
+                    {name: '{{ members.0.username }}', y: {{ members.0.b7 }}+{{ members.0.b6 }}+{{ members.0.b5 }}+{{ members.0.b4 }}+{{ members.0.b3 }}+{{ members.0.b2 }}+{{ members.0.b1 }}, url: 'http://bbs.hcharts.cn'},
+                    ['{{ members.1.username }}', {{ members.1.b7 }}+{{ members.1.b6 }}+{{ members.1.b5 }}+{{ members.1.b4 }}+{{ members.1.b3 }}+{{ members.1.b2 }}+{{ members.1.b1 }}],
+                    ['{{ members.2.username }}', {{ members.2.b7 }}+{{ members.2.b6 }}+{{ members.2.b5 }}+{{ members.2.b4 }}+{{ members.2.b3 }}+{{ members.2.b2 }}+{{ members.2.b1 }}],
+                    {
+                        name: '{{ members.4.username }}',
+                        y: {{ members.4.b7 }}+{{ members.4.b6 }}+{{ members.4.b5 }}+{{ members.4.b4 }}+{{ members.4.b3 }}+{{ members.4.b2 }}+{{ members.4.b1 }},
+                        sliced: true,
+                        selected: true,
+                        url: 'http://www.hcharts.cn'
+                    }
+                ]
+            }]
+        }, function (c) {
+            // 环形图圆心
+            var centerY = c.series[0].center[1],
+                titleHeight = parseInt(c.title.styles.fontSize);
+            c.setTitle({
+                y: centerY + titleHeight / 2
+            });
+            chart = c;
+        });
+    });
+</script>
+
+<script type="text/javascript">
+
+</script>
+
+
+</body>
+</html>
