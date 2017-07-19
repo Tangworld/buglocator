@@ -387,7 +387,7 @@
                 <div class="col-lg-9 main-chart" style="padding-top: 0px;padding-right:0px;">
                     <!--时间轴区域-->
                 <div style="background: #ffffff; padding:10px; margin:7px; border:none">
-                <h3 style="background:#ff865c; padding: 16px; margin: 0px">
+                <h3 style="background:#ff865c; padding: 16px; margin: 0px;height: 60px">
                     <font color="#fff" size="5">Activities</font>
                 </h3>
                     <div class="content-panel" style="position:relative; height: 563px; overflow:auto">
@@ -497,24 +497,23 @@
                 </div><!-- /col-lg-3 -->
             </div>
             <!--/row -->
-        <div class="row" style="margin-left:8px;">
+        <div class="row" style="margin-left:8px;background: white">
             <!--图表区域 -->
-            <div class="col-lg-9" style="position:relative;background: #FFFFFF;padding-left:10px; padding-right:10px;width:74.3%">
+            <div class="col-lg-9" style="position:relative;background: #FFFFFF;padding-left:10px; padding-right:20px;">
                 <!--CUSTOM CHART START -->
-                    <h3 style="padding-top: 18px;padding-bottom:18px; background: #ff865c;font-weight:500;">
-                        <font color="#fff" size="5">&nbsp Recent Contribution</font></h3>
-                <div id="highcharts" style="min-width:400px;height:400px;;"></div>
+                <h3 style="background:#ff865c; padding: 16px; margin: 0px;margin-top: 10px;height: 60px">
+                    <font color="#fff" size="5">&nbsp Recent Contribution</font>
+                </h3>
+                    <div id="highcharts" style="min-width:400px;height:400px;"></div>
+
                         <!--custom chart end-->
             </div><!-- /col-lg-9 -->
-            <!-- 环图-->
-            <div class="col-lg-3" style="background: #FFFFFF; margin-left:6px; width:25.3%">
-                <div id="donut chart" class="mb" style="border:none" >
-                    <h3 align="center" style="padding: 18px; background: #ff865c;font-weight:500;">
-                        <font color="#fff" size="5"> Contribution Ratio</font>
-                    </h3>
-                    <div id="circle" style="min-width:100%;height:400px;float: right;"></div>
-                </div><!-- / calendar -->
+            <!--饼图-->
+            <div class="col-lg-3 ds" style="padding:10px;padding-left: 0px">
+                <h3 style="height: 60px;"><font size="5">Contribution Ratio</font></h3>
+                    <div id="circle" style="height:400px;margin: 0 auto"></div>
             </div>
+
 
         </div>
 
@@ -780,8 +779,8 @@
             });
         });
         var doc = document.documentElement;
-        relHeight = (doc.clientHeight > doc.scrollHeight) ? doc.clientHeight : doc.scrollHeight;
-        document.getElementById('bg').style.height = relHeight+'px';
+        relHeight = (doc.clientHeight > doc.scrollHeight) ? doc.clientHeight : doc.scrollHeight;//获取屏幕高度和当前页面高度中的较大值
+        document.getElementById('bg').style.height = relHeight+'px';//id为bg的div就是我页面中的遮罩层
         document.getElementById('pop').style.display = 'block';
         document.getElementById('bg').style.display = 'block';
 
@@ -795,6 +794,7 @@
     $(function () {
         var chart = new Highcharts.Chart('circle', {
             chart: {
+                renderTo:'col-lg-3 ds',
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
