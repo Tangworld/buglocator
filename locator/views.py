@@ -26,8 +26,14 @@ def login(request):
     :param request: 
     :return: 
     """
-    # if authority(request) == False:
-    #    return HttpResponseRedirect('/locator/lock')
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
     validate = {}
     v1 = ""
     v2 = ""
@@ -184,8 +190,7 @@ def logout(request):
     :param request: 
     :return: 登录页面
     """
-    del request.session['username']  # 删除session
-    del request.session['password']
+    request.session.clear()  #直接清空session
     return HttpResponseRedirect('/locator/index/')
 
 
@@ -195,6 +200,15 @@ def profile(request):
     :param request: 
     :return: 个人信息页面
     """
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
+
     currentid = request.session['userid']
     record = models.Record.objects.get(userid=currentid)
     maxvalue = 0
@@ -273,12 +287,13 @@ def main(request):
     :param request: 
     :return: 进入主页
     """
-    # if authority(request) == False:
-    #    return HttpResponseRedirect('/locator/lock')
-    # 暂时使用相同数据
-
-
-
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
 
     if request.session['isadmin'] == 'yes':
         members = []
@@ -402,8 +417,14 @@ def edit(request):
     :param request: 
     :return: 
     """
-    # if authority(request) == False:
-    #    return HttpResponseRedirect('/locator/lock')
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
     if request.session['isadmin']=='yes':
         return render(request, 'admin/editprofile_admin.html')
     else:
@@ -416,8 +437,14 @@ def confirm(request):
     :param request: 
     :return: 
     """
-    # if authority(request) == False:
-    #    return HttpResponseRedirect('/locator/lock')
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
     flag = True
     infomation = ""
     username = request.session['username']
@@ -454,13 +481,14 @@ def lock(request):
 def unlock(request):
     """
     解锁页面
+    先判断输入的密码是否正确，若正确进入主页的同时删除session中的lock值，否则返回锁定页面
     :param request: 
     :return: 
     """
-    request.session['lock'] = 'unlock'
     password = request.POST.get('password', None)
     realpassword = request.session['password']
     if password == realpassword:
+        del request.session['lock']
         return HttpResponseRedirect('/locator/main/')
     else:
         return render(request, 'lock_screen.html')
@@ -468,12 +496,11 @@ def unlock(request):
 
 def newreport(request):
     """
-    跳转到提交报告页面
+    跳转到提交报告页面（废弃）
     :param request: 
     :return: 
     """
     # authority(request)
-
     current = request.session['username']
     finalusers = []
     finalproducts = []
@@ -491,7 +518,7 @@ def newreport(request):
 
 def savereport(request):
     """
-    存储新的缺陷报告
+    存储新的缺陷报告（废弃）
     status 参数 ：open代表未分配，unfix代表未修复，fixed代表已修复
     :param request: 
     :return: 
@@ -531,17 +558,18 @@ def savereport(request):
     return HttpResponseRedirect('/locator/main')
 
 
-def authority(request):
-    username = ""
-    lock = request.session['lock']
-    if lock == 'lock':
-        return False
-    else:
-        return True
 
 
 def unfixed(request):
     # 待修复页面
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
     current_name = request.session['username']
     current_isadmin = request.session['isadmin']
     reports = models.Report.objects.all()
@@ -563,6 +591,14 @@ def unfixed(request):
 
 def fixed(request):
     # 已修复页面
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
     current_name = request.session['username']
     current_isadmin = request.session['isadmin']
     reports = models.Report.objects.all()
@@ -583,6 +619,14 @@ def fixed(request):
 
 
 def not_assigned(request):
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
     reports = models.Report.objects.all()
     disContent = []
 
@@ -593,6 +637,15 @@ def not_assigned(request):
     return render(request, 'admin/defects_not_assigned_admin.html', {'contents': disContent})
 
 def more_timeline(request):
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
+
     current_isadmin = request.session['isadmin']
     current_username = request.session['username']
     dis_reports = []
@@ -647,3 +700,22 @@ def more_timeline(request):
             dis_content.append(dis_reports[i])
         return render(request,'timeline.html',{'dis_reports': dis_content})
 
+
+def check_lock(request):
+    '''
+    若session里有lock这个值证明页面已经被锁定，解锁后删除session中相应值，因此若没有lock这个值证明未锁定
+    :param request: 
+    :return: 
+    '''
+    lock = 'lock' in request.session
+    return lock
+
+
+def authority(request):
+    '''
+    判断是否是登录状态
+    :param request: 
+    :return: 
+    '''
+    userflag = 'username' in request.session
+    return userflag
