@@ -132,7 +132,7 @@ class CurrentUser:
         self.f7 = f7
 
 
-class Infomation:
+class Information:
 
     allbugs = 0
     allfiles = 0

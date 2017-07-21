@@ -5,7 +5,7 @@ from locator import models
 import time
 import types
 from domain import CurrentUser
-from domain import Infomation
+from domain import Information
 import json
 from locator import utils
 
@@ -265,14 +265,14 @@ def profile(request):
 
     print minvalue
     print minmonth
-    infomation = Infomation()
-    infomation.setAll(allbugs=allbugs, allfiles=allfiles, maxmonth=maxmonth, minmonth=minmonth, b1=int(record.b1), b2=int(record.b2), b3=int(record.b3), b4=int(record.b4), b5=int(record.b5), b6=int(record.b6), b7=int(record.b7),
+    information = Information()
+    information.setAll(allbugs=allbugs, allfiles=allfiles, maxmonth=maxmonth, minmonth=minmonth, b1=int(record.b1), b2=int(record.b2), b3=int(record.b3), b4=int(record.b4), b5=int(record.b5), b6=int(record.b6), b7=int(record.b7),
                       f1=int(record.f1), f2=int(record.f2), f3=int(record.f3), f4=int(record.f4), f5=int(record.f5), f6=int(record.f6), f7=int(record.f7))
 
     if request.session['isadmin'] == 'yes':
         return render(request, 'admin/profile_admin.html')
     else:
-        return render(request, 'profile.html', {'infomation': infomation})
+        return render(request, 'profile.html', {'infomation': information})
 
 
 def main(request):
