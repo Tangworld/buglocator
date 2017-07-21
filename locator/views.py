@@ -7,8 +7,10 @@ import types
 from domain import CurrentUser
 from domain import Infomation
 import json
+from locator import utils
 
 # Create your views here.
+
 
 
 def index(request):
@@ -28,19 +30,13 @@ def login(request):
     """
     # 权限控制
     lockflag = check_lock(request)
-    userflag = authority(request)
     if lockflag:
         return HttpResponseRedirect('/locator/lock/')
-    if not userflag:
-        return HttpResponseRedirect('/locator/index/')
 
-    validate = {}
     v1 = ""
     v2 = ""
     flag = True
     validatepassword = ""
-    username = ""
-    password = ""
 
     username = request.POST.get('username', None)
     password = request.POST.get('password', None)
@@ -49,7 +45,6 @@ def login(request):
         if validatepassword.password != password:
             v2 = "Incorrect password！"
             flag = False
-        print validatepassword
     except Exception, e:
         print e
         v2 = "Incorrect password！"
@@ -84,7 +79,7 @@ def login(request):
                 productId = int(productobj.product_id)
                 userids = models.ProUser.objects.filter(product_id=productId)
 
-                reports = models.Report.objects.all()
+                reports = utils.get_all_reports()
                 for report in reports:
                     if report.status == 'fixed':
                         time_local = time.localtime(float(report.fixdate))
@@ -305,7 +300,7 @@ def main(request):
             productId = int(productobj.product_id)
             userids = models.ProUser.objects.filter(product_id=productId)
 
-            reports = models.Report.objects.all()
+            reports = utils.get_all_reports()
             for report in reports:
                 time_local = time.localtime(float(report.opendate))
                 dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
@@ -425,7 +420,7 @@ def edit(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    if request.session['isadmin']=='yes':
+    if request.session['isadmin'] == 'yes':
         return render(request, 'admin/editprofile_admin.html')
     else:
         return render(request, 'editprofile.html')
@@ -570,23 +565,24 @@ def unfixed(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    current_name = request.session['username']
     current_isadmin = request.session['isadmin']
-    reports = models.Report.objects.all()
+    current_username = request.session['username']
     disContent = []
 
     if current_isadmin == 'yes':
+        reports = utils.get_reports('unfixed')
         for report in reports:
-            if report.status == 'unfixed':
-                tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), report.assignee)
-                disContent.append(tmpContent)
+            tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), report.assignee)
+            disContent.append(tmpContent)
         return render(request, 'admin/defects_not_resolved_admin.html', {'contents': disContent})
     else:
+        reports = utils.get_reports('unfixed', current_username)
         for report in reports:
-            if report.assignee == current_name and report.status == 'unfixed':
-                tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))))
-                disContent.append(tmpContent)
+            tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))))
+            disContent.append(tmpContent)
         return render(request, 'defects_not_resolved.html', {'contents': disContent})
+
+
 
 
 def fixed(request):
@@ -599,22 +595,21 @@ def fixed(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    current_name = request.session['username']
     current_isadmin = request.session['isadmin']
-    reports = models.Report.objects.all()
+    current_username = request.session['username']
     disContent = []
 
     if current_isadmin == 'yes':
+        reports = utils.get_reports('fixed')
         for report in reports:
-            if report.status == 'fixed':
-                tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.fixdate))))
-                disContent.append(tmpContent)
+            tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.fixdate))))
+            disContent.append(tmpContent)
         return render(request, 'admin/defects_resolved_admin.html', {'contents': disContent})
     else:
+        reports = utils.get_reports('fixed', current_username)
         for report in reports:
-            if report.assignee == current_name and report.status == 'fixed':
-                tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.fixdate))))
-                disContent.append(tmpContent)
+            tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.fixdate))))
+            disContent.append(tmpContent)
         return render(request, 'defects_resolved.html', {'contents': disContent})
 
 
@@ -627,11 +622,11 @@ def not_assigned(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    reports = models.Report.objects.all()
+
     disContent = []
 
+    reports = utils.get_reports('open')
     for report in reports:
-        if report.status == 'open':
             tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(float(report.opendate))))
             disContent.append(tmpContent)
     return render(request, 'admin/defects_not_assigned_admin.html', {'contents': disContent})
@@ -645,13 +640,12 @@ def more_timeline(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-
     current_isadmin = request.session['isadmin']
     current_username = request.session['username']
     dis_reports = []
 
     if current_isadmin == 'yes':
-        reports = models.Report.objects.all()
+        reports = utils.get_all_reports()
         #print len(reports)
         for report in reports:
             if report.status == 'fixed':
@@ -674,7 +668,7 @@ def more_timeline(request):
         dis_content = []
         for i in range(len(dis_reports) - 1, -1, -1):
             dis_content.append(dis_reports[i])
-        return render(request, 'admin/timeline_admin.html',{'dis_reports': dis_content})
+        return render(request, 'admin/timeline_admin.html', {'dis_reports': dis_content})
     else:
         reports1 = models.Report.objects.filter(reporter=current_username)
         reports2 = models.Report.objects.filter(assignee=current_username)
