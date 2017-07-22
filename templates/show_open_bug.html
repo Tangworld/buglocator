@@ -125,7 +125,7 @@
 
                     <div class="span9" style="width: 100%;padding-left: 15px">
 
-                        <h3 style="background:#ff865c; padding: 16px; margin: 0px;margin-top: 10px;height: 60px">
+                        <h3 style="background:#ff865c; padding: 16px; margin: 0px;margin-top: 10px;margin-bottom:20px;height: 60px">
                             <font color="#fff" size="5">BUG 18357</font>
                         </h3>
 
@@ -156,16 +156,14 @@
 
                                             <div class="plan-features">
                                                 <ul>
-                                                    <li style="width: 40%;float: left"><strong>Reporter</strong></li>
-                                                    <li >Eugene Kireyev</li>
-                                                    <li style="width: 40%;float: left"><strong>Assignee</strong></li>
-                                                    <li >Davi Pires</li>
                                                     <li style="width: 40%;float: left"><strong>Product</strong></li>
-                                                    <li>AspectJ</li>
-                                                    <li style="width: 40%;float: left"><strong>OpenDate</strong></li>
-                                                    <li>1166063160</li>
-                                                    <li style="width: 40%;float: left"><strong>Status</strong></li>
-                                                    <li>Open</li>
+                                                    <li >{{ bug.productid }}</li>
+                                                    <li style="width: 40%;float: left"><strong>Component</strong></li>
+                                                    <li >{{ bug.component }}</li>
+                                                    <li style="width: 40%;float: left"><strong>Platform</strong></li>
+                                                    <li>{{ bug.platform }}</li>
+                                                    <li style="width: 40%;float: left"><strong>OS</strong></li>
+                                                    <li>{{ bug.os }}</li>
                                                 </ul>
                                             </div> <!-- /plan-features -->
 
@@ -177,7 +175,7 @@
                                     </div> <!-- /plan-container -->
 
                                     <div class="plan-container">
-                                        <div class="plan orange">
+                                        <div class="plan">
                                             <div class="plan-header">
 
                                                 <div class="plan-title">
@@ -192,16 +190,14 @@
 
                                             <div class="plan-features">
                                                 <ul>
-                                                    <li style="width: 40%;float: left"><strong>Component</strong></li>
-                                                    <li>compiler</li>
-                                                    <li style="width: 40%;float: left"><strong>Version</strong></li>
-                                                    <li>1.5.3RC1</li>
-                                                    <li style="width: 40%;float: left"><strong>Platform</strong></li>
-                                                    <li>PC</li>
-                                                    <li style="width: 40%;float: left"><strong>OS</strong></li>
-                                                    <li>Linux</li>
-                                                    <li style="width: 40%;float: left"><strong>Priority</strong></li>
-                                                    <li>P3</li>
+                                                    <li style="width: 40%;float: left"><strong>OpenDate</strong></li>
+                                                    <li>{{ bug.opendate }}</li>
+                                                    <li style="width: 40%;float: left"><strong>Reporter</strong></li>
+                                                    <li>{{ bug.reporter }}</li>
+                                                    <li style="width: 40%;float: left"><strong>Assignee</strong></li>
+                                                    <li>{{ bug.assignee }}</li>
+                                                    <li style="width: 40%;float: left"><strong></strong> &nbsp;</li>
+                                                    <li> &nbsp;</li>
                                                 </ul>
                                             </div> <!-- /plan-features -->
 
@@ -228,16 +224,14 @@
 
                                             <div class="plan-features">
                                                 <ul>
-                                                    <li style="width: 40%;float: left"><strong>severity</strong></li>
-                                                    <li>major</li>
-                                                    <li style="width: 40%;float: left"><strong>severity</strong></li>
-                                                    <li>major</li>
-                                                    <li style="width: 40%;float: left"><strong>severity</strong></li>
-                                                    <li>major</li>
-                                                    <li style="width: 40%;float: left"><strong>severity</strong></li>
-                                                    <li>major</li>
-                                                    <li style="width: 40%;float: left"><strong>severity</strong></li>
-                                                    <li>major</li>
+                                                    <li style="width: 40%;float: left"><strong>Severity</strong></li>
+                                                    <li>{{ bug.severity }}</li>
+                                                    <li style="width: 40%;float: left"><strong>Priority</strong></li>
+                                                    <li>{{ bug.priority }}</li>
+                                                    <li style="width: 40%;float: left"><strong>Version</strong></li>
+                                                    <li>{{ bug.version }}</li>
+                                                    <li style="width: 40%;float: left"><strong>Status</strong></li>
+                                                    <li>{{ bug.status }}</li>
                                                 </ul>
                                             </div> <!-- /plan-features -->
 
@@ -266,9 +260,7 @@
 
                             <div class="widget-content">
 
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                <p>{{ bug.description }}</p>
 
                                 <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
                                     ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse

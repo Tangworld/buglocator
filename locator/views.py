@@ -715,5 +715,14 @@ def authority(request):
     return userflag
 
 
-def tryit(request):
-    return render(request, 'show_bug.html')
+def show_open_bug(request):
+    '''
+    展示open bug的具体信息
+    :param request: open bug展示页面
+    :return: 
+    '''
+    bugid = request.GET.get('bugid')
+    bug = models.Report.objects.get(bugid=bugid)
+    productname = models.Product.objects.get(id=bug.productid).name
+    bug.productid = productname
+    return render(request, 'show_open_bug.html', {'bug': bug})
