@@ -721,8 +721,26 @@ def show_open_bug(request):
     :param request: open bug展示页面
     :return: 
     '''
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
     bugid = request.GET.get('bugid')
-    bug = models.Report.objects.filter(bugid=bugid)[0]
-    productname = models.Product.objects.get(id=bug.productid).name
-    bug.productid = productname
+    bug = utils.get_one_report(bugid)
     return render(request, 'show_open_bug.html', {'bug': bug})
+
+def show_fixed_bug(request):
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
+    bugid = request.GET.get('bugid')
+    bug = utils.get_one_report(bugid)
+    return render(request, 'show_fixed_bug.html', {'bug': bug})

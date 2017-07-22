@@ -80,21 +80,8 @@
                         <span>Details</span>
                     </a>
                 </li>
-
                 <li class="sub-menu">
-                    <a href="#">
-                        <i class="fa fa-magnet"></i>
-                        <span>BugHunter</span>
-                    </a>
-
-                <li class="sub-menu">
-                    <a href="#">
-                        <i class="fa fa-bell"></i>
-                        <span>L2SS</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="{% url 'locator:unfixed' %}">
+                    <a href="{% url 'locator:fixed' %}">
                         <i class="fa fa-level-up"></i>
                         <span>Back</span>
                     </a>
@@ -133,7 +120,7 @@
                         <div class="widget">
 
                             <div class="widget-header">
-                                <i class="fa fa-bell" style="margin-left: 16px"></i><h3 style="margin-top: 10px;color: red">Open</h3>
+                                <i class="fa fa-check-square-o" style="margin-left: 16px"></i><h3 style="margin-top: 10px;color: green">Fixed</h3>
                             </div> <!-- /widget-header -->
 
                             <div class="widget-content">
@@ -190,14 +177,14 @@
 
                                             <div class="plan-features">
                                                 <ul>
-                                                    <li style="width: 40%;float: left"><strong>OpenDate</strong></li>
+                                                    <li style="width: 40%;float: left"><strong>Open Date</strong></li>
                                                     <li>&nbsp;{{ bug.opendate }}</li>
+                                                    <li style="width: 40%;float: left"><strong>Fixed Date</strong></li>
+                                                    <li>&nbsp;{{ bug.fixdate }}</li>
                                                     <li style="width: 40%;float: left"><strong>Reporter</strong></li>
                                                     <li>&nbsp;{{ bug.reporter }}</li>
                                                     <li style="width: 40%;float: left"><strong>Assignee</strong></li>
                                                     <li>&nbsp;{{ bug.assignee }}</li>
-                                                    <li style="width: 40%;float: left"><strong></strong> &nbsp;</li>
-                                                    <li> &nbsp;</li>
                                                 </ul>
                                             </div> <!-- /plan-features -->
 

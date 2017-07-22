@@ -1,5 +1,5 @@
 from locator import models
-
+import time
 
 def get_reports(status, assignee=''):
     reports = []
@@ -13,3 +13,17 @@ def get_reports(status, assignee=''):
 def get_all_reports():
     reports = models.Report.objects.all()
     return reports
+
+
+def get_one_report(bugid):
+    bug = models.Report.objects.filter(bugid=bugid)[0]
+    productname = models.Product.objects.get(id=bug.productid).name
+    bug.productid = productname
+    open_local = time.localtime(float(bug.opendate))
+    open_date = time.strftime("%Y-%m-%d %H:%M:%S", open_local)
+    fix_local = time.localtime(float(bug.fixdate))
+    fix_date = time.strftime("%Y-%m-%d %H:%M:%S", fix_local)
+    bug.opendate = open_date
+    bug.fixdate = fix_date
+
+    return bug
