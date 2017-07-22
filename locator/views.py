@@ -722,7 +722,7 @@ def show_open_bug(request):
     :return: 
     '''
     bugid = request.GET.get('bugid')
-    bug = models.Report.objects.get(bugid=bugid)
+    bug = models.Report.objects.filter(bugid=bugid)[0]
     productname = models.Product.objects.get(id=bug.productid).name
     bug.productid = productname
     return render(request, 'show_open_bug.html', {'bug': bug})

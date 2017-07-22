@@ -75,28 +75,28 @@
                 <h5 class="centered">{{ request.session.username }}</h5>
 
                 <li class="mt">
-                    <a class="active" href="{% url 'locator:main' %}">
-                        <i class="fa fa-desktop icon"></i>
-                        <span>Overview</span>
+                    <a class="active" href="{% url 'locator:show_open_bug' %}?bugid={{ bug.bugid }}">
+                        <i class="fa fa-file-text"></i>
+                        <span>Details</span>
                     </a>
                 </li>
 
                 <li class="sub-menu">
-                    <a href="{% url 'locator:fixed' %}">
-                        <i class="fa fa-check-square-o"></i>
-                        <span>Fixed Bugs</span>
+                    <a href="#">
+                        <i class="fa fa-magnet"></i>
+                        <span>BugHunter</span>
                     </a>
 
+                <li class="sub-menu">
+                    <a href="#">
+                        <i class="fa fa-bell"></i>
+                        <span>L2SS</span>
+                    </a>
+                </li>
                 <li class="sub-menu">
                     <a href="{% url 'locator:unfixed' %}">
-                        <i class="fa fa-bell"></i>
-                        <span>Open Bugs</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="{% url 'locator:profile' %}">
-                        <i class="fa fa-user"></i>
-                        <span>User Profile</span>
+                        <i class="fa fa-level-up"></i>
+                        <span>Back</span>
                     </a>
 
                 </li>
