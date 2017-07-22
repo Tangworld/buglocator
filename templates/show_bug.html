@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="icon" href="/assets/img/logo.jpg">
+
+    <title>BugLocator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/assets/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/style-responsive.css" rel="stylesheet">
+
+
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/assets/css/bootstrap-responsive.min.css" rel="stylesheet"/>
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet"/>
+    <link href="/assets/css/font-awesome.css" rel="stylesheet"/>
+
+    <link href="/assets/css/adminia.css" rel="stylesheet"/>
+    <link href="/assets/css/adminia-responsive.css" rel="stylesheet"/>
+
+
+    <link href="/assets/css/plans.css" rel="stylesheet"/>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<section id="container">
+    <!-- **********************************************************************************************************************************************************
+    TOP BAR CONTENT & NOTIFICATIONS
+    *********************************************************************************************************************************************************** -->
+    <!--header start-->
+    <header class="header black-bg">
+        <div class="sidebar-toggle-box">
+            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation" style="color: #797979"></div>
+        </div>
+        <!--logo start-->
+        <a href="{% url 'locator:main' %}" class="logo" style="margin-top: 19px"><b>BUG LOCATOR</b></a>
+        <!--logo end-->
+
+        <div class="top-menu">
+            <ul class="nav pull-right top-menu">
+                <li><a class="logout" href="login.html">Logout</a></li>
+            </ul>
+        </div>
+    </header>
+    <!--header end-->
+
+    <!-- **********************************************************************************************************************************************************
+    MAIN SIDEBAR MENU
+    *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar" class="nav-collapse ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu" id="nav-accordion">
+
+                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="{{ request.session.avatarloc }}" class="img-circle" width="60"></a></p>
+                <h5 class="centered">{{ request.session.username }}</h5>
+
+                <li class="mt">
+                    <a class="active" href="{% url 'locator:main' %}">
+                        <i class="fa fa-desktop icon"></i>
+                        <span>Overview</span>
+                    </a>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="{% url 'locator:fixed' %}">
+                        <i class="fa fa-check-square-o"></i>
+                        <span>Fixed Bugs</span>
+                    </a>
+
+                <li class="sub-menu">
+                    <a href="{% url 'locator:unfixed' %}">
+                        <i class="fa fa-bell"></i>
+                        <span>Open Bugs</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="{% url 'locator:profile' %}">
+                        <i class="fa fa-user"></i>
+                        <span>User Profile</span>
+                    </a>
+
+                </li>
+                <li class="sub-menu">
+                    <a href="{% url 'locator:lock' %}">
+                        <i class="fa fa-lock"></i>
+                        <span>Lock</span>
+                    </a>
+
+                </li>
+
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
+    <!--sidebar end-->
+
+    <!-- **********************************************************************************************************************************************************
+    MAIN CONTENT
+    *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper site-min-height">
+            <div class="row mt">
+                <div class="col-lg-12">
+
+                    <div class="span9" style="width: 100%;padding-left: 15px">
+
+                        <h3 style="background:#ff865c; padding: 16px; margin: 0px;margin-top: 10px;height: 60px">
+                            <font color="#fff" size="5">BUG 18357</font>
+                        </h3>
+
+
+                        <div class="widget">
+
+                            <div class="widget-header">
+                                <i class="fa fa-bell" style="margin-left: 16px"></i><h3 style="margin-top: 10px;color: red">Open</h3>
+                            </div> <!-- /widget-header -->
+
+                            <div class="widget-content">
+
+                                <div class="pricing-plans plans-3">
+
+                                    <div class="plan-container">
+                                        <div class="plan">
+                                            <div class="plan-header">
+
+                                                <div class="plan-title">
+
+                                                </div> <!-- /plan-title -->
+
+                                                <div class="plan-price">
+                                                    <span class="note"></span>Nature<span class="term"></span>
+                                                </div> <!-- /plan-price -->
+
+                                            </div> <!-- /plan-header -->
+
+                                            <div class="plan-features">
+                                                <ul>
+                                                    <li style="width: 40%;float: left"><strong>Reporter</strong></li>
+                                                    <li >Eugene Kireyev</li>
+                                                    <li style="width: 40%;float: left"><strong>Assignee</strong></li>
+                                                    <li >Davi Pires</li>
+                                                    <li style="width: 40%;float: left"><strong>Product</strong></li>
+                                                    <li>AspectJ</li>
+                                                    <li style="width: 40%;float: left"><strong>OpenDate</strong></li>
+                                                    <li>1166063160</li>
+                                                    <li style="width: 40%;float: left"><strong>Status</strong></li>
+                                                    <li>Open</li>
+                                                </ul>
+                                            </div> <!-- /plan-features -->
+
+                                            <div class="plan-actions">
+                                                <a class="btn"> </a>
+                                            </div> <!-- /plan-actions -->
+
+                                        </div> <!-- /plan -->
+                                    </div> <!-- /plan-container -->
+
+                                    <div class="plan-container">
+                                        <div class="plan orange">
+                                            <div class="plan-header">
+
+                                                <div class="plan-title">
+
+                                                </div> <!-- /plan-title -->
+
+                                                <div class="plan-price">
+                                                    <span class="note"></span>Date<span class="term"></span>
+                                                </div> <!-- /plan-price -->
+
+                                            </div> <!-- /plan-header -->
+
+                                            <div class="plan-features">
+                                                <ul>
+                                                    <li style="width: 40%;float: left"><strong>Component</strong></li>
+                                                    <li>compiler</li>
+                                                    <li style="width: 40%;float: left"><strong>Version</strong></li>
+                                                    <li>1.5.3RC1</li>
+                                                    <li style="width: 40%;float: left"><strong>Platform</strong></li>
+                                                    <li>PC</li>
+                                                    <li style="width: 40%;float: left"><strong>OS</strong></li>
+                                                    <li>Linux</li>
+                                                    <li style="width: 40%;float: left"><strong>Priority</strong></li>
+                                                    <li>P3</li>
+                                                </ul>
+                                            </div> <!-- /plan-features -->
+
+                                            <div class="plan-actions">
+                                                <a href="javascript:;" class="btn"></a>
+                                            </div> <!-- /plan-actions -->
+
+                                        </div> <!-- /plan -->
+                                    </div> <!-- /plan-container -->
+
+                                    <div class="plan-container">
+                                        <div class="plan">
+                                            <div class="plan-header">
+
+                                                <div class="plan-title">
+
+                                                </div> <!-- /plan-title -->
+
+                                                <div class="plan-price">
+                                                    <span class="note"></span>Urgency<span class="term"></span>
+                                                </div> <!-- /plan-price -->
+
+                                            </div> <!-- /plan-header -->
+
+                                            <div class="plan-features">
+                                                <ul>
+                                                    <li style="width: 40%;float: left"><strong>severity</strong></li>
+                                                    <li>major</li>
+                                                    <li style="width: 40%;float: left"><strong>severity</strong></li>
+                                                    <li>major</li>
+                                                    <li style="width: 40%;float: left"><strong>severity</strong></li>
+                                                    <li>major</li>
+                                                    <li style="width: 40%;float: left"><strong>severity</strong></li>
+                                                    <li>major</li>
+                                                    <li style="width: 40%;float: left"><strong>severity</strong></li>
+                                                    <li>major</li>
+                                                </ul>
+                                            </div> <!-- /plan-features -->
+
+                                            <div class="plan-actions">
+                                                <a href="javascript:;" class="btn"></a>
+                                            </div> <!-- /plan-actions -->
+
+                                        </div> <!-- /plan -->
+                                    </div> <!-- /plan-container -->
+
+
+
+
+                                </div> <!-- /pricing-plans -->
+
+                            </div> <!-- /widget-content -->
+
+                        </div> <!-- /widget -->
+
+
+                        <div class="widget">
+
+                            <div class="widget-header">
+                                <h3 style="margin-left: 6px;margin-top: 10px">Description</h3>
+                            </div> <!-- /widget-header -->
+
+                            <div class="widget-content">
+
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                                    ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </div> <!-- /widget-content -->
+
+                        </div> <!-- /widget -->
+
+
+                    </div> <!-- /span9 -->
+                </div>
+            </div>
+
+        </section>
+        <! --/wrapper -->
+    </section><!-- /MAIN CONTENT -->
+
+    <!--main content end-->
+</section>
+
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
+<script class="include" type="text/javascript" src="/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="/assets/js/jquery.scrollTo.min.js"></script>
+<script src="/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="/assets/js/jquery-1.7.2.min.js"></script>
+
+
+<script src="/assets/js/bootstrap.js"></script>
+
+
+<!--common script for all pages-->
+<script src="/assets/js/common-scripts.js"></script>
+
+<!--script for this page-->
+
+<script>
+    //custom select box
+
+    $(function () {
+        $('select.styled').customSelect();
+    });
+
+</script>
+
+</body>
+</html>

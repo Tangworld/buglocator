@@ -713,3 +713,7 @@ def authority(request):
     '''
     userflag = 'username' in request.session
     return userflag
+
+
+def tryit(request):
+    return render(request, 'show_bug.html')

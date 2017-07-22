@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^savereport/$', views.savereport, name='savereport'),
     url(r'^unfixed/$',views.unfixed,name='unfixed'),
     url(r'^fixed/$', views.fixed, name='fixed'),
+    url(r'^tryit/$', views.tryit, name='tryit'),
 
     url(r'^index_admin/$', views.login, name='index_admin'),
     url(r'^profile_admin/$', views.profile, name='profile_admin'),
