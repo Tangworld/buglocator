@@ -27,4 +27,6 @@ urlpatterns = [
 
     url(r'^timeline$',views.more_timeline,name='timeline'),
     url(r'^timeline_admin$', views.more_timeline, name='timeline_admin'),
+
+    #url(r'^detailpage/$', views.bug_detail, name='detailpage')
 ]

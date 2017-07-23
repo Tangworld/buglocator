@@ -647,3 +647,14 @@ def more_timeline(request):
             dis_content.append(dis_reports[i])
         return render(request,'timeline.html',{'dis_reports': dis_content})
 
+#def bug_detail(request):
+#    reportid = request.GET.get('reportid')
+ #   report = models.Report.objects.filter(bugid=reportid)[0]
+  #  dis_content = []
+   # dis_content[0] = report['bugid']
+    #dis_content[1] = report['summary']
+    #dis_content[2] = report['reporter']
+    #dis_content[3] = report['assignee']
+    #dis_content[4] = report['opendate']
+    #dis_content[5] = report['fixdate']
+    #return render(request,'detailPage.html',{'dis_content':dis_content})
