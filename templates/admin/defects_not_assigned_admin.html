@@ -131,7 +131,7 @@
                                     <tbody>
                                     {% for content in contents %}
                                         <tr>
-                                            <td><a href="../basic_table.html#">{{ content.0 }}</a></td>
+                                            <td><a href="{% url 'locator:show_notassigned' %}?bugid={{ content.0 }}">{{ content.0 }}</a></td>
                                             <td class="hidden-phone" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;">{{ content.1 }}</td>
                                             <td>{{ content.2 }}</td>
                                             <td>{{ content.3 }}</td>

@@ -81,17 +81,22 @@ def login(request):
                     if report.status == 'fixed':
                         time_local = time.localtime(float(report.fixdate))
                         dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
-                        tmp = [dt, '2', report.bugid, report.summary, report.assignee]
+                        tmp = [dt, '2', report.bugid, report.summary, report.assignee, '1']
                         dis_reports.append(tmp)
                     elif report.status == 'unfixed':
                         time_local = time.localtime(float(report.opendate))
                         dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
-                        tmp = [dt, '3', report.bugid, report.summary, report.assignee]
+                        tmp = [dt, '3', report.bugid, report.summary, report.assignee, '0']
                         dis_reports.append(tmp)
                 for report in reports:
                     time_local = time.localtime(float(report.opendate))
                     dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
-                    tmp = [dt, '1', report.bugid, report.summary, report.reporter]
+                    if report.status == 'fixed':
+                        tmp = [dt, '1', report.bugid, report.summary, report.reporter, '1']
+                    elif report.status == 'unfixed':
+                        tmp = [dt, '1', report.bugid, report.summary, report.reporter, '0']
+                    else:
+                        tmp = [dt, '1', report.bugid, report.summary, report.reporter, '2']
                     dis_reports.append(tmp)
 
                 dis_reports.sort(lambda x, y: cmp(x[0], y[0]))
@@ -316,18 +321,25 @@ def main(request):
 
             reports = utils.get_all_reports()
             for report in reports:
-                time_local = time.localtime(float(report.opendate))
-                dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
                 if report.status == 'fixed':
-                    tmp = [dt, '2', report.bugid, report.summary, report.assignee]
+                    time_local = time.localtime(float(report.fixdate))
+                    dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
+                    tmp = [dt, '2', report.bugid, report.summary, report.assignee, '1']
                     dis_reports.append(tmp)
                 elif report.status == 'unfixed':
-                    tmp = [dt, '3', report.bugid, report.summary, report.assignee]
+                    time_local = time.localtime(float(report.opendate))
+                    dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
+                    tmp = [dt, '3', report.bugid, report.summary, report.assignee, '0']
                     dis_reports.append(tmp)
             for report in reports:
                 time_local = time.localtime(float(report.opendate))
                 dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
-                tmp = [dt, '1', report.bugid, report.summary, report.reporter]
+                if report.status == 'fixed':
+                    tmp = [dt, '1', report.bugid, report.summary, report.reporter, '1']
+                elif report.status == 'unfixed':
+                    tmp = [dt, '1', report.bugid, report.summary, report.reporter, '0']
+                else:
+                    tmp = [dt, '1', report.bugid, report.summary, report.reporter,'2']
                 dis_reports.append(tmp)
 
             dis_reports.sort(lambda x, y: cmp(x[0], y[0]))
@@ -700,17 +712,22 @@ def more_timeline(request):
             if report.status == 'fixed':
                 time_local = time.localtime(float(report.fixdate))
                 dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
-                tmp = [dt, '2', report.bugid, report.summary, report.assignee]
+                tmp = [dt, '2', report.bugid, report.summary, report.assignee, '1']
                 dis_reports.append(tmp)
             elif report.status == 'unfixed':
                 time_local = time.localtime(float(report.opendate))
                 dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
-                tmp = [dt, '3', report.bugid, report.summary, report.assignee]
+                tmp = [dt, '3', report.bugid, report.summary, report.assignee, '0']
                 dis_reports.append(tmp)
         for report in reports:
             time_local = time.localtime(float(report.opendate))
             dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
-            tmp = [dt, '1', report.bugid, report.summary, report.reporter]
+            if report.status == 'fixed':
+                tmp = [dt, '1', report.bugid, report.summary, report.reporter, '1']
+            elif report.status == 'unfixed':
+                tmp = [dt, '1', report.bugid, report.summary, report.reporter, '0']
+            else:
+                tmp = [dt, '1', report.bugid, report.summary, report.reporter, '2']
             dis_reports.append(tmp)
 
         dis_reports.sort(lambda x, y: cmp(x[0], y[0]))
@@ -793,7 +810,10 @@ def show_open_bug(request):
 
     bugid = request.GET.get('bugid')
     bug = utils.get_one_report(bugid)
-    return render(request, 'show_open_bug.html', {'bug': bug})
+    if request.session['isadmin'] == 'yes':
+        return render(request, 'admin/show_open_admin.html', {'bug': bug})
+    else:
+        return render(request, 'show_open_bug.html', {'bug': bug})
 
 def show_fixed_bug(request):
     lockflag = check_lock(request)
@@ -805,7 +825,10 @@ def show_fixed_bug(request):
 
     bugid = request.GET.get('bugid')
     bug = utils.get_one_report(bugid)
-    return render(request, 'show_fixed_bug.html', {'bug': bug})
+    if request.session['isadmin'] == 'yes':
+        return render(request, 'admin/show_fixed_admin.html', {'bug': bug})
+    else:
+        return render(request, 'show_fixed_bug.html', {'bug': bug})
 
 def show_notassigned_bug(request):
     lockflag = check_lock(request)
@@ -817,4 +840,7 @@ def show_notassigned_bug(request):
 
     bugid = request.GET.get('bugid')
     bug = utils.get_one_report(bugid)
-    return render(request, 'show_notassigned_bug.html', {'bug': bug})
+    if request.session['isadmin'] == 'yes':
+        return render(request, 'admin/show_notassigned_admin.html', {'bug': bug})
+    else:
+        return render(request, 'show_notassigned_bug.html', {'bug': bug})

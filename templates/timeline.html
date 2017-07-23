@@ -150,13 +150,11 @@
                 <p class="centered"><a href="{% url 'locator:profile' %}"><img src="{{ request.session.avatarloc }}" class="img-circle" width="60"></a></p>
                 <h5 class="centered">{{ request.session.username }}</h5>
 
-
-                <li class="sub-menu" >
-                    <a class=active href="{% url 'locator:timeline' %}">
+                <li class="mt">
+                    <a class="active" href="{% url 'locator:timeline' %}">
                         <i class="fa fa-clock-o"></i>
                         <span>Timeline</span>
                     </a>
-
                 </li>
                 <li class="sub-menu">
                     <a href="{% url 'locator:main' %}">
@@ -668,3 +666,5 @@
 
 </body>
 </html>
+
+
