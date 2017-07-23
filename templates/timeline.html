@@ -150,32 +150,22 @@
                 <p class="centered"><a href="{% url 'locator:profile' %}"><img src="{{ request.session.avatarloc }}" class="img-circle" width="60"></a></p>
                 <h5 class="centered">{{ request.session.username }}</h5>
 
-                <li class="mt">
-                    <a  href="{% url 'locator:main' %}">
-                        <i class="fa fa-desktop icon"></i>
-                        <span>Overview</span>
-                    </a>
-                </li>
 
-                <li class="sub-menu">
-                    <a href="{% url 'locator:fixed' %}">
-                        <i class="fa fa-check-square-o"></i>
-                        <span>Fixed Bugs</span>
-                    </a>
-
-                <li class="sub-menu">
-                    <a href="{% url 'locator:unfixed' %}">
-                        <i class="fa fa-bell"></i>
-                        <span>Open Bugs</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="{% url 'locator:profile' %}">
-                        <i class="fa fa-user"></i>
-                        <span>User Profile</span>
+                <li class="sub-menu" >
+                    <a class=active href="{% url 'locator:timeline' %}">
+                        <i class="fa fa-clock-o"></i>
+                        <span>Timeline</span>
                     </a>
 
                 </li>
+                <li class="sub-menu">
+                    <a href="{% url 'locator:main' %}">
+                        <i class="fa fa-level-up"></i>
+                        <span>Back</span>
+                    </a>
+
+                </li>
+
                 <li class="sub-menu">
                     <a href="{% url 'locator:lock' %}">
                         <i class="fa fa-lock"></i>
@@ -220,7 +210,13 @@
                                     </div>
                                     <div class="desc">
                                         You reported Bug &nbsp;
-                                        <a href="javascript:;">{{ report.2 }}</a>.
+                                        {% if report.4 == '1' %}
+                                            <a href="{% url 'locator:show_fixed_bug' %}?bugid={{ report.2 }}">{{ report.2 }}</a>.
+                                            {% elif report.4 == '0' %}
+                                            <a href="{% url 'locator:show_open_bug' %}?bugid={{ report.2 }}">{{ report.2 }}</a>.
+                                            {% else %}
+                                            <a href="{% url 'locator:show_notassigned' %}?bugid={{ report.2 }}">{{ report.2 }}</a>.
+                                            {% endif %}
                                     </br>
                                         Summary:{{ report.3 }}
                                         <!--  <a href="javascript:;" style="font-style:italic">See details...</a> -->
@@ -242,7 +238,7 @@
                                         </div>
                                         <div class="desc">
                                             You fixed Bug
-                                            &nbsp; <a href="javascript:;">{{ report.2 }}</a>.
+                                            &nbsp; <a href="{% url 'locator:show_fixed_bug' %}?bugid={{ report.2 }}">{{ report.2 }}</a>.
                                             </br>
                                             Summary:{{ report.3 }}
                                             <!--  <a href="javascript:;" style="font-style:italic">See details...</a> -->
@@ -263,8 +259,14 @@
                                         <span class="time-wrapper"><span class="time">{{ report.0 }}</span></span>
                                     </div>
                                     <div class="desc">
-                                        Bug &nbsp; <a href="javascript:;">{{ report.2 }}</a> &nbsp;was assigned to
-                                        you.
+                                        Bug &nbsp; {% if report.4 == '1' %}
+                                            <a href="{% url 'locator:show_fixed_bug' %}?bugid={{ report.2 }}">{{ report.2 }}</a>.
+                                            {% elif report.4 == '0' %}
+                                            <a href="{% url 'locator:show_open_bug' %}?bugid={{ report.2 }}">{{ report.2 }}</a>.
+                                            {% else %}
+                                            <a href="{% url 'locator:show_notassigned' %}?bugid={{ report.2 }}">{{ report.2 }}</a>.
+                                            {% endif %}
+                                        &nbsp;was assigned to you.
                                     </br>
                                         Summary:{{ report.3 }}
                                         <!--  <a href="javascript:;" style="font-style:italic">See details...</a> -->

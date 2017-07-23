@@ -66,9 +66,6 @@ def login(request):
         request.session['isadmin'] = validatepassword.isadmin
         request.session['avatarloc'] = validatepassword.avatarloc
 
-
-
-
         if validatepassword.isadmin == 'yes':
             members = []
             dis_reports = []
@@ -95,6 +92,7 @@ def login(request):
                     time_local = time.localtime(float(report.opendate))
                     dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
                     tmp = [dt, '1', report.bugid, report.summary, report.reporter]
+                    dis_reports.append(tmp)
 
                 dis_reports.sort(lambda x, y: cmp(x[0], y[0]))
                 dis_content = []
@@ -117,6 +115,11 @@ def login(request):
             except Exception, e:
                 print e
             # print dis_content
+                # 获取当前页面URL，用于返回上一页的操作
+                fullpath = request.get_full_path()
+                request.session['lastpage'] = fullpath
+                #print fullpath.split('/')
+                ######
             return render(request, 'admin/index_admin.html', {'members': members, 'dis_reports': dis_content, 'series': json.dumps(highdata), 'data': json.dumps(circledata)})
         else:
             members = []
@@ -134,18 +137,23 @@ def login(request):
                 for report in reports1:
                     time_local = time.localtime(float(report.opendate))
                     dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
-                    tmp = [dt, '1', report.bugid, report.summary]
+                    if report.status == 'fixed':
+                        tmp = [dt, '1', report.bugid, report.summary, '1']
+                    elif report.status == 'unfixed':
+                        tmp = [dt, '1', report.bugid, report.summary, '0']
+                    elif report.status == 'open':
+                        tmp = [dt, '1', report.bugid, report.summary, '2']
                     dis_reports.append(tmp)
                 for report in reports2:
                     if report.status == 'fixed':
                         time_local = time.localtime(float(report.fixdate))
                         dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
-                        tmp = [dt, '2', report.bugid, report.summary]
+                        tmp = [dt, '2', report.bugid, report.summary, '1']
                         dis_reports.append(tmp)
                     elif report.status == 'unfixed':
                         time_local = time.localtime(float(report.opendate))
                         dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
-                        tmp = [dt, '3', report.bugid, report.summary]
+                        tmp = [dt, '3', report.bugid, report.summary, '0']
                         dis_reports.append(tmp)
                 dis_reports.sort(lambda x, y: cmp(x[0], y[0]))
                 dis_content = []
@@ -174,6 +182,12 @@ def login(request):
                 print e
             currentuser.setMyall(current)
             currentuser.setOthersall(others)
+            # 获取当前页面URL，用于返回上一页的操作
+            fullpath = request.get_full_path()
+            string = fullpath.split('/')
+            tmpStr = string[0]+string[1]+':'+string[2]+string[3]
+            request.session['lastpage'] = tmpStr
+            ######
             return render(request, 'index.html', {'members': members, 'dis_reports': dis_content, 'currentuser': currentuser})
     else:
         return render(request, 'login.html', {"validate": validate})
@@ -314,6 +328,7 @@ def main(request):
                 time_local = time.localtime(float(report.opendate))
                 dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
                 tmp = [dt, '1', report.bugid, report.summary, report.reporter]
+                dis_reports.append(tmp)
 
             dis_reports.sort(lambda x, y: cmp(x[0], y[0]))
             dis_content = []
@@ -342,6 +357,10 @@ def main(request):
         except Exception, e:
             print e
         # print dis_content
+            # 获取当前页面URL，用于返回上一页的操作
+            fullpath = request.get_full_path()
+            request.session['lastpage'] = fullpath
+            ######
         return render(request, 'admin/index_admin.html', {'members': members, 'dis_reports': dis_content, 'series': json.dumps(highdata), 'data': json.dumps(circledata)})
     else:
         members = []
@@ -359,16 +378,23 @@ def main(request):
             for report in reports1:
                 time_local = time.localtime(float(report.opendate))
                 dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
-                tmp = [dt, '1', report.bugid, report.summary]
+                if report.status == 'fixed':
+                    tmp = [dt, '1', report.bugid, report.summary, '1']
+                elif report.status == 'unfixed':
+                    tmp = [dt, '1', report.bugid, report.summary, '0']
+                elif report.status == 'open':
+                    tmp = [dt, '1', report.bugid, report.summary, '2']
                 dis_reports.append(tmp)
             for report in reports2:
-                time_local = time.localtime(float(report.opendate))
-                dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
                 if report.status == 'fixed':
-                    tmp = [dt, '2', report.bugid, report.summary]
+                    time_local = time.localtime(float(report.fixdate))
+                    dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
+                    tmp = [dt, '2', report.bugid, report.summary, '1']
                     dis_reports.append(tmp)
                 elif report.status == 'unfixed':
-                    tmp = [dt, '3', report.bugid, report.summary]
+                    time_local = time.localtime(float(report.opendate))
+                    dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
+                    tmp = [dt, '3', report.bugid, report.summary, '0']
                     dis_reports.append(tmp)
             dis_reports.sort(lambda x, y: cmp(x[0], y[0]))
             dis_content = []
@@ -403,6 +429,10 @@ def main(request):
             print e
         currentuser.setMyall(current)
         currentuser.setOthersall(others)
+        # 获取当前页面URL，用于返回上一页的操作
+        fullpath = request.get_full_path()
+        request.session['lastpage'] = fullpath
+        ######
         return render(request, 'index.html', {'members': members, 'dis_reports': dis_content, 'currentuser': currentuser})
 
 
@@ -554,7 +584,6 @@ def savereport(request):
 
 
 
-
 def unfixed(request):
     # 待修复页面
     # 权限控制
@@ -574,12 +603,20 @@ def unfixed(request):
         for report in reports:
             tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), report.assignee)
             disContent.append(tmpContent)
+# 获取当前页面URL，用于返回上一页的操作
+        fullpath = request.get_full_path()
+        request.session['lastpage'] = fullpath
+            ######
         return render(request, 'admin/defects_not_resolved_admin.html', {'contents': disContent})
     else:
         reports = utils.get_reports('unfixed', current_username)
         for report in reports:
             tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))))
             disContent.append(tmpContent)
+            # 获取当前页面URL，用于返回上一页的操作
+        fullpath = request.get_full_path()
+        request.session['lastpage'] = fullpath
+            ######
         return render(request, 'defects_not_resolved.html', {'contents': disContent})
 
 
@@ -604,8 +641,16 @@ def fixed(request):
         for report in reports:
             tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.fixdate))))
             disContent.append(tmpContent)
+            # 获取当前页面URL，用于返回上一页的操作
+        fullpath = request.get_full_path()
+        request.session['lastpage'] = fullpath
+            ######
         return render(request, 'admin/defects_resolved_admin.html', {'contents': disContent})
     else:
+        # 获取当前页面URL，用于返回上一页的操作
+        fullpath = request.get_full_path()
+        request.session['lastpage'] = fullpath
+        ######
         reports = utils.get_reports('fixed', current_username)
         for report in reports:
             tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.fixdate))))
@@ -626,6 +671,10 @@ def not_assigned(request):
     disContent = []
 
     reports = utils.get_reports('open')
+    # 获取当前页面URL，用于返回上一页的操作
+    fullpath = request.get_full_path()
+    request.session['lastpage'] = fullpath
+    ######
     for report in reports:
             tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(float(report.opendate))))
             disContent.append(tmpContent)
@@ -668,6 +717,10 @@ def more_timeline(request):
         dis_content = []
         for i in range(len(dis_reports) - 1, -1, -1):
             dis_content.append(dis_reports[i])
+            # 获取当前页面URL，用于返回上一页的操作
+        fullpath = request.get_full_path()
+        request.session['lastpage'] = fullpath
+            ######
         return render(request, 'admin/timeline_admin.html', {'dis_reports': dis_content})
     else:
         reports1 = models.Report.objects.filter(reporter=current_username)
@@ -675,23 +728,32 @@ def more_timeline(request):
         for report in reports1:
             time_local = time.localtime(float(report.opendate))
             dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
-            tmp = [dt, '1', report.bugid, report.summary]
+            if report.status == 'fixed':
+                tmp = [dt, '1', report.bugid, report.summary,'1']
+            elif report.status == 'unfixed':
+                tmp = [dt, '1', report.bugid, report.summary, '0']
+            else :
+                tmp = [dt, '1', report.bugid, report.summary, '2']
             dis_reports.append(tmp)
         for report in reports2:
             if report.status == 'fixed':
                 time_local = time.localtime(float(report.fixdate))
                 dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
-                tmp = [dt, '2', report.bugid, report.summary]
+                tmp = [dt, '2', report.bugid, report.summary, '1']
                 dis_reports.append(tmp)
             elif report.status == 'unfixed':
                 time_local = time.localtime(float(report.opendate))
                 dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
-                tmp = [dt, '3', report.bugid, report.summary]
+                tmp = [dt, '3', report.bugid, report.summary, '0']
                 dis_reports.append(tmp)
         dis_reports.sort(lambda x, y: cmp(x[0], y[0]))
         dis_content = []
         for i in range(len(dis_reports) - 1, -1, -1):
             dis_content.append(dis_reports[i])
+            # 获取当前页面URL，用于返回上一页的操作
+        fullpath = request.get_full_path()
+        request.session['lastpage'] = fullpath
+            ######
         return render(request,'timeline.html',{'dis_reports': dis_content})
 
 
@@ -744,3 +806,15 @@ def show_fixed_bug(request):
     bugid = request.GET.get('bugid')
     bug = utils.get_one_report(bugid)
     return render(request, 'show_fixed_bug.html', {'bug': bug})
+
+def show_notassigned_bug(request):
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
+    bugid = request.GET.get('bugid')
+    bug = utils.get_one_report(bugid)
+    return render(request, 'show_notassigned_bug.html', {'bug': bug})
