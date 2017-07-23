@@ -5,10 +5,12 @@ from locator import models
 import time
 import types
 from domain import CurrentUser
-from domain import Infomation
+from domain import Information
 import json
+from locator import utils
 
 # Create your views here.
+
 
 
 def index(request):
@@ -26,15 +28,15 @@ def login(request):
     :param request: 
     :return: 
     """
-    # if authority(request) == False:
-    #    return HttpResponseRedirect('/locator/lock')
-    validate = {}
+    # 权限控制
+    lockflag = check_lock(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+
     v1 = ""
     v2 = ""
     flag = True
     validatepassword = ""
-    username = ""
-    password = ""
 
     username = request.POST.get('username', None)
     password = request.POST.get('password', None)
@@ -43,7 +45,6 @@ def login(request):
         if validatepassword.password != password:
             v2 = "Incorrect password！"
             flag = False
-        print validatepassword
     except Exception, e:
         print e
         v2 = "Incorrect password！"
@@ -78,7 +79,7 @@ def login(request):
                 productId = int(productobj.product_id)
                 userids = models.ProUser.objects.filter(product_id=productId)
 
-                reports = models.Report.objects.all()
+                reports = utils.get_all_reports()
                 for report in reports:
                     if report.status == 'fixed':
                         time_local = time.localtime(float(report.fixdate))
@@ -184,8 +185,7 @@ def logout(request):
     :param request: 
     :return: 登录页面
     """
-    del request.session['username']  # 删除session
-    del request.session['password']
+    request.session.clear()  #直接清空session
     return HttpResponseRedirect('/locator/index/')
 
 
@@ -195,6 +195,15 @@ def profile(request):
     :param request: 
     :return: 个人信息页面
     """
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
+
     currentid = request.session['userid']
     record = models.Record.objects.get(userid=currentid)
     maxvalue = 0
@@ -256,14 +265,14 @@ def profile(request):
 
     print minvalue
     print minmonth
-    infomation = Infomation()
-    infomation.setAll(allbugs=allbugs, allfiles=allfiles, maxmonth=maxmonth, minmonth=minmonth, b1=int(record.b1), b2=int(record.b2), b3=int(record.b3), b4=int(record.b4), b5=int(record.b5), b6=int(record.b6), b7=int(record.b7),
+    information = Information()
+    information.setAll(allbugs=allbugs, allfiles=allfiles, maxmonth=maxmonth, minmonth=minmonth, b1=int(record.b1), b2=int(record.b2), b3=int(record.b3), b4=int(record.b4), b5=int(record.b5), b6=int(record.b6), b7=int(record.b7),
                       f1=int(record.f1), f2=int(record.f2), f3=int(record.f3), f4=int(record.f4), f5=int(record.f5), f6=int(record.f6), f7=int(record.f7))
 
     if request.session['isadmin'] == 'yes':
         return render(request, 'admin/profile_admin.html')
     else:
-        return render(request, 'profile.html', {'infomation': infomation})
+        return render(request, 'profile.html', {'infomation': information})
 
 
 def main(request):
@@ -273,12 +282,13 @@ def main(request):
     :param request: 
     :return: 进入主页
     """
-    # if authority(request) == False:
-    #    return HttpResponseRedirect('/locator/lock')
-    # 暂时使用相同数据
-
-
-
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
 
     if request.session['isadmin'] == 'yes':
         members = []
@@ -290,7 +300,7 @@ def main(request):
             productId = int(productobj.product_id)
             userids = models.ProUser.objects.filter(product_id=productId)
 
-            reports = models.Report.objects.all()
+            reports = utils.get_all_reports()
             for report in reports:
                 time_local = time.localtime(float(report.opendate))
                 dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
@@ -402,9 +412,15 @@ def edit(request):
     :param request: 
     :return: 
     """
-    # if authority(request) == False:
-    #    return HttpResponseRedirect('/locator/lock')
-    if request.session['isadmin']=='yes':
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
+    if request.session['isadmin'] == 'yes':
         return render(request, 'admin/editprofile_admin.html')
     else:
         return render(request, 'editprofile.html')
@@ -416,8 +432,14 @@ def confirm(request):
     :param request: 
     :return: 
     """
-    # if authority(request) == False:
-    #    return HttpResponseRedirect('/locator/lock')
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
     flag = True
     infomation = ""
     username = request.session['username']
@@ -454,13 +476,14 @@ def lock(request):
 def unlock(request):
     """
     解锁页面
+    先判断输入的密码是否正确，若正确进入主页的同时删除session中的lock值，否则返回锁定页面
     :param request: 
     :return: 
     """
-    request.session['lock'] = 'unlock'
     password = request.POST.get('password', None)
     realpassword = request.session['password']
     if password == realpassword:
+        del request.session['lock']
         return HttpResponseRedirect('/locator/main/')
     else:
         return render(request, 'lock_screen.html')
@@ -468,12 +491,11 @@ def unlock(request):
 
 def newreport(request):
     """
-    跳转到提交报告页面
+    跳转到提交报告页面（废弃）
     :param request: 
     :return: 
     """
     # authority(request)
-
     current = request.session['username']
     finalusers = []
     finalproducts = []
@@ -491,7 +513,7 @@ def newreport(request):
 
 def savereport(request):
     """
-    存储新的缺陷报告
+    存储新的缺陷报告（废弃）
     status 参数 ：open代表未分配，unfix代表未修复，fixed代表已修复
     :param request: 
     :return: 
@@ -531,74 +553,99 @@ def savereport(request):
     return HttpResponseRedirect('/locator/main')
 
 
-def authority(request):
-    username = ""
-    lock = request.session['lock']
-    if lock == 'lock':
-        return False
-    else:
-        return True
 
 
 def unfixed(request):
     # 待修复页面
-    current_name = request.session['username']
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
     current_isadmin = request.session['isadmin']
-    reports = models.Report.objects.all()
+    current_username = request.session['username']
     disContent = []
 
     if current_isadmin == 'yes':
+        reports = utils.get_reports('unfixed')
         for report in reports:
-            if report.status == 'unfixed':
-                tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), report.assignee)
-                disContent.append(tmpContent)
+            tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), report.assignee)
+            disContent.append(tmpContent)
         return render(request, 'admin/defects_not_resolved_admin.html', {'contents': disContent})
     else:
+        reports = utils.get_reports('unfixed', current_username)
         for report in reports:
-            if report.assignee == current_name and report.status == 'unfixed':
-                tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))))
-                disContent.append(tmpContent)
+            tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))))
+            disContent.append(tmpContent)
         return render(request, 'defects_not_resolved.html', {'contents': disContent})
+
+
 
 
 def fixed(request):
     # 已修复页面
-    current_name = request.session['username']
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
     current_isadmin = request.session['isadmin']
-    reports = models.Report.objects.all()
+    current_username = request.session['username']
     disContent = []
 
     if current_isadmin == 'yes':
+        reports = utils.get_reports('fixed')
         for report in reports:
-            if report.status == 'fixed':
-                tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.fixdate))))
-                disContent.append(tmpContent)
+            tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.fixdate))))
+            disContent.append(tmpContent)
         return render(request, 'admin/defects_resolved_admin.html', {'contents': disContent})
     else:
+        reports = utils.get_reports('fixed', current_username)
         for report in reports:
-            if report.assignee == current_name and report.status == 'fixed':
-                tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.fixdate))))
-                disContent.append(tmpContent)
+            tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.fixdate))))
+            disContent.append(tmpContent)
         return render(request, 'defects_resolved.html', {'contents': disContent})
 
 
 def not_assigned(request):
-    reports = models.Report.objects.all()
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
+
     disContent = []
 
+    reports = utils.get_reports('open')
     for report in reports:
-        if report.status == 'open':
             tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(float(report.opendate))))
             disContent.append(tmpContent)
     return render(request, 'admin/defects_not_assigned_admin.html', {'contents': disContent})
 
 def more_timeline(request):
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
     current_isadmin = request.session['isadmin']
     current_username = request.session['username']
     dis_reports = []
 
     if current_isadmin == 'yes':
-        reports = models.Report.objects.all()
+        reports = utils.get_all_reports()
         #print len(reports)
         for report in reports:
             if report.status == 'fixed':
@@ -621,7 +668,7 @@ def more_timeline(request):
         dis_content = []
         for i in range(len(dis_reports) - 1, -1, -1):
             dis_content.append(dis_reports[i])
-        return render(request, 'admin/timeline_admin.html',{'dis_reports': dis_content})
+        return render(request, 'admin/timeline_admin.html', {'dis_reports': dis_content})
     else:
         reports1 = models.Report.objects.filter(reporter=current_username)
         reports2 = models.Report.objects.filter(assignee=current_username)
@@ -647,14 +694,53 @@ def more_timeline(request):
             dis_content.append(dis_reports[i])
         return render(request,'timeline.html',{'dis_reports': dis_content})
 
-#def bug_detail(request):
-#    reportid = request.GET.get('reportid')
- #   report = models.Report.objects.filter(bugid=reportid)[0]
-  #  dis_content = []
-   # dis_content[0] = report['bugid']
-    #dis_content[1] = report['summary']
-    #dis_content[2] = report['reporter']
-    #dis_content[3] = report['assignee']
-    #dis_content[4] = report['opendate']
-    #dis_content[5] = report['fixdate']
-    #return render(request,'detailPage.html',{'dis_content':dis_content})
+
+def check_lock(request):
+    '''
+    若session里有lock这个值证明页面已经被锁定，解锁后删除session中相应值，因此若没有lock这个值证明未锁定
+    :param request: 
+    :return: 
+    '''
+    lock = 'lock' in request.session
+    return lock
+
+
+def authority(request):
+    '''
+    判断是否是登录状态
+    :param request: 
+    :return: 
+    '''
+    userflag = 'username' in request.session
+    return userflag
+
+
+def show_open_bug(request):
+    '''
+    展示open bug的具体信息
+    :param request: open bug展示页面
+    :return: 
+    '''
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
+    bugid = request.GET.get('bugid')
+    bug = utils.get_one_report(bugid)
+    return render(request, 'show_open_bug.html', {'bug': bug})
+
+def show_fixed_bug(request):
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
+    bugid = request.GET.get('bugid')
+    bug = utils.get_one_report(bugid)
+    return render(request, 'show_fixed_bug.html', {'bug': bug})
