@@ -27,3 +27,14 @@ def get_one_report(bugid):
     bug.fixdate = fix_date
 
     return bug
+
+
+def get_value(request, method, key):
+    value = ''
+    if method == 'session':
+        value = request.session[key]
+    if method == 'get':
+        value = request.GET.get(key)
+    if method == 'post':
+        value = request.POST.get(key)
+    return value

@@ -48,7 +48,8 @@
     <!--header start-->
     <header class="header black-bg">
         <div class="sidebar-toggle-box">
-            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation" style="color: #797979"></div>
+            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"
+                 style="color: #797979"></div>
         </div>
         <!--logo start-->
         <a href="{% url 'locator:main' %}" class="logo" style="margin-top: 19px"><b>BUG LOCATOR</b></a>
@@ -71,7 +72,8 @@
             <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
 
-                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="{{ request.session.avatarloc }}" class="img-circle" width="60"></a></p>
+                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="{{ request.session.avatarloc }}"
+                                                                               class="img-circle" width="60"></a></p>
                 <h5 class="centered">{{ request.session.username }}</h5>
 
                 <li class="mt">
@@ -112,12 +114,13 @@
 
                     <div class="span9" style="width: 100%;padding-left: 20px">
 
-                        <h3 style="background:#ff865c; padding: 16px; margin: 0px;margin-top: 10px;;height: 60px">
-                            <font color="#fff" size="5">Bug {{ bug.bugid }}</font>
-                        </h3>
+                        <div style="background: #ffffff; padding:10px; margin:7px; border:none">
+                            <h3 style="background:#ff865c; padding: 16px; margin: 0px;margin-top: 10px;margin-bottom:20px;height: 60px">
+                                <font color="#fff" size="5">Bug {{ bug.bugid }}</font>
+                            </h3>
 
 
-                        <div class="widget" style="margin-top: 10px">
+                            <div class="widget" style="margin-top: 10px">
 
                             <div class="widget-header">
                                 <h3 style="margin-top: 10px;">&nbsp; Meta Data</h3>
@@ -218,6 +221,7 @@
                             </div> <!-- /widget-content -->
 
                         </div> <!-- /widget -->
+                        </div>
 
 
                     </div> <!-- /span9 -->
