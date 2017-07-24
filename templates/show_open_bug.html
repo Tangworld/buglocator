@@ -121,171 +121,118 @@
     *********************************************************************************************************************************************************** -->
     <!--main content start-->
     <section id="main-content">
-        <section class="wrapper site-min-height" style="margin-top:45px">
-            <div class="row mt">
+        <section class="wrapper site-min-height">
+            <div class="row mt" style="margin-top:10px">
                 <div class="col-lg-12">
 
-                    <div class="span9" style="width: 100%;padding-left: 20px">
-                        <div style="background: #ffffff; padding:10px; margin:7px; border:none">
-                            <h3 style="background:#ff865c; padding: 16px; margin: 0px;margin-top: 10px;margin-bottom:20px;height: 60px">
+                    <div class="span9" style="width: 100%;padding-left: 10px">
+
+                        <div style="background: #ffffff; padding:10px;box-shadow: 0px 3px 2px #aab2bd;">
+                            <h3 style="background:#ff865c; padding: 16px;margin-top:0;margin-bottom:20px;height: 60px">
                                 <font color="#fff" size="5">Bug {{ bug.bugid }}</font>
                             </h3>
 
+                            <div class="widget" style="margin-top: 10px">
 
-                            <div class="widget" style="margin-bottom: 20px">
+                            <div class="widget-header">
+                                <h3 style="margin-top: 10px;">&nbsp; Meta Data</h3>
+                            </div> <!-- /widget-header -->
 
-                                <div class="widget-header">
-                                    <i class="fa fa-bell" style="margin-left: 16px"></i>
-                                    <h3 style="margin-top: 10px;color: red">Open Bug</h3>
-                                </div> <!-- /widget-header -->
+                            <div class="widget-content">
 
-                                <div class="widget-content">
+                                <div class="pricing-plans plans-4">
 
-                                    <div class="pricing-plans plans-3">
+                                    <div class="plan-container">
+                                        <div class="plan">
+                                            <div class="plan-features">
+                                                <ul>
+                                                    <li style="width: 30%;float: left"><strong>Product</strong></li>
+                                                    <li >{{ bug.productid }}</li>
+                                                    <li style="width: 30%;float: left"><strong>Component</strong></li>
+                                                    <li >{{ bug.component }}</li>
+                                                    <li style="width: 30%;float: left;border-bottom: none"><strong>Status</strong></li>
+                                                    <li>{{ bug.status }}</li>
+                                                   <!-- <li style="height: 0"></li>-->
+                                                </ul>
+                                            </div> <!-- /plan-features -->
+                                        </div> <!-- /plan -->
+                                    </div> <!-- /plan-container -->
 
-                                        <div class="plan-container">
-                                            <div class="plan">
-                                                <div class="plan-header">
+                                    <div class="plan-container">
+                                        <div class="plan">
+                                            <div class="plan-features">
+                                                <ul>
+                                                    <li style="width: 30%;float: left"><strong>Open Date</strong></li>
+                                                    <li>{{ bug.opendate }}</li>
+                                                    <li style="width: 30%;float: left"><strong>Reporter</strong></li>
+                                                    <li>{{ bug.reporter }}</li>
+                                                    <li style="width: 30%;float: left;border-bottom: none"><strong>Assignee</strong></li>
+                                                    <li>&nbsp;{{ bug.assignee }}</li>
+                                                    <!--<li style="height: 0"></li>-->
+                                                </ul>
+                                            </div> <!-- /plan-features -->
+                                        </div> <!-- /plan -->
+                                    </div> <!-- /plan-container -->
 
-                                                    <div class="plan-title">
-
-                                                    </div> <!-- /plan-title -->
-
-                                                    <div class="plan-price">
-                                                        <span class="note"></span>Basics
-                                                        <!--<span class="term"></span>-->
-                                                    </div> <!-- /plan-price -->
-
-                                                </div> <!-- /plan-header -->
-
-                                                <div class="plan-features">
-                                                    <ul>
-                                                        <li style="width: 40%;float: left"><strong>Product</strong></li>
-                                                        <li>&nbsp;{{ bug.productid }}</li>
-                                                        <li style="width: 40%;float: left"><strong>Component</strong>
-                                                        </li>
-                                                        <li>&nbsp;{{ bug.component }}</li>
-                                                        <li style="width: 40%;float: left"><strong>Platform</strong>
-                                                        </li>
-                                                        <li>&nbsp;{{ bug.platform }}</li>
-                                                        <li style="width: 40%;float: left"><strong>OS</strong></li>
-                                                        <li>&nbsp;{{ bug.os }}</li>
-                                                        <li></li>
-                                                    </ul>
-                                                </div> <!-- /plan-features -->
-
-                                                <div class="plan-actions">
-                                                    <!--<a class="btn"> </a>-->
-                                                </div> <!-- /plan-actions -->
-
-                                            </div> <!-- /plan -->
-                                        </div> <!-- /plan-container -->
-
-                                        <div class="plan-container">
-                                            <div class="plan">
-                                                <div class="plan-header">
-
-                                                    <div class="plan-title">
-
-                                                    </div> <!-- /plan-title -->
-
-                                                    <div class="plan-price">
-                                                        <span class="note"></span>Report and Assign
-                                                        <!--<span class="term"></span>-->
-                                                    </div> <!-- /plan-price -->
-
-                                                </div> <!-- /plan-header -->
-
-                                                <div class="plan-features">
-                                                    <ul>
-                                                        <li style="width: 40%;float: left"><strong>OpenDate</strong>
-                                                        </li>
-                                                        <li>&nbsp;{{ bug.opendate }}</li>
-                                                        <li style="width: 40%;float: left"><strong>Reporter</strong>
-                                                        </li>
-                                                        <li>&nbsp;{{ bug.reporter }}</li>
-                                                        <li style="width: 40%;float: left"><strong>Assignee</strong>
-                                                        </li>
-                                                        <li>&nbsp;{{ bug.assignee }}</li>
-                                                        <!--<li style="width: 40%;float: left"><strong></strong> &nbsp;</li>-->
-                                                        <li> &nbsp;</li>
-                                                        <li></li>
-                                                    </ul>
-                                                </div> <!-- /plan-features -->
-
-                                                <div class="plan-actions">
-                                                    <!--<a href="javascript:;" class="btn"></a>-->
-                                                </div> <!-- /plan-actions -->
-
-                                            </div> <!-- /plan -->
-                                        </div> <!-- /plan-container -->
-
-                                        <div class="plan-container">
-                                            <div class="plan">
-                                                <div class="plan-header">
-
-                                                    <div class="plan-title">
-
-                                                    </div> <!-- /plan-title -->
-
-                                                    <div class="plan-price">
-                                                        <span class="note"></span>Urgency
-                                                        <!--<span class="term"></span>-->
-                                                    </div> <!-- /plan-price -->
-
-                                                </div> <!-- /plan-header -->
-
-                                                <div class="plan-features">
-                                                    <ul>
-                                                        <li style="width: 40%;float: left"><strong>Severity</strong>
-                                                        </li>
-                                                        <li>&nbsp;{{ bug.severity }}</li>
-                                                        <li style="width: 40%;float: left"><strong>Priority</strong>
-                                                        </li>
-                                                        <li>&nbsp;{{ bug.priority }}</li>
-                                                        <li style="width: 40%;float: left"><strong>Version</strong></li>
-                                                        <li>&nbsp;{{ bug.version }}</li>
-                                                        <li style="width: 40%;float: left"><strong>Status</strong></li>
-                                                        <li>&nbsp;{{ bug.status }}</li>
-                                                        <li></li>
-                                                    </ul>
-                                                </div> <!-- /plan-features -->
-
-                                                <div class="plan-actions">
-                                                    <!-- <a href="javascript:;" class="btn"></a>-->
-                                                </div> <!-- /plan-actions -->
-
-                                            </div> <!-- /plan -->
-                                        </div> <!-- /plan-container -->
+                                    <div class="plan-container">
+                                        <div class="plan" style="margin-right:0">
+                                            <div class="plan-features">
+                                                <ul>
+                                                    <li style="width: 30%;float: left"><strong>Severity</strong></li>
+                                                    <li>{{ bug.severity }}</li>
+                                                    <li style="width: 30%;float: left"><strong>Priority</strong></li>
+                                                    <li>{{ bug.priority }}</li>
+                                                    <li style="width: 30%;float: left">&nbsp;</li>
+                                                    <li>&nbsp;</li>
+                                                  <!--  <li style="height: 0"></li>-->
+                                                </ul>
+                                            </div> <!-- /plan-features -->
 
 
-                                    </div> <!-- /pricing-plans -->
+                                        </div> <!-- /plan -->
+                                    </div> <!-- /plan-container -->
+                                    <div class="plan-container">
+                                        <div class="plan" style="margin-right:0">
 
-                                </div> <!-- /widget-content -->
 
-                            </div> <!-- /widget -->
+                                            <div class="plan-features">
+                                                <ul>
+                                                    <li style="width: 30%;float: left"><strong>Version</strong></li>
+                                                    <li>{{ bug.version }}</li>
+                                                    <li style="width: 30%;float: left"><strong>Platform</strong></li>
+                                                    <li>{{ bug.platform }}</li>
+                                                    <li style="width: 30%;float: left;border-bottom: none"><strong>OS</strong></li>
+                                                    <li>{{ bug.os }}</li>
+                                                </ul>
+                                            </div> <!-- /plan-features -->
+                                        </div> <!-- /plan -->
+                                    </div> <!-- /plan-container -->
+                                </div> <!-- /pricing-plans -->
+
+                            </div> <!-- /widget-content -->
+
+                        </div> <!-- /widget -->
 
 
-                            <div class="widget">
+                        <div class="widget">
 
-                                <div class="widget-header">
-                                    <h3 style="margin-left: 6px;margin-top: 10px">Description</h3>
-                                </div> <!-- /widget-header -->
+                            <div class="widget-header">
+                                <h3 style="margin-top: 10px">&nbsp;Description</h3>
+                            </div> <!-- /widget-header -->
 
-                                <div class="widget-content">
+                            <div class="widget-content">
 
-                                    <p>{{ bug.description }}</p>
+                                <p>&nbsp;&nbsp;{{ bug.description }}</p>
 
-                                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                        aliquip ex
-                                        ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                                        esse
-                                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                </div> <!-- /widget-content -->
+                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                                    ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </div> <!-- /widget-content -->
 
-                            </div> <!-- /widget -->
+                        </div> <!-- /widget -->
                         </div>
+
 
                     </div> <!-- /span9 -->
                 </div>
