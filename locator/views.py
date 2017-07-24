@@ -805,8 +805,11 @@ def show_open_bug(request):
         return HttpResponseRedirect('/locator/index/')
 
     bugid = request.GET.get('bugid')
+    flag = request.GET.get('flag')
+    request.session['flag'] = flag
     bug = utils.get_one_report(bugid)
     if request.session['isadmin'] == 'yes':
+
         return render(request, 'admin/show_open_admin.html', {'bug': bug})
     else:
         return render(request, 'show_open_bug.html', {'bug': bug})
@@ -820,6 +823,8 @@ def show_fixed_bug(request):
         return HttpResponseRedirect('/locator/index/')
 
     bugid = request.GET.get('bugid')
+    flag = request.GET.get('flag')
+    request.session['flag'] = flag
     bug = utils.get_one_report(bugid)
     if request.session['isadmin'] == 'yes':
         return render(request, 'admin/show_fixed_admin.html', {'bug': bug})
@@ -835,8 +840,33 @@ def show_notassigned_bug(request):
         return HttpResponseRedirect('/locator/index/')
 
     bugid = request.GET.get('bugid')
+    flag = request.GET.get('flag')
+    request.session['flag'] = flag
     bug = utils.get_one_report(bugid)
     if request.session['isadmin'] == 'yes':
         return render(request, 'admin/show_notassigned_admin.html', {'bug': bug})
     else:
         return render(request, 'show_notassigned_bug.html', {'bug': bug})
+
+def back(request):
+    '''
+    1：overview页面
+    2：timeline页面
+    3：open页面
+    4：fixed页面
+    5：notassigned页面
+    解决进入具体页面后返回的路径
+    :param request: 页面重定向
+    :return: 
+    '''
+    flag = request.session['flag']
+    if flag == '1':
+        return HttpResponseRedirect('/locator/main')
+    elif flag == '2':
+        return HttpResponseRedirect('/locator/timeline')
+    elif flag == '3':
+        return HttpResponseRedirect('/locator/unfixed')
+    elif flag == '4':
+        return HttpResponseRedirect('/locator/fixed')
+    else:
+        return HttpResponseRedirect('/locator/not_assigned')

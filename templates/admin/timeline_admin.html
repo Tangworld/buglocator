@@ -207,11 +207,11 @@
                                     <div class="desc">
                                         <a>{{ report.4 }} </a> reported Bug &nbsp;
                                         {% if report.5 == '1' %}
-                                            <a href="{% url 'locator:show_fixed_bug' %}?bugid={{ report.2 }}">{{ report.2 }}</a>.
+                                            <a href="{% url 'locator:show_fixed_bug' %}?bugid={{ report.2 }}&flag=2">{{ report.2 }}</a>.
                                             {% elif report.5 == '0' %}
-                                            <a href="{% url 'locator:show_open_bug' %}?bugid={{ report.2 }}">{{ report.2 }}</a>.
+                                            <a href="{% url 'locator:show_open_bug' %}?bugid={{ report.2 }}&flag=2">{{ report.2 }}</a>.
                                             {% else %}
-                                            <a href="{% url 'locator:show_notassigned' %}?bugid={{ report.2 }}">{{ report.2 }}</a>.
+                                            <a href="{% url 'locator:show_notassigned' %}?bugid={{ report.2 }}&flag=2">{{ report.2 }}</a>.
                                             {% endif %}
                                     </br>
                                         Summary:{{ report.3 }}
@@ -234,7 +234,7 @@
                                         </div>
                                         <div class="desc">
                                             <a>{{ report.4 }} </a>  fixed Bug
-                                            &nbsp; <a href="{% url 'locator:show_fixed_bug' %}?bugid={{ report.2 }}">{{ report.2 }}</a>.
+                                            &nbsp; <a href="{% url 'locator:show_fixed_bug' %}?bugid={{ report.2 }}&flag=2">{{ report.2 }}</a>.
                                             </br>
                                             Summary:{{ report.3 }}
                                             <!--  <a href="javascript:;" style="font-style:italic">See details...</a> -->
@@ -256,11 +256,11 @@
                                     </div>
                                     <div class="desc">
                                         Bug &nbsp;{% if report.5 == '1' %}
-                                            <a href="{% url 'locator:show_fixed_bug' %}?bugid={{ report.2 }}">{{ report.2 }}</a>.
+                                            <a href="{% url 'locator:show_fixed_bug' %}?bugid={{ report.2 }}&flag=2">{{ report.2 }}</a>.
                                             {% elif report.5 == '0' %}
-                                            <a href="{% url 'locator:show_open_bug' %}?bugid={{ report.2 }}">{{ report.2 }}</a>.
+                                            <a href="{% url 'locator:show_open_bug' %}?bugid={{ report.2 }}&flag=2">{{ report.2 }}</a>.
                                             {% else %}
-                                            <a href="{% url 'locator:show_notassigned' %}?bugid={{ report.2 }}">{{ report.2 }}</a>.
+                                            <a href="{% url 'locator:show_notassigned' %}?bugid={{ report.2 }}&flag=2">{{ report.2 }}</a>.
                                             {% endif %} &nbsp;was assigned to
                                         <a href="javascript:;">{{ report.4 }} </a> .
                                     </br>
@@ -274,7 +274,7 @@
 
                             {% endfor %}
                         <div align="right" style="padding: 10px;">
-                            <a href="{% url 'locator:timeline_admin' %}">Go-Top</a>
+                            <a href="{% url 'locator:timeline' %}">Go-Top</a>
                         </div>
                         </ul>
 
