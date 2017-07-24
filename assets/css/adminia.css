@@ -185,7 +185,7 @@ input {
 	
 	width: auto;
 	
-	margin-bottom: 2em;
+	margin-bottom: 10px;
 }
 	
 .widget-header {
@@ -254,7 +254,7 @@ input {
 
 
 .widget-content {
-	padding: 10px 15px 10px;
+	padding: 0px 0px 0px;
 	
 	background: #FFF;
 	

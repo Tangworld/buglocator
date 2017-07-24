@@ -22,7 +22,7 @@
 /*-- Plan --*/
 
 .plan {
-    margin-right: 6px;
+    margin-right: 0px;
     
     border-radius: 4px;
 }
@@ -59,9 +59,9 @@
 }
 
 .plan-price {
-	padding: 10px 0 20px;
+	padding: 15px 0 15px;
 	
-    font-size: 30px;
+    font-size: 26px;
     line-height: 0.8em;
     
 	background-color: #797979;
@@ -94,11 +94,11 @@
 
 .plan-features {
 	border: 1px solid #DDD;	
-	border-bottom: none;
+	/*border-bottom: none;*/
 }
 
 .plan-features {
-	padding-bottom: 1em;
+	/*padding-bottom: 1em;*/
 }
 
 .plan-features ul {
@@ -109,10 +109,10 @@
 }
 
 .plan-features li {	
-	padding: 1em 0;
+	padding: 0.8em 0;
 	margin: 0 2em;
 	
-	text-align: center;
+	text-align: left;
 	
 	border-bottom: 1px dotted #CCC;
 }
