@@ -858,6 +858,14 @@ def back(request):
     :param request: 页面重定向
     :return: 
     '''
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+
+
     flag = utils.get_value(request, 'session', 'flag')
     if flag == '1':
         return HttpResponseRedirect('/locator/main')
