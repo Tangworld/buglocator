@@ -34,8 +34,8 @@ def login(request):
     flag = True
     validatepassword = ""
 
-    username = request.POST.get('username', None)
-    password = request.POST.get('password', None)
+    username = utils.get_value(request, 'post', 'username')
+    password = utils.get_value(request, 'post', 'password')
     try:
         validatepassword = models.User.objects.get(username=username)
         if validatepassword.password != password:
@@ -117,8 +117,8 @@ def login(request):
                 print e
             # print dis_content
                 # 获取当前页面URL，用于返回上一页的操作
-                fullpath = request.get_full_path()
-                request.session['lastpage'] = fullpath
+                # fullpath = request.get_full_path()
+                # request.session['lastpage'] = fullpath
                 #print fullpath.split('/')
                 ######
             return render(request, 'admin/index_admin.html', {'members': members, 'dis_reports': dis_content, 'series': json.dumps(highdata), 'data': json.dumps(circledata)})
@@ -184,10 +184,10 @@ def login(request):
             currentuser.setMyall(current)
             currentuser.setOthersall(others)
             # 获取当前页面URL，用于返回上一页的操作
-            fullpath = request.get_full_path()
-            string = fullpath.split('/')
-            tmpStr = string[0]+string[1]+':'+string[2]+string[3]
-            request.session['lastpage'] = tmpStr
+            # fullpath = request.get_full_path()
+            # string = fullpath.split('/')
+            # tmpStr = string[0]+string[1]+':'+string[2]+string[3]
+            # request.session['lastpage'] = tmpStr
             ######
             return render(request, 'index.html', {'members': members, 'dis_reports': dis_content, 'currentuser': currentuser})
     else:
@@ -219,7 +219,7 @@ def profile(request):
         return HttpResponseRedirect('/locator/index/')
 
 
-    currentid = request.session['userid']
+    currentid = utils.get_value(request, 'session', 'userid')
     record = models.Record.objects.get(userid=currentid)
     maxvalue = 0
     minvalue = 1000
@@ -284,7 +284,7 @@ def profile(request):
     information.setAll(allbugs=allbugs, allfiles=allfiles, maxmonth=maxmonth, minmonth=minmonth, b1=int(record.b1), b2=int(record.b2), b3=int(record.b3), b4=int(record.b4), b5=int(record.b5), b6=int(record.b6), b7=int(record.b7),
                       f1=int(record.f1), f2=int(record.f2), f3=int(record.f3), f4=int(record.f4), f5=int(record.f5), f6=int(record.f6), f7=int(record.f7))
 
-    if request.session['isadmin'] == 'yes':
+    if utils.get_value(request, 'session', 'isadmin') == 'yes':
         return render(request, 'admin/profile_admin.html')
     else:
         return render(request, 'profile.html', {'infomation': information})
@@ -305,13 +305,13 @@ def main(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    if request.session['isadmin'] == 'yes':
+    if utils.get_value(request, 'session', 'isadmin') == 'yes':
         members = []
         dis_reports = []
         highdata = []
         circledata = []
         try:
-            productobj = models.ProUser.objects.get(user_id=request.session['userid'])
+            productobj = models.ProUser.objects.get(user_id=utils.get_value(request, 'session', 'userid'))
             productId = int(productobj.product_id)
             userids = models.ProUser.objects.filter(product_id=productId)
 
@@ -366,8 +366,8 @@ def main(request):
             print e
         # print dis_content
             # 获取当前页面URL，用于返回上一页的操作
-            fullpath = request.get_full_path()
-            request.session['lastpage'] = fullpath
+            # fullpath = request.get_full_path()
+            # request.session['lastpage'] = fullpath
             ######
         return render(request, 'admin/index_admin.html', {'members': members, 'dis_reports': dis_content, 'series': json.dumps(highdata), 'data': json.dumps(circledata)})
     else:
@@ -377,12 +377,12 @@ def main(request):
         others = 0
         current = 0
         try:
-            productobj = models.ProUser.objects.get(user_id=request.session['userid'])
+            productobj = models.ProUser.objects.get(user_id=utils.get_value(request, 'session', 'userid'))
             productId = int(productobj.product_id)
             userids = models.ProUser.objects.filter(product_id=productId)
 
-            reports1 = models.Report.objects.filter(reporter=request.session['username'])
-            reports2 = models.Report.objects.filter(assignee=request.session['username'])
+            reports1 = models.Report.objects.filter(reporter=utils.get_value(request, 'session', 'username'))
+            reports2 = models.Report.objects.filter(assignee=utils.get_value(request, 'session', 'username'))
             for report in reports1:
                 time_local = time.localtime(float(report.opendate))
                 dt = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
@@ -438,8 +438,8 @@ def main(request):
         currentuser.setMyall(current)
         currentuser.setOthersall(others)
         # 获取当前页面URL，用于返回上一页的操作
-        fullpath = request.get_full_path()
-        request.session['lastpage'] = fullpath
+        # fullpath = request.get_full_path()
+        # request.session['lastpage'] = fullpath
         ######
         return render(request, 'index.html', {'members': members, 'dis_reports': dis_content, 'currentuser': currentuser})
 
@@ -458,7 +458,7 @@ def edit(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    if request.session['isadmin'] == 'yes':
+    if utils.get_value(request, 'session', 'isadmin') == 'yes':
         return render(request, 'admin/editprofile_admin.html')
     else:
         return render(request, 'editprofile.html')
@@ -480,9 +480,9 @@ def confirm(request):
 
     flag = True
     infomation = ""
-    username = request.session['username']
-    inputPassword = request.POST.get('password', None)
-    inputPassword2 = request.POST.get('password2', None)
+    username = utils.get_value(request, 'session', 'username')
+    inputPassword = utils.get_value(request, 'post', 'password')
+    inputPassword2 = utils.get_value(request, 'post', 'password2')
     if inputPassword == "":
         flag = False
         infomation = "Password cannot be empty！"
@@ -518,8 +518,8 @@ def unlock(request):
     :param request: 
     :return: 
     """
-    password = request.POST.get('password', None)
-    realpassword = request.session['password']
+    password = utils.get_value(request, 'post', 'password')
+    realpassword = utils.get_value(request, 'session', 'password')
     if password == realpassword:
         del request.session['lock']
         return HttpResponseRedirect('/locator/main/')
@@ -602,8 +602,8 @@ def unfixed(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    current_isadmin = request.session['isadmin']
-    current_username = request.session['username']
+    current_isadmin = utils.get_value(request, 'session', 'isadmin')
+    current_username = utils.get_value(request, 'session', 'username')
     disContent = []
 
     if current_isadmin == 'yes':
@@ -612,8 +612,8 @@ def unfixed(request):
             tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), report.assignee)
             disContent.append(tmpContent)
 # 获取当前页面URL，用于返回上一页的操作
-        fullpath = request.get_full_path()
-        request.session['lastpage'] = fullpath
+#         fullpath = request.get_full_path()
+#         request.session['lastpage'] = fullpath
             ######
         return render(request, 'admin/defects_not_resolved_admin.html', {'contents': disContent})
     else:
@@ -622,8 +622,8 @@ def unfixed(request):
             tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))))
             disContent.append(tmpContent)
             # 获取当前页面URL，用于返回上一页的操作
-        fullpath = request.get_full_path()
-        request.session['lastpage'] = fullpath
+        # fullpath = request.get_full_path()
+        # request.session['lastpage'] = fullpath
             ######
         return render(request, 'defects_not_resolved.html', {'contents': disContent})
 
@@ -640,8 +640,8 @@ def fixed(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    current_isadmin = request.session['isadmin']
-    current_username = request.session['username']
+    current_isadmin = utils.get_value(request, 'session', 'isadmin')
+    current_username = utils.get_value(request, 'session', 'username')
     disContent = []
 
     if current_isadmin == 'yes':
@@ -650,14 +650,14 @@ def fixed(request):
             tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.fixdate))))
             disContent.append(tmpContent)
             # 获取当前页面URL，用于返回上一页的操作
-        fullpath = request.get_full_path()
-        request.session['lastpage'] = fullpath
+        # fullpath = request.get_full_path()
+        # request.session['lastpage'] = fullpath
             ######
         return render(request, 'admin/defects_resolved_admin.html', {'contents': disContent})
     else:
         # 获取当前页面URL，用于返回上一页的操作
-        fullpath = request.get_full_path()
-        request.session['lastpage'] = fullpath
+        # fullpath = request.get_full_path()
+        # request.session['lastpage'] = fullpath
         ######
         reports = utils.get_reports('fixed', current_username)
         for report in reports:
@@ -680,8 +680,8 @@ def not_assigned(request):
 
     reports = utils.get_reports('open')
     # 获取当前页面URL，用于返回上一页的操作
-    fullpath = request.get_full_path()
-    request.session['lastpage'] = fullpath
+    # fullpath = request.get_full_path()
+    # request.session['lastpage'] = fullpath
     ######
     for report in reports:
             tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(float(report.opendate))))
@@ -697,8 +697,8 @@ def more_timeline(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    current_isadmin = request.session['isadmin']
-    current_username = request.session['username']
+    current_isadmin = utils.get_value(request, 'session', 'isadmin')
+    current_username = utils.get_value(request, 'session', 'username')
     dis_reports = []
 
     if current_isadmin == 'yes':
@@ -731,8 +731,8 @@ def more_timeline(request):
         for i in range(len(dis_reports) - 1, -1, -1):
             dis_content.append(dis_reports[i])
             # 获取当前页面URL，用于返回上一页的操作
-        fullpath = request.get_full_path()
-        request.session['lastpage'] = fullpath
+        # fullpath = request.get_full_path()
+        # request.session['lastpage'] = fullpath
             ######
         return render(request, 'admin/timeline_admin.html', {'dis_reports': dis_content})
     else:
@@ -764,10 +764,10 @@ def more_timeline(request):
         for i in range(len(dis_reports) - 1, -1, -1):
             dis_content.append(dis_reports[i])
             # 获取当前页面URL，用于返回上一页的操作
-        fullpath = request.get_full_path()
-        request.session['lastpage'] = fullpath
+        # fullpath = request.get_full_path()
+        # request.session['lastpage'] = fullpath
             ######
-        return render(request,'timeline.html',{'dis_reports': dis_content})
+        return render(request, 'timeline.html', {'dis_reports': dis_content})
 
 
 def check_lock(request):
@@ -804,12 +804,11 @@ def show_open_bug(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    bugid = request.GET.get('bugid')
-    flag = request.GET.get('flag')
+    bugid = utils.get_value(request, 'get', 'bugid')
+    flag = utils.get_value(request, 'get', 'flag')
     request.session['flag'] = flag
     bug = utils.get_one_report(bugid)
     if request.session['isadmin'] == 'yes':
-
         return render(request, 'admin/show_open_admin.html', {'bug': bug})
     else:
         return render(request, 'show_open_bug.html', {'bug': bug})
@@ -822,8 +821,8 @@ def show_fixed_bug(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    bugid = request.GET.get('bugid')
-    flag = request.GET.get('flag')
+    bugid = utils.get_value(request, 'get', 'bugid')
+    flag = utils.get_value(request, 'get', 'flag')
     request.session['flag'] = flag
     bug = utils.get_one_report(bugid)
     if request.session['isadmin'] == 'yes':
@@ -839,8 +838,8 @@ def show_notassigned_bug(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    bugid = request.GET.get('bugid')
-    flag = request.GET.get('flag')
+    bugid = utils.get_value(request, 'get', 'bugid')
+    flag = utils.get_value(request, 'get', 'flag')
     request.session['flag'] = flag
     bug = utils.get_one_report(bugid)
     if request.session['isadmin'] == 'yes':
@@ -859,7 +858,7 @@ def back(request):
     :param request: 页面重定向
     :return: 
     '''
-    flag = request.session['flag']
+    flag = utils.get_value(request, 'session', 'flag')
     if flag == '1':
         return HttpResponseRedirect('/locator/main')
     elif flag == '2':
