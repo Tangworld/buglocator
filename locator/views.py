@@ -28,10 +28,6 @@ def login(request):
     :param request: 
     :return: 
     """
-    # 权限控制
-    lockflag = check_lock(request)
-    if lockflag:
-        return HttpResponseRedirect('/locator/lock/')
 
     v1 = ""
     v2 = ""
