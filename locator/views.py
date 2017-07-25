@@ -877,3 +877,11 @@ def back(request):
         return HttpResponseRedirect('/locator/fixed')
     else:
         return HttpResponseRedirect('/locator/not_assigned')
+
+def alg_res(request):
+    content = []
+    paths = []
+    paths.append('/home/ranger/PycharmProjects/new/buglocator/locator/models.py')
+    file = open('/home/ranger/PycharmProjects/new/buglocator/locator/models.py', 'r')
+    content.append(file.read())
+    return render(request, 'resultPage.html', {'content' : content, 'paths':paths})
