@@ -2,11 +2,11 @@
 import test
 
 def main():
-    k_vocab = open('../data/k_vocab.txt', 'r')
-    omega = open('../data/omega.txt', 'r')
-    phi = open('../data/phi.txt', 'r')
-    pl = open('../data/pl.txt', 'r')
-    ptw = open('../data/ptw.txt', 'r')
+    k_vocab = open('../data/bughunter/k_vocab.txt', 'r')
+    omega = open('../data/bughunter/omega.txt', 'r')
+    phi = open('../data/bughunter/phi.txt', 'r')
+    pl = open('../data/bughunter/pl.txt', 'r')
+    ptw = open('../data/bughunter/ptw.txt', 'r')
 
     # 获取k_vocab参数
     k_vocab_value = k_vocab.readlines()
