@@ -913,6 +913,18 @@ a {
   color: #428bca;
   text-decoration: none;
 }
+a.nav-bar
+{
+  width: 150px;
+  border: 0;
+  color: #1a1a1a;
+  text-decoration: none;
+  border: 1px solid #CCCCCC;
+  font-size: 1.2em;
+  text-align: center;
+  font-weight: 500;
+
+}
 a:hover,
 a:focus {
   color: #2a6496;
@@ -1367,8 +1379,8 @@ kbd kbd {
 }
 pre {
   display: block;
-  padding: 9.5px;
-  margin: 0 0 10px;
+  padding: 10px;
+  margin: 0 0 0px;
   font-size: 13px;
   line-height: 1.42857143;
   color: #333;
@@ -3700,7 +3712,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
   color: #fff;
-  background-color: #428bca;
+  background-color: #a1a6a9;
 }
 .nav-stacked > li {
   float: none;
