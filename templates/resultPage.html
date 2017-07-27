@@ -25,6 +25,7 @@
     <link href="/assets/css/adminia-responsive.css" rel="stylesheet"/>
 
     <!--标签云的link-->
+{#    <link rel="stylesheet" type="text/css" href="/assets/css/zzsc-demo.css">#}
 
 
     <link href="/assets/css/plans.css" rel="stylesheet"/>
@@ -73,7 +74,8 @@
             <!-- sidebar menu start-->
             <ul class="sidebar-menu" id="nav-accordion">
 
-                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="{{ request.session.avatarloc }}" class="img-circle" width="60"></a></p>
+                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="{{ request.session.avatarloc }}"
+                                                                               class="img-circle" width="60"></a></p>
                 <h5 class="centered">{{ request.session.username }}</h5>
 
                 <li class="mt">
@@ -119,88 +121,92 @@
                                 <font color="#fff" size="5">Detatil Result</font>
                             </h3>
                             <div class="widget" style="margin-top: 10px; border-bottom: solid;">
-<iframe src="{% url 'locator:test' %}" style="width: 49.9%;height: 500px;float: left" frameborder="0" scrolling="no"></iframe>
-                                <iframe src="{% url 'locator:test' %}" style="width: 49.9%;height: 500px;float: left" frameborder="0" scrolling="no"></iframe>
+                                <iframe src="{% url 'locator:cloud' %}" style="width: 49.9%;height: 500px;float: left" frameborder="0" scrolling="no"></iframe>
+                                <iframe src="{% url 'locator:cloud' %}" style="width: 49.9%;height: 500px;float: left" frameborder="0" scrolling="no"></iframe>
                             </div> <!--/widget -->
 
                             <div class="widget">
-                                 <div class="panel-body" style="padding-left:0px">
-                            <ul class="nav nav-pills">
-                             <li class="active"><a class="nav-bar" href="#file10-pills" data-toggle="tab">File1:  90%</a>
-                                </li>
-                                {% for file in filelist %}
-                                <li class=""><a class="nav-bar" href="#file{{ forloop.counter0 }}-pills" data-toggle="tab">File1:  90%</a>
-                                </li>
-                                {% endfor %}
-{#                                <li class=""><a class="nav-bar" href="#file2-pills" data-toggle="tab">File2:  80%</a>#}
-{#                                </li>#}
-{#                                <li class=""><a class="nav-bar" href="#file3-pills" data-toggle="tab">File3:  70%</a>#}
-{#                                </li>#}
-{#                                <li class=""><a class="nav-bar" href="#file4-pills" data-toggle="tab">File4:  60%</a>#}
-{#                                </li>#}
-{#                                <li class=""><a class="nav-bar" href="#file5-pills" data-toggle="tab">File5:  50%</a>#}
-{#                                </li>#}
-                            </ul>
+                                <div class="panel-body" style="padding-left:0px">
+                                    <ul class="nav nav-pills">
+{#                                        <li class="active"><a class="nav-bar" href="#file10-pills" data-toggle="tab">File1:#}
+{#                                            90%</a>#}
+{#                                        </li>#}
+                                        {% for file in filelist %}
+                                            <li class=""><a class="nav-bar" href="#file{{ forloop.counter0 }}-pills"
+                                                            data-toggle="tab">File{{ forloop.counter0 }}: 90%</a>
+                                            </li>
+                                        {% endfor %}
+                                        {#                                <li class=""><a class="nav-bar" href="#file2-pills" data-toggle="tab">File2:  80%</a>#}
+                                        {#                                </li>#}
+                                        {#                                <li class=""><a class="nav-bar" href="#file3-pills" data-toggle="tab">File3:  70%</a>#}
+                                        {#                                </li>#}
+                                        {#                                <li class=""><a class="nav-bar" href="#file4-pills" data-toggle="tab">File4:  60%</a>#}
+                                        {#                                </li>#}
+                                        {#                                <li class=""><a class="nav-bar" href="#file5-pills" data-toggle="tab">File5:  50%</a>#}
+                                        {#                                </li>#}
+                                    </ul>
 
-                            <div class="tab-content">
-                             <div class="tab-pane fade " id="file10-pills">
-                                    <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font> &nbsp;</h4>
-                                    <pre style="height: 680px;padding:10px;">
-                                        <code>
-                                        </code>
-
-                                    </pre>
-                                </div>
-                                {% for file in filelist %}
-                                <div class="tab-pane fade " id="file{{ forloop.counter0 }}-pills">
-                                    <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font> &nbsp;{{ file.path }}</h4>
-                                    <pre style="height: 680px;padding:10px;">
+                                    <div class="tab-content">
+{#                                        <div class="tab-pane fade " id="file10-pills">#}
+{#                                            <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font>#}
+{#                                                &nbsp;</h4>#}
+{#                                            <pre style="height: 680px;padding:10px;">#}
+{#                                        <code>#}
+{#                                        </code>#}
+{##}
+{#                                    </pre>#}
+{#                                        </div>#}
+                                        {% for file in filelist %}
+                                            <div class="tab-pane fade " id="file{{ forloop.counter0 }}-pills">
+                                                <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font>
+                                                    &nbsp;{{ file.path }}</h4>
+                                                <pre style="height: 680px;padding:10px;">
                                         <code>
 {{ file.content }}
                                         </code>
 
                                     </pre>
-                                </div>
-                                {% endfor %}
-{#                                <div class="tab-pane fade" id="file2-pills">#}
-{#                                    <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font> &nbsp;{{ paths.0 }}</h4>#}
-{#                                    <pre style="height: 680px;padding:10px;">#}
-{#                                        <code>#}
-{#{{ content.0 }}#}
-{#                                        </code>#}
-{#                                    </pre>#}
-{#                                </div>#}
-{#                                <div class="tab-pane fade" id="file3-pills">#}
-{#                                    <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font> &nbsp;{{ paths.0 }}</h4>#}
-{#                                    <pre style="height: 680px;padding:10px;">#}
-{#                                        <code>#}
-{#{{ content.0 }}#}
-{#                                        </code>#}
-{##}
-{#                                    </pre>#}
-{#                                </div>#}
-{#                                <div class="tab-pane fade" id="file4-pills">#}
-{#                                    <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font> &nbsp;{{ paths.0 }}</h4>#}
-{#                                    <pre style="height: 680px;padding:10px;">#}
-{#                                        <code>#}
-{#{{ content.0 }}#}
-{#                                        </code>#}
-{##}
-{#                                    </pre>#}
-{#                                </div>#}
-{#                                <div class="tab-pane fade" id="file5-pills">#}
-{#                                    <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font> &nbsp;{{ paths.0 }}</h4>#}
-{#                                    <pre style="height: 680px;padding:10px;">#}
-{#                                        <code>#}
-{#{{ content.0 }}#}
-{#                                        </code>#}
-{##}
-{#                                    </pre>#}
-{#                                </div>#}
-                            </div>
+                                            </div>
+                                        {% endfor %}
+                                        {#                                <div class="tab-pane fade" id="file2-pills">#}
+                                        {#                                    <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font> &nbsp;{{ paths.0 }}</h4>#}
+                                        {#                                    <pre style="height: 680px;padding:10px;">#}
+                                        {#                                        <code>#}
+                                        {#{{ content.0 }}#}
+                                        {#                                        </code>#}
+                                        {#                                    </pre>#}
+                                        {#                                </div>#}
+                                        {#                                <div class="tab-pane fade" id="file3-pills">#}
+                                        {#                                    <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font> &nbsp;{{ paths.0 }}</h4>#}
+                                        {#                                    <pre style="height: 680px;padding:10px;">#}
+                                        {#                                        <code>#}
+                                        {#{{ content.0 }}#}
+                                        {#                                        </code>#}
+                                        {##}
+                                        {#                                    </pre>#}
+                                        {#                                </div>#}
+                                        {#                                <div class="tab-pane fade" id="file4-pills">#}
+                                        {#                                    <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font> &nbsp;{{ paths.0 }}</h4>#}
+                                        {#                                    <pre style="height: 680px;padding:10px;">#}
+                                        {#                                        <code>#}
+                                        {#{{ content.0 }}#}
+                                        {#                                        </code>#}
+                                        {##}
+                                        {#                                    </pre>#}
+                                        {#                                </div>#}
+                                        {#                                <div class="tab-pane fade" id="file5-pills">#}
+                                        {#                                    <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font> &nbsp;{{ paths.0 }}</h4>#}
+                                        {#                                    <pre style="height: 680px;padding:10px;">#}
+                                        {#                                        <code>#}
+                                        {#{{ content.0 }}#}
+                                        {#                                        </code>#}
+                                        {##}
+                                        {#                                    </pre>#}
+                                        {#                                </div>#}
+                                    </div>
 
-                            </div> <!-- /widget -->
-                        </div>
+                                </div> <!-- /widget -->
+                            </div>
                         </div>
                     </div> <!-- /span9 -->
                 </div> <!--/col-lg-12-->
@@ -215,7 +221,6 @@
 <!--标签云的script-->
 
 
-
 <!-- js placed at the end of the document so the pages load faster -->
 <script src="/assets/js/jquery.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
@@ -227,6 +232,8 @@
 <script src="/assets/js/jquery-1.9.1.min.js"></script>
 <script src="/assets/js/jquery.selectlist.js"></script>
 <script src="/assets/js/table-sort.js"></script>
+<script src="/assets/js/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script src="/assets/js/jquery.svg3dtagcloud.min.js"></script>
 <script type="text/javascript">
     $(function () {
         $('select').selectlist({
@@ -250,7 +257,6 @@
     });
 
 </script>
-
 
 
 </body>

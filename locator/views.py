@@ -906,13 +906,7 @@ def alg_res(request):
             # content.append(thiscontent.readlines())
         except Exception, e:
             print e
-            filelist.append({'content': 'No such file', 'path': ''})
 
-
-
-    # paths.append('/home/tsj/PycharmProjects/buglocator/locator/models.py')
-    # file = open('/home/tsj/PycharmProjects/buglocator/locator/models.py', 'r')
-    # content.append(file.read())
     return render(request, 'resultPage.html', {'filelist': filelist})
 
 
@@ -974,5 +968,5 @@ def get_result(bugid):
 
 
 
-def testtest(request):
+def cloud(request):
     return render(request, 'cloud.html')
