@@ -1387,8 +1387,8 @@ pre {
   word-break: break-all;
   word-wrap: break-word;
   background-color: #f5f5f5;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  /*border: 1px solid #ccc;
+  border-radius: 4px;*/
 }
 pre code {
   padding: 0;
@@ -3598,7 +3598,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav > li > a {
   position: relative;
   display: block;
-  padding: 10px 15px;
+  padding: 18px 35px;
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
@@ -3706,7 +3706,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-radius: 4px;
 }
 .nav-pills > li + li {
-  margin-left: 2px;
+  margin-left: 0px;
 }
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:hover,

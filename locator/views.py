@@ -1,4 +1,6 @@
 # -*- coding:utf-8 -*-
+
+import random
 from django.shortcuts import render
 from django.shortcuts import HttpResponseRedirect
 from locator import models
@@ -8,9 +10,11 @@ from domain import CurrentUser
 from domain import Information
 import json
 from locator import utils
-
+import test
+import os
 # Create your views here.
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def index(request):
@@ -879,9 +883,121 @@ def back(request):
         return HttpResponseRedirect('/locator/not_assigned')
 
 def alg_res(request):
-    content = []
-    paths = []
-    paths.append('/home/ranger/PycharmProjects/new/buglocator/locator/models.py')
-    file = open('/home/ranger/PycharmProjects/new/buglocator/locator/models.py', 'r')
-    content.append(file.read())
-    return render(request, 'resultPage.html', {'content' : content, 'paths':paths})
+    #原有代码
+    #pre = BASE_DIR+'/data/bughunter/'
+
+    '''
+    filelist = []
+    bugid = utils.get_value(request, 'get', 'bugid')
+    result = get_result(bugid)
+    filemap = open(BASE_DIR+'/data/bughunter/FileMap.txt', 'r')
+    files = filemap.readlines()
+    filemap.close()
+    for r in result:
+        #print type(r)
+        #print r
+        key = r-1
+        # paths.append(files[r].replace('\n', ''))
+        thispath = pre + files[key].replace('\n', '')
+        try:
+            thiscontent = open(thispath, 'r')
+            filelist.append({'content': thiscontent.read(), 'path': files[r].replace('\n', '')})
+
+            # content.append(thiscontent.readlines())
+        except Exception, e:
+            print e
+            filelist.append({'content': 'No such file', 'path': ''})
+    '''
+    #测试代码
+    cList = [' ', '<', '>', '&', '\'', '"', '\n']
+    cDict = {' ': '&nbsp;',
+             '<': '&lt;',
+             '>': '&gt;',
+             '\'': '&apos;',
+             '"': 'quot;',
+             '\n': '<br>'}
+    testPath = '/home/ranger/PycharmProjects/new/buglocator/locator/urls.py'
+    fileStr = open('/home/ranger/PycharmProjects/new/buglocator/locator/another.txt', 'r').read()
+    fileTest = open(testPath,'r').read()
+    wordArr = []
+    aWord = []
+    for char in fileStr:
+        if char.isalpha():
+            aWord.append(char)
+        elif char.isdigit():
+            aWord.append(char)
+        else:
+            wordArr.append("".join(aWord))
+            aWord = []
+            if char not in cList:
+                wordArr.append(char)
+            else:
+                wordArr.append(cDict[char])
+    kwArr = ['applet', 'RPFactor', 'RemoteUIApplet', 'class']
+    # paths.append('/home/tsj/PycharmProjects/buglocator/locator/models.py')
+    # file = open('/home/tsj/PycharmProjects/buglocator/locator/models.py', 'r')
+    # content.append(file.read())
+    return render(request, 'resultPage.html', {'fileArr':json.dumps(wordArr), 'sel_arr':json.dumps(kwArr),
+                                               'path':testPath,'file':fileTest})
+
+
+def get_result(bugid):
+    k_vocab = open(BASE_DIR+'/data/bughunter/k_vocab.txt', 'r')
+    omega = open(BASE_DIR+'/data/bughunter/omega.txt', 'r')
+    phi = open(BASE_DIR+'/data/bughunter/phi.txt', 'r')
+    pl = open(BASE_DIR+'/data/bughunter/pl.txt', 'r')
+    ptw = open(BASE_DIR+'/data/bughunter/ptw.txt', 'r')
+    k_vocab_value = k_vocab.readlines()
+    omega_value = omega.readlines()
+    phi_value = phi.readlines()
+    pl_value = pl.readlines()
+    ptw_value = ptw.readlines()
+    k_vocab.close()
+    omega.close()
+    phi.close()
+    pl.close()
+    ptw.close()
+
+    # 获取k_vocab参数
+    r_k_vocab = eval(k_vocab_value[0])
+    # 获取omega参数
+    r_omega = eval(omega_value[0])
+    # 获取phi参数
+    r_phi = eval(phi_value[0])
+    # 获取pl参数
+    r_pl = eval(pl_value[0])
+    r_ptw = eval(ptw_value[0])
+
+    bugidmap = open(BASE_DIR+'/data/bughunter/BugidMap.txt', 'r')
+    reports = open(BASE_DIR+'/data/bughunter/reports.txt', 'r')
+    bugids = bugidmap.readlines()
+    reportss = reports.readlines()
+    bugidmap.close()
+    reports.close()
+    index = 0
+    current_report = ()
+    for id in bugids:
+        print bugid, id, type(bugid), type(id.decode('utf-8'))
+        if int(bugid) == int(id):
+            break
+        index += 1
+    print index
+    current_report = reportss[index]
+    current_report = eval(current_report)
+    ws = current_report[0]
+    ts = current_report[1]
+    print type(ws), type(ts)
+    print ws, ts
+    report = {'ws': ws, 'ts': ts}
+
+
+    result = []
+    s_ptd = test.llda_test(report, r_k_vocab, r_pl, r_phi, r_omega, r_ptw)
+    for i in range(0, 10):
+        result.append(s_ptd[i][0])
+    return result
+
+
+
+def testtest(request):
+    return render(request, 'cloud.html')

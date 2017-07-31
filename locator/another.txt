@@ -1,0 +1,50 @@
+I am trying to run the Swing based applet of Azureus with:
+gcjappletviewer, jamvm, classpath (all from latest CVS) and
+Azureus 2.3.0.4 with the webui plugin 1.5.2
+(http://azureus.sourceforge.net/plugin_details.php?plugin=webui)
+
+If everything would work correct Azureus would create a jar file containing its
+classes and deliver this to the client applet which I want to run with
+gcjappletviewer.
+
+However when the applet tries to establish the HTTP connection to receive the
+file it fails and throws the following exception:
+
+gcjappletviewer http://10.11.11.11:6883/applet_webui_only.html
+raw arguments:
+ http://10.11.11.11:6883/applet_webui_only.html
+parsed applet tags:
+ tag 0:
+  name=
+  code=org.gudy.azureus2.ui.webplugin.remoteui.applet.RemoteUIApplet.class
+  codebase=.
+  archive=[http://10.11.11.11:6883/remui.jar]
+  parameters={width=100%, height=100%}
+  documentbase=http://10.11.11.11:6883/applet_webui_only.html
+
+document base = http://10.11.11.11:6883/applet_webui_only.html, dispatcher = htt
+p://10.11.11.11:6883/process.cgi
+org.gudy.azureus2.pluginsimpl.remote.RPException: RequestDispatch fails
+   at org.gudy.azureus2.ui.webplugin.remoteui.applet.RemoteUIApplet.dispatchSupp
+ort (RemoteUIApplet.java:573)
+   at org.gudy.azureus2.ui.webplugin.remoteui.applet.RemoteUIApplet.dispatch (Re
+moteUIApplet.java:405)
+   at org.gudy.azureus2.pluginsimpl.remote.RPFactory.getPlugin (RPFactory.java:3 9)
+   at org.gudy.azureus2.ui.webplugin.remoteui.applet.RemoteUIApplet.start (Remot
+eUIApplet.java:124)
+   at gnu.gcjwebplugin.StandaloneAppletWindow.<init> (StandaloneAppletWindow.jav
+a:188)
+   at gnu.gcjwebplugin.StandaloneAppletViewer.<init> (StandaloneAppletViewer.jav
+a:161)
+   at gnu.gcjwebplugin.AppletViewer.main (AppletViewer.java:284)
+Caused by: java.net.ProtocolException: Peer closed connection
+   at gnu.java.net.protocol.http.Request.readResponse (Request.java:415)
+   at gnu.java.net.protocol.http.Request.dispatch (Request.java:378)
+   at gnu.java.net.protocol.http.HTTPURLConnection.connect (HTTPURLConnection.ja
+va:232)
+   at org.gudy.azureus2.ui.webplugin.remoteui.applet.RemoteUIApplet.dispatchSupp
+ort (RemoteUIApplet.java:494)
+   ...6 more
+
+Since the applet works with proprietary JDK 1.4 and 5.0 I suspect the problem is
+in Classpath.

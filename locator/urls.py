@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^show_fixed_bug/$', views.show_fixed_bug, name='show_fixed_bug'),
     url(r'^show_notassigned_bug/$', views.show_notassigned_bug, name='show_notassigned'),
     url(r'^back/$', views.back, name='back'),
+    url(r'^test/$', views.testtest, name='test'),
 
     url(r'^index_admin/$', views.login, name='index_admin'),
     url(r'^profile_admin/$', views.profile, name='profile_admin'),
