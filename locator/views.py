@@ -891,11 +891,11 @@ def back(request):
         return HttpResponseRedirect('/locator/not_assigned')
 
 def alg_res(request):
-    pre = BASE_DIR+'/data/bughunter/'
+    #原有代码
+    #pre = BASE_DIR+'/data/bughunter/'
 
+    '''
     filelist = []
-    # content = []
-    # paths = []
     bugid = utils.get_value(request, 'get', 'bugid')
     result = get_result(request, bugid)
     filemap = open(BASE_DIR+'/data/bughunter/FileMap.txt', 'r')
@@ -903,8 +903,13 @@ def alg_res(request):
     filemap.close()
     print result
     for r in result:
+<<<<<<< HEAD
+        #print type(r)
+        #print r
+=======
         # print type(r)
         # print r
+>>>>>>> 514f8269b8d7733169cdfa0674a047b8f9391fd9
         key = r-1
         # paths.append(files[r].replace('\n', ''))
         thispath = pre + files[key].replace('\n', '')
@@ -915,8 +920,41 @@ def alg_res(request):
             # content.append(thiscontent.readlines())
         except Exception, e:
             print e
-    print filelist
-    return render(request, 'resultPage.html', {'filelist': filelist})
+<<<<<<< HEAD
+            filelist.append({'content': 'No such file', 'path': ''})
+    '''
+    #测试代码
+    cList = [' ', '<', '>', '&', '\'', '"', '\n']
+    cDict = {' ': '&nbsp;',
+             '<': '&lt;',
+             '>': '&gt;',
+             '\'': '&apos;',
+             '"': 'quot;',
+             '\n': '<br>'}
+    testPath = '/home/ranger/PycharmProjects/new/buglocator/locator/urls.py'
+    fileStr = open('/home/ranger/PycharmProjects/new/buglocator/locator/another.txt', 'r').read()
+    fileTest = open(testPath,'r').read()
+    wordArr = []
+    aWord = []
+    for char in fileStr:
+        if char.isalpha():
+            aWord.append(char)
+        elif char.isdigit():
+            aWord.append(char)
+        else:
+            wordArr.append("".join(aWord))
+            aWord = []
+            if char not in cList:
+                wordArr.append(char)
+            else:
+                wordArr.append(cDict[char])
+    kwArr = ['applet', 'RPFactor', 'RemoteUIApplet', 'class']
+    # paths.append('/home/tsj/PycharmProjects/buglocator/locator/models.py')
+    # file = open('/home/tsj/PycharmProjects/buglocator/locator/models.py', 'r')
+    # content.append(file.read())
+    return render(request, 'resultPage.html', {'fileArr':json.dumps(wordArr), 'sel_arr':json.dumps(kwArr),
+                                               'path':testPath,'file':fileTest})
+
 
 
 def get_result(request, bugid):

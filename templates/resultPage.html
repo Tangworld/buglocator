@@ -127,106 +127,107 @@
     *********************************************************************************************************************************************************** -->
     <!--main content start-->
     <section id="main-content">
-        <section class="wrapper site-min-height" style="padding-left:0">
+        <section class="wrapper site-min-height" style="padding-left:0;padding-bottom:0px">
             <div class="row mt" style="margin-top:10px">
-                <div class="col-lg-12" style="padding-right:10px">
+             <!--   <div class="col-lg-12" style="padding-right:10px">-->
 
-                    <div class="span9" style="width: 100%;padding-left: 10px">
+                    <div class="span9" style="width: 100%;padding-left: 20px">
 
                         <div style="background: #ffffff; padding:10px;box-shadow: 0px 3px 2px #aab2bd;">
                             <h3 style="background:#ff865c; padding: 16px;margin-top:0;margin-bottom:20px;height: 60px">
                                 <font color="#fff" size="5">Detatil Result</font>
                             </h3>
-                            <div class="widget" style="margin-top: 10px; border-bottom: solid;">
-                                <iframe src="{% url 'locator:cloud' %}" style="width: 49.9%;height: 500px;float: left" frameborder="0" scrolling="no"></iframe>
-                                <iframe src="{% url 'locator:cloud' %}" style="width: 49.9%;height: 500px;float: left" frameborder="0" scrolling="no"></iframe>
-                            </div> <!--/widget -->
 
-                            <div class="widget">
-                                <div class="panel-body" style="padding-left:0px">
-                                    <ul class="nav nav-pills">
-{#                                        <li class="active"><a class="nav-bar" href="#file10-pills" data-toggle="tab">File1:#}
-{#                                            90%</a>#}
-{#                                        </li>#}
-                                        {% for file in filelist %}
-                                            <li class=""><a class="nav-bar" href="#file{{ forloop.counter0 }}-pills"
-                                                            data-toggle="tab">File{{ forloop.counter0 }}: 90%</a>
-                                            </li>
-                                        {% endfor %}
-                                        {#                                <li class=""><a class="nav-bar" href="#file2-pills" data-toggle="tab">File2:  80%</a>#}
-                                        {#                                </li>#}
-                                        {#                                <li class=""><a class="nav-bar" href="#file3-pills" data-toggle="tab">File3:  70%</a>#}
-                                        {#                                </li>#}
-                                        {#                                <li class=""><a class="nav-bar" href="#file4-pills" data-toggle="tab">File4:  60%</a>#}
-                                        {#                                </li>#}
-                                        {#                                <li class=""><a class="nav-bar" href="#file5-pills" data-toggle="tab">File5:  50%</a>#}
-                                        {#                                </li>#}
+                            <!--<div class="widget" style="margin-top: 10px; border-bottom: solid;">
+
+                            </div> /widget -->
+
+                            <div class="widget" style="background: #ffffff; height: 850px;">
+                                 <div class="col-lg-5" style="overflow: auto;padding-left:0">
+                                     <div class="tab-content" style="border: 1px solid #ccc;">
+                                         <div class="tab-pane active " id="file1-pills">
+                                             <h4 style="margin:0;padding: 10px;background: #f5f5f5;padding-bottom:40px;"><font color="black">Bug Report--Description：&nbsp;Bug ***</font> &nbsp;</h4>
+                                             <div style="height: 750px;overflow: auto;padding:10px;background: #f5f5f5;">
+                                                 <div id="content" style="width: 100%;font-size:1.2em;
+                                                 padding-top:15px;padding-left:10px;background: #282c34;color: #abb2bf;";>
+
+                                                 </div><!--/content-->
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div> <!-- /col-lg-5 -->
+                                <div class="col-lg-2" style="padding-left:65px">
+                                     <ul class="nav nav-pills" style="align-self: center">
+                                         <li class="active"><a class="nav-bar" href="#file1-pills" data-toggle="tab">File1:  90%</a>
+                                         </li>
+                                         <li class=""><a class="nav-bar" href="#file2-pills" data-toggle="tab">File2:  80%</a>
+                                        </li>
+                                        <li class=""><a class="nav-bar" href="#file3-pills" data-toggle="tab">File3:  70%</a>
+                                        </li>
+                                        <li class=""><a class="nav-bar" href="#file4-pills" data-toggle="tab">File4:  60%</a>
+                                        </li>
+                                        <li class=""><a class="nav-bar" href="#file5-pills" data-toggle="tab">File5:  50%</a>
+                                        </li>
+                                     </ul>
+                                    <ul class="nav nav-pills" style="align-self: center;margin-top:50px;">
+                                        <li class="" style="">
+                                            <a class="nav-bar" style="background: #ff865c;
+                                             color: #ffffff;padding:18px 15px;font-size:1.5em">Tag as Fixed</a>
+                                         </li>
                                     </ul>
+                                </div> <!-- /col-lg-2-->
+                                <div class="col-lg-5" style="padding-right:0">
+                                    <div class="tab-content" style="border:1px solid #ccc;width:100%">
+                                        <div class="tab-pane active " id="file1-pills">
+                                            <h4 style="margin:0;padding: 10px;background: #f5f5f5"><font color="black">File Path: &nbsp;{{ path }}</font> &nbsp;</h4>
 
-                                    <div class="tab-content">
-{#                                        <div class="tab-pane fade " id="file10-pills">#}
-{#                                            <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font>#}
-{#                                                &nbsp;</h4>#}
-{#                                            <pre style="height: 680px;padding:10px;">#}
+                                            <pre style="height: 780px;padding:10px;">
+                                                <code>
+{{ file }}
+                                                </code>
+                                            </pre>
+                                        </div>
+{#                                <div class="tab-pane fade" id="file2-pills">#}
+{#                                    <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font> &nbsp;{{ paths.0 }}</h4>#}
+{#                                    <pre style="height: 680px;padding:10px;">#}
 {#                                        <code>#}
+{#{{ content.0 }}#}
+{#                                        </code>#}
+{#                                    </pre>#}
+{#                                </div>#}
+{#                                <div class="tab-pane fade" id="file3-pills">#}
+{#                                    <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font> &nbsp;{{ paths.0 }}</h4>#}
+{#                                    <pre style="height: 680px;padding:10px;">#}
+{#                                        <code>#}
+{#{{ content.0 }}#}
 {#                                        </code>#}
 {##}
 {#                                    </pre>#}
-{#                                        </div>#}
-                                        {% for file in filelist %}
-                                            <div class="tab-pane fade " id="file{{ forloop.counter0 }}-pills">
-                                                <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font>
-                                                    &nbsp;{{ file.path }}</h4>
-                                                <pre style="height: 680px;padding:10px;">
-                                        <code>
-{{ file.content }}
-                                        </code>
-
-                                    </pre>
-                                            </div>
-                                        {% endfor %}
-                                        {#                                <div class="tab-pane fade" id="file2-pills">#}
-                                        {#                                    <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font> &nbsp;{{ paths.0 }}</h4>#}
-                                        {#                                    <pre style="height: 680px;padding:10px;">#}
-                                        {#                                        <code>#}
-                                        {#{{ content.0 }}#}
-                                        {#                                        </code>#}
-                                        {#                                    </pre>#}
-                                        {#                                </div>#}
-                                        {#                                <div class="tab-pane fade" id="file3-pills">#}
-                                        {#                                    <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font> &nbsp;{{ paths.0 }}</h4>#}
-                                        {#                                    <pre style="height: 680px;padding:10px;">#}
-                                        {#                                        <code>#}
-                                        {#{{ content.0 }}#}
-                                        {#                                        </code>#}
-                                        {##}
-                                        {#                                    </pre>#}
-                                        {#                                </div>#}
-                                        {#                                <div class="tab-pane fade" id="file4-pills">#}
-                                        {#                                    <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font> &nbsp;{{ paths.0 }}</h4>#}
-                                        {#                                    <pre style="height: 680px;padding:10px;">#}
-                                        {#                                        <code>#}
-                                        {#{{ content.0 }}#}
-                                        {#                                        </code>#}
-                                        {##}
-                                        {#                                    </pre>#}
-                                        {#                                </div>#}
-                                        {#                                <div class="tab-pane fade" id="file5-pills">#}
-                                        {#                                    <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font> &nbsp;{{ paths.0 }}</h4>#}
-                                        {#                                    <pre style="height: 680px;padding:10px;">#}
-                                        {#                                        <code>#}
-                                        {#{{ content.0 }}#}
-                                        {#                                        </code>#}
-                                        {##}
-                                        {#                                    </pre>#}
-                                        {#                                </div>#}
-                                    </div>
-
-                                </div> <!-- /widget -->
+{#                                </div>#}
+{#                                <div class="tab-pane fade" id="file4-pills">#}
+{#                                    <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font> &nbsp;{{ paths.0 }}</h4>#}
+{#                                    <pre style="height: 680px;padding:10px;">#}
+{#                                        <code>#}
+{#{{ content.0 }}#}
+{#                                        </code>#}
+{##}
+{#                                    </pre>#}
+{#                                </div>#}
+{#                                <div class="tab-pane fade" id="file5-pills">#}
+{#                                    <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font> &nbsp;{{ paths.0 }}</h4>#}
+{#                                    <pre style="height: 680px;padding:10px;">#}
+{#                                        <code>#}
+{#{{ content.0 }}#}
+{#                                        </code>#}
+{##}
+{#                                    </pre>#}
+{#                                </div>#}
                             </div>
+                                </div><!--/col-lg-5-->
+                        </div>
                         </div>
                     </div> <!-- /span9 -->
-                </div> <!--/col-lg-12-->
+            <!--    </div> <!--/col-lg-12-->
             </div><!--/row mt-->
         </section>
         <! --/wrapper -->
@@ -274,7 +275,41 @@
     });
 
 </script>
+<!-- 分段渲染文本的JS函数 -->
+<script type="text/javascript">
+    window.onload = addElementDiv
+function judge(value,arr)
+{
+    var i = arr.length;
+    while(i--)
+    {
+        if(arr[i] === value){
+            return true;
+        }
+    }
+    return false;
+}
 
+function addElementDiv() {
+　　var parent = document.getElementById("content");
+    var tmp1 = {{ fileArr|safe }};
+    var tmp2 = {{ sel_arr|safe }};
+    var index;
+
+    for(var i=0;i<tmp1.length;i++)
+    {
+        if( judge(tmp1[i],tmp2) )
+        {
+            parent.innerHTML = parent.innerHTML+"<span class='type1' style='color: #c678dd'>"+tmp1[i]+"</span>";
+        }
+        else
+        {
+            parent.innerHTML = parent.innerHTML+"<span>"+tmp1[i]+"</span>";
+        }
+        index = i;
+    }
+　　}
+</script>
 
 </body>
 </html>
