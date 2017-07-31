@@ -109,10 +109,32 @@
                     <div class="span9" style="width: 100%;padding-left: 10px">
 
                         <div style="background: #ffffff; padding:10px;box-shadow: 0px 3px 2px #aab2bd;">
-                            <h3 style="background:#5285fb; padding: 16px;margin-top:0;margin-bottom:20px;height: 60px">
+                            <h3 style="background:#5285fb; padding: 16px;margin-top:0;margin-bottom:10px;height: 60px">
                                 <font color="#fff" size="5">Bug {{ bug.bugid }}</font>
                             </h3>
-
+                            <div class="col-lg-4" style="">
+                                <div class="col-lg-3" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight:600;
+                                font-size:1.3em;padding-right:10px;padding-top:10px;padding-left:20px;width:auto">
+                                    Assign to:&nbsp;
+                                </div>
+                                <div class="col-lg-6" style="padding-bottom: 10px;padding-left:0;padding-right:20px;width:auto;">
+                                    <select name="assignee" style="height:44px;padding:0 20px;font-size:1.3em;
+                                    color: #fff;    background-color: #286090;border-color: #204d74;
+                                    border-radius: 6px;">
+                                        <option style="">Select Assignee...</option>
+                                        <option style="">Roberto</option>
+                                        <option style="">andrew french</option>
+                                        <option style="">William</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3" style="padding-left:0;">
+                                    <button style="height:44px;padding:0 15px;font-size:1.3em;font-weight:600;
+                                     color:#ffffff;background: #26B99A;border: 1px solid #169F85;border-radius: 6px"
+                                    onclick="JavaScript:save();">
+                                        Confirm
+                                    </button>
+                                </div>
+                            </div>
                             <div class="widget" style="margin-top: 10px">
 
                             <div class="widget-header">
@@ -194,8 +216,7 @@
 
                         </div> <!-- /widget -->
 
-
-                        <div class="widget">
+                            <div class="widget">
 
                             <div class="widget-header">
                                 <h3 style="margin-top: 10px;font-size: medium">&nbsp;Description</h3>
@@ -265,6 +286,12 @@
     }
     function unfix() {
         window.location.href = "{% url 'locator:unfixed_admin' %}";
+    }
+</script>
+<script>
+    function save() {
+        alert('Assigning Completed.');
+        window.location.href = '{% url 'locator:save_assignment' %}';
     }
 </script>
 
