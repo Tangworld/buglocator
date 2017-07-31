@@ -75,17 +75,18 @@ class Record(models.Model):
 
 
 class bugidmap(models.Model):
-    index = models.CharField(max_length=20, null=True, blank=True)
+    bugidnumber = models.CharField(max_length=20, null=True, blank=True)
     bugid = models.CharField(max_length=20, null=True, blank=True)
 
 
 class filemap(models.Model):
-    index = models.CharField(max_length=20, null=True, blank=True)
+    filenumber = models.CharField(max_length=20, null=True, blank=True)
     filepath = models.CharField(max_length=200, null=True, blank=True)
 
 
 class reports(models.Model):
-    index = models.CharField(max_length=20, null=True, blank=True)
-    content = models.CharField(max_length=200, null=True, blank=True)
+    reportnumber = models.CharField(max_length=20, null=True, blank=True)
+    content = models.TextField(max_length=500, null=True, blank=True)
+
 
 
