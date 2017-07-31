@@ -15,6 +15,12 @@ import os
 # Create your views here.
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+global pre_k_vocab
+global pre_omega
+global pre_phi
+global pre_pl
+global pre_ptw
+
 
 
 def index(request):
@@ -808,6 +814,8 @@ def show_open_bug(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
+    premeter_to_memry(request)
+
     bugid = utils.get_value(request, 'get', 'bugid')
     flag = utils.get_value(request, 'get', 'flag')
     request.session['flag'] = flag
@@ -889,13 +897,19 @@ def alg_res(request):
     '''
     filelist = []
     bugid = utils.get_value(request, 'get', 'bugid')
-    result = get_result(bugid)
+    result = get_result(request, bugid)
     filemap = open(BASE_DIR+'/data/bughunter/FileMap.txt', 'r')
     files = filemap.readlines()
     filemap.close()
+    print result
     for r in result:
+<<<<<<< HEAD
         #print type(r)
         #print r
+=======
+        # print type(r)
+        # print r
+>>>>>>> 514f8269b8d7733169cdfa0674a047b8f9391fd9
         key = r-1
         # paths.append(files[r].replace('\n', ''))
         thispath = pre + files[key].replace('\n', '')
@@ -906,6 +920,7 @@ def alg_res(request):
             # content.append(thiscontent.readlines())
         except Exception, e:
             print e
+<<<<<<< HEAD
             filelist.append({'content': 'No such file', 'path': ''})
     '''
     #测试代码
@@ -941,35 +956,28 @@ def alg_res(request):
                                                'path':testPath,'file':fileTest})
 
 
-def get_result(bugid):
-    k_vocab = open(BASE_DIR+'/data/bughunter/k_vocab.txt', 'r')
-    omega = open(BASE_DIR+'/data/bughunter/omega.txt', 'r')
-    phi = open(BASE_DIR+'/data/bughunter/phi.txt', 'r')
-    pl = open(BASE_DIR+'/data/bughunter/pl.txt', 'r')
-    ptw = open(BASE_DIR+'/data/bughunter/ptw.txt', 'r')
-    k_vocab_value = k_vocab.readlines()
-    omega_value = omega.readlines()
-    phi_value = phi.readlines()
-    pl_value = pl.readlines()
-    ptw_value = ptw.readlines()
-    k_vocab.close()
-    omega.close()
-    phi.close()
-    pl.close()
-    ptw.close()
+
+def get_result(request, bugid):
+
+    global pre_k_vocab
+    global pre_omega
+    global pre_phi
+    global pre_pl
+    global pre_ptw
 
     # 获取k_vocab参数
-    r_k_vocab = eval(k_vocab_value[0])
+    print pre_k_vocab
+    r_k_vocab = eval(pre_k_vocab[0])
     # 获取omega参数
-    r_omega = eval(omega_value[0])
+    r_omega = eval(pre_omega[0])
     # 获取phi参数
-    r_phi = eval(phi_value[0])
+    r_phi = eval(pre_phi[0])
     # 获取pl参数
-    r_pl = eval(pl_value[0])
-    r_ptw = eval(ptw_value[0])
+    r_pl = eval(pre_pl[0])
+    r_ptw = eval(pre_ptw[0])
 
     bugidmap = open(BASE_DIR+'/data/bughunter/BugidMap.txt', 'r')
-    reports = open(BASE_DIR+'/data/bughunter/reports.txt', 'r')
+    reports = open(BASE_DIR+'/data/bughunter/Reports.txt', 'r')
     bugids = bugidmap.readlines()
     reportss = reports.readlines()
     bugidmap.close()
@@ -977,17 +985,17 @@ def get_result(bugid):
     index = 0
     current_report = ()
     for id in bugids:
-        print bugid, id, type(bugid), type(id.decode('utf-8'))
+        # print bugid, id, type(bugid), type(id.decode('utf-8'))
         if int(bugid) == int(id):
             break
         index += 1
-    print index
+    # print index
     current_report = reportss[index]
     current_report = eval(current_report)
-    ws = current_report[0]
-    ts = current_report[1]
-    print type(ws), type(ts)
-    print ws, ts
+    ws = current_report[1]
+    ts = current_report[0]
+    # print type(ws), type(ts)
+    # print ws, ts
     report = {'ws': ws, 'ts': ts}
 
 
@@ -999,5 +1007,31 @@ def get_result(bugid):
 
 
 
-def testtest(request):
+def cloud(request):
     return render(request, 'cloud.html')
+
+def premeter_to_memry(request):
+    k_vocab = open(BASE_DIR + '/data/bughunter/k_vocab.txt', 'r')
+    omega = open(BASE_DIR + '/data/bughunter/omega.txt', 'r')
+    phi = open(BASE_DIR + '/data/bughunter/phi.txt', 'r')
+    pl = open(BASE_DIR + '/data/bughunter/pl.txt', 'r')
+    ptw = open(BASE_DIR + '/data/bughunter/ptw.txt', 'r')
+
+    global pre_k_vocab
+    global pre_omega
+    global pre_phi
+    global pre_pl
+    global pre_ptw
+
+    pre_k_vocab = k_vocab.readlines()
+    pre_omega = omega.readlines()
+    pre_phi = phi.readlines()
+    pre_pl = pl.readlines()
+    pre_ptw = ptw.readlines()
+
+    k_vocab.close()
+    omega.close()
+    phi.close()
+    pl.close()
+    ptw.close()
+    # return pre_k_vocab, pre_omega, pre_phi, pre_pl, pre_ptw

@@ -1,2 +1,4 @@
 buglocator/settings.py
 buglocator/settings.pyc
+data/bughunter/omega.txt
+data/bughunter/phi.txt
