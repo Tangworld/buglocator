@@ -639,8 +639,6 @@ def unfixed(request):
         return render(request, 'defects_not_resolved.html', {'contents': disContent})
 
 
-
-
 def fixed(request):
     # 已修复页面
     # 权限控制
@@ -1027,3 +1025,6 @@ def premeter_to_memry(request):
     pl.close()
     ptw.close()
     # return pre_k_vocab, pre_omega, pre_phi, pre_pl, pre_ptw
+
+def save_assignment(request):
+    return HttpResponseRedirect('/locator/main')

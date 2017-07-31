@@ -32,5 +32,5 @@ urlpatterns = [
 
     url(r'^timeline$',views.more_timeline,name='timeline'),
     url(r'^resultpage$', views.alg_res, name='resultpage'),
-
+    url(r'^save_assignment/$', views.save_assignment, name='save_assignment'),
 ]
