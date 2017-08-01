@@ -171,12 +171,15 @@
 {#                                        <li class=""><a class="nav-bar" href="#file5-pills" data-toggle="tab">File5:  50%</a>#}
 {#                                        </li>#}
                                      </ul>
+                                <form action="{% url 'locator:to_fix' %}" method="post">
                                     <ul class="nav nav-pills" style="align-self: center;margin-top:50px;">
                                         <li class="" style="">
+                                            <input type="hidden" value="{{ bugid }}" name="bugid" />
                                             <a class="nav-bar" style="background: #ff865c;
-                                             color: #ffffff;padding:18px 15px;font-size:1.5em">Tag as Fixed</a>
+                                             color: #ffffff;padding:18px 15px;font-size:1.5em" onclick="JavaScript:save();">Tag as Fixed</a>
                                          </li>
                                     </ul>
+                                    </form>
                                 </div> <!-- /col-lg-2-->
                                 <div class="col-lg-5" style="padding-right:0">
                                     <div class="tab-content" style="border:1px solid #ccc;width:100%">
@@ -316,6 +319,13 @@ function addElementDiv() {
         index = i;
     }
 　　}
+</script>
+
+<script>
+    function save() {
+        alert('Fixed!');
+        window.location.href = '{% url 'locator:to_fix' %}';
+    }
 </script>
 
 </body>

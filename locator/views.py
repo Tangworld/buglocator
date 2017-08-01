@@ -955,7 +955,7 @@ def alg_res(request):
     # content.append(file.read())
     # return render(request, 'resultPage.html', {'fileArr':json.dumps(wordArr), 'sel_arr':json.dumps(kwArr),
     #                                            'path':testPath,'file':fileTest})
-    return render(request, 'resultPage.html', {'fileArr':json.dumps(wordArr), 'sel_arr':json.dumps(kwArr), 'filelist': filelist})
+    return render(request, 'resultPage.html', {'fileArr':json.dumps(wordArr), 'sel_arr':json.dumps(kwArr), 'filelist': filelist, 'bugid': bugid})
 
 
 
@@ -1029,8 +1029,13 @@ def premeter_to_memry(request):
 def save_assignment(request):
     assignee = request.POST.get('assignee')
     bugid = request.POST.get('bugid')
-    print assignee
-    print bugid
     bug = models.Report.objects.filter(bugid=bugid)[0]
     bug.assignee = assignee
     return HttpResponseRedirect('/locator/not_assigned')
+
+def to_fix(request):
+    bugid = request.POST.get('bugid')
+    print bugid
+    report = models.Report.objects.get(bugid=bugid)
+    report.status = 'fix'
+    return HttpResponseRedirect('/locator/unfix')
