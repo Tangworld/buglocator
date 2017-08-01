@@ -2,3 +2,5 @@ buglocator/settings.py
 buglocator/settings.pyc
 data/bughunter/omega.txt
 data/bughunter/phi.txt
+data/bughunter/File2Word.txt
+data/bughunter/pws_dict.txt

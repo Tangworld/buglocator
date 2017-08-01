@@ -1,6 +1,6 @@
 from collections import Counter
 
-def calc_pws(ws, t_vocab, pz, phi, omega, ptw):
+def calc_pws(ws, t_vocab, pz, phi, ptw):
     pws = {}
 
     ws = list(set(ws))
@@ -26,7 +26,7 @@ def calc_pwds(ws):
     return pwds
 
 
-def llda_test(data, k_vocab_total, pl, phi, omega, ptw):
+def llda_test(data, k_vocab_total, pl, phi, ptw, new_pws):
     l0 = phi.keys()[0]
     w_vocab = set(phi[l0].keys())
     t_vocab = pl.keys()
@@ -44,7 +44,7 @@ def llda_test(data, k_vocab_total, pl, phi, omega, ptw):
             ws.remove(w)
     del ws_temp
 
-    pws = calc_pws(ws, t_vocab, pl, phi, omega, ptw)
+    pws = calc_pws(ws, t_vocab, pl, phi,  ptw)
     pwds = calc_pwds(ws)
 
     pzd = {}
@@ -53,7 +53,8 @@ def llda_test(data, k_vocab_total, pl, phi, omega, ptw):
         for w in set(ws):
             #if w == t:
             if w in k_vocab_total:
-                pzd[t] += (ptw[t] * omega[t][w] + (1 - ptw[t])*phi[t][w])*pl[t]*pwds[w]/pws[w]
+                # pzd[t] += (ptw[t] * omega[t][w] + (1 - ptw[t])*phi[t][w])*pl[t]*pwds[w]/pws[w]
+                pzd[t] += new_pws[t][w] * pl[t] * pwds[w] / pws[w]
             else:
                 pzd[t] += phi[t][w]*pl[t]*pwds[w]/pws[w]
 
