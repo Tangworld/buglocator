@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 
 import random
+import MySQLdb
 from django.shortcuts import render
 from django.shortcuts import HttpResponseRedirect
 from locator import models
@@ -617,7 +618,7 @@ def unfixed(request):
     disContent = []
 
     if current_isadmin == 'yes':
-        reports = utils.get_reports('unfixed')
+        reports = utils.get_reports(status='open')
         for report in reports:
             tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), report.assignee)
             disContent.append(tmpContent)
@@ -627,7 +628,7 @@ def unfixed(request):
             ######
         return render(request, 'admin/defects_not_resolved_admin.html', {'contents': disContent})
     else:
-        reports = utils.get_reports('unfixed', current_username)
+        reports = utils.get_reports(status='open', assignee=current_username)
         for report in reports:
             tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))))
             disContent.append(tmpContent)
@@ -890,38 +891,8 @@ def back(request):
 
 def alg_res(request):
     #原有代码
-    #pre = BASE_DIR+'/data/bughunter/'
+    pre = BASE_DIR+'/data/bughunter/'
 
-    '''
-    filelist = []
-    bugid = utils.get_value(request, 'get', 'bugid')
-    result = get_result(request, bugid)
-    filemap = open(BASE_DIR+'/data/bughunter/FileMap.txt', 'r')
-    files = filemap.readlines()
-    filemap.close()
-    print result
-    for r in result:
-<<<<<<< HEAD
-        #print type(r)
-        #print r
-=======
-        # print type(r)
-        # print r
->>>>>>> 514f8269b8d7733169cdfa0674a047b8f9391fd9
-        key = r-1
-        # paths.append(files[r].replace('\n', ''))
-        thispath = pre + files[key].replace('\n', '')
-        try:
-            thiscontent = open(thispath, 'r')
-            filelist.append({'content': thiscontent.read(), 'path': files[r].replace('\n', '')})
-
-            # content.append(thiscontent.readlines())
-        except Exception, e:
-            print e
-<<<<<<< HEAD
-            filelist.append({'content': 'No such file', 'path': ''})
-    '''
-    #测试代码
     cList = [' ', '<', '>', '&', '\'', '"', '\n']
     cDict = {' ': '&nbsp;',
              '<': '&lt;',
@@ -929,29 +900,62 @@ def alg_res(request):
              '\'': '&apos;',
              '"': 'quot;',
              '\n': '<br>'}
-    testPath = '/home/ranger/PycharmProjects/new/buglocator/locator/urls.py'
-    fileStr = open('/home/ranger/PycharmProjects/new/buglocator/locator/another.txt', 'r').read()
-    fileTest = open(testPath,'r').read()
+
+    filelist = []
+    bugid = utils.get_value(request, 'get', 'bugid')
+    result = get_result(request, bugid)
     wordArr = []
     aWord = []
-    for char in fileStr:
-        if char.isalpha():
-            aWord.append(char)
-        elif char.isdigit():
-            aWord.append(char)
-        else:
-            wordArr.append("".join(aWord))
-            aWord = []
-            if char not in cList:
-                wordArr.append(char)
-            else:
-                wordArr.append(cDict[char])
+    # print result
+    for r in result:
+        filepath = models.filemap.objects.get(filenumber=r).filepath
+        thispath = str(pre + filepath)
+        try:
+            thiscontent = open(thispath, 'r')
+            fileStr = thiscontent.read()
+            for char in fileStr:
+                if char.isalpha():
+                    aWord.append(char)
+                elif char.isdigit():
+                    aWord.append(char)
+                else:
+                    wordArr.append("".join(aWord))
+                    aWord = []
+                    if char not in cList:
+                        wordArr.append(char)
+                    else:
+                        wordArr.append(cDict[char])
+            filelist.append({'content': fileStr, 'path': filepath})
+
+            # content.append(thiscontent.readlines())
+        except Exception, e:
+            print e
+
+    #测试代码
+
+    # testPath = '/home/ranger/PycharmProjects/new/buglocator/locator/urls.py'
+    # fileStr = open('/home/ranger/PycharmProjects/new/buglocator/locator/another.txt', 'r').read()
+    # fileTest = open(testPath,'r').read()
+    #
+    # for char in fileStr:
+    #     if char.isalpha():
+    #         aWord.append(char)
+    #     elif char.isdigit():
+    #         aWord.append(char)
+    #     else:
+    #         wordArr.append("".join(aWord))
+    #         aWord = []
+    #         if char not in cList:
+    #             wordArr.append(char)
+    #         else:
+    #             wordArr.append(cDict[char])
     kwArr = ['applet', 'RPFactor', 'RemoteUIApplet', 'class']
     # paths.append('/home/tsj/PycharmProjects/buglocator/locator/models.py')
     # file = open('/home/tsj/PycharmProjects/buglocator/locator/models.py', 'r')
     # content.append(file.read())
-    return render(request, 'resultPage.html', {'fileArr':json.dumps(wordArr), 'sel_arr':json.dumps(kwArr),
-                                               'path':testPath,'file':fileTest})
+    # return render(request, 'resultPage.html', {'fileArr':json.dumps(wordArr), 'sel_arr':json.dumps(kwArr),
+    #                                            'path':testPath,'file':fileTest})
+    return render(request, 'resultPage.html', {'fileArr':json.dumps(wordArr), 'sel_arr':json.dumps(kwArr), 'filelist': filelist, 'bugid': bugid})
 
 
 
@@ -964,7 +968,7 @@ def get_result(request, bugid):
     global pre_ptw
 
     # 获取k_vocab参数
-    print pre_k_vocab
+    # print pre_k_vocab
     r_k_vocab = eval(pre_k_vocab[0])
     # 获取omega参数
     r_omega = eval(pre_omega[0])
@@ -974,21 +978,9 @@ def get_result(request, bugid):
     r_pl = eval(pre_pl[0])
     r_ptw = eval(pre_ptw[0])
 
-    bugidmap = open(BASE_DIR+'/data/bughunter/BugidMap.txt', 'r')
-    reports = open(BASE_DIR+'/data/bughunter/Reports.txt', 'r')
-    bugids = bugidmap.readlines()
-    reportss = reports.readlines()
-    bugidmap.close()
-    reports.close()
-    index = 0
-    current_report = ()
-    for id in bugids:
-        # print bugid, id, type(bugid), type(id.decode('utf-8'))
-        if int(bugid) == int(id):
-            break
-        index += 1
-    # print index
-    current_report = reportss[index]
+    indexx = models.bugidmap.objects.get(bugid=bugid).bugidnumber
+    current_report = models.reports.objects.get(reportnumber=indexx).content
+
     current_report = eval(current_report)
     ws = current_report[1]
     ts = current_report[0]
@@ -1035,4 +1027,17 @@ def premeter_to_memry(request):
     # return pre_k_vocab, pre_omega, pre_phi, pre_pl, pre_ptw
 
 def save_assignment(request):
-    return HttpResponseRedirect('/locator/main')
+    assignee = request.POST.get('assignee')
+    bugid = request.POST.get('bugid')
+    bug = models.Report.objects.filter(bugid=bugid)[0]
+    bug.assignee = assignee
+    bug.save()
+    return HttpResponseRedirect('/locator/not_assigned')
+
+def to_fix(request):
+    bugid = request.POST.get('bugid')
+    print bugid
+    report = models.Report.objects.get(bugid=bugid)
+    report.status = 'fix'
+    report.save()
+    return HttpResponseRedirect('/locator/unfix')

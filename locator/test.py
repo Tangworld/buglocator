@@ -68,6 +68,6 @@ def llda_test(data, k_vocab_total, pl, phi, ptw, new_pws):
     '''
     # test one record
     s_ptd = sorted(pzd.items(), lambda x, y: cmp(x[1], y[1]), reverse=True)
-    print s_ptd
+    # print s_ptd
 
     return s_ptd

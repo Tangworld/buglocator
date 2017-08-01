@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^show_notassigned_bug/$', views.show_notassigned_bug, name='show_notassigned'),
     url(r'^back/$', views.back, name='back'),
     url(r'^cloud/$', views.cloud, name='cloud'),
+    url(r'^to_fix/$', views.to_fix, name='to_fix'),
 
     url(r'^index_admin/$', views.login, name='index_admin'),
     url(r'^profile_admin/$', views.profile, name='profile_admin'),

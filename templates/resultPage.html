@@ -160,36 +160,43 @@
                                      <ul class="nav nav-pills" style="align-self: center">
                                          <li class="active"><a class="nav-bar" href="#file1-pills" data-toggle="tab">File1:  90%</a>
                                          </li>
-                                         <li class=""><a class="nav-bar" href="#file2-pills" data-toggle="tab">File2:  80%</a>
+                                         {% for file in filelist %}
+                                         <li class=""><a class="nav-bar" href="#file{{ forloop.counter0 }}-pills" data-toggle="tab">File{{ forloop.counter0 }}:  80%</a>
                                         </li>
-                                        <li class=""><a class="nav-bar" href="#file3-pills" data-toggle="tab">File3:  70%</a>
-                                        </li>
-                                        <li class=""><a class="nav-bar" href="#file4-pills" data-toggle="tab">File4:  60%</a>
-                                        </li>
-                                        <li class=""><a class="nav-bar" href="#file5-pills" data-toggle="tab">File5:  50%</a>
-                                        </li>
+                                         {% endfor %}
+{#                                        <li class=""><a class="nav-bar" href="#file3-pills" data-toggle="tab">File3:  70%</a>#}
+{#                                        </li>#}
+{#                                        <li class=""><a class="nav-bar" href="#file4-pills" data-toggle="tab">File4:  60%</a>#}
+{#                                        </li>#}
+{#                                        <li class=""><a class="nav-bar" href="#file5-pills" data-toggle="tab">File5:  50%</a>#}
+{#                                        </li>#}
                                      </ul>
+                                <form action="{% url 'locator:to_fix' %}" method="post">
                                     <ul class="nav nav-pills" style="align-self: center;margin-top:50px;">
                                         <li class="" style="">
+                                            <input type="hidden" value="{{ bugid }}" name="bugid" />
                                             <a class="nav-bar" style="background: #ff865c;
-                                             color: #ffffff;padding:18px 15px;font-size:1.5em">Tag as Fixed</a>
+                                             color: #ffffff;padding:18px 15px;font-size:1.5em" onclick="JavaScript:save();">Tag as Fixed</a>
                                          </li>
                                     </ul>
+                                    </form>
                                 </div> <!-- /col-lg-2-->
                                 <div class="col-lg-5" style="padding-right:0">
                                     <div class="tab-content" style="border:1px solid #ccc;width:100%">
-                                        <div class="tab-pane active " id="file1-pills">
-                                            <h4 style="margin:0;padding: 10px;background: #f5f5f5"><font color="black">File Path: &nbsp;{{ path }}</font> &nbsp;</h4>
+                                        {% for file in filelist %}
+                                        <div class="tab-pane " id="file{{ forloop.counter0 }}-pills">
+                                            <h4 style="margin:0;padding: 10px;background: #f5f5f5"><font color="black">File Path: &nbsp;{{ file.path }}</font> &nbsp;</h4>
 
                                             <pre sty
 
 
                                                  le="height: 780px;padding:10px;">
                                                 <code>
-{{ file }}
+{{ file.content }}
                                                 </code>
                                             </pre>
                                         </div>
+                                        {% endfor %}
 {#                                <div class="tab-pane fade" id="file2-pills">#}
 {#                                    <h4 style="margin-bottom: 10px;"><font color="black">File Path: </font> &nbsp;{{ paths.0 }}</h4>#}
 {#                                    <pre style="height: 680px;padding:10px;">#}
@@ -312,6 +319,13 @@ function addElementDiv() {
         index = i;
     }
 　　}
+</script>
+
+<script>
+    function save() {
+        alert('Fixed!');
+        window.location.href = '{% url 'locator:to_fix' %}';
+    }
 </script>
 
 </body>

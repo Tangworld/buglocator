@@ -38,7 +38,7 @@
             <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation" style="color: #797979"></div>
         </div>
         <!--logo start-->
-        <a href="{% url 'locator:main' %}" class="logo"><b>BUG LOCATOR</b></a>
+        <a href="{% url 'locator:main' %}" class="logo" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"><b>BUG LOCATOR</b></a>
         <!--logo end-->
 
         <div class="top-menu">
@@ -117,25 +117,25 @@
                         <div class="col-md-12" style="padding:10px">
                             <div class="content-panel" style="padding: 10px;">
                                 <table summary="user infomation table" id="tableSort" class="table table-striped table-advance table-hover" style="table-layout: fixed">
-                                    <h3 style="font-weight: bold; background: #5285fb; padding:15px; margin-top:0;"><font color="#fff">&nbsp Unassigned Bugs</font></h3>
+                                    <h3 style="font-weight: bold; background: #5285fb; padding:15px; margin-top:0;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"><font color="#fff">&nbsp Unassigned Bugs</font></h3>
                                     <hr>
                                     <thead>
                                     <tr>
-                                        <th># Bug ID <i id="0" class="fa fa-toggle-down" onclick="$.sortTable.sort('tableSort',0)"></i></th>
-                                        <th class="hidden-phone"><i class="fa fa-question-circle"></i> Summary <i id="1" class="fa fa-toggle-down" onclick="$.sortTable.sort('tableSort',1)"></i></th>
-                                        <th><i class="fa fa-user" aria-hidden="true"></i> Reporter <i id="2" class="fa fa-toggle-down" onclick="$.sortTable.sort('tableSort',2)"></i></th>
-                                        <th><i class=" fa fa-calendar"></i> Report Date <i id="3" class="fa fa-toggle-down" onclick="$.sortTable.sort('tableSort',3)"></i></th>
-                                        <th><i class=" fa fa-paper-plane"></i> Operation <i id="4" class="fa fa-toggle-down" onclick="$.sortTable.sort('tableSort',4)"></i></th>
+                                        <th style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;"># Bug ID <i id="0" class="fa fa-toggle-down" onclick="$.sortTable.sort('tableSort',0)"></i></th>
+                                        <th class="hidden-phone" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;"><i class="fa fa-question-circle"></i> Summary <i id="1" class="fa fa-toggle-down" onclick="$.sortTable.sort('tableSort',1)"></i></th>
+                                        <th style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;"><i class="fa fa-user" aria-hidden="true"></i> Reporter <i id="2" class="fa fa-toggle-down" onclick="$.sortTable.sort('tableSort',2)"></i></th>
+                                        <th style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;"><i class=" fa fa-calendar"></i> Report Date <i id="3" class="fa fa-toggle-down" onclick="$.sortTable.sort('tableSort',3)"></i></th>
+                                        <th style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;"><i class=" fa fa-paper-plane"></i> Operation <i id="4" class="fa fa-toggle-down" onclick="$.sortTable.sort('tableSort',4)"></i></th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     {% for content in contents %}
                                         <tr>
-                                            <td><a href="{% url 'locator:show_notassigned' %}?bugid={{ content.0 }}&flag=5">{{ content.0 }}</a></td>
+                                            <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;"><a href="{% url 'locator:show_notassigned' %}?bugid={{ content.0 }}&flag=5">{{ content.0 }}</a></td>
                                             <td class="hidden-phone" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;">{{ content.1 }}</td>
-                                            <td>{{ content.2 }}</td>
-                                            <td>{{ content.3 }}</td>
-                                            <td>
+                                            <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;">{{ content.2 }}</td>
+                                            <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;">{{ content.3 }}</td>
+                                            <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;">
                                                 <button class="btn btn-success btn-xs"><i class="fa fa-check"></i>
                                                 </button>
                                                 <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>
