@@ -618,7 +618,7 @@ def unfixed(request):
     disContent = []
 
     if current_isadmin == 'yes':
-        reports = utils.get_reports('unfixed')
+        reports = utils.get_reports(status='open')
         for report in reports:
             tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), report.assignee)
             disContent.append(tmpContent)
@@ -628,7 +628,7 @@ def unfixed(request):
             ######
         return render(request, 'admin/defects_not_resolved_admin.html', {'contents': disContent})
     else:
-        reports = utils.get_reports('unfixed', current_username)
+        reports = utils.get_reports(status='open', assignee=current_username)
         for report in reports:
             tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))))
             disContent.append(tmpContent)
@@ -1031,6 +1031,7 @@ def save_assignment(request):
     bugid = request.POST.get('bugid')
     bug = models.Report.objects.filter(bugid=bugid)[0]
     bug.assignee = assignee
+    bug.save()
     return HttpResponseRedirect('/locator/not_assigned')
 
 def to_fix(request):
@@ -1038,4 +1039,5 @@ def to_fix(request):
     print bugid
     report = models.Report.objects.get(bugid=bugid)
     report.status = 'fix'
+    report.save()
     return HttpResponseRedirect('/locator/unfix')
