@@ -1027,4 +1027,10 @@ def premeter_to_memry(request):
     # return pre_k_vocab, pre_omega, pre_phi, pre_pl, pre_ptw
 
 def save_assignment(request):
-    return HttpResponseRedirect('/locator/main')
+    assignee = request.POST.get('assignee')
+    bugid = request.POST.get('bugid')
+    print assignee
+    print bugid
+    bug = models.Report.objects.filter(bugid=bugid)[0]
+    bug.assignee = assignee
+    return HttpResponseRedirect('/locator/not_assigned')
