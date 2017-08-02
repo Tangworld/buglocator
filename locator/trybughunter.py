@@ -4,8 +4,9 @@ import time
 # import cal_pws
 
 def main():
+    start = time.time()
     k_vocab = open('../data/bughunter/k_vocab.txt', 'r')
-    omega = open('../data/bughunter/omega.txt', 'r')
+    #omega = open('../data/bughunter/omega.txt', 'r')
     phi = open('../data/bughunter/phi.txt', 'r')
     pl = open('../data/bughunter/pl.txt', 'r')
     ptw = open('../data/bughunter/ptw.txt', 'r')
@@ -32,8 +33,8 @@ def main():
     r_k_vocab = eval(k_vocab_value[0])
 
     # 获取omega参数
-    omega_value = omega.readlines()
-    r_omega = eval(omega_value[0])
+    #omega_value = omega.readlines()
+    #r_omega = eval(omega_value[0])
 
     # 获取phi参数
     phi_value = phi.readlines()
@@ -50,6 +51,8 @@ def main():
     ts = [1, 2686, 3470, 3817, 1889, 3037]
     report = {'ws': ws, 'ts': ts}
 
+    end = time.time()
+    print end - start
     print "Loading Complete."
     s_ptd = test.llda_test(report, r_k_vocab, r_pl, r_phi, r_ptw, r_pws)
     #words = cal_pws.cal_pws(r_ptw, r_omega, r_phi)
@@ -60,8 +63,5 @@ def main():
 
 
 if __name__ == "__main__":
-
-    start = time.time()
     main()
-    end = time.time()
-    print end - start
+

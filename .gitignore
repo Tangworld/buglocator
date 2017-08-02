@@ -4,3 +4,11 @@ data/bughunter/omega.txt
 data/bughunter/phi.txt
 data/bughunter/File2Word.txt
 data/bughunter/pws_dict.txt
+
+data/bughunter/k_vocab.pkl
+data/bughunter/phi.pkl
+data/bughunter/ptw.pkl
+data/bughunter/pl.pkl
+data/bughunter/pws.pkl
+
+data/bughunter/pickle_test.py
