@@ -563,7 +563,6 @@ def savereport(request):
     :param request: 
     :return: 
     """
-    # authority(request)
     summary = request.POST.get('summary')
     description = request.POST.get('description')
     reporter = request.session['userid']
@@ -825,7 +824,15 @@ def show_notassigned_bug(request):
     request.session['flag'] = flag
     bug = utils.get_one_report(bugid)
     if request.session['isadmin'] == 'yes':
-        return render(request, 'admin/show_notassigned_admin.html', {'bug': bug})
+        productobj = models.ProUser.objects.get(user_id=utils.get_value(request, 'session', 'userid'))
+        productId = int(productobj.product_id)
+        userids = models.ProUser.objects.filter(product_id=productId)
+        users = []
+        for userid in userids:
+            one = models.User.objects.get(id=userid.user_id)
+            if not one.username == 'Admin':
+                users.append(one.username)
+        return render(request, 'admin/show_notassigned_admin.html', {'bug': bug, 'users': users})
     else:
         return render(request, 'show_notassigned_bug.html', {'bug': bug})
 
