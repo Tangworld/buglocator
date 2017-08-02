@@ -577,19 +577,6 @@ def savereport(request):
     os = request.POST.get('os')
     priority = request.POST.get('priority')
     severity = request.POST.get('severity')
-    # print summary
-    # print description
-    # print reporter
-    # print assignee
-    # print status
-    # print opendate
-    # print component
-    # print version
-    # print platform
-    # print os
-    # print priority
-    # print severity
-    # print productid
 
     models.Report.objects.create(summary=summary, description=description, reporter=reporter,
                                  assignee=assignee, status=status, opendate=opendate,
@@ -795,7 +782,6 @@ def show_open_bug(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-
     premeter_to_memry(request)
 
     bugid = utils.get_value(request, 'get', 'bugid')
@@ -807,6 +793,7 @@ def show_open_bug(request):
     else:
         return render(request, 'show_open_bug.html', {'bug': bug})
 
+
 def show_fixed_bug(request):
     lockflag = check_lock(request)
     userflag = authority(request)
@@ -814,7 +801,6 @@ def show_fixed_bug(request):
         return HttpResponseRedirect('/locator/lock/')
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
-
 
     bugid = utils.get_value(request, 'get', 'bugid')
     flag = utils.get_value(request, 'get', 'flag')
@@ -825,6 +811,7 @@ def show_fixed_bug(request):
     else:
         return render(request, 'show_fixed_bug.html', {'bug': bug})
 
+
 def show_notassigned_bug(request):
     lockflag = check_lock(request)
     userflag = authority(request)
@@ -832,7 +819,6 @@ def show_notassigned_bug(request):
         return HttpResponseRedirect('/locator/lock/')
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
-
 
     bugid = utils.get_value(request, 'get', 'bugid')
     flag = utils.get_value(request, 'get', 'flag')
@@ -842,6 +828,7 @@ def show_notassigned_bug(request):
         return render(request, 'admin/show_notassigned_admin.html', {'bug': bug})
     else:
         return render(request, 'show_notassigned_bug.html', {'bug': bug})
+
 
 def back(request):
     '''
@@ -864,6 +851,7 @@ def back(request):
     lastpage = utils.get_value(request, 'session', 'lastpage')
     print lastpage
     return HttpResponseRedirect(lastpage)
+
 
 def alg_res(request):
     # 权限控制
@@ -950,7 +938,6 @@ def get_result(request, bugid):
         return HttpResponseRedirect('/locator/lock/')
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
-
 
     global pre_k_vocab
     global pre_omega
