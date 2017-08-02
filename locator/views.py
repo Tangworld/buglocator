@@ -30,6 +30,7 @@ def index(request):
     :param request: 
     :return: 进入登录页面
     """
+    utils.get_lastpage(request)
     return render(request, 'login.html', )
 
 
@@ -39,7 +40,7 @@ def login(request):
     :param request: 
     :return: 
     """
-
+    utils.get_lastpage(request)
     v1 = ""
     v2 = ""
     flag = True
@@ -198,7 +199,7 @@ def login(request):
             # fullpath = request.get_full_path()
             # string = fullpath.split('/')
             # tmpStr = string[0]+string[1]+':'+string[2]+string[3]
-            # request.session['lastpage'] = tmpStr
+            # request.session['lastpage'] = fullpath
             ######
             return render(request, 'index.html', {'members': members, 'dis_reports': dis_content, 'currentuser': currentuser})
     else:
@@ -228,6 +229,8 @@ def profile(request):
         return HttpResponseRedirect('/locator/lock/')
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
+
+    utils.get_lastpage(request)
 
 
     currentid = utils.get_value(request, 'session', 'userid')
@@ -315,6 +318,8 @@ def main(request):
         return HttpResponseRedirect('/locator/lock/')
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
+
+    utils.get_lastpage(request)
 
     if utils.get_value(request, 'session', 'isadmin') == 'yes':
         members = []
@@ -469,6 +474,8 @@ def edit(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
+    utils.get_lastpage(request)
+
     if utils.get_value(request, 'session', 'isadmin') == 'yes':
         return render(request, 'admin/editprofile_admin.html')
     else:
@@ -488,6 +495,8 @@ def confirm(request):
         return HttpResponseRedirect('/locator/lock/')
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
+
+    utils.get_lastpage(request)
 
     flag = True
     infomation = ""
@@ -518,6 +527,7 @@ def lock(request):
     :param request: 
     :return: 
     """
+    utils.get_lastpage(request)
     request.session['lock'] = 'lock'
     return render(request, 'lock_screen.html')
 
@@ -531,6 +541,9 @@ def unlock(request):
     """
     password = utils.get_value(request, 'post', 'password')
     realpassword = utils.get_value(request, 'session', 'password')
+
+    utils.get_lastpage(request)
+
     if password == realpassword:
         del request.session['lock']
         return HttpResponseRedirect('/locator/main/')
@@ -613,6 +626,8 @@ def unfixed(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
+    utils.get_lastpage(request)
+
     current_isadmin = utils.get_value(request, 'session', 'isadmin')
     current_username = utils.get_value(request, 'session', 'username')
     disContent = []
@@ -649,6 +664,8 @@ def fixed(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
+    utils.get_lastpage(request)
+
     current_isadmin = utils.get_value(request, 'session', 'isadmin')
     current_username = utils.get_value(request, 'session', 'username')
     disContent = []
@@ -684,6 +701,7 @@ def not_assigned(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
+    utils.get_lastpage(request)
 
     disContent = []
 
@@ -705,6 +723,8 @@ def more_timeline(request):
         return HttpResponseRedirect('/locator/lock/')
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
+
+    utils.get_lastpage(request)
 
     current_isadmin = utils.get_value(request, 'session', 'isadmin')
     current_username = utils.get_value(request, 'session', 'username')
@@ -813,6 +833,7 @@ def show_open_bug(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
+
     premeter_to_memry(request)
 
     bugid = utils.get_value(request, 'get', 'bugid')
@@ -832,6 +853,7 @@ def show_fixed_bug(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
+
     bugid = utils.get_value(request, 'get', 'bugid')
     flag = utils.get_value(request, 'get', 'flag')
     request.session['flag'] = flag
@@ -848,6 +870,7 @@ def show_notassigned_bug(request):
         return HttpResponseRedirect('/locator/lock/')
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
+
 
     bugid = utils.get_value(request, 'get', 'bugid')
     flag = utils.get_value(request, 'get', 'flag')
@@ -876,20 +899,24 @@ def back(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
+    lastpage = utils.get_value(request, 'session', 'lastpage')
+    print lastpage
+    return HttpResponseRedirect(lastpage)
 
-    flag = utils.get_value(request, 'session', 'flag')
-    if flag == '1':
-        return HttpResponseRedirect('/locator/main')
-    elif flag == '2':
-        return HttpResponseRedirect('/locator/timeline')
-    elif flag == '3':
-        return HttpResponseRedirect('/locator/unfixed')
-    elif flag == '4':
-        return HttpResponseRedirect('/locator/fixed')
-    else:
-        return HttpResponseRedirect('/locator/not_assigned')
+    # flag = utils.get_value(request, 'session', 'flag')
+    # if flag == '1':
+    #     return HttpResponseRedirect('/locator/main')
+    # elif flag == '2':
+    #     return HttpResponseRedirect('/locator/timeline')
+    # elif flag == '3':
+    #     return HttpResponseRedirect('/locator/unfixed')
+    # elif flag == '4':
+    #     return HttpResponseRedirect('/locator/fixed')
+    # else:
+    #     return HttpResponseRedirect('/locator/not_assigned')
 
 def alg_res(request):
+    utils.get_lastpage(request)
     #原有代码
     pre = BASE_DIR+'/data/bughunter/'
 
