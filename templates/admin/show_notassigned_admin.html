@@ -123,10 +123,10 @@
                                         <select name="assignee" style="height:44px;padding:0 20px;font-size:1.3em;
                                         color: #fff;    background-color: #286090;border-color: #204d74;
                                         border-radius: 6px;">
-                                            <option style="">Select Assignee...</option>
-                                            <option style="">Roberto</option>
-                                            <option style="">andrew french</option>
-                                            <option style="">William</option>
+                                            <option style="" disabled selected>Select Assignee...</option>
+                                            {% for user in users %}
+                                            <option value="{{ user }}">{{ user }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                     <div class="col-lg-3" style="padding-left:0;">

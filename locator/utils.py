@@ -38,3 +38,8 @@ def get_value(request, method, key):
     if method == 'post':
         value = request.POST.get(key)
     return value
+
+
+def get_lastpage(request):
+    fullpath = request.get_full_path()
+    request.session['lastpage'] = fullpath
