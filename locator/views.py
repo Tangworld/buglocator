@@ -1032,6 +1032,7 @@ def save_assignment(request):
     bugid = request.POST.get('bugid')
     bug = models.Report.objects.filter(bugid=bugid)[0]
     bug.assignee = assignee
+    bug.status = 'unfixed'
     bug.save()
     return HttpResponseRedirect('/locator/not_assigned')
 
