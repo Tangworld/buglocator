@@ -271,7 +271,7 @@
                                         <span class="flag" style="background: #99CCCC">Report</span>
                                         <span class="time-wrapper"><span class="time">{{ report.0 }}</span></span>
                                     </div>
-                                    <div class="desc">
+                                    <div class="desc" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" title="{{ report.3 }}">
                                         You reported Bug &nbsp;
                                         {% if report.4 == '1' %}
                                             <a href="{% url 'locator:show_fixed_bug' %}?bugid={{ report.2 }}&flag=1">{{ report.2 }}</a>.
@@ -299,7 +299,7 @@
                                             <span class="flag" style="background: #CCFFCC">Fix</span>
                                             <span class="time-wrapper"><span class="time">{{ report.0 }}</span></span>
                                         </div>
-                                        <div class="desc">
+                                        <div class="desc" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" title="{{ report.3 }}">
                                             You fixed Bug
                                             <a href="{% url 'locator:show_notassigned' %}?bugid={{ report.2 }}&flag=1">{{ report.2 }}</a>.
                                             </br>
@@ -321,7 +321,7 @@
                                         <span class="flag" style="background: #FFFFCC">Assigned</span>
                                         <span class="time-wrapper"><span class="time">{{ report.0 }}</span></span>
                                     </div>
-                                    <div class="desc">
+                                    <div class="desc" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" title="{{ report.3 }}">
                                         Bug &nbsp;
                                         {% if report.4 == '1' %}
                                             <a href="{% url 'locator:show_fixed_bug' %}?bugid={{ report.2 }}&flag=1">{{ report.2 }}</a>

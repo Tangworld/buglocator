@@ -788,8 +788,6 @@ def show_open_bug(request):
     #premeter_to_memry(request)
 
     bugid = utils.get_value(request, 'get', 'bugid')
-    flag = utils.get_value(request, 'get', 'flag')
-    request.session['flag'] = flag
     bug = utils.get_one_report(bugid)
     if request.session['isadmin'] == 'yes':
         return render(request, 'admin/show_open_admin.html', {'bug': bug})
@@ -806,8 +804,6 @@ def show_fixed_bug(request):
         return HttpResponseRedirect('/locator/index/')
 
     bugid = utils.get_value(request, 'get', 'bugid')
-    flag = utils.get_value(request, 'get', 'flag')
-    request.session['flag'] = flag
     bug = utils.get_one_report(bugid)
     if request.session['isadmin'] == 'yes':
         return render(request, 'admin/show_fixed_admin.html', {'bug': bug})
@@ -824,8 +820,6 @@ def show_notassigned_bug(request):
         return HttpResponseRedirect('/locator/index/')
 
     bugid = utils.get_value(request, 'get', 'bugid')
-    flag = utils.get_value(request, 'get', 'flag')
-    request.session['flag'] = flag
     bug = utils.get_one_report(bugid)
     if request.session['isadmin'] == 'yes':
         productobj = models.ProUser.objects.get(user_id=utils.get_value(request, 'session', 'userid'))
@@ -889,7 +883,7 @@ def alg_res(request):
     wordArr = []
     aWord = []
     # 以下对description内容进行切分
-    bugreport = models.Report.objects.get(bugid='40858').description
+    bugreport = models.Report.objects.get(bugid=bugid).description
     for char in bugreport:
         if char.isalpha():
             aWord.append(char)
@@ -1111,6 +1105,7 @@ def save_assignment(request):
     bugid = request.POST.get('bugid')
     bug = models.Report.objects.filter(bugid=bugid)[0]
     bug.assignee = assignee
+    bug.status = 'unfixed'
     bug.save()
     return HttpResponseRedirect('/locator/not_assigned')
 
@@ -1124,8 +1119,11 @@ def to_fix(request):
         return HttpResponseRedirect('/locator/index/')
 
     bugid = request.POST.get('bugid')
+    timestamp = int(time.time())
     print bugid
+    print timestamp
     report = models.Report.objects.get(bugid=bugid)
     report.status = 'fix'
+    report.fixdate = timestamp
     report.save()
     return HttpResponseRedirect('/locator/unfix')
