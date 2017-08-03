@@ -32,6 +32,8 @@ urlpatterns = [
     url(r'^editprofile_admin$', views.edit, name='editprofile_admin'),
 
     url(r'^timeline$',views.more_timeline,name='timeline'),
-    url(r'^resultpage$', views.alg_res, name='resultpage'),
     url(r'^save_assignment/$', views.save_assignment, name='save_assignment'),
+    url(r'^resultpage$', views.alg_res, name='resultpage'),
+    url(r'^resultpage_l2ss$', views.alg_res_l2ss, name='resultpage_l2ss'),
+
 ]

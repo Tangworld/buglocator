@@ -11,14 +11,16 @@ from domain import CurrentUser
 from domain import Information
 import json
 from locator import utils
-import test
 import os
 import pickle
+
+import test
+import L2ss
 # Create your views here.
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 global r_k_vocab
-# global pre_omega
 global r_phi
 global r_pl
 global r_ptw
@@ -783,7 +785,7 @@ def show_open_bug(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    premeter_to_memry(request)
+    #premeter_to_memry(request)
 
     bugid = utils.get_value(request, 'get', 'bugid')
     flag = utils.get_value(request, 'get', 'flag')
@@ -870,7 +872,6 @@ def alg_res(request):
         return HttpResponseRedirect('/locator/lock/')
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
-    #原有代码
     pre = BASE_DIR+'/data/bughunter/'
 
     cList = [' ', '<', '>', '&', '\'', '"', '\n']
@@ -883,6 +884,7 @@ def alg_res(request):
 
     filelist = []
     bugid = utils.get_value(request, 'get', 'bugid')
+    print bugid
     result = get_result(request, bugid)
     wordArr = []
     aWord = []
@@ -917,33 +919,68 @@ def alg_res(request):
             filelist.append({'content': fileStr, 'path': filepath})
         except Exception, e:
             print e
+    return render(request, 'resultPage.html', {'fileArr':json.dumps(wordArr), 'sel_arr':json.dumps(kwArr),
+                                               'filelist': filelist, 'bugid': bugid})
 
-    #测试代码
+def alg_res_l2ss(request):
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+    pre = BASE_DIR+'/data/L2SS/'
 
-    # testPath = '/home/ranger/PycharmProjects/new/buglocator/locator/urls.py'
-    # fileStr = open('/home/ranger/PycharmProjects/new/buglocator/locator/another.txt', 'r').read()
-    # fileTest = open(testPath,'r').read()
-    #
-    # for char in fileStr:
-    #     if char.isalpha():
-    #         aWord.append(char)
-    #     elif char.isdigit():
-    #         aWord.append(char)
-    #     else:
-    #         wordArr.append("".join(aWord))
-    #         aWord = []
-    #         if char not in cList:
-    #             wordArr.append(char)
-    #         else:
-    #             wordArr.append(cDict[char])
-    # paths.append('/home/tsj/PycharmProjects/buglocator/locator/models.py')
-    # file = open('/home/tsj/PycharmProjects/buglocator/locator/models.py', 'r')
-    # content.append(file.read())
-    # return render(request, 'resultPage.html', {'fileArr':json.dumps(wordArr), 'sel_arr':json.dumps(kwArr),
-    #                                            'path':testPath,'file':fileTest})
-    return render(request, 'resultPage.html', {'fileArr':json.dumps(wordArr), 'sel_arr':json.dumps(kwArr), 'filelist': filelist, 'bugid': bugid})
+    cList = [' ', '<', '>', '&', '\'', '"', '\n']
+    cDict = {' ': '&nbsp;',
+             '<': '&lt;',
+             '>': '&gt;',
+             '\'': '&apos;',
+             '"': 'quot;',
+             '\n': '<br>'}
 
-
+    filelist = []
+    bugid = utils.get_value(request, 'get', 'bugid')
+    print bugid
+    result = get_result_l2ss(request, str(bugid))
+    wordArr = []
+    aWord = []
+    # 以下对description内容进行切分
+    bugreport = models.Report.objects.get(bugid='40858').description
+    for char in bugreport:
+        if char.isalpha():
+            aWord.append(char)
+        elif char.isdigit():
+            aWord.append(char)
+        else:
+            wordArr.append("".join(aWord))
+            aWord = []
+            if char not in cList:
+                wordArr.append(char)
+            else:
+                wordArr.append(cDict[char])
+    # 以下读取结果中的文件内容并获取文件对应的关键词
+    kwArr = []
+    for r in result:
+        filepath = models.filemap.objects.get(path_l2ss=r).filepath
+        fileid = models.filemap.objects.get(path_l2ss=r).filenumber
+        print fileid
+        keywordIDs = models.f2w.objects.get(fileID=fileid).keywords.split(' ')
+        keywords = models.wordmap.objects.filter(wordID__in=keywordIDs)
+        tmp = []
+        for keyword in keywords:
+            tmp.append(keyword.word)
+        kwArr.append(tmp)
+        thispath = str(pre + filepath)
+        try:
+            thiscontent = open(thispath, 'r')
+            fileStr = thiscontent.read()
+            filelist.append({'content': fileStr, 'path': filepath})
+        except Exception, e:
+            print e
+    return render(request, 'resultPage.html', {'fileArr':json.dumps(wordArr), 'sel_arr':json.dumps(kwArr),
+                                               'filelist': filelist, 'bugid': bugid})
 
 def get_result(request, bugid):
     # 权限控制
@@ -977,8 +1014,51 @@ def get_result(request, bugid):
     for i in range(0, 10):
         result.append(s_ptd[i][0])
     end = time.time()
-    print end - start, "here"
+    print "BugHunter consumed %f s."%(end-start)
     return result
+
+
+def get_result_l2ss(request, bugid):
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+    start = time.time()
+    pkl_aspectj_l2ss = file(BASE_DIR+'/data/L2SS/aspectj.pkl', 'rb')
+    pkl_epl_l2ss = file(BASE_DIR+'/data/L2SS/epl_l2ss.pkl', 'rb')
+    pkl_phi2_l2ss = file(BASE_DIR + '/data/L2SS/phi2_l2ss.pkl', 'rb')
+    pkl_phi_l2ss = file(BASE_DIR + '/data/L2SS/phi_l2ss.pkl', 'rb')
+    pkl_pl_l2ss = file(BASE_DIR + '/data/L2SS/pl_l2ss.pkl', 'rb')
+    pkl_ptw_l2ss = file(BASE_DIR + '/data/L2SS/ptw_l2ss.pkl', 'rb')
+    pkl_tr_dis_l2ss = file(BASE_DIR + '/data/L2SS/tr_dis_l2ss.pkl', 'rb')
+
+    data_l2ss = pickle.load(pkl_aspectj_l2ss)
+    epl_l2ss = pickle.load(pkl_epl_l2ss)
+    phi_l2ss = pickle.load(pkl_phi_l2ss)
+    phi2_l2ss = pickle.load(pkl_phi2_l2ss)
+    pl_l2ss = pickle.load(pkl_pl_l2ss)
+    ptw_l2ss = pickle.load(pkl_ptw_l2ss)
+    tr_dis_l2ss = pickle.load(pkl_tr_dis_l2ss)
+
+    pkl_aspectj_l2ss.close()
+    pkl_epl_l2ss.close()
+    pkl_phi2_l2ss.close()
+    pkl_phi_l2ss.close()
+    pkl_pl_l2ss.close()
+    pkl_ptw_l2ss.close()
+    pkl_tr_dis_l2ss.close()
+
+    s_ptd = L2ss.l2ss_test(bugid, epl_l2ss, pl_l2ss, phi_l2ss, phi2_l2ss, ptw_l2ss, tr_dis_l2ss, data_l2ss)
+    result = []
+    for i in range(10):
+        result.append(s_ptd[i][0])
+    end = time.time()
+    print "L2SS consumed %f s." %(end - start)
+    return result
+
 
 def cloud(request):
     # 权限控制
@@ -990,6 +1070,7 @@ def cloud(request):
         return HttpResponseRedirect('/locator/index/')
 
     return render(request, 'cloud.html')
+
 
 def premeter_to_memry(request):
     pkl_k_vocab = file(BASE_DIR+'/data/bughunter/k_vocab.pkl', 'rb')
