@@ -120,21 +120,21 @@
                                     <hr>
                                     <thead>
                                     <tr>
-                                        <th style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;"># Bug ID <i id="0" class="fa fa-toggle-down" onclick="$.sortTable.sort('tableSort',0)"></i></th>
-                                        <th  class="hidden-phone" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;"><i class="fa fa-question-circle"></i> Summary <i id="1" class="fa fa-toggle-down" onclick="$.sortTable.sort('tableSort',1)"></i></th>
-                                        <th style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;"><i class="fa fa-user" aria-hidden="true"></i> Reporter <i id="2" class="fa fa-toggle-down" onclick="$.sortTable.sort('tableSort',2)"></i></th>
-                                        <th style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;"><i class=" fa fa-calendar"></i> Report Date <i id="3" class="fa fa-toggle-down" onclick="$.sortTable.sort('tableSort',3)"></i></th>
+                                        <th ># Bug ID <i id="0" class="fa fa-toggle-down" onclick="$.sortTable.sort('tableSort',0)"></i></th>
+                                        <th  class="hidden-phone" ><i class="fa fa-question-circle"></i> Summary <i id="1" class="fa fa-toggle-down" onclick="$.sortTable.sort('tableSort',1)"></i></th>
+                                        <th ><i class="fa fa-user" aria-hidden="true"></i> Reporter <i id="2" class="fa fa-toggle-down" onclick="$.sortTable.sort('tableSort',2)"></i></th>
+                                        <th ><i class=" fa fa-calendar"></i> Report Date <i id="3" class="fa fa-toggle-down" onclick="$.sortTable.sort('tableSort',3)"></i></th>
                                         <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     {% for content in contents %}
                                         <tr>
-                                            <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;"><a href="{% url 'locator:show_open_bug' %}?bugid={{ content.0 }}">{{ content.0 }}</a></td>
+                                            <td ><a href="{% url 'locator:show_open_bug' %}?bugid={{ content.0 }}">{{ content.0 }}</a></td>
                                             <td class="hidden-phone" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;" title="{{ content.1 }}">{{ content.1 }}</td>
-                                            <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;">{{ content.2 }}</td>
-                                            <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;">{{ content.3 }}</td>
-                                            <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;">
+                                            <td >{{ content.2 }}</td>
+                                            <td >{{ content.3 }}</td>
+                                            <td >
                                                 <a href="{% url 'locator:show_open_bug' %}?bugid={{ content.0 }}"><button class="btn btn-primary btn-xs" style="width: 100px"><i class="fa fa-pencil"></i></button></a>
                                             </td>
                                         </tr>
