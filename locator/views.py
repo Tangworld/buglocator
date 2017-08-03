@@ -822,8 +822,6 @@ def show_notassigned_bug(request):
         return HttpResponseRedirect('/locator/index/')
 
     bugid = utils.get_value(request, 'get', 'bugid')
-    flag = utils.get_value(request, 'get', 'flag')
-    request.session['flag'] = flag
     bug = utils.get_one_report(bugid)
     if request.session['isadmin'] == 'yes':
         productobj = models.ProUser.objects.get(user_id=utils.get_value(request, 'session', 'userid'))
