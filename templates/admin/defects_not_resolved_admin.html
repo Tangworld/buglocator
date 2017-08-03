@@ -141,7 +141,7 @@
                                     {% for content in contents %}
                                         <tr>
                                             <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;"><a href="{% url 'locator:show_open_bug' %}?bugid={{ content.0 }}">{{ content.0 }}</a></td>
-                                            <td class="hidden-phone" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;">{{ content.1 }}</td>
+                                            <td class="hidden-phone" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;" title="{{ content.1 }}">{{ content.1 }}</td>
                                             <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;">{{ content.2 }}</td>
                                             <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;">{{ content.3 }}</td>
                                             <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;">{{ content.4 }}</td>
