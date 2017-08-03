@@ -132,7 +132,7 @@
                                     <tbody>
                                     {% for content in contents %}
                                         <tr>
-                                            <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;"><a href="{% url 'locator:show_fixed_bug' %}?bugid={{ content.0 }}&flag=4">{{ content.0 }}</a></td>
+                                            <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;"><a href="{% url 'locator:show_fixed_bug' %}?bugid={{ content.0 }}">{{ content.0 }}</a></td>
                                             <td class="hidden-phone" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;">{{ content.1 }}</td>
                                             <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;">{{ content.2 }}</td>
                                             <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 20em;">{{ content.3 }}</td>

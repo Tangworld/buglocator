@@ -786,8 +786,6 @@ def show_open_bug(request):
     premeter_to_memry(request)
 
     bugid = utils.get_value(request, 'get', 'bugid')
-    flag = utils.get_value(request, 'get', 'flag')
-    request.session['flag'] = flag
     bug = utils.get_one_report(bugid)
     if request.session['isadmin'] == 'yes':
         return render(request, 'admin/show_open_admin.html', {'bug': bug})
@@ -804,8 +802,6 @@ def show_fixed_bug(request):
         return HttpResponseRedirect('/locator/index/')
 
     bugid = utils.get_value(request, 'get', 'bugid')
-    flag = utils.get_value(request, 'get', 'flag')
-    request.session['flag'] = flag
     bug = utils.get_one_report(bugid)
     if request.session['isadmin'] == 'yes':
         return render(request, 'admin/show_fixed_admin.html', {'bug': bug})
