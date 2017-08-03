@@ -15,7 +15,7 @@ class User(models.Model):
 class Report(models.Model):
     bugid = models.CharField(max_length=20, null=True, blank=True)
     summary = models.CharField(max_length=50, null=True, blank=True)
-    description = models.CharField(max_length=200, null=True, blank=True)
+    description = models.TextField(max_length=700, null=True, blank=True)
     reporter = models.CharField(max_length=32, null=True, blank=True)
     assignee = models.CharField(max_length=32, null=True, blank=True)
     productid = models.CharField(max_length=32, null=True, blank=True)
