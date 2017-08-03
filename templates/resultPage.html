@@ -164,6 +164,7 @@
                                          <li class=""><a class="nav-bar" href="#file{{ forloop.counter0 }}-pills" data-toggle="tab">File{{ forloop.counter0 }}:  80%</a>
                                         </li>
                                          {% endfor %}
+
 {#                                        <li class=""><a class="nav-bar" href="#file3-pills" data-toggle="tab">File3:  70%</a>#}
 {#                                        </li>#}
 {#                                        <li class=""><a class="nav-bar" href="#file4-pills" data-toggle="tab">File4:  60%</a>#}
@@ -187,10 +188,7 @@
                                         <div class="tab-pane " id="file{{ forloop.counter0 }}-pills">
                                             <h4 style="margin:0;padding: 10px;background: #f5f5f5"><font color="black">File Path: &nbsp;{{ file.path }}</font> &nbsp;</h4>
 
-                                            <pre sty
-
-
-                                                 le="height: 780px;padding:10px;">
+                                            <pre style="height: 780px;padding:10px; overflow:auto;">
                                                 <code>
 {{ file.content }}
                                                 </code>
@@ -303,7 +301,7 @@ function judge(value,arr)
 function addElementDiv() {
 　　var parent = document.getElementById("content");
     var tmp1 = {{ fileArr|safe }};
-    var tmp2 = {{ sel_arr|safe }};
+    var tmp2 = {{ sel_arr.0|safe }};
     var index;
 
     for(var i=0;i<tmp1.length;i++)

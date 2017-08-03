@@ -89,4 +89,10 @@ class reports(models.Model):
     content = models.TextField(max_length=500, null=True, blank=True)
 
 
+class f2w(models.Model):
+    fileID = models.CharField(max_length=20, null=True, blank=True)
+    keywords = models.TextField(max_length=200, null=True, blank=True)
 
+class wordmap(models.Model):
+    wordID = models.CharField(max_length=20, null=True, blank=True)
+    word = models.TextField(max_length=500, null=True, blank=True)

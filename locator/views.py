@@ -13,14 +13,16 @@ import json
 from locator import utils
 import test
 import os
+import pickle
 # Create your views here.
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-global pre_k_vocab
-global pre_omega
-global pre_phi
-global pre_pl
-global pre_ptw
+global r_k_vocab
+# global pre_omega
+global r_phi
+global r_pl
+global r_ptw
+global r_pws
 
 
 
@@ -602,14 +604,14 @@ def unfixed(request):
     disContent = []
 
     if current_isadmin == 'yes':
-        reports = utils.get_reports(status='open')
+        reports = utils.get_reports(status='unfixed')
         for report in reports:
             tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))), report.assignee)
             disContent.append(tmpContent)
 
         return render(request, 'admin/defects_not_resolved_admin.html', {'contents': disContent})
     else:
-        reports = utils.get_reports(status='open', assignee=current_username)
+        reports = utils.get_reports(status='unfixed', assignee=current_username)
         for report in reports:
             tmpContent = (report.bugid, report.summary, report.reporter, time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(float(report.opendate))))
             disContent.append(tmpContent)
@@ -884,28 +886,35 @@ def alg_res(request):
     result = get_result(request, bugid)
     wordArr = []
     aWord = []
-    # print result
+    # 以下对description内容进行切分
+    bugreport = models.Report.objects.get(bugid='40858').description
+    for char in bugreport:
+        if char.isalpha():
+            aWord.append(char)
+        elif char.isdigit():
+            aWord.append(char)
+        else:
+            wordArr.append("".join(aWord))
+            aWord = []
+            if char not in cList:
+                wordArr.append(char)
+            else:
+                wordArr.append(cDict[char])
+    # 以下读取结果中的文件内容并获取文件对应的关键词
+    kwArr = []
     for r in result:
         filepath = models.filemap.objects.get(filenumber=r).filepath
+        keywordIDs = models.f2w.objects.get(fileID=r).keywords.split(' ')
+        keywords = models.wordmap.objects.filter(wordID__in=keywordIDs)
+        tmp = []
+        for keyword in keywords:
+            tmp.append(keyword.word)
+        kwArr.append(tmp)
         thispath = str(pre + filepath)
         try:
             thiscontent = open(thispath, 'r')
             fileStr = thiscontent.read()
-            for char in fileStr:
-                if char.isalpha():
-                    aWord.append(char)
-                elif char.isdigit():
-                    aWord.append(char)
-                else:
-                    wordArr.append("".join(aWord))
-                    aWord = []
-                    if char not in cList:
-                        wordArr.append(char)
-                    else:
-                        wordArr.append(cDict[char])
             filelist.append({'content': fileStr, 'path': filepath})
-
-            # content.append(thiscontent.readlines())
         except Exception, e:
             print e
 
@@ -927,7 +936,6 @@ def alg_res(request):
     #             wordArr.append(char)
     #         else:
     #             wordArr.append(cDict[char])
-    kwArr = ['applet', 'RPFactor', 'RemoteUIApplet', 'class']
     # paths.append('/home/tsj/PycharmProjects/buglocator/locator/models.py')
     # file = open('/home/tsj/PycharmProjects/buglocator/locator/models.py', 'r')
     # content.append(file.read())
@@ -946,22 +954,12 @@ def get_result(request, bugid):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    global pre_k_vocab
-    global pre_omega
-    global pre_phi
-    global pre_pl
-    global pre_ptw
-
-    # 获取k_vocab参数
-    # print pre_k_vocab
-    r_k_vocab = eval(pre_k_vocab[0])
-    # 获取omega参数
-    r_omega = eval(pre_omega[0])
-    # 获取phi参数
-    r_phi = eval(pre_phi[0])
-    # 获取pl参数
-    r_pl = eval(pre_pl[0])
-    r_ptw = eval(pre_ptw[0])
+    start = time.time()
+    global r_k_vocab
+    global r_phi
+    global r_pl
+    global r_ptw
+    global r_pws
 
     indexx = models.bugidmap.objects.get(bugid=bugid).bugidnumber
     current_report = models.reports.objects.get(reportnumber=indexx).content
@@ -973,14 +971,14 @@ def get_result(request, bugid):
     # print ws, ts
     report = {'ws': ws, 'ts': ts}
 
-
     result = []
-    s_ptd = test.llda_test(report, r_k_vocab, r_pl, r_phi, r_omega, r_ptw)
+    #s_ptd = test.llda_test(report, r_k_vocab, r_pl, r_phi, r_omega, r_ptw, r_pws)
+    s_ptd = test.llda_test(report, r_k_vocab, r_pl, r_phi, r_ptw, r_pws)
     for i in range(0, 10):
         result.append(s_ptd[i][0])
+    end = time.time()
+    print end - start, "here"
     return result
-
-
 
 def cloud(request):
     # 权限控制
@@ -994,30 +992,30 @@ def cloud(request):
     return render(request, 'cloud.html')
 
 def premeter_to_memry(request):
-    k_vocab = open(BASE_DIR + '/data/bughunter/k_vocab.txt', 'r')
-    omega = open(BASE_DIR + '/data/bughunter/omega.txt', 'r')
-    phi = open(BASE_DIR + '/data/bughunter/phi.txt', 'r')
-    pl = open(BASE_DIR + '/data/bughunter/pl.txt', 'r')
-    ptw = open(BASE_DIR + '/data/bughunter/ptw.txt', 'r')
+    pkl_k_vocab = file(BASE_DIR+'/data/bughunter/k_vocab.pkl', 'rb')
+    pkl_phi = file(BASE_DIR+'/data/bughunter/phi.pkl', 'rb')
+    pkl_pl = file(BASE_DIR+'/data/bughunter/pl.pkl', 'rb')
+    pkl_ptw = file(BASE_DIR+'/data/bughunter/ptw.pkl', 'rb')
+    pkl_pws = file(BASE_DIR+'/data/bughunter/pws.pkl', 'rb')
 
-    global pre_k_vocab
-    global pre_omega
-    global pre_phi
-    global pre_pl
-    global pre_ptw
+    global r_k_vocab
+    global r_phi
+    global r_pl
+    global r_ptw
+    global r_pws
 
-    pre_k_vocab = k_vocab.readlines()
-    pre_omega = omega.readlines()
-    pre_phi = phi.readlines()
-    pre_pl = pl.readlines()
-    pre_ptw = ptw.readlines()
+    r_k_vocab = pickle.load(pkl_k_vocab)
+    r_phi = pickle.load(pkl_phi)
+    r_pl = pickle.load(pkl_pl)
+    r_ptw = pickle.load(pkl_ptw)
+    r_pws = pickle.load(pkl_pws)
 
-    k_vocab.close()
-    omega.close()
-    phi.close()
-    pl.close()
-    ptw.close()
-    # return pre_k_vocab, pre_omega, pre_phi, pre_pl, pre_ptw
+    pkl_k_vocab.close()
+    pkl_phi.close()
+    pkl_pl.close()
+    pkl_ptw.close()
+    pkl_pws.close()
+
 
 def save_assignment(request):
     # 权限控制
