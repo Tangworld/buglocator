@@ -885,7 +885,7 @@ def alg_res(request):
     wordArr = []
     aWord = []
     # 以下对description内容进行切分
-    bugreport = models.Report.objects.get(bugid='40858').description
+    bugreport = models.Report.objects.get(bugid=bugid).description
     for char in bugreport:
         if char.isalpha():
             aWord.append(char)
@@ -1042,8 +1042,11 @@ def to_fix(request):
         return HttpResponseRedirect('/locator/index/')
 
     bugid = request.POST.get('bugid')
+    timestamp = int(time.time())
     print bugid
+    print timestamp
     report = models.Report.objects.get(bugid=bugid)
     report.status = 'fix'
+    report.fixdate = timestamp
     report.save()
     return HttpResponseRedirect('/locator/unfix')
