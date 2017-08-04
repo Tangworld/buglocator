@@ -941,7 +941,7 @@ def alg_res_l2ss(request):
     wordArr = []
     aWord = []
     # 以下对description内容进行切分
-    bugreport = models.Report.objects.get(bugid='40858').description
+    bugreport = models.Report.objects.get(bugid=bugid).description
     for char in bugreport:
         if char.isalpha():
             aWord.append(char)
