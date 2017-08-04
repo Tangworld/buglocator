@@ -82,6 +82,7 @@ class bugidmap(models.Model):
 class filemap(models.Model):
     filenumber = models.CharField(max_length=20, null=True, blank=True)
     filepath = models.CharField(max_length=200, null=True, blank=True)
+    path_l2ss = models.CharField(max_length=200, null=True, blank=True)
 
 
 class reports(models.Model):
