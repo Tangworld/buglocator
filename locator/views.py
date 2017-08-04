@@ -286,8 +286,8 @@ def profile(request):
         minvalue = int(record.b7)
         minmonth = 'July'
 
-    print minvalue
-    print minmonth
+    # print minvalue
+    # print minmonth
     information = Information()
     information.setAll(allbugs=allbugs, allfiles=allfiles, maxmonth=maxmonth, minmonth=minmonth, b1=int(record.b1), b2=int(record.b2), b3=int(record.b3), b4=int(record.b4), b5=int(record.b5), b6=int(record.b6), b7=int(record.b7),
                       f1=int(record.f1), f2=int(record.f2), f3=int(record.f3), f4=int(record.f4), f5=int(record.f5), f6=int(record.f6), f7=int(record.f7))
@@ -785,13 +785,13 @@ def show_open_bug(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    #premeter_to_memry(request)
 
     bugid = utils.get_value(request, 'get', 'bugid')
     bug = utils.get_one_report(bugid)
     if request.session['isadmin'] == 'yes':
         return render(request, 'admin/show_open_admin.html', {'bug': bug})
     else:
+        premeter_to_memry(request)
         return render(request, 'show_open_bug.html', {'bug': bug})
 
 
@@ -854,7 +854,7 @@ def back(request):
         return HttpResponseRedirect('/locator/index/')
 
     lastpage = utils.get_value(request, 'session', 'lastpage')
-    print lastpage
+    # print lastpage
     return HttpResponseRedirect(lastpage)
 
 
@@ -868,7 +868,7 @@ def alg_res(request):
         return HttpResponseRedirect('/locator/index/')
     pre = BASE_DIR+'/data/bughunter/'
 
-    cList = [' ', '<', '>', '&', '\'', '"', '\n']
+    cList = [' ', '<', '>', '\'', '"', '\n']
     cDict = {' ': '&nbsp;',
              '<': '&lt;',
              '>': '&gt;',
@@ -878,7 +878,7 @@ def alg_res(request):
 
     filelist = []
     bugid = utils.get_value(request, 'get', 'bugid')
-    print bugid
+    # print bugid
     result = get_result(request, bugid)
     wordArr = []
     aWord = []
@@ -900,11 +900,13 @@ def alg_res(request):
     kwArr = []
     for r in result:
         filepath = models.filemap.objects.get(filenumber=r).filepath
+        # print r
         keywordIDs = models.f2w.objects.get(fileID=r).keywords.split(' ')
         keywords = models.wordmap.objects.filter(wordID__in=keywordIDs)
         tmp = []
         for keyword in keywords:
             tmp.append(keyword.word)
+
         kwArr.append(tmp)
         thispath = str(pre + filepath)
         try:
@@ -924,9 +926,9 @@ def alg_res_l2ss(request):
         return HttpResponseRedirect('/locator/lock/')
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
-    pre = BASE_DIR+'/data/L2SS/'
+    pre = BASE_DIR+'/data/bughunter/'
 
-    cList = [' ', '<', '>', '&', '\'', '"', '\n']
+    cList = [' ', '<', '>', '\'', '"', '\n']
     cDict = {' ': '&nbsp;',
              '<': '&lt;',
              '>': '&gt;',
@@ -936,12 +938,12 @@ def alg_res_l2ss(request):
 
     filelist = []
     bugid = utils.get_value(request, 'get', 'bugid')
-    print bugid
+    # print bugid
     result = get_result_l2ss(request, str(bugid))
     wordArr = []
     aWord = []
     # 以下对description内容进行切分
-    bugreport = models.Report.objects.get(bugid='40858').description
+    bugreport = models.Report.objects.get(bugid=bugid).description
     for char in bugreport:
         if char.isalpha():
             aWord.append(char)
@@ -957,14 +959,18 @@ def alg_res_l2ss(request):
     # 以下读取结果中的文件内容并获取文件对应的关键词
     kwArr = []
     for r in result:
+        # print r
         filepath = models.filemap.objects.get(path_l2ss=r).filepath
         fileid = models.filemap.objects.get(path_l2ss=r).filenumber
-        print fileid
+        # print fileid
         keywordIDs = models.f2w.objects.get(fileID=fileid).keywords.split(' ')
+        print keywordIDs
         keywords = models.wordmap.objects.filter(wordID__in=keywordIDs)
+        print keywords
         tmp = []
         for keyword in keywords:
             tmp.append(keyword.word)
+            print tmp
         kwArr.append(tmp)
         thispath = str(pre + filepath)
         try:
@@ -973,7 +979,7 @@ def alg_res_l2ss(request):
             filelist.append({'content': fileStr, 'path': filepath})
         except Exception, e:
             print e
-    return render(request, 'resultPage.html', {'fileArr':json.dumps(wordArr), 'sel_arr':json.dumps(kwArr),
+    return render(request, 'resultPage.html', {'fileArr': json.dumps(wordArr), 'sel_arr': json.dumps(kwArr),
                                                'filelist': filelist, 'bugid': bugid})
 
 def get_result(request, bugid):
@@ -1120,8 +1126,8 @@ def to_fix(request):
 
     bugid = request.POST.get('bugid')
     timestamp = int(time.time())
-    print bugid
-    print timestamp
+    # print bugid
+    # print timestamp
     report = models.Report.objects.get(bugid=bugid)
     report.status = 'fix'
     report.fixdate = timestamp

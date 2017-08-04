@@ -84,17 +84,13 @@
                 </li>
 
                 <li class="sub-menu">
-<<<<<<< HEAD
-                    <a href="{% url 'locator:resultpage' %}?bugid=166514">
-=======
                     <a href="{% url 'locator:resultpage' %}?bugid={{ bug.bugid }}">
->>>>>>> bde139dc56dbb167b67d7d49d4edd0734e97f574
                         <i class="fa fa-magnet"></i>
                         <span>BugHunter</span>
                     </a>
 
                 <li class="sub-menu">
-                    <a href="{% url 'locator:resultpage_l2ss' %}?bugid=166514">
+                    <a href="{% url 'locator:resultpage_l2ss' %}?bugid={{ bug.bugid }}">
                         <i class="fa fa-bell"></i>
                         <span>L2SS</span>
                     </a>

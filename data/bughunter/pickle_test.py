@@ -31,18 +31,21 @@ def f2winsert():
 
     pre_pws = file_pws.readlines()
     pws = eval(pre_pws[0])
-    #cnt = 0
+    print len(pws.keys())
+    cnt = 0
     for key in pws.keys():
         string = ''
         for i in range(10):
             string = string + str(pws[key][i][0]) + ' '
         # cursor.execute("select * from locator_bugidmap")
         cursor.execute("insert into locator_f2w(fileID, keywords) values('"+str(key)+"', '"+string+"')")
-        # cnt += 1
+        cnt += 1
 
+    print cnt
     db.commit()  # Commit the transaction
     cursor.close()
     db.close()
+
 
 f2winsert()
 
