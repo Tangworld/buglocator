@@ -21,10 +21,13 @@ def get_one_report(bugid):
     bug.productid = productname
     open_local = time.localtime(float(bug.opendate))
     open_date = time.strftime("%Y-%m-%d %H:%M:%S", open_local)
-    fix_local = time.localtime(float(bug.fixdate))
-    fix_date = time.strftime("%Y-%m-%d %H:%M:%S", fix_local)
     bug.opendate = open_date
-    bug.fixdate = fix_date
+    if not bug.fixdate == '':
+        fix_local = time.localtime(float(bug.fixdate))
+        fix_date = time.strftime("%Y-%m-%d %H:%M:%S", fix_local)
+        bug.fixdate = fix_date
+
+
 
     return bug
 
