@@ -916,7 +916,7 @@ def alg_res(request):
         except Exception, e:
             print e
     return render(request, 'resultPage.html', {'fileArr':json.dumps(wordArr), 'sel_arr':json.dumps(kwArr),
-                                               'filelist': filelist, 'bugid': bugid})
+                                               'filelist': filelist, 'bugid': bugid, 'report': bugreport})
 
 def alg_res_l2ss(request):
     # 权限控制
@@ -965,13 +965,15 @@ def alg_res_l2ss(request):
         # print fileid
         keywordIDs = models.f2w.objects.get(fileID=fileid).keywords.split(' ')
         # print keywordIDs
-        keywords = models.wordmap.objects.filter(wordID__in=keywordIDs[0:-2])
+        keywords = models.wordmap.objects.filter(wordID__in=keywordIDs[0:-1])
         # print keywords
-        tmp = []
+        #tmp = []
         for keyword in keywords:
-            tmp.append(keyword.word)
+            #tmp.append(keyword.word)
+            kwArr.append(keyword.word)
             # print tmp
-        kwArr.append(tmp)
+        #kwArr.append(tmp)
+        print len(kwArr)
         thispath = str(pre + filepath)
         try:
             thiscontent = open(thispath, 'r')
@@ -979,8 +981,8 @@ def alg_res_l2ss(request):
             filelist.append({'content': fileStr, 'path': filepath})
         except Exception, e:
             print e
-    return render(request, 'resultPage.html', {'fileArr': json.dumps(wordArr), 'sel_arr': json.dumps(kwArr),
-                                               'filelist': filelist, 'bugid': bugid})
+    return render(request, 'resultPage.html', {'fileArr': json.dumps(wordArr), 'sel_arr': kwArr,
+                                               'filelist': filelist, 'bugid': bugid, 'report': bugreport})
 
 def get_result(request, bugid):
     # 权限控制
