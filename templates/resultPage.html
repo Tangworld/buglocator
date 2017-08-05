@@ -35,7 +35,13 @@
     <script>hljs.initHighlightingOnLoad();</script>
     <script src="/assets/js/prefixfree.min.js"></script>
     <script src="/assets/js/index.js"></script>
-
+    <!-- 鼠标经过效果-->
+    <script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this demo in a modern browser that supports CSS Variables.");</script>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700|Nunito:400,700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/assets/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="/assets/css/demo.css" />
+	<link rel="stylesheet" type="text/css" href="/assets/css/style-adsila.css" />
+    <!-- /鼠标经过效果-->
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -377,39 +383,81 @@
                             </div> <!-- /col-lg-5 -->
                                 <div class="col-lg-7" style="">
                                     <div class="col-lg-2" style="width: 28.6%;">
-                                        <ul class="nav nav-tabs" style="border-bottom:none;">
-                                            <li class="active" style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" >
-                                                <a href="#file0" data-toggle="tab">&nbsp;&nbsp;Source File-0</a>
-                                            </li>
-                                            <li class="" style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-                                                <a href="#file1" data-toggle="tab">&nbsp;&nbsp;Source File-1</a>
-                                            </li>
-                                            <li class="" style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-                                                <a href="#file2" data-toggle="tab">&nbsp;&nbsp;Source File-2</a>
-                                            </li>
-                                            <li class="" style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-                                                <a href="#file3" data-toggle="tab">&nbsp;&nbsp;Source File-3</a>
-                                            </li>
-                                            <li class="" style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" >
-                                                <a href="#file4" data-toggle="tab">&nbsp;&nbsp;Source File-4</a>
-                                            </li>
-                                            <li class="" style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-                                                <a href="#file5" data-toggle="tab">&nbsp;&nbsp;Source File-5</a>
-                                            </li>
-                                            <li class="" style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-                                                <a href="#file6" data-toggle="tab">&nbsp;&nbsp;Source File-6</a>
-                                            </li>
-                                            <li class="" style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-                                                <a href="#file7" data-toggle="tab">&nbsp;&nbsp;Source File-7</a>
-                                            </li>
-                                            <li class="" style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-                                                <a href="#file8" data-toggle="tab">&nbsp;&nbsp;Source File-8</a>
-                                            </li>
-                                            <li class="" style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-                                                <a href="#file9" data-toggle="tab">&nbsp;&nbsp;Source File-9</a>
-                                            </li>
+                                        <ul style="border-bottom:none;">
+                                            <nav class="menu menu--adsila">
 
+                                                <a href="#file0" data-toggle="tab" class="menu__item">
+                                                    <li class="active"
+                                                        style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name">&nbsp;&nbsp;Source File-0</span>
+                                                    </li>
+                                                </a>
+
+                                                <a href="#file1" data-toggle="tab" class="menu__item">
+                                                    <li class=""
+                                                        style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name">&nbsp;&nbsp;Source File-1</span>
+                                                    </li>
+                                                </a>
+
+                                                <a href="#file2" data-toggle="tab" class="menu__item">
+                                                    <li class=""
+                                                        style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name">&nbsp;&nbsp;Source File-2</span>
+                                                    </li>
+                                                </a>
+
+
+                                                <a href="#file3" data-toggle="tab" class="menu__item">
+                                                    <li class=""
+                                                        style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name">&nbsp;&nbsp;Source File-3</span>
+                                                    </li>
+                                                </a>
+
+
+                                                <a href="#file4" data-toggle="tab" class="menu__item">
+                                                    <li class=""
+                                                        style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name">&nbsp;&nbsp;Source File-4</span>
+                                                    </li>
+                                                </a>
+
+
+                                                <a href="#file5" data-toggle="tab">
+                                                    <li class=""
+                                                        style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name">&nbsp;&nbsp;Source File-5</span>
+                                                    </li>
+                                                </a>
+
+                                                <a href="#file6" data-toggle="tab">
+                                                    <li class=""
+                                                        style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name">&nbsp;&nbsp;Source File-6</span>
+                                                    </li>
+                                                </a>
+                                                <a href="#file7" data-toggle="tab">
+                                                    <li class=""
+                                                        style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name">&nbsp;&nbsp;Source File-7</span>
+                                                    </li>
+                                                </a>
+                                                <a href="#file8" data-toggle="tab">
+                                                    <li class=""
+                                                        style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name">&nbsp;&nbsp;Source File-8</span>
+                                                    </li>
+                                                </a>
+                                                <a href="#file9" data-toggle="tab">
+                                                    <li class=""
+                                                        style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name">&nbsp;&nbsp;Source File-9</span>
+                                                    </li>
+                                                </a>
+                                            </nav>
                                         </ul>
+
                                         <form action="{% url 'locator:to_fix' %}" method="post">
                                     <ul class="nav nav-pills" style="align-self: center;margin-top:50px;">
                                         <li class="" style="">
@@ -430,7 +478,7 @@
                                                         <h4 style="padding: 10px; margin: 0px">Keywords</h4>
                                                         <tbody>
                                                     <tr>
-                                                        <td >keyword1</td>
+                                                        <td >keyword11</td>
                                                         <td >keyword2</td>
                                                     </tr>
                                                     <tr>
@@ -461,7 +509,7 @@
                                                         <h4 style="padding: 10px; margin: 0px">Keywords</h4>
                                                         <tbody>
                                                     <tr>
-                                                        <td >keyword1</td>
+                                                        <td >keyword12</td>
                                                         <td >keyword2</td>
                                                     </tr>
                                                     <tr>
@@ -492,7 +540,7 @@
                                                         <h4 style="padding: 10px; margin: 0px">Keywords</h4>
                                                         <tbody>
                                                     <tr>
-                                                        <td >keyword1</td>
+                                                        <td >keyword13</td>
                                                         <td >keyword2</td>
                                                     </tr>
                                                     <tr>
@@ -523,7 +571,7 @@
                                                         <h4 style="padding: 10px; margin: 0px">Keywords</h4>
                                                         <tbody>
                                                     <tr>
-                                                        <td >keyword1</td>
+                                                        <td >keyword14</td>
                                                         <td >keyword2</td>
                                                     </tr>
                                                     <tr>
@@ -582,14 +630,15 @@
 <script src="/assets/js/table-sort.js"></script>
 <script src="/assets/js/jquery-2.1.1.min.js" type="text/javascript"></script>
 <script src="/assets/js/jquery.svg3dtagcloud.min.js"></script>
-<script src="http://libs.useso.com/js/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+<script src="/assets/js/jquery.min.js" type="text/javascript"></script>
 <script>window.jQuery || document.write('<script src="/assets/js/jquery-1.11.0.min.js"><\/script>')</script>
 <script type="text/javascript" src="/assets/js/jquery.mark.min.js"></script>
+<!--鼠标经过效果 -->
+<script src="/assets/js/demo.js"></script>
+<!--/鼠标经过效果 -->
 <script type="text/javascript">
     $(function () {
         var mark = function (keywords, classname) {
-
-
             // Read the keyword
             {#        var keyword = $("input[name='keyword']").val();#}
             var keyword = keywords;
