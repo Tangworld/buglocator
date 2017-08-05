@@ -964,13 +964,13 @@ def alg_res_l2ss(request):
         fileid = models.filemap.objects.get(path_l2ss=r).filenumber
         # print fileid
         keywordIDs = models.f2w.objects.get(fileID=fileid).keywords.split(' ')
-        print keywordIDs
-        keywords = models.wordmap.objects.filter(wordID__in=keywordIDs)
-        print keywords
+        # print keywordIDs
+        keywords = models.wordmap.objects.filter(wordID__in=keywordIDs[0:-2])
+        # print keywords
         tmp = []
         for keyword in keywords:
             tmp.append(keyword.word)
-            print tmp
+            # print tmp
         kwArr.append(tmp)
         thispath = str(pre + filepath)
         try:
