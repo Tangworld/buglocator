@@ -311,28 +311,30 @@
 <script>window.jQuery || document.write('<script src="/assets/js/jquery-1.11.0.min.js"><\/script>')</script>
 <script type="text/javascript" src="/assets/js/jquery.mark.min.js"></script>
 <script type="text/javascript">
-    $(function() {
+    $(function () {
         document.getElementById('highlight').innerHTML = '风华';
-      var mark = function() {
+        var mark = function () {
 
-        // Read the keyword
-        var keyword = $("input[name='keyword']").val();
+            // Read the keyword
+            {#        var keyword = $("input[name='keyword']").val();#}
+            var keyword = 's';
+            alert(keyword);
 
-        // Determine selected options
-        var options = {
-          "className": "match"
+            // Determine selected options
+            var options = {
+                "className": "match"
+            };
+            $("input[name='opt[]']").each(function () {
+                options[$(this).val()] = $(this).is(":checked");
+            });
+
+            // Mark the keyword inside the context
+            $(".context").removeMark();
+            $(".context").mark(keyword, options);
         };
-        $("input[name='opt[]']").each(function() {
-          options[$(this).val()] = $(this).is(":checked");
-        });
-
-        // Mark the keyword inside the context
-        $(".context").removeMark();
-        $(".context").mark(keyword, options);
-      };
-
-      $("input[name='keyword']").on("keyup", mark);
-      $("input[type='checkbox']").on("change", mark);
+        mark();
+{#        $("input[name='keyword']").on('keyup', mark);#}
+{#        $("input[type='checkbox']").on("change", mark);#}
 
     });
 </script>
