@@ -381,13 +381,19 @@
                                     </div>
                                 </div>
                             </div> <!-- /col-lg-5 -->
-                                 <div class="col-lg-7" style="">
+                                 <div class="col-lg-7" style="padding-left:0;">
                                     <div class="col-lg-2" style="width: 28.6%;">
                                         <ul style="border-bottom:none;">
                                             <nav class="menu menu--adsila">
+                                                <a href="#whole" data-toggle="tab" class="">
+                                                    <li class="active"
+                                                        style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name">&nbsp;&nbsp;Whole Result</span>
+                                                    </li>
+                                                </a>
 
                                                 <a href="#file0" data-toggle="tab" class="menu__item">
-                                                    <li class="active"
+                                                    <li class=""
                                                         style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                                         <span class="menu__item-name">&nbsp;&nbsp;Source File-0</span>
                                                     </li>
@@ -424,32 +430,32 @@
                                                 </a>
 
 
-                                                <a href="#file5" data-toggle="tab">
+                                                <a href="#file5" data-toggle="tab" class="menu__item">
                                                     <li class=""
                                                         style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                                         <span class="menu__item-name">&nbsp;&nbsp;Source File-5</span>
                                                     </li>
                                                 </a>
 
-                                                <a href="#file6" data-toggle="tab">
+                                                <a href="#file6" data-toggle="tab" class="menu__item">
                                                     <li class=""
                                                         style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                                         <span class="menu__item-name">&nbsp;&nbsp;Source File-6</span>
                                                     </li>
                                                 </a>
-                                                <a href="#file7" data-toggle="tab">
+                                                <a href="#file7" data-toggle="tab" class="menu__item">
                                                     <li class=""
                                                         style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                                         <span class="menu__item-name">&nbsp;&nbsp;Source File-7</span>
                                                     </li>
                                                 </a>
-                                                <a href="#file8" data-toggle="tab">
+                                                <a href="#file8" data-toggle="tab" class="menu__item">
                                                     <li class=""
                                                         style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                                         <span class="menu__item-name">&nbsp;&nbsp;Source File-8</span>
                                                     </li>
                                                 </a>
-                                                <a href="#file9" data-toggle="tab">
+                                                <a href="#file9" data-toggle="tab" class="menu__item">
                                                     <li class=""
                                                         style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                                         <span class="menu__item-name">&nbsp;&nbsp;Source File-9</span>
@@ -460,7 +466,7 @@
 
                                         <form action="{% url 'locator:to_fix' %}" method="post">
                                     <ul class="nav nav-pills" style="align-self: center;margin-top:50px;">
-                                        <li class="" style="">
+                                        <li class="" style="padding-left:40px;">
                                             <input type="hidden" value="{{ bugid }}" name="bugid"/>
                                             <a class="nav-bar" href="javascript:;" style="background: #ff865c;
                                              color: #ffffff;padding:18px 15px;font-size:1.5em"
@@ -813,7 +819,7 @@
                                             </div>
                                         </div>
                                         <iframe src="{% url 'locator:cloud' %}" frameborder="0" scrolling="no"
-                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto"></iframe>
+                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
                                     </div>
                                 </div>
                         </div>
