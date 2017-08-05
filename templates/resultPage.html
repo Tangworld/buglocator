@@ -200,6 +200,7 @@
                                                            style="display: none">
                                                     <br>
                                                 </div>
+
                                                 <div class="panel-body context">
                                                     <!--<p>Bytecode dump weaving annotation based aspect on Java 8 using
                                                         asjectjtools &gt;1.8.2</p>
@@ -400,7 +401,7 @@
                                                 </a>
 
                                                 <a href="#file1" data-toggle="tab" class="menu__item">
-                                                    <li class=""
+                                                    <li class="file1"
                                                         style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                                         <span class="menu__item-name">&nbsp;&nbsp;Source File-1</span>
                                                     </li>
@@ -873,12 +874,13 @@
             });
 
             // Mark the keyword inside the context
-            {#            $(".context").removeMark();#}
+            $(".context").removeMark();
             $(".context").mark(keyword, options);
 
         };
-        mark('java 8', 'file1');
-        mark('service', 'file2');
+{#        mark('java 8', 'file1');#}
+{#        mark('service', 'file2');#}
+         $("li[class='file1']").on('click', mark('service', 'file1'));
         {#        $("input[name='keyword']").on('keyup', mark);#}
         {#        $("input[type='checkbox']").on("change", mark);#}
 
