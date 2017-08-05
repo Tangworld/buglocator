@@ -23,9 +23,8 @@
 
     <link href="/assets/css/adminia.css" rel="stylesheet"/>
     <link href="/assets/css/adminia-responsive.css" rel="stylesheet"/>
-
     <!--标签云的link-->
-{#    <link rel="stylesheet" type="text/css" href="/assets/css/zzsc-demo.css">#}
+    {#    <link rel="stylesheet" type="text/css" href="/assets/css/zzsc-demo.css">#}
 
 
     <link href="/assets/css/plans.css" rel="stylesheet"/>
@@ -35,23 +34,52 @@
     <script src="/assets/js/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
     <script src="/assets/js/prefixfree.min.js"></script>
-  <script src="/assets/js/index.js"></script>
+    <script src="/assets/js/index.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+        div.search span,
+        div.search input[name="keyword"] {
+            display: block;
+        }
+
+        div.search input[name="keyword"] {
+            margin-top: 4px;
+        }
+
+        div.panel {
+            padding: 1em 12em;
+            margin-bottom: 15px;
+        }
+
+        div.panel-body p {
+            text-indent: 2em;
+        }
+
+        span.file2 {
+            background: red;
+            color: black;
+        }
+
+        span.file1 {
+            background: yellow;
+            color: black;
+        }
+    </style>
     <style>
         canvas {
-	background: #111;
-	border: 1px solid #171717;
-	display: block;
-	left: 50%;
-	margin: -51px 0 0 -201px;
-	position: absolute;
-	top: 50%;
-}
+            background: #111;
+            border: 1px solid #171717;
+            display: block;
+            left: 50%;
+            margin: -51px 0 0 -201px;
+            position: absolute;
+            top: 50%;
+        }
     </style>
 
 
@@ -59,8 +87,8 @@
 
 <body>
 <div style="text-align:center;clear:both">
-<script src="/gg_bd_ad_720x90.js" type="text/javascript"></script>
-<script src="/follow.js" type="text/javascript"></script>
+    <script src="/gg_bd_ad_720x90.js" type="text/javascript"></script>
+    <script src="/follow.js" type="text/javascript"></script>
 </div>
 <section id="container">
     <!-- **********************************************************************************************************************************************************
@@ -144,47 +172,254 @@
 
                             <div class="widget" style="background: #ffffff; height: 850px;">
                                  <div class="col-lg-5" style="overflow: auto;padding-left:0">
-                                     <div class="tab-content" style="border: 1px solid #ccc;">
-                                         <div class="tab-pane active " id="file1-pills">
-                                             <h4 style="margin:0;padding: 10px;background: #f5f5f5;padding-bottom:40px;"><font color="black">Bug Report--Description：&nbsp;Bug ***</font> &nbsp;</h4>
-                                             <div style="height: 750px;overflow: auto;padding:10px;background: #f5f5f5;">
-                                                 <div id="content" style="width: 100%;font-size:1.2em;
-                                                 padding-top:15px;padding-left:10px;background: #282c34;color: #abb2bf;";>
-                                                     {{ fileArr }}
-                                                     {{ sel_arr }}
-                                                 </div><!--/content-->
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div> <!-- /col-lg-5 -->
+                                <div class="tab-content" style="border: 1px solid #ccc;">
+                                    <div class="tab-pane active " id="file1-pills">
+                                        <h4 style="margin:0;padding: 10px;background: #f5f5f5;padding-bottom:40px;">
+                                            <font color="black">Bug Report--Description：&nbsp;Bug {{ bugid }}</font>
+                                            &nbsp;</h4>
+                                        <div style="height: 750px;overflow: auto;padding:10px;background: #f5f5f5;">
+                                            <div id="content" style="width: 100%;font-size:1.2em;
+                                                 padding-top:15px;padding-left:10px;background: #282c34;color: #abb2bf;"
+                                                 ;>
+                                                <!-- 关键词高亮插件-->
+
+                                                <div class="col-xs-6">
+                                                    <input type="checkbox" name="opt[]"
+                                                           value="separateWordSearch" checked
+                                                           style="display: none">
+                                                    <br>
+                                                    <input type="checkbox" name="opt[]" value="diacritics"
+                                                           checked style="display: none">
+                                                    <br>
+                                                    <input type="checkbox" name="opt[]" value="debug"
+                                                           style="display: none">
+                                                    <br>
+                                                </div>
+                                                <div class="panel-body context">
+                                                    <p>Bytecode dump weaving annotation based aspect on Java 8 using
+                                                        asjectjtools &gt;1.8.2</p>
+                                                    <p>Created attachment 251819 [details]Maven project that
+                                                        reproduces the issueApologies for the non-descriptive title
+                                                        but I really have no idea how to better classify this.When
+                                                        trying to upgrade an existing project from java 7 to java 8
+                                                        aspectj weaving started to fail for one of the project's
+                                                        modules:[INFO]
+                                                        ------------------------------------------------------------------------[INFO]
+                                                        BUILD FAILURE[INFO]
+                                                        ------------------------------------------------------------------------[INFO]
+                                                        Total time: 2.362 s[INFO] Finished at:
+                                                        2015-03-23T10:19:18+01:00[INFO] Final Memory:
+                                                        21M/164M[INFO]
+                                                        ------------------------------------------------------------------------[ERROR]
+                                                        Failed to execute goal
+                                                        org.codehaus.mojo:aspectj-maven-plugin:1.7:compile
+                                                        (default) on project testapp: AJC compiler errors:[ERROR]
+                                                        abort trouble in:[ERROR] public class no.kantega.FooService
+                                                        extends java.lang.Object:[ERROR] public void &lt;init&gt;():[ERROR]
+                                                        ALOAD_0 // Lno/kantega/FooService; this (line 3)[ERROR]
+                                                        INVOKESPECIAL java.lang.Object.&lt;init&gt; ()V[ERROR]
+                                                        constructor-execution(void no.kantega.FooService.&lt;init&gt;())[ERROR]
+                                                        | RETURN[ERROR] constructor-execution(void
+                                                        no.kantega.FooService.&lt;init&gt;())[ERROR] end public
+                                                        void &lt;init&gt;()[ERROR] [ERROR] public String doSomething()
+                                                        org.aspectj.weaver.MethodDeclarationLineNumber: 6:92[ERROR]
+                                                        :[ERROR] GETSTATIC no.kantega.FooService.ajc$tjp_0
+                                                        Lorg/aspectj/lang/JoinPoint$StaticPart;[ERROR]
+                                                        ALOAD_0[ERROR] ALOAD_0[ERROR] INVOKESTATIC
+                                                        org.aspectj.runtime.reflect.Factory.makeJP
+                                                        (Lorg/aspectj/lang/JoinPoint$StaticPart;Ljava/lang/Object;Ljava/lang/Object;)Lorg/aspectj/lang/JoinPoint;[ERROR]
+                                                        ASTORE_1[ERROR] method-execution(java.lang.String
+                                                        no.kantega.FooService.doSomething())[ERROR] | LDC &quot;foo&quot;
+                                                        (line 7)[ERROR] | ARETURN[ERROR]
+                                                        method-execution(java.lang.String
+                                                        no.kantega.FooService.doSomething())[ERROR] end public
+                                                        String doSomething()[ERROR] [ERROR] end public class
+                                                        no.kantega.FooService[ERROR] -- (BCException) Class
+                                                        no.kantega.FooServiceLoggerAspect does not have a method
+                                                        handleInfoJoinPointsToLog with signature
+                                                        (Lorg/aspectj/lang/ProceedingJoinPoint;)Ljava/lang/Object;[ERROR]
+                                                        when implementing on shadow
+                                                        method-execution(java.lang.String
+                                                        no.kantega.FooService.doSomething())[ERROR] when weaving
+                                                        type no.kantega.FooService[ERROR] when weaving
+                                                        classes[ERROR] when weaving[ERROR] when batch building
+                                                        BuildConfig[null] #Files=3 AopXmls=#0[ERROR] [ERROR] Class
+                                                        no.kantega.FooServiceLoggerAspect does not have a method
+                                                        handleInfoJoinPointsToLog with signature
+                                                        (Lorg/aspectj/lang/ProceedingJoinPoint;)Ljava/lang/Object;[ERROR]
+                                                        when implementing on shadow
+                                                        method-execution(java.lang.String
+                                                        no.kantega.FooService.doSomething())[ERROR] when weaving
+                                                        type no.kantega.FooService[ERROR] when weaving
+                                                        classes[ERROR] when weaving[ERROR] when batch building
+                                                        BuildConfig[null] #Files=3 AopXmls=#0[ERROR] [ERROR]
+                                                        org.aspectj.weaver.BCException: Class
+                                                        no.kantega.FooServiceLoggerAspect does not have a method
+                                                        handleInfoJoinPointsToLog with signature
+                                                        (Lorg/aspectj/lang/ProceedingJoinPoint;)Ljava/lang/Object;[ERROR]
+                                                        when implementing on shadow
+                                                        method-execution(java.lang.String
+                                                        no.kantega.FooService.doSomething())[ERROR] when weaving
+                                                        type no.kantega.FooService[ERROR] when weaving
+                                                        classes[ERROR] when weaving[ERROR] when batch building
+                                                        BuildConfig[null] #Files=3 AopXmls=#0[ERROR] [ERROR] at
+                                                        org.aspectj.weaver.bcel.LazyClassGen.getLazyMethodGen(LazyClassGen.java:1548)[ERROR]
+                                                        at
+                                                        org.aspectj.weaver.bcel.LazyClassGen.getLazyMethodGen(LazyClassGen.java:1533)[ERROR]
+                                                        at
+                                                        org.aspectj.weaver.bcel.BcelAdvice.canInline(BcelAdvice.java:244)[ERROR]
+                                                        at
+                                                        org.aspectj.weaver.bcel.BcelAdvice.implementOn(BcelAdvice.java:363)[ERROR]
+                                                        at
+                                                        org.aspectj.weaver.Shadow.implementMungers(Shadow.java:632)[ERROR]
+                                                        at
+                                                        org.aspectj.weaver.Shadow.implement(Shadow.java:547)[ERROR]
+                                                        at
+                                                        org.aspectj.weaver.bcel.BcelClassWeaver.implement(BcelClassWeaver.java:3335)[ERROR]
+                                                        at
+                                                        org.aspectj.weaver.bcel.BcelClassWeaver.weave(BcelClassWeaver.java:496)[ERROR]
+                                                        at
+                                                        org.aspectj.weaver.bcel.BcelClassWeaver.weave(BcelClassWeaver.java:100)[ERROR]
+                                                        at
+                                                        org.aspectj.weaver.bcel.BcelWeaver.weave(BcelWeaver.java:1689)[ERROR]
+                                                        at
+                                                        org.aspectj.weaver.bcel.BcelWeaver.weaveWithoutDump(BcelWeaver.java:1633)[ERROR]
+                                                        at
+                                                        org.aspectj.weaver.bcel.BcelWeaver.weaveAndNotify(BcelWeaver.java:1398)[ERROR]
+                                                        at
+                                                        org.aspectj.weaver.bcel.BcelWeaver.weave(BcelWeaver.java:1184)[ERROR]
+                                                        at
+                                                        org.aspectj.ajdt.internal.compiler.AjPipeliningCompilerAdapter.weaveQueuedEntries(AjPipeliningCompilerAdapter.java:514)[ERROR]
+                                                        at
+                                                        org.aspectj.ajdt.internal.compiler.AjPipeliningCompilerAdapter.queueForWeaving(AjPipeliningCompilerAdapter.java:447)[ERROR]
+                                                        at
+                                                        org.aspectj.ajdt.internal.compiler.AjPipeliningCompilerAdapter.afterProcessing(AjPipeliningCompilerAdapter.java:432)[ERROR]
+                                                        at
+                                                        org.aspectj.ajdt.internal.compiler.CompilerAdapter.ajc$after$org_aspectj_ajdt_internal_compiler_CompilerAdapter$5$6b855184(CompilerAdapter.aj:103)[ERROR]
+                                                        at
+                                                        org.aspectj.org.eclipse.jdt.internal.compiler.Compiler.process(Compiler.java:822)[ERROR]
+                                                        at
+                                                        org.aspectj.org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:480)[ERROR]
+                                                        at
+                                                        org.aspectj.org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:420)[ERROR]
+                                                        at
+                                                        org.aspectj.ajdt.internal.core.builder.AjBuildManager.performCompilation(AjBuildManager.java:1036)[ERROR]
+                                                        at
+                                                        org.aspectj.ajdt.internal.core.builder.AjBuildManager.performBuild(AjBuildManager.java:272)[ERROR]
+                                                        at
+                                                        org.aspectj.ajdt.internal.core.builder.AjBuildManager.batchBuild(AjBuildManager.java:185)[ERROR]
+                                                        at
+                                                        org.aspectj.ajdt.ajc.AjdtCommand.doCommand(AjdtCommand.java:112)[ERROR]
+                                                        at
+                                                        org.aspectj.ajdt.ajc.AjdtCommand.runCommand(AjdtCommand.java:60)[ERROR]
+                                                        at org.aspectj.tools.ajc.Main.run(Main.java:371)[ERROR] at
+                                                        org.aspectj.tools.ajc.Main.runMain(Main.java:248)[ERROR] at
+                                                        org.codehaus.mojo.aspectj.AbstractAjcCompiler.execute(AbstractAjcCompiler.java:524)[ERROR]
+                                                        at
+                                                        org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:132)[ERROR]
+                                                        at
+                                                        org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:208)[ERROR]
+                                                        at
+                                                        org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)[ERROR]
+                                                        at
+                                                        org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:145)[ERROR]
+                                                        at
+                                                        org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:116)[ERROR]
+                                                        at
+                                                        org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:80)[ERROR]
+                                                        at
+                                                        org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)[ERROR]
+                                                        at
+                                                        org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:120)[ERROR]
+                                                        at
+                                                        org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:355)[ERROR]
+                                                        at
+                                                        org.apache.maven.DefaultMaven.execute(DefaultMaven.java:155)[ERROR]
+                                                        at
+                                                        org.apache.maven.cli.MavenCli.execute(MavenCli.java:584)[ERROR]
+                                                        at
+                                                        org.apache.maven.cli.MavenCli.doMain(MavenCli.java:216)[ERROR]
+                                                        at
+                                                        org.apache.maven.cli.MavenCli.main(MavenCli.java:160)[ERROR]
+                                                        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native
+                                                        Method)[ERROR] at
+                                                        sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)[ERROR]
+                                                        at
+                                                        sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)[ERROR]
+                                                        at java.lang.reflect.Method.invoke(Method.java:483)[ERROR]
+                                                        at
+                                                        org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)[ERROR]
+                                                        at
+                                                        org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)[ERROR]
+                                                        at
+                                                        org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)[ERROR]
+                                                        at
+                                                        org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)[ERROR]
+                                                        -&gt; [Help 1][ERROR] Relevant versions are maven 3.2.5
+                                                        maven-compiler-plugin 3.1 aspectj-maven-plugin 1.7
+                                                        aspectjrt/tools 1.8.5. I've attached a small stand-alone
+                                                        maven project that reproduces the issue on my machine. As
+                                                        for workarounds the build works fine if I back down to
+                                                        aspectjrools/aspectjrt 1.8.2. 1.8.3 through 1.8.5 all fail
+                                                        the same way. Additionally setting compliance levels to 1.7
+                                                        works even on 1.8.5 though that workaround would lock us
+                                                        out of using Java 8 constructs for now. I'm not sure why
+                                                        this particular module fails while the others worked fine
+                                                        through the upgrade but I'm guessing it has to do with this
+                                                        particular module being the only one to use annotation
+                                                        based aspects.</p>
+                                                </div>
+                                                <!-- /关键词高亮插件-->
+                                            </div><!--/content-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- /col-lg-5 -->
                                 <div class="col-lg-7" style="">
                                     <div class="col-lg-2" style="width: 28.6%;">
                                         <ul class="nav nav-tabs" style="border-bottom:none;">
-                                            <li class="active" style="float:none;" ><a href="#file0" data-toggle="tab">&nbsp;&nbsp;Source File-0</a>
+                                            <li class="active" style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" >
+                                                <a href="#file0" data-toggle="tab">&nbsp;&nbsp;Source File-0</a>
                                             </li>
-                                            <li class="" style="float:none"><a href="#file1" data-toggle="tab">&nbsp;&nbsp;Source File-1</a>
+                                            <li class="" style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                <a href="#file1" data-toggle="tab">&nbsp;&nbsp;Source File-1</a>
                                             </li>
-                                            <li class="" style="float:none"><a href="#file2" data-toggle="tab">&nbsp;&nbsp;Source File-2</a>
+                                            <li class="" style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                <a href="#file2" data-toggle="tab">&nbsp;&nbsp;Source File-2</a>
                                             </li>
-                                            <li class="" style="float:none"><a href="#file3" data-toggle="tab">&nbsp;&nbsp;Source File-3</a>
+                                            <li class="" style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                <a href="#file3" data-toggle="tab">&nbsp;&nbsp;Source File-3</a>
                                             </li>
-                                            <li class="" style="float:none;" ><a href="#file4" data-toggle="tab">&nbsp;&nbsp;Source File-4</a>
+                                            <li class="" style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" >
+                                                <a href="#file4" data-toggle="tab">&nbsp;&nbsp;Source File-4</a>
                                             </li>
-                                            <li class="" style="float:none"><a href="#file5" data-toggle="tab">&nbsp;&nbsp;Source File-5</a>
+                                            <li class="" style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                <a href="#file5" data-toggle="tab">&nbsp;&nbsp;Source File-5</a>
                                             </li>
-                                            <li class="" style="float:none"><a href="#file6" data-toggle="tab">&nbsp;&nbsp;Source File-6</a>
+                                            <li class="" style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                <a href="#file6" data-toggle="tab">&nbsp;&nbsp;Source File-6</a>
                                             </li>
-                                            <li class="" style="float:none"><a href="#file7" data-toggle="tab">&nbsp;&nbsp;Source File-7</a>
+                                            <li class="" style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                <a href="#file7" data-toggle="tab">&nbsp;&nbsp;Source File-7</a>
                                             </li>
-                                            <li class="" style="float:none"><a href="#file8" data-toggle="tab">&nbsp;&nbsp;Source File-8</a>
+                                            <li class="" style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                <a href="#file8" data-toggle="tab">&nbsp;&nbsp;Source File-8</a>
                                             </li>
-                                            <li class="" style="float:none"><a href="#file9" data-toggle="tab">&nbsp;&nbsp;Source File-9</a>
+                                            <li class="" style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                <a href="#file9" data-toggle="tab">&nbsp;&nbsp;Source File-9</a>
                                             </li>
 
                                         </ul>
-                                        <div style="float:none; margin-top:50px; background: #ff865c; color: #FFFFFF">
-                                            <a style="color:#FFFFFF" href="javascript:;"><font size="5" style="padding:20px">&nbsp;&nbsp;Tag as Fixed</font></a>
-                                        </div>
+                                        <form action="{% url 'locator:to_fix' %}" method="post">
+                                    <ul class="nav nav-pills" style="align-self: center;margin-top:50px;">
+                                        <li class="" style="">
+                                            <input type="hidden" value="{{ bugid }}" name="bugid"/>
+                                            <a class="nav-bar" href="javascript:;" style="background: #ff865c;
+                                             color: #ffffff;padding:18px 15px;font-size:1.5em"
+                                               onclick="JavaScript:save();">Tag as Fixed</a>
+                                        </li>
+                                    </ul>
+                                </form>
                                     </div>
                                     <div class="col-lg-5" style="width: 71.4%; border: 1px solid #ccc;">
                                         <div class="tab-content">
@@ -313,12 +548,16 @@
                                                 </div> <!-- /plan-features -->
                                             </div>
                                         </div>
+                                        <iframe src="{% url 'locator:cloud' %}" frameborder="0" scrolling="no"
+                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto"></iframe>
                                     </div>
                                 </div>
                         </div>
+
                         </div>
-                    </div> <!-- /span9 -->
-            <!--    </div> <!--/col-lg-12-->
+                    </div>
+                </div> <!-- /span9 -->
+                <!--    </div> <!--/col-lg-12-->
             </div><!--/row mt-->
         </section>
         <! --/wrapper -->
@@ -343,6 +582,37 @@
 <script src="/assets/js/table-sort.js"></script>
 <script src="/assets/js/jquery-2.1.1.min.js" type="text/javascript"></script>
 <script src="/assets/js/jquery.svg3dtagcloud.min.js"></script>
+<script src="http://libs.useso.com/js/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/jquery-1.11.0.min.js"><\/script>')</script>
+<script type="text/javascript" src="/assets/js/jquery.mark.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var mark = function (keywords, classname) {
+
+
+            // Read the keyword
+            {#        var keyword = $("input[name='keyword']").val();#}
+            var keyword = keywords;
+            // Determine selected options
+            var options = {
+                "className": classname
+            };
+            $("input[name='opt[]']").each(function () {
+                options[$(this).val()] = $(this).is(":checked");
+            });
+
+            // Mark the keyword inside the context
+            {#            $(".context").removeMark();#}
+            $(".context").mark(keyword, options);
+
+        };
+        mark('java 8', 'file1');
+        mark('service', 'file2');
+        {#        $("input[name='keyword']").on('keyup', mark);#}
+        {#        $("input[type='checkbox']").on("change", mark);#}
+
+    });
+</script>
 <script type="text/javascript">
     $(function () {
         $('select').selectlist({
@@ -369,37 +639,32 @@
 <!-- 分段渲染文本的JS函数 -->
 <script type="text/javascript">
     window.onload = addElementDiv
-function judge(value,arr)
-{
-    var i = arr.length;
-    while(i--)
-    {
-        if(arr[i] === value){
-            return true;
+    function judge(value, arr) {
+        var i = arr.length;
+        while (i--) {
+            if (arr[i] === value) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function addElementDiv() {
+        var parent = document.getElementById("content");
+        var tmp1 = JSON.parse({{ fileArr|safe }});
+        var tmp2 = JSON.parse({{ sel_arr.0|safe }});
+        var index;
+
+        for (var i = 0; i < tmp1.length; i++) {
+            if (judge(tmp1[i], tmp2)) {
+                parent.innerHTML = parent.innerHTML + "<span class='type1' style='color: #c678dd'>" + tmp1[i] + "</span>";
+            }
+            else {
+                parent.innerHTML = parent.innerHTML + "<span>" + tmp1[i] + "</span>";
+            }
+            index = i;
         }
     }
-    return false;
-}
-
-function addElementDiv() {
-　　var parent = document.getElementById("content");
-    var tmp1 = JSON.parse({{ fileArr|safe }});
-    var tmp2 = JSON.parse({{ sel_arr.0|safe }});
-    var index;
-
-    for(var i=0;i<tmp1.length;i++)
-    {
-        if( judge(tmp1[i],tmp2) )
-        {
-            parent.innerHTML = parent.innerHTML+"<span class='type1' style='color: #c678dd'>"+tmp1[i]+"</span>";
-        }
-        else
-        {
-            parent.innerHTML = parent.innerHTML+"<span>"+tmp1[i]+"</span>";
-        }
-        index = i;
-    }
-　　}
 </script>
 
 <script>

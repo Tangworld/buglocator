@@ -1069,7 +1069,7 @@ def cloud(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    return render(request, 'cloud.html')
+    return render(request, 'static_cloud.html')
 
 
 def premeter_to_memry(request):
@@ -1126,10 +1126,11 @@ def to_fix(request):
 
     bugid = request.POST.get('bugid')
     timestamp = int(time.time())
-    # print bugid
+    print type(bugid)
+    print bugid
     # print timestamp
     report = models.Report.objects.get(bugid=bugid)
-    report.status = 'fix'
+    report.status = 'fixed'
     report.fixdate = timestamp
     report.save()
     return HttpResponseRedirect('/locator/unfix')
