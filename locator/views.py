@@ -1069,7 +1069,7 @@ def cloud(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    return render(request, 'cloud.html')
+    return render(request, 'static_cloud.html')
 
 
 def premeter_to_memry(request):
