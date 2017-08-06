@@ -1002,6 +1002,7 @@ def alg_res_l2ss(request):
     # aWord = []
     # 以下对description内容进行切分
     bugreport = models.Report.objects.get(bugid=bugid).description
+    print 'report:>>>>>>', bugreport
     '''
     for char in bugreport:
         if char.isalpha():
