@@ -915,6 +915,7 @@ def alg_res(request):
             filelist.append({'content': fileStr, 'path': filepath})
         except Exception, e:
             print e
+
     return render(request, 'resultPage.html', {'fileArr':json.dumps(wordArr), 'sel_arr':json.dumps(kwArr),
                                                'filelist': filelist, 'bugid': bugid, 'report': bugreport})
 
