@@ -920,7 +920,12 @@ def alg_res(request):
             filelist.append({'content': fileStr, 'path': filepath})
         except Exception, e:
             print e
-    print kwArr
+    common = ''
+    for kw in kwArr:
+        if kwArr.count(kw) > 1:
+            common += (kw + ' ')
+    print common
+    str_kws.append(common)
     return render(request, 'resultPage.html', {'fileArr':json.dumps(wordArr), 'sel_arr': kwArr, 'str_kws': str_kws,
                                                'filelist': filelist, 'bugid': bugid, 'report': bugreport})
 
@@ -964,7 +969,9 @@ def alg_res_l2ss(request):
                 wordArr.append(cDict[char])
     # 以下读取结果中的文件内容并获取文件对应的关键词
     kwArr = []
+    str_kws = []
     for r in result:
+        str_kw = ''
         # print r
         filepath = models.filemap.objects.get(path_l2ss=r).filepath
         fileid = models.filemap.objects.get(path_l2ss=r).filenumber
@@ -977,18 +984,19 @@ def alg_res_l2ss(request):
         for keyword in keywords:
             #tmp.append(keyword.word)
             kwArr.append(keyword.word)
+            str_kw += (keyword.word + ' ')
             # print tmp
         #kwArr.append(tmp)
         print len(kwArr)
         thispath = str(pre + filepath)
+        str_kws.append(str_kw)
         try:
             thiscontent = open(thispath, 'r')
             fileStr = thiscontent.read()
             filelist.append({'content': fileStr, 'path': filepath})
         except Exception, e:
             print e
-    print kwArr
-    return render(request, 'resultPage.html', {'fileArr': json.dumps(wordArr), 'sel_arr': kwArr,
+    return render(request, 'resultPage.html', {'fileArr': json.dumps(wordArr), 'sel_arr': kwArr, 'str_kws': str_kws,
                                                'filelist': filelist, 'bugid': bugid, 'report': bugreport})
 
 def get_result(request, bugid):
@@ -1133,13 +1141,13 @@ def to_fix(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    bugid = request.POST.get('bugid')
+    bugid = utils.get_value(request, 'post', 'bugid')
     timestamp = int(time.time())
     print type(bugid)
     print bugid
-    # print timestamp
+    print timestamp
     report = models.Report.objects.get(bugid=bugid)
     report.status = 'fixed'
     report.fixdate = timestamp
     report.save()
-    return HttpResponseRedirect('/locator/unfix')
+    return HttpResponseRedirect('/locator/unfixed')

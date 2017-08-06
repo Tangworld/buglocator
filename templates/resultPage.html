@@ -111,6 +111,10 @@
             background: #8a6d3b;
             color: black;
         }
+        span.common {
+            background: white;
+            color: black;
+        }
     </style>
     <style>
         canvas {
@@ -244,7 +248,7 @@
                                     <div class="col-lg-2" style="width: 28.6%;">
                                         <ul style="border-bottom:none;">
                                             <nav class="menu menu--adsila">
-                                                <a href="#whole" data-toggle="tab" class="menu__item">
+                                                <a href="#whole" data-toggle="tab" class="menu__item" onmouseover="javascript:change(10,'whole');">
                                                     <li class="active"
                                                         style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                                         <span class="menu__item-name">&nbsp;&nbsp;Whole Result</span>
@@ -323,16 +327,16 @@
                                             </nav>
                                         </ul>
 
-                                        <form action="{% url 'locator:to_fix' %}" method="post">
                                     <ul class="nav nav-pills" style="align-self: center;margin-top:50px;">
                                         <li class="" style="padding-left:40px;">
-                                            <input type="hidden" value="{{ bugid }}" name="bugid"/>
+                                            <form id="fix" action="{% url 'locator:to_fix' %}" method="post">
+                                                <input type="hidden" name="bugid" value="{{ bugid }}" />
                                             <a class="nav-bar" href="javascript:;" style="background: #ff865c;
                                              color: #ffffff;padding:18px 15px;font-size:1.5em"
                                                onclick="JavaScript:save();">Tag as Fixed</a>
+                                            </form>
                                         </li>
                                     </ul>
-                                </form>
                                     </div>
                                     <div class="col-lg-5" style="width: 71.4%; border: 1px solid #ccc;">
                                         <div class="tab-content">
@@ -741,6 +745,7 @@
 
 {#		  $("input[name='keyword']").on("keyup", mark);#}
 {#		  $("input[type='checkbox']").on("change", mark);#}
+        mark('{{ str_kws.10 }}', 'common');
         mark('{{ str_kws.0 }}', 'file0');
         mark('{{ str_kws.1 }}', 'file1');
         mark('{{ str_kws.2 }}', 'file2');
@@ -767,41 +772,68 @@
 <!--common script for all pages-->
 <script src="/assets/js/common-scripts.js"></script>
 <script>
-    function change(number, pre){
-        var mark = function(keywords, classname) {
+    function change(number, pre) {
+        var mark = function (keywords, classname) {
             var keyword = keywords;
 
-		    // Determine selected options
-		    var options = {
-		      "className": classname
-		    };
-		    $("input[name='opt[]']").each(function() {
-		      options[$(this).val()] = $(this).is(":checked");
-		    });
-		    // Mark the keyword inside the context
-		    $(".context").removeMark();
-		    $(".context").mark(keyword, options);
-		  };
-        if(number == 0){
+            // Determine selected options
+            var options = {
+                "className": classname
+            };
+            $("input[name='opt[]']").each(function () {
+                options[$(this).val()] = $(this).is(":checked");
+            });
+            // Mark the keyword inside the context
+            $(".context").removeMark();
+            $(".context").mark(keyword, options);
+        };
+        if (number == 0) {
             mark('{{ str_kws.0 }}', pre)
-        } else if(number == 1){
+        } else if (number == 1) {
             mark('{{ str_kws.1 }}', pre)
-        } else if(number == 2){
+        } else if (number == 2) {
             mark('{{ str_kws.2 }}', pre)
-        } else if(number == 3){
+        } else if (number == 3) {
             mark('{{ str_kws.3 }}', pre)
-        } else if(number == 4){
+        } else if (number == 4) {
             mark('{{ str_kws.4 }}', pre)
-        } else if(number == 5){
+        } else if (number == 5) {
             mark('{{ str_kws.5 }}', pre)
-        } else if(number == 6){
+        } else if (number == 6) {
             mark('{{ str_kws.6 }}', pre)
-        } else if(number == 7){
+        } else if (number == 7) {
             mark('{{ str_kws.7 }}', pre)
-        } else if(number == 8){
+        } else if (number == 8) {
             mark('{{ str_kws.8 }}', pre)
-         }else if(number == 9){
+        } else if (number == 9) {
             mark('{{ str_kws.9 }}', pre)
+        } else if (number == 10) {
+            var mark = function (keywords, classname) {
+                var keyword = keywords;
+
+                // Determine selected options
+                var options = {
+                    "className": classname
+                };
+                $("input[name='opt[]']").each(function () {
+                    options[$(this).val()] = $(this).is(":checked");
+                });
+                // Mark the keyword inside the context
+                {#		    $(".context").removeMark();#}
+                $(".context").mark(keyword, options);
+            };
+            $(".context").removeMark();
+            mark('{{ str_kws.10 }}', 'common');
+            mark('{{ str_kws.0 }}', 'file0');
+            mark('{{ str_kws.1 }}', 'file1');
+            mark('{{ str_kws.2 }}', 'file2');
+            mark('{{ str_kws.3 }}', 'file3');
+            mark('{{ str_kws.4 }}', 'file4');
+            mark('{{ str_kws.5 }}', 'file5');
+            mark('{{ str_kws.6 }}', 'file6');
+            mark('{{ str_kws.7 }}', 'file7');
+            mark('{{ str_kws.8 }}', 'file8');
+            mark('{{ str_kws.9 }}', 'file9');
         }
 
 
@@ -852,9 +884,9 @@
 <script>
     function save() {
         alert('Fixed!');
-        window.location.href = '{% url 'locator:to_fix' %}';
+        document.getElementById('fix').submit();
     }
 </script>
-
+{{ bugid }}
 </body>
 </html>
