@@ -898,25 +898,30 @@ def alg_res(request):
                 wordArr.append(cDict[char])
     # 以下读取结果中的文件内容并获取文件对应的关键词
     kwArr = []
+    str_kws = []
     for r in result:
+        str_kw = ''
         filepath = models.filemap.objects.get(filenumber=r).filepath
         # print r
         keywordIDs = models.f2w.objects.get(fileID=r).keywords.split(' ')
         keywords = models.wordmap.objects.filter(wordID__in=keywordIDs)
-        tmp = []
         for keyword in keywords:
-            tmp.append(keyword.word)
-
-        kwArr.append(tmp)
+            #tmp.append(keyword.word)
+            kwArr.append(keyword.word)
+            str_kw += (keyword.word+' ')
+            # print tmp
+        #kwArr.append(tmp)
+        print len(kwArr)
         thispath = str(pre + filepath)
+        str_kws.append(str_kw)
         try:
             thiscontent = open(thispath, 'r')
             fileStr = thiscontent.read()
             filelist.append({'content': fileStr, 'path': filepath})
         except Exception, e:
             print e
-
-    return render(request, 'resultPage.html', {'fileArr':json.dumps(wordArr), 'sel_arr':json.dumps(kwArr),
+    print kwArr
+    return render(request, 'resultPage.html', {'fileArr':json.dumps(wordArr), 'sel_arr': kwArr, 'str_kws': str_kws,
                                                'filelist': filelist, 'bugid': bugid, 'report': bugreport})
 
 def alg_res_l2ss(request):
@@ -982,6 +987,7 @@ def alg_res_l2ss(request):
             filelist.append({'content': fileStr, 'path': filepath})
         except Exception, e:
             print e
+    print kwArr
     return render(request, 'resultPage.html', {'fileArr': json.dumps(wordArr), 'sel_arr': kwArr,
                                                'filelist': filelist, 'bugid': bugid, 'report': bugreport})
 
