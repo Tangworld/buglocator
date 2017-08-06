@@ -1019,7 +1019,7 @@ def alg_res_l2ss(request):
     str_kws = []
     for r in result:
         str_kw = ''
-        # print r
+        print r
         filepath = models.filemap.objects.get(path_l2ss=r).filepath
         fileid = models.filemap.objects.get(path_l2ss=r).filenumber
         # print fileid
