@@ -66,13 +66,53 @@
             text-indent: 2em;
         }
 
-        span.file2 {
+        span.file0 {
             background: red;
             color: black;
         }
 
         span.file1 {
+            background: #6265fe;
+            color: black;
+        }
+        span.file2 {
             background: yellow;
+            color: black;
+        }
+        span.file3 {
+            background: green;
+            color: black;
+        }
+        span.file4 {
+            background: #9ad6fc;
+            color: black;
+        }
+        span.file5 {
+            background: #daafe8;
+            color: black;
+        }
+        span.file6 {
+            background: #663399;
+            color: black;
+        }
+        span.file7 {
+            background: #c0a16b;
+            color: black;
+        }
+        span.file8 {
+            background: #FF3778;
+            color: black;
+        }
+        span.file9 {
+            background: blue;
+            color: black;
+        }
+        span.whole {
+            background: #8a6d3b;
+            color: black;
+        }
+        span.common {
+            background: white;
             color: black;
         }
     </style>
@@ -189,20 +229,13 @@
                                                  ;>
                                                 <!-- 关键词高亮插件-->
                                                 <div class="col-xs-6">
-                                                    <input type="checkbox" name="opt[]"
-                                                           value="separateWordSearch" checked
-                                                           style="display: none">
-                                                    <br>
-                                                    <input type="checkbox" name="opt[]" value="diacritics"
-                                                           checked style="display: none">
-                                                    <br>
-                                                    <input type="checkbox" name="opt[]" value="debug"
-                                                           style="display: none">
-                                                    <br>
+                                                    <input type="checkbox" name="opt[]" value="separateWordSearch" checked style="display: none">
+                                                    <input type="checkbox" name="opt[]" value="diacritics" checked style="display: none">
+                                                    <input type="checkbox" name="opt[]" value="debug" style="display: none">
                                                 </div>
 
                                                 <div class="panel-body context">
-{{ report }}
+<p>{{ report }}</p>
                                                 </div>
                                                 <!-- /关键词高亮插件-->
                                             </div><!--/content-->
@@ -214,78 +247,78 @@
                                     <div class="col-lg-2" style="width: 28.6%;">
                                         <ul style="border-bottom:none;">
                                             <nav class="menu menu--adsila">
-                                                <a href="#whole" data-toggle="tab" class="">
+                                                <a href="#whole" data-toggle="tab" class="menu__item" onmouseover="javascript:change(10,'whole');">
                                                     <li class="active"
                                                         style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                                         <span class="menu__item-name">&nbsp;&nbsp;Whole Result</span>
                                                     </li>
                                                 </a>
 
-                                                <a href="#file0" data-toggle="tab" class="menu__item">
-                                                    <li class=""
+                                                <a href="#file0" data-toggle="tab" class="menu__item" onmouseover="javascript:change(0,'file0');">
+                                                    <li class="file0"
                                                         style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                                         <span class="menu__item-name">&nbsp;&nbsp;Source File-0</span>
                                                     </li>
                                                 </a>
 
-                                                <a href="#file1" data-toggle="tab" class="menu__item">
+                                                <a href="#file1" data-toggle="tab" class="menu__item" onmouseover="javascript:change(1,'file1');">
                                                     <li class="file1"
                                                         style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                                         <span class="menu__item-name">&nbsp;&nbsp;Source File-1</span>
                                                     </li>
                                                 </a>
 
-                                                <a href="#file2" data-toggle="tab" class="menu__item">
-                                                    <li class=""
+                                                <a href="#file2" data-toggle="tab" class="menu__item" onmouseover="javascript:change(2,'file2');">
+                                                    <li class="file2"
                                                         style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                                         <span class="menu__item-name">&nbsp;&nbsp;Source File-2</span>
                                                     </li>
                                                 </a>
 
 
-                                                <a href="#file3" data-toggle="tab" class="menu__item">
-                                                    <li class=""
+                                                <a href="#file3" data-toggle="tab" class="menu__item" onmouseover="javascript:change(3,'file3');">
+                                                    <li class="file3"
                                                         style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                                         <span class="menu__item-name">&nbsp;&nbsp;Source File-3</span>
                                                     </li>
                                                 </a>
 
 
-                                                <a href="#file4" data-toggle="tab" class="menu__item">
-                                                    <li class=""
+                                                <a href="#file4" data-toggle="tab" class="menu__item" onmouseover="javascript:change(4,'file4');">
+                                                    <li class="file4"
                                                         style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                                         <span class="menu__item-name">&nbsp;&nbsp;Source File-4</span>
                                                     </li>
                                                 </a>
 
 
-                                                <a href="#file5" data-toggle="tab" class="menu__item">
-                                                    <li class=""
+                                                <a href="#file5" data-toggle="tab" class="menu__item" onmouseover="javascript:change(5,'file5');">
+                                                    <li class="file5"
                                                         style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                                         <span class="menu__item-name">&nbsp;&nbsp;Source File-5</span>
                                                     </li>
                                                 </a>
 
-                                                <a href="#file6" data-toggle="tab" class="menu__item">
-                                                    <li class=""
+                                                <a href="#file6" data-toggle="tab" class="menu__item" onmouseover="javascript:change(6,'file6');">
+                                                    <li class="file6"
                                                         style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                                         <span class="menu__item-name">&nbsp;&nbsp;Source File-6</span>
                                                     </li>
                                                 </a>
-                                                <a href="#file7" data-toggle="tab" class="menu__item">
-                                                    <li class=""
+                                                <a href="#file7" data-toggle="tab" class="menu__item" onmouseover="javascript:change(7,'file7');">
+                                                    <li class="file7"
                                                         style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                                         <span class="menu__item-name">&nbsp;&nbsp;Source File-7</span>
                                                     </li>
                                                 </a>
-                                                <a href="#file8" data-toggle="tab" class="menu__item">
-                                                    <li class=""
+                                                <a href="#file8" data-toggle="tab" class="menu__item" onmouseover="javascript:change(8,'file8');">
+                                                    <li class="file8"
                                                         style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                                         <span class="menu__item-name">&nbsp;&nbsp;Source File-8</span>
                                                     </li>
                                                 </a>
-                                                <a href="#file9" data-toggle="tab" class="menu__item">
-                                                    <li class=""
+                                                <a href="#file9" data-toggle="tab" class="menu__item" onmouseover="javascript:change(9,'file9');">
+                                                    <li class="file9"
                                                         style="float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                                         <span class="menu__item-name">&nbsp;&nbsp;Source File-9</span>
                                                     </li>
@@ -293,16 +326,16 @@
                                             </nav>
                                         </ul>
 
-                                        <form action="{% url 'locator:to_fix' %}" method="post">
                                     <ul class="nav nav-pills" style="align-self: center;margin-top:50px;">
                                         <li class="" style="padding-left:40px;">
-                                            <input type="hidden" value="{{ bugid }}" name="bugid"/>
+                                            <form id="fix" action="{% url 'locator:to_fix' %}" method="post">
+                                                <input type="hidden" name="bugid" value="{{ bugid }}" />
                                             <a class="nav-bar" href="javascript:;" style="background: #ff865c;
                                              color: #ffffff;padding:18px 15px;font-size:1.5em"
                                                onclick="JavaScript:save();">Tag as Fixed</a>
+                                            </form>
                                         </li>
                                     </ul>
-                                </form>
                                     </div>
                                     <div class="col-lg-5" style="width: 71.4%; border: 1px solid #ccc; height:750px">
                                         <div class="tab-content">
@@ -816,31 +849,42 @@
 <script src="/assets/js/demo.js"></script>
 <!--/鼠标经过效果 -->
 <script type="text/javascript">
-    $(function () {
-        var mark = function (keywords, classname) {
-            // Read the keyword
-            {#        var keyword = $("input[name='keyword']").val();#}
-            var keyword = keywords;
-            // Determine selected options
-            var options = {
-                "className": classname
-            };
-            $("input[name='opt[]']").each(function () {
-                options[$(this).val()] = $(this).is(":checked");
-            });
+    $(function() {
 
-            // Mark the keyword inside the context
-            $(".context").removeMark();
-            $(".context").mark(keyword, options);
+		  var mark = function(keywords, classname) {
 
-        };
-{#        mark('java 8', 'file1');#}
-{#        mark('service', 'file2');#}
-         $("li[class='file1']").on('click', mark('service', 'file1'));
-        {#        $("input[name='keyword']").on('keyup', mark);#}
-        {#        $("input[type='checkbox']").on("change", mark);#}
+		    // Read the keyword
+{#		    var keyword = $("input[name='keyword']").val();#}
+              var keyword = keywords;
 
-    });
+		    // Determine selected options
+		    var options = {
+		      "className": classname
+		    };
+		    $("input[name='opt[]']").each(function() {
+		      options[$(this).val()] = $(this).is(":checked");
+		    });
+
+		    // Mark the keyword inside the context
+{#		    $(".context").removeMark();#}
+		    $(".context").mark(keyword, options);
+		  };
+
+{#		  $("input[name='keyword']").on("keyup", mark);#}
+{#		  $("input[type='checkbox']").on("change", mark);#}
+        mark('{{ str_kws.10 }}', 'common');
+        mark('{{ str_kws.0 }}', 'file0');
+        mark('{{ str_kws.1 }}', 'file1');
+        mark('{{ str_kws.2 }}', 'file2');
+        mark('{{ str_kws.3 }}', 'file3');
+        mark('{{ str_kws.4 }}', 'file4');
+        mark('{{ str_kws.5 }}', 'file5');
+        mark('{{ str_kws.6 }}', 'file6');
+        mark('{{ str_kws.7 }}', 'file7');
+        mark('{{ str_kws.8 }}', 'file8');
+        mark('{{ str_kws.9 }}', 'file9');
+
+		});
 </script>
 <script type="text/javascript">
     $(function () {
@@ -854,7 +898,74 @@
 
 <!--common script for all pages-->
 <script src="/assets/js/common-scripts.js"></script>
+<script>
+    function change(number, pre) {
+        var mark = function (keywords, classname) {
+            var keyword = keywords;
 
+            // Determine selected options
+            var options = {
+                "className": classname
+            };
+            $("input[name='opt[]']").each(function () {
+                options[$(this).val()] = $(this).is(":checked");
+            });
+            // Mark the keyword inside the context
+            $(".context").removeMark();
+            $(".context").mark(keyword, options);
+        };
+        if (number == 0) {
+            mark('{{ str_kws.0 }}', pre)
+        } else if (number == 1) {
+            mark('{{ str_kws.1 }}', pre)
+        } else if (number == 2) {
+            mark('{{ str_kws.2 }}', pre)
+        } else if (number == 3) {
+            mark('{{ str_kws.3 }}', pre)
+        } else if (number == 4) {
+            mark('{{ str_kws.4 }}', pre)
+        } else if (number == 5) {
+            mark('{{ str_kws.5 }}', pre)
+        } else if (number == 6) {
+            mark('{{ str_kws.6 }}', pre)
+        } else if (number == 7) {
+            mark('{{ str_kws.7 }}', pre)
+        } else if (number == 8) {
+            mark('{{ str_kws.8 }}', pre)
+        } else if (number == 9) {
+            mark('{{ str_kws.9 }}', pre)
+        } else if (number == 10) {
+            var mark = function (keywords, classname) {
+                var keyword = keywords;
+
+                // Determine selected options
+                var options = {
+                    "className": classname
+                };
+                $("input[name='opt[]']").each(function () {
+                    options[$(this).val()] = $(this).is(":checked");
+                });
+                // Mark the keyword inside the context
+                {#		    $(".context").removeMark();#}
+                $(".context").mark(keyword, options);
+            };
+            $(".context").removeMark();
+            mark('{{ str_kws.10 }}', 'common');
+            mark('{{ str_kws.0 }}', 'file0');
+            mark('{{ str_kws.1 }}', 'file1');
+            mark('{{ str_kws.2 }}', 'file2');
+            mark('{{ str_kws.3 }}', 'file3');
+            mark('{{ str_kws.4 }}', 'file4');
+            mark('{{ str_kws.5 }}', 'file5');
+            mark('{{ str_kws.6 }}', 'file6');
+            mark('{{ str_kws.7 }}', 'file7');
+            mark('{{ str_kws.8 }}', 'file8');
+            mark('{{ str_kws.9 }}', 'file9');
+        }
+
+
+    }
+</script>
 <!--script for this page-->
 
 <script>
@@ -900,9 +1011,9 @@
 <script>
     function save() {
         alert('Fixed!');
-        window.location.href = '{% url 'locator:to_fix' %}';
+        document.getElementById('fix').submit();
     }
 </script>
-
+{{ bugid }}
 </body>
 </html>

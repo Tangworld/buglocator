@@ -902,26 +902,39 @@ def alg_res(request):
     '''
     # 以下读取结果中的文件内容并获取文件对应的关键词
     kwArr = []
+
     kwPos = []
+    str_kws = []
     for r in result:
+        str_kw = ''
         filepath = models.filemap.objects.get(filenumber=r).filepath
         # print r
         keywordIDs = models.f2w.objects.get(fileID=r).keywords.split(' ')
         keywords = models.wordmap.objects.filter(wordID__in=keywordIDs[0:-1])
-        #print keywords
-        # tmp = []
         for keyword in keywords:
-            # tmp.append(keyword.word)
+            #tmp.append(keyword.word)
             kwArr.append(keyword.word)
+            str_kw += (keyword.word+' ')
+            # print tmp
+        #kwArr.append(tmp)
+        print len(kwArr)
         thispath = str(pre + filepath)
+        str_kws.append(str_kw)
         try:
             thiscontent = open(thispath, 'r')
             fileStr = thiscontent.read()
             filelist.append({'content': fileStr, 'path': filepath})
         except Exception, e:
             print e
-    return render(request, 'resultPage.html', {'sel_arr':kwArr,
-                'filelist': filelist, 'bugid': bugid, 'report': bugreport})
+
+    common = ''
+    for kw in kwArr:
+        if kwArr.count(kw) > 1:
+            common += (kw + ' ')
+    print common
+    str_kws.append(common)
+    return render(request, 'resultPage.html', {'sel_arr': kwArr, 'str_kws': str_kws,
+                                               'filelist': filelist, 'bugid': bugid, 'report': bugreport})
 
 
 def get_result(request, bugid):
@@ -1003,7 +1016,9 @@ def alg_res_l2ss(request):
     '''
     # 以下读取结果中的文件内容并获取文件对应的关键词
     kwArr = []
+    str_kws = []
     for r in result:
+        str_kw = ''
         # print r
         filepath = models.filemap.objects.get(path_l2ss=r).filepath
         fileid = models.filemap.objects.get(path_l2ss=r).filenumber
@@ -1016,18 +1031,22 @@ def alg_res_l2ss(request):
         for keyword in keywords:
             #tmp.append(keyword.word)
             kwArr.append(keyword.word)
+            str_kw += (keyword.word + ' ')
             # print tmp
         #kwArr.append(tmp)
         print len(kwArr)
         thispath = str(pre + filepath)
+        str_kws.append(str_kw)
         try:
             thiscontent = open(thispath, 'r')
             fileStr = thiscontent.read()
             filelist.append({'content': fileStr, 'path': filepath})
         except Exception, e:
             print e
-    return render(request, 'resultPage.html', {'sel_arr': kwArr,
+
+    return render(request, 'resultPage.html', {'sel_arr': kwArr, 'str_kws': str_kws,
                 'filelist': filelist, 'bugid': bugid, 'report': bugreport})
+
 
 def get_result_l2ss(request, bugid):
     # 权限控制
@@ -1144,13 +1163,13 @@ def to_fix(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    bugid = request.POST.get('bugid')
+    bugid = utils.get_value(request, 'post', 'bugid')
     timestamp = int(time.time())
     print type(bugid)
     print bugid
-    # print timestamp
+    print timestamp
     report = models.Report.objects.get(bugid=bugid)
     report.status = 'fixed'
     report.fixdate = timestamp
     report.save()
-    return HttpResponseRedirect('/locator/unfix')
+    return HttpResponseRedirect('/locator/unfixed')
