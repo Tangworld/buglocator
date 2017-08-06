@@ -868,6 +868,7 @@ def alg_res(request):
         return HttpResponseRedirect('/locator/lock/')
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
+    methodid = request.GET.get('method')
     pre = BASE_DIR+'/data/bughunter/'
     '''
     cList = [' ', '<', '>', '\'', '"', '\n']
@@ -933,7 +934,7 @@ def alg_res(request):
             common += (kw + ' ')
     print common
     str_kws.append(common)
-    return render(request, 'resultPage.html', {'sel_arr': kwArr, 'str_kws': str_kws,
+    return render(request, 'resultPage.html', {'sel_arr': kwArr, 'str_kws': str_kws,'method': methodid,
                                                'filelist': filelist, 'bugid': bugid, 'report': bugreport})
 
 
@@ -982,6 +983,7 @@ def alg_res_l2ss(request):
         return HttpResponseRedirect('/locator/lock/')
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
+    methodid = request.GET.get('method')
     pre = BASE_DIR+'/data/bughunter/'
     '''
     cList = [' ', '<', '>', '\'', '"', '\n']
@@ -1045,7 +1047,7 @@ def alg_res_l2ss(request):
             print e
 
     return render(request, 'resultPage.html', {'sel_arr': kwArr, 'str_kws': str_kws,
-                'filelist': filelist, 'bugid': bugid, 'report': bugreport})
+                'filelist': filelist, 'bugid': bugid, 'report': bugreport, 'method':methodid})
 
 
 def get_result_l2ss(request, bugid):

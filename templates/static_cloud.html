@@ -10,7 +10,7 @@
 
 <style>
 .append_div {
-	background: black;color:#FFFFFF; opacity:0.5; text-align: center; position: absolute; height: 100px; width: 80px; 
+	background: black;color:#FFFFFF; opacity:0.5; text-align: center; position: absolute; height: 45px; width: 60px;
 }
 </style>
 
@@ -45,26 +45,26 @@
     else
     {
         data = [
-            [tmp[0], 27, 100],
-            [tmp[1], 20, 123],
-            [tmp[2], 19, 222],
-            [tmp[3], 15, 111],
-            [tmp[4], 13, 111],
-            [tmp[5], 10, 111],
-            [tmp[6], 8, 111],
-            [tmp[7], 8, 111],
-            [tmp[8], 8, 111],
-            [tmp[9], 8, 111],
-            [tmp[10], 5, 111],
-            [tmp[11], 5, 111],
-            [tmp[12], 5, 111],
-            [tmp[13], 6, 111],
-            [tmp[14], 3, 111],
-            [tmp[15], 3, 111],
-            [tmp[16], 3, 111],
-            [tmp[17], 3, 111],
-            [tmp[18], 2, 111],
-            [tmp[19], 2, 111]
+            [tmp[0], 27, 1],
+            [tmp[1], 20, 2],
+            [tmp[2], 19, 3],
+            [tmp[3], 15, 4],
+            [tmp[4], 13, 5],
+            [tmp[5], 10, 6],
+            [tmp[6], 8, 7],
+            [tmp[7], 8, 8],
+            [tmp[8], 8, 9],
+            [tmp[9], 8, 10],
+            [tmp[10], 5, 11],
+            [tmp[11], 5, 12],
+            [tmp[12], 5, 13],
+            [tmp[13], 6, 14],
+            [tmp[14], 3, 15],
+            [tmp[15], 3, 16],
+            [tmp[16], 3, 17],
+            [tmp[17], 3, 18],
+            [tmp[18], 2, 19],
+            [tmp[19], 2, 20]
         ];
 
     }
@@ -82,7 +82,7 @@
 		ev = ev || event;
 		$.each(data, function(i, item) {
 			if(txt == item[0]){
-				var html = item[0]/*+"<br />"+item[1]+"<br />"+item[2]*/;
+				var html = item[0]+"<br />"+item[2];
 				$("#my_favorite_latin_words").after("<div class='append_div' style='left:" + ev.clientX + "px; top:" + ev.clientY + "px; '>" + html + "</div>");
 				return;
 			}
