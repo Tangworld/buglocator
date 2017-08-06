@@ -1002,7 +1002,7 @@ def alg_res_l2ss(request):
     # aWord = []
     # 以下对description内容进行切分
     bugreport = models.Report.objects.get(bugid=bugid).description
-    print 'report:>>>>>>', bugreport
+    # print 'report:>>>>>>', bugreport
     '''
     for char in bugreport:
         if char.isalpha():
@@ -1046,7 +1046,12 @@ def alg_res_l2ss(request):
             filelist.append({'content': fileStr, 'path': filepath})
         except Exception, e:
             print e
-
+    common = ''
+    for kw in kwArr:
+        if kwArr.count(kw) > 1:
+            common += (kw + ' ')
+    print common
+    str_kws.append(common)
     return render(request, 'resultPage.html', {'sel_arr': kwArr, 'str_kws': str_kws,
                 'filelist': filelist, 'bugid': bugid, 'report': bugreport, 'method':methodid})
 
