@@ -202,178 +202,6 @@
                                                 </div>
 
                                                 <div class="panel-body context">
-                                                    <!--<p>Bytecode dump weaving annotation based aspect on Java 8 using
-                                                        asjectjtools &gt;1.8.2</p>
-                                                    <p>Created attachment 251819 [details]Maven project that
-                                                        reproduces the issueApologies for the non-descriptive title
-                                                        but I really have no idea how to better classify this.When
-                                                        trying to upgrade an existing project from java 7 to java 8
-                                                        aspectj weaving started to fail for one of the project's
-                                                        modules:[INFO]
-                                                        ------------------------------------------------------------------------[INFO]
-                                                        BUILD FAILURE[INFO]
-                                                        ------------------------------------------------------------------------[INFO]
-                                                        Total time: 2.362 s[INFO] Finished at:
-                                                        2015-03-23T10:19:18+01:00[INFO] Final Memory:
-                                                        21M/164M[INFO]
-                                                        ------------------------------------------------------------------------[ERROR]
-                                                        Failed to execute goal
-                                                        org.codehaus.mojo:aspectj-maven-plugin:1.7:compile
-                                                        (default) on project testapp: AJC compiler errors:[ERROR]
-                                                        abort trouble in:[ERROR] public class no.kantega.FooService
-                                                        extends java.lang.Object:[ERROR] public void &lt;init&gt;():[ERROR]
-                                                        ALOAD_0 // Lno/kantega/FooService; this (line 3)[ERROR]
-                                                        INVOKESPECIAL java.lang.Object.&lt;init&gt; ()V[ERROR]
-                                                        constructor-execution(void no.kantega.FooService.&lt;init&gt;())[ERROR]
-                                                        | RETURN[ERROR] constructor-execution(void
-                                                        no.kantega.FooService.&lt;init&gt;())[ERROR] end public
-                                                        void &lt;init&gt;()[ERROR] [ERROR] public String doSomething()
-                                                        org.aspectj.weaver.MethodDeclarationLineNumber: 6:92[ERROR]
-                                                        :[ERROR] GETSTATIC no.kantega.FooService.ajc$tjp_0
-                                                        Lorg/aspectj/lang/JoinPoint$StaticPart;[ERROR]
-                                                        ALOAD_0[ERROR] ALOAD_0[ERROR] INVOKESTATIC
-                                                        org.aspectj.runtime.reflect.Factory.makeJP
-                                                        (Lorg/aspectj/lang/JoinPoint$StaticPart;Ljava/lang/Object;Ljava/lang/Object;)Lorg/aspectj/lang/JoinPoint;[ERROR]
-                                                        ASTORE_1[ERROR] method-execution(java.lang.String
-                                                        no.kantega.FooService.doSomething())[ERROR] | LDC &quot;foo&quot;
-                                                        (line 7)[ERROR] | ARETURN[ERROR]
-                                                        method-execution(java.lang.String
-                                                        no.kantega.FooService.doSomething())[ERROR] end public
-                                                        String doSomething()[ERROR] [ERROR] end public class
-                                                        no.kantega.FooService[ERROR] -- (BCException) Class
-                                                        no.kantega.FooServiceLoggerAspect does not have a method
-                                                        handleInfoJoinPointsToLog with signature
-                                                        (Lorg/aspectj/lang/ProceedingJoinPoint;)Ljava/lang/Object;[ERROR]
-                                                        when implementing on shadow
-                                                        method-execution(java.lang.String
-                                                        no.kantega.FooService.doSomething())[ERROR] when weaving
-                                                        type no.kantega.FooService[ERROR] when weaving
-                                                        classes[ERROR] when weaving[ERROR] when batch building
-                                                        BuildConfig[null] #Files=3 AopXmls=#0[ERROR] [ERROR] Class
-                                                        no.kantega.FooServiceLoggerAspect does not have a method
-                                                        handleInfoJoinPointsToLog with signature
-                                                        (Lorg/aspectj/lang/ProceedingJoinPoint;)Ljava/lang/Object;[ERROR]
-                                                        when implementing on shadow
-                                                        method-execution(java.lang.String
-                                                        no.kantega.FooService.doSomething())[ERROR] when weaving
-                                                        type no.kantega.FooService[ERROR] when weaving
-                                                        classes[ERROR] when weaving[ERROR] when batch building
-                                                        BuildConfig[null] #Files=3 AopXmls=#0[ERROR] [ERROR]
-                                                        org.aspectj.weaver.BCException: Class
-                                                        no.kantega.FooServiceLoggerAspect does not have a method
-                                                        handleInfoJoinPointsToLog with signature
-                                                        (Lorg/aspectj/lang/ProceedingJoinPoint;)Ljava/lang/Object;[ERROR]
-                                                        when implementing on shadow
-                                                        method-execution(java.lang.String
-                                                        no.kantega.FooService.doSomething())[ERROR] when weaving
-                                                        type no.kantega.FooService[ERROR] when weaving
-                                                        classes[ERROR] when weaving[ERROR] when batch building
-                                                        BuildConfig[null] #Files=3 AopXmls=#0[ERROR] [ERROR] at
-                                                        org.aspectj.weaver.bcel.LazyClassGen.getLazyMethodGen(LazyClassGen.java:1548)[ERROR]
-                                                        at
-                                                        org.aspectj.weaver.bcel.LazyClassGen.getLazyMethodGen(LazyClassGen.java:1533)[ERROR]
-                                                        at
-                                                        org.aspectj.weaver.bcel.BcelAdvice.canInline(BcelAdvice.java:244)[ERROR]
-                                                        at
-                                                        org.aspectj.weaver.bcel.BcelAdvice.implementOn(BcelAdvice.java:363)[ERROR]
-                                                        at
-                                                        org.aspectj.weaver.Shadow.implementMungers(Shadow.java:632)[ERROR]
-                                                        at
-                                                        org.aspectj.weaver.Shadow.implement(Shadow.java:547)[ERROR]
-                                                        at
-                                                        org.aspectj.weaver.bcel.BcelClassWeaver.implement(BcelClassWeaver.java:3335)[ERROR]
-                                                        at
-                                                        org.aspectj.weaver.bcel.BcelClassWeaver.weave(BcelClassWeaver.java:496)[ERROR]
-                                                        at
-                                                        org.aspectj.weaver.bcel.BcelClassWeaver.weave(BcelClassWeaver.java:100)[ERROR]
-                                                        at
-                                                        org.aspectj.weaver.bcel.BcelWeaver.weave(BcelWeaver.java:1689)[ERROR]
-                                                        at
-                                                        org.aspectj.weaver.bcel.BcelWeaver.weaveWithoutDump(BcelWeaver.java:1633)[ERROR]
-                                                        at
-                                                        org.aspectj.weaver.bcel.BcelWeaver.weaveAndNotify(BcelWeaver.java:1398)[ERROR]
-                                                        at
-                                                        org.aspectj.weaver.bcel.BcelWeaver.weave(BcelWeaver.java:1184)[ERROR]
-                                                        at
-                                                        org.aspectj.ajdt.internal.compiler.AjPipeliningCompilerAdapter.weaveQueuedEntries(AjPipeliningCompilerAdapter.java:514)[ERROR]
-                                                        at
-                                                        org.aspectj.ajdt.internal.compiler.AjPipeliningCompilerAdapter.queueForWeaving(AjPipeliningCompilerAdapter.java:447)[ERROR]
-                                                        at
-                                                        org.aspectj.ajdt.internal.compiler.AjPipeliningCompilerAdapter.afterProcessing(AjPipeliningCompilerAdapter.java:432)[ERROR]
-                                                        at
-                                                        org.aspectj.ajdt.internal.compiler.CompilerAdapter.ajc$after$org_aspectj_ajdt_internal_compiler_CompilerAdapter$5$6b855184(CompilerAdapter.aj:103)[ERROR]
-                                                        at
-                                                        org.aspectj.org.eclipse.jdt.internal.compiler.Compiler.process(Compiler.java:822)[ERROR]
-                                                        at
-                                                        org.aspectj.org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:480)[ERROR]
-                                                        at
-                                                        org.aspectj.org.eclipse.jdt.internal.compiler.Compiler.compile(Compiler.java:420)[ERROR]
-                                                        at
-                                                        org.aspectj.ajdt.internal.core.builder.AjBuildManager.performCompilation(AjBuildManager.java:1036)[ERROR]
-                                                        at
-                                                        org.aspectj.ajdt.internal.core.builder.AjBuildManager.performBuild(AjBuildManager.java:272)[ERROR]
-                                                        at
-                                                        org.aspectj.ajdt.internal.core.builder.AjBuildManager.batchBuild(AjBuildManager.java:185)[ERROR]
-                                                        at
-                                                        org.aspectj.ajdt.ajc.AjdtCommand.doCommand(AjdtCommand.java:112)[ERROR]
-                                                        at
-                                                        org.aspectj.ajdt.ajc.AjdtCommand.runCommand(AjdtCommand.java:60)[ERROR]
-                                                        at org.aspectj.tools.ajc.Main.run(Main.java:371)[ERROR] at
-                                                        org.aspectj.tools.ajc.Main.runMain(Main.java:248)[ERROR] at
-                                                        org.codehaus.mojo.aspectj.AbstractAjcCompiler.execute(AbstractAjcCompiler.java:524)[ERROR]
-                                                        at
-                                                        org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:132)[ERROR]
-                                                        at
-                                                        org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:208)[ERROR]
-                                                        at
-                                                        org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)[ERROR]
-                                                        at
-                                                        org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:145)[ERROR]
-                                                        at
-                                                        org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:116)[ERROR]
-                                                        at
-                                                        org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:80)[ERROR]
-                                                        at
-                                                        org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)[ERROR]
-                                                        at
-                                                        org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:120)[ERROR]
-                                                        at
-                                                        org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:355)[ERROR]
-                                                        at
-                                                        org.apache.maven.DefaultMaven.execute(DefaultMaven.java:155)[ERROR]
-                                                        at
-                                                        org.apache.maven.cli.MavenCli.execute(MavenCli.java:584)[ERROR]
-                                                        at
-                                                        org.apache.maven.cli.MavenCli.doMain(MavenCli.java:216)[ERROR]
-                                                        at
-                                                        org.apache.maven.cli.MavenCli.main(MavenCli.java:160)[ERROR]
-                                                        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native
-                                                        Method)[ERROR] at
-                                                        sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)[ERROR]
-                                                        at
-                                                        sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)[ERROR]
-                                                        at java.lang.reflect.Method.invoke(Method.java:483)[ERROR]
-                                                        at
-                                                        org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)[ERROR]
-                                                        at
-                                                        org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)[ERROR]
-                                                        at
-                                                        org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)[ERROR]
-                                                        at
-                                                        org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)[ERROR]
-                                                        -&gt; [Help 1][ERROR] Relevant versions are maven 3.2.5
-                                                        maven-compiler-plugin 3.1 aspectj-maven-plugin 1.7
-                                                        aspectjrt/tools 1.8.5. I've attached a small stand-alone
-                                                        maven project that reproduces the issue on my machine. As
-                                                        for workarounds the build works fine if I back down to
-                                                        aspectjrools/aspectjrt 1.8.2. 1.8.3 through 1.8.5 all fail
-                                                        the same way. Additionally setting compliance levels to 1.7
-                                                        works even on 1.8.5 though that workaround would lock us
-                                                        out of using Java 8 constructs for now. I'm not sure why
-                                                        this particular module fails while the others worked fine
-                                                        through the upgrade but I'm guessing it has to do with this
-                                                        particular module being the only one to use annotation
-                                                        based aspects.</p>-->
 {{ report }}
                                                 </div>
                                                 <!-- /关键词高亮插件-->
@@ -476,9 +304,9 @@
                                     </ul>
                                 </form>
                                     </div>
-                                    <div class="col-lg-5" style="width: 71.4%; border: 1px solid #ccc;">
+                                    <div class="col-lg-5" style="width: 71.4%; border: 1px solid #ccc; height:750px">
                                         <div class="tab-content">
-                                            <div class="tab-pane fade active in" id="whole">
+                                            <div class="tab-pane fade active in" id="whole" style="margin-top:10px">
                                                 <div class="plan-features">
                                                     <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
                                                         <h4 style="padding: 10px; margin: 0px">Keywords</h4>
@@ -486,30 +314,37 @@
                                                     <tr>
                                                         <td >keyword11</td>
                                                         <td >keyword2</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td >keyword1</td>
                                                         <td >keyword2</td>
                                                     </tr>
                                                     <tr>
                                                         <td >keyword1</td>
                                                         <td >keyword2</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td >keyword1</td>
                                                         <td >keyword2</td>
                                                     </tr>
                                                     <tr>
                                                         <td >keyword1</td>
+                                                        <td >keyword2</td>
+                                                        <td >keyword2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >keyword1</td>
+                                                        <td >keyword2</td>
+                                                        <td >keyword2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >keyword1</td>
+                                                        <td >keyword2</td>
                                                         <td >keyword2</td>
                                                     </tr>
 
                                                 </tbody>
                                                     </table>
                                                 </div> <!-- /plan-features -->
+                                                 <iframe src="{% url 'locator:cloud' %}?type=10" frameborder="0" scrolling="no"
+                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
                                             </div>
                                             <div class="tab-pane fade" id="file0">
-                                                <h4 style="word-wrap:break-word ">File path: {{ filelist.0.path }}</h4>
+                                                <h4 style="word-wrap:break-word ">File path:<br>{{ filelist.0.path }}</h4>
                                                 <div class="plan-features">
                                                     <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
                                                         <h4 style="padding: 10px; margin: 0px">Keywords</h4>
@@ -517,51 +352,30 @@
                                                     <tr>
                                                         <td >{{ sel_arr.0}}</td>
                                                         <td >{{ sel_arr.1}}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td >{{ sel_arr.2}}</td>
                                                         <td >{{ sel_arr.3}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td >{{ sel_arr.4}}</td>
                                                         <td >{{ sel_arr.5}}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td >{{ sel_arr.6}}</td>
                                                         <td >{{ sel_arr.7}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td >{{ sel_arr.8}}</td>
                                                         <td >{{ sel_arr.9}}</td>
-                                                    </tr>
-
-                                                </tbody>
-                                                    </table>
-                                                </div> <!-- /plan-features -->
-                                            </div>
-                                            <div class="tab-pane fade" id="file1">
-                                                <h4 style="word-wrap:break-word ">File path: {{ filelist.1.path }}</h4>
-                                                <div class="plan-features">
-                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
-                                                        <h4 style="padding: 10px; margin: 0px">Keywords</h4>
-                                                        <tbody>
-                                                    <tr>
                                                         <td >{{ sel_arr.10}}</td>
                                                         <td >{{ sel_arr.11}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td >{{ sel_arr.12}}</td>
                                                         <td >{{ sel_arr.13}}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td >{{ sel_arr.14}}</td>
                                                         <td >{{ sel_arr.15}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td >{{ sel_arr.16}}</td>
                                                         <td >{{ sel_arr.17}}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td >{{ sel_arr.18}}</td>
                                                         <td >{{ sel_arr.19}}</td>
                                                     </tr>
@@ -569,9 +383,11 @@
                                                 </tbody>
                                                     </table>
                                                 </div> <!-- /plan-features -->
+                                                 <iframe src="{% url 'locator:cloud' %}?type=0" frameborder="0" scrolling="no"
+                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
                                             </div>
-                                            <div class="tab-pane fade" id="file2">
-                                                <h4 style="word-wrap:break-word ">File path: {{ filelist.2.path }}</h4>
+                                            <div class="tab-pane fade" id="file1">
+                                                <h4 style="word-wrap:break-word ">File path:<br>{{ filelist.1.path }}</h4>
                                                 <div class="plan-features">
                                                     <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
                                                         <h4 style="padding: 10px; margin: 0px">Keywords</h4>
@@ -579,61 +395,41 @@
                                                     <tr>
                                                         <td >{{ sel_arr.20}}</td>
                                                         <td >{{ sel_arr.21}}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td >{{ sel_arr.22}}</td>
                                                         <td >{{ sel_arr.23}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td >{{ sel_arr.24}}</td>
                                                         <td >{{ sel_arr.25}}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td >{{ sel_arr.26}}</td>
                                                         <td >{{ sel_arr.27}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td >{{ sel_arr.28}}</td>
                                                         <td >{{ sel_arr.29}}</td>
-                                                    </tr>
-
-                                                </tbody>
-                                                    </table>
-                                                </div> <!-- /plan-features -->
-                                            </div>
-                                            <div class="tab-pane fade" id="file3">
-                                                <h4 style="word-wrap:break-word ">File path: {{ filelist.3.path }}</h4>
-                                                <div class="plan-features">
-                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
-                                                        <h4 style="padding: 10px; margin: 0px">Keywords</h4>
-                                                        <tbody>
-                                                    <tr>
                                                         <td >{{ sel_arr.30}}</td>
                                                         <td >{{ sel_arr.31}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td >{{ sel_arr.32}}</td>
                                                         <td >{{ sel_arr.33}}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td >{{ sel_arr.34}}</td>
                                                         <td >{{ sel_arr.35}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td >{{ sel_arr.36}}</td>
                                                         <td >{{ sel_arr.37}}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td >{{ sel_arr.38}}</td>
                                                         <td >{{ sel_arr.39}}</td>
                                                     </tr>
-
                                                 </tbody>
                                                     </table>
                                                 </div> <!-- /plan-features -->
+                                                 <iframe src="{% url 'locator:cloud' %}?type=1" frameborder="0" scrolling="no"
+                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
                                             </div>
-                                            <div class="tab-pane fade" id="file4">
-                                                <h4 style="word-wrap:break-word ">File path: {{ filelist.4.path }}</h4>
+                                            <div class="tab-pane fade" id="file2">
+                                                <h4 style="word-wrap:break-word ">File path:<br>{{ filelist.2.path }}</h4>
                                                 <div class="plan-features">
                                                     <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
                                                         <h4 style="padding: 10px; margin: 0px">Keywords</h4>
@@ -641,51 +437,30 @@
                                                     <tr>
                                                         <td >{{ sel_arr.40}}</td>
                                                         <td >{{ sel_arr.41}}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td >{{ sel_arr.42}}</td>
                                                         <td >{{ sel_arr.43}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td >{{ sel_arr.44}}</td>
                                                         <td >{{ sel_arr.45}}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td >{{ sel_arr.46}}</td>
                                                         <td >{{ sel_arr.47}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td >{{ sel_arr.48}}</td>
                                                         <td >{{ sel_arr.49}}</td>
-                                                    </tr>
-
-                                                </tbody>
-                                                    </table>
-                                                </div> <!-- /plan-features -->
-                                            </div>
-                                            <div class="tab-pane fade" id="file5">
-                                                <h4 style="word-wrap:break-word ">File path: {{ filelist.5.path }}</h4>
-                                                <div class="plan-features">
-                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
-                                                        <h4 style="padding: 10px; margin: 0px">Keywords</h4>
-                                                        <tbody>
-                                                    <tr>
                                                         <td >{{ sel_arr.50}}</td>
                                                         <td >{{ sel_arr.51}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td >{{ sel_arr.52}}</td>
                                                         <td >{{ sel_arr.53}}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td >{{ sel_arr.54}}</td>
                                                         <td >{{ sel_arr.55}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td >{{ sel_arr.56}}</td>
                                                         <td >{{ sel_arr.57}}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td >{{ sel_arr.58}}</td>
                                                         <td >{{ sel_arr.59}}</td>
                                                     </tr>
@@ -693,9 +468,11 @@
                                                 </tbody>
                                                     </table>
                                                 </div> <!-- /plan-features -->
+                                                 <iframe src="{% url 'locator:cloud' %}?type=2" frameborder="0" scrolling="no"
+                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
                                             </div>
-                                            <div class="tab-pane fade" id="file6">
-                                                <h4 style="word-wrap:break-word ">File path: {{ filelist.6.path }}</h4>
+                                            <div class="tab-pane fade" id="file3">
+                                                <h4 style="word-wrap:break-word ">File path:<br>{{ filelist.3.path }}</h4>
                                                 <div class="plan-features">
                                                     <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
                                                         <h4 style="padding: 10px; margin: 0px">Keywords</h4>
@@ -703,51 +480,30 @@
                                                     <tr>
                                                         <td >{{ sel_arr.60}}</td>
                                                         <td >{{ sel_arr.61}}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td >{{ sel_arr.62}}</td>
                                                         <td >{{ sel_arr.63}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td >{{ sel_arr.64}}</td>
                                                         <td >{{ sel_arr.65}}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td >{{ sel_arr.66}}</td>
                                                         <td >{{ sel_arr.67}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td >{{ sel_arr.68}}</td>
                                                         <td >{{ sel_arr.69}}</td>
-                                                    </tr>
-
-                                                </tbody>
-                                                    </table>
-                                                </div> <!-- /plan-features -->
-                                            </div>
-                                            <div class="tab-pane fade" id="file7">
-                                                <h4 style="word-wrap:break-word ">File path: {{ filelist.7.path }}</h4>
-                                                <div class="plan-features">
-                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
-                                                        <h4 style="padding: 10px; margin: 0px">Keywords</h4>
-                                                        <tbody>
-                                                    <tr>
                                                         <td >{{ sel_arr.70}}</td>
                                                         <td >{{ sel_arr.71}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td >{{ sel_arr.72}}</td>
                                                         <td >{{ sel_arr.73}}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td >{{ sel_arr.74}}</td>
                                                         <td >{{ sel_arr.75}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td >{{ sel_arr.76}}</td>
                                                         <td >{{ sel_arr.77}}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td >{{ sel_arr.78}}</td>
                                                         <td >{{ sel_arr.79}}</td>
                                                     </tr>
@@ -755,9 +511,11 @@
                                                 </tbody>
                                                     </table>
                                                 </div> <!-- /plan-features -->
+                                                 <iframe src="{% url 'locator:cloud' %}?type=3" frameborder="0" scrolling="no"
+                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
                                             </div>
-                                            <div class="tab-pane fade" id="file8">
-                                                <h4 style="word-wrap:break-word ">File path: {{ filelist.8.path }}</h4>
+                                            <div class="tab-pane fade" id="file4">
+                                                <h4 style="word-wrap:break-word ">File path:<br>{{ filelist.4.path }}</h4>
                                                 <div class="plan-features">
                                                     <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
                                                         <h4 style="padding: 10px; margin: 0px">Keywords</h4>
@@ -765,51 +523,30 @@
                                                     <tr>
                                                         <td >{{ sel_arr.80}}</td>
                                                         <td >{{ sel_arr.81}}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td >{{ sel_arr.82}}</td>
                                                         <td >{{ sel_arr.83}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td >{{ sel_arr.84}}</td>
                                                         <td >{{ sel_arr.85}}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td >{{ sel_arr.86}}</td>
                                                         <td >{{ sel_arr.87}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td >{{ sel_arr.88}}</td>
                                                         <td >{{ sel_arr.89}}</td>
-                                                    </tr>
-
-                                                </tbody>
-                                                    </table>
-                                                </div> <!-- /plan-features -->
-                                            </div>
-                                            <div class="tab-pane fade" id="file9">
-                                                <h4 style="word-wrap:break-word ">File path: {{ filelist.9.path }}</h4>
-                                                <div class="plan-features">
-                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
-                                                        <h4 style="padding: 10px; margin: 0px">Keywords</h4>
-                                                        <tbody>
-                                                    <tr>
                                                         <td >{{ sel_arr.90}}</td>
                                                         <td >{{ sel_arr.91}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td >{{ sel_arr.92}}</td>
                                                         <td >{{ sel_arr.93}}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td >{{ sel_arr.94}}</td>
                                                         <td >{{ sel_arr.95}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td >{{ sel_arr.96}}</td>
                                                         <td >{{ sel_arr.97}}</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td >{{ sel_arr.98}}</td>
                                                         <td >{{ sel_arr.99}}</td>
                                                     </tr>
@@ -817,10 +554,229 @@
                                                 </tbody>
                                                     </table>
                                                 </div> <!-- /plan-features -->
+                                                 <iframe src="{% url 'locator:cloud' %}?type=4" frameborder="0" scrolling="no"
+                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
+                                            </div>
+                                            <div class="tab-pane fade" id="file5">
+                                                <h4 style="word-wrap:break-word ">File path:<br>{{ filelist.5.path }}</h4>
+                                                <div class="plan-features">
+                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
+                                                        <h4 style="padding: 10px; margin: 0px">Keywords</h4>
+                                                        <tbody>
+                                                    <tr>
+                                                        <td >{{ sel_arr.100}}</td>
+                                                        <td >{{ sel_arr.101}}</td>
+                                                        <td >{{ sel_arr.102}}</td>
+                                                        <td >{{ sel_arr.103}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.104}}</td>
+                                                        <td >{{ sel_arr.105}}</td>
+                                                        <td >{{ sel_arr.106}}</td>
+                                                        <td >{{ sel_arr.107}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.108}}</td>
+                                                        <td >{{ sel_arr.109}}</td>
+                                                        <td >{{ sel_arr.110}}</td>
+                                                        <td >{{ sel_arr.111}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.112}}</td>
+                                                        <td >{{ sel_arr.113}}</td>
+                                                        <td >{{ sel_arr.114}}</td>
+                                                        <td >{{ sel_arr.115}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.116}}</td>
+                                                        <td >{{ sel_arr.117}}</td>
+                                                        <td >{{ sel_arr.118}}</td>
+                                                        <td >{{ sel_arr.119}}</td>
+                                                    </tr>
+
+                                                </tbody>
+                                                    </table>
+                                                </div> <!-- /plan-features -->
+                                                 <iframe src="{% url 'locator:cloud' %}?type=5" frameborder="0" scrolling="no"
+                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
+                                            </div>
+                                            <div class="tab-pane fade" id="file6">
+                                                <h4 style="word-wrap:break-word ">File path:<br>{{ filelist.6.path }}</h4>
+                                                <div class="plan-features">
+                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
+                                                        <h4 style="padding: 10px; margin: 0px">Keywords</h4>
+                                                        <tbody>
+                                                    <tr>
+                                                        <td >{{ sel_arr.120}}</td>
+                                                        <td >{{ sel_arr.121}}</td>
+                                                        <td >{{ sel_arr.122}}</td>
+                                                        <td >{{ sel_arr.123}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.124}}</td>
+                                                        <td >{{ sel_arr.125}}</td>
+                                                        <td >{{ sel_arr.126}}</td>
+                                                        <td >{{ sel_arr.127}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.128}}</td>
+                                                        <td >{{ sel_arr.129}}</td>
+                                                        <td >{{ sel_arr.130}}</td>
+                                                        <td >{{ sel_arr.131}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.132}}</td>
+                                                        <td >{{ sel_arr.133}}</td>
+                                                        <td >{{ sel_arr.134}}</td>
+                                                        <td >{{ sel_arr.135}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.136}}</td>
+                                                        <td >{{ sel_arr.137}}</td>
+                                                        <td >{{ sel_arr.138}}</td>
+                                                        <td >{{ sel_arr.139}}</td>
+                                                    </tr>
+
+                                                </tbody>
+                                                    </table>
+                                                </div> <!-- /plan-features -->
+                                                 <iframe src="{% url 'locator:cloud' %}?type=6" frameborder="0" scrolling="no"
+                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
+                                            </div>
+                                            <div class="tab-pane fade" id="file7">
+                                                <h4 style="word-wrap:break-word ">File path:<br>{{ filelist.7.path }}</h4>
+                                                <div class="plan-features">
+                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
+                                                        <h4 style="padding: 10px; margin: 0px">Keywords</h4>
+                                                        <tbody>
+                                                   <tr>
+                                                        <td >{{ sel_arr.140}}</td>
+                                                        <td >{{ sel_arr.141}}</td>
+                                                        <td >{{ sel_arr.142}}</td>
+                                                        <td >{{ sel_arr.143}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.144}}</td>
+                                                        <td >{{ sel_arr.145}}</td>
+                                                        <td >{{ sel_arr.146}}</td>
+                                                        <td >{{ sel_arr.147}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.148}}</td>
+                                                        <td >{{ sel_arr.149}}</td>
+                                                        <td >{{ sel_arr.150}}</td>
+                                                        <td >{{ sel_arr.151}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.152}}</td>
+                                                        <td >{{ sel_arr.153}}</td>
+                                                        <td >{{ sel_arr.154}}</td>
+                                                        <td >{{ sel_arr.155}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.156}}</td>
+                                                        <td >{{ sel_arr.157}}</td>
+                                                        <td >{{ sel_arr.158}}</td>
+                                                        <td >{{ sel_arr.159}}</td>
+                                                    </tr>
+
+                                                </tbody>
+                                                    </table>
+                                                </div> <!-- /plan-features -->
+                                                 <iframe src="{% url 'locator:cloud' %}?type=7" frameborder="0" scrolling="no"
+                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
+                                            </div>
+                                            <div class="tab-pane fade" id="file8">
+                                                <h4 style="word-wrap:break-word ">File path:<br>{{ filelist.8.path }}</h4>
+                                                <div class="plan-features">
+                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
+                                                        <h4 style="padding: 10px; margin: 0px">Keywords</h4>
+                                                        <tbody>
+                                                    <tr>
+                                                        <td >{{ sel_arr.160}}</td>
+                                                        <td >{{ sel_arr.161}}</td>
+                                                        <td >{{ sel_arr.162}}</td>
+                                                        <td >{{ sel_arr.163}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.164}}</td>
+                                                        <td >{{ sel_arr.165}}</td>
+                                                        <td >{{ sel_arr.166}}</td>
+                                                        <td >{{ sel_arr.167}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.168}}</td>
+                                                        <td >{{ sel_arr.169}}</td>
+                                                        <td >{{ sel_arr.170}}</td>
+                                                        <td >{{ sel_arr.171}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.172}}</td>
+                                                        <td >{{ sel_arr.173}}</td>
+                                                        <td >{{ sel_arr.174}}</td>
+                                                        <td >{{ sel_arr.175}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.176}}</td>
+                                                        <td >{{ sel_arr.177}}</td>
+                                                        <td >{{ sel_arr.178}}</td>
+                                                        <td >{{ sel_arr.179}}</td>
+                                                    </tr>
+
+                                                </tbody>
+                                                    </table>
+                                                </div> <!-- /plan-features -->
+                                                 <iframe src="{% url 'locator:cloud' %}?type=8" frameborder="0" scrolling="no"
+                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
+                                            </div>
+                                            <div class="tab-pane fade" id="file9">
+                                                <h4 style="word-wrap:break-word ">File path:<br>{{ filelist.9.path }}</h4>
+                                                <div class="plan-features">
+                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
+                                                        <h4 style="padding: 10px; margin: 0px">Keywords</h4>
+                                                        <tbody>
+                                                    <tr>
+                                                        <td >{{ sel_arr.180}}</td>
+                                                        <td >{{ sel_arr.181}}</td>
+                                                        <td >{{ sel_arr.182}}</td>
+                                                        <td >{{ sel_arr.183}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.184}}</td>
+                                                        <td >{{ sel_arr.185}}</td>
+                                                        <td >{{ sel_arr.186}}</td>
+                                                        <td >{{ sel_arr.187}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.188}}</td>
+                                                        <td >{{ sel_arr.189}}</td>
+                                                        <td >{{ sel_arr.190}}</td>
+                                                        <td >{{ sel_arr.191}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.192}}</td>
+                                                        <td >{{ sel_arr.193}}</td>
+                                                        <td >{{ sel_arr.194}}</td>
+                                                        <td >{{ sel_arr.195}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.196}}</td>
+                                                        <td >{{ sel_arr.197}}</td>
+                                                        <td >{{ sel_arr.198}}</td>
+                                                        <td >{{ sel_arr.199}}</td>
+                                                    </tr>
+
+                                                </tbody>
+                                                    </table>
+                                                </div> <!-- /plan-features -->
+                                                 <iframe src="{% url 'locator:cloud' %}?type=9" frameborder="0" scrolling="no"
+                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
                                             </div>
                                         </div>
+                                        <!--
                                         <iframe src="{% url 'locator:cloud' %}" frameborder="0" scrolling="no"
                                                     style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
+                                                    -->
                                     </div>
                                 </div>
                         </div>

@@ -25,6 +25,7 @@ global r_phi
 global r_pl
 global r_ptw
 global r_pws
+global kwArr
 
 
 
@@ -859,6 +860,7 @@ def back(request):
 
 
 def alg_res(request):
+    global kwArr
     # 权限控制
     lockflag = check_lock(request)
     userflag = authority(request)
@@ -867,7 +869,7 @@ def alg_res(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
     pre = BASE_DIR+'/data/bughunter/'
-
+    '''
     cList = [' ', '<', '>', '\'', '"', '\n']
     cDict = {' ': '&nbsp;',
              '<': '&lt;',
@@ -875,15 +877,16 @@ def alg_res(request):
              '\'': '&apos;',
              '"': 'quot;',
              '\n': '<br>'}
-
+    '''
     filelist = []
     bugid = utils.get_value(request, 'get', 'bugid')
     # print bugid
     result = get_result(request, bugid)
-    wordArr = []
+    # wordArr = []
     aWord = []
     # 以下对description内容进行切分
     bugreport = models.Report.objects.get(bugid=bugid).description
+    '''
     for char in bugreport:
         if char.isalpha():
             aWord.append(char)
@@ -896,84 +899,20 @@ def alg_res(request):
                 wordArr.append(char)
             else:
                 wordArr.append(cDict[char])
+    '''
     # 以下读取结果中的文件内容并获取文件对应的关键词
     kwArr = []
+    kwPos = []
     for r in result:
         filepath = models.filemap.objects.get(filenumber=r).filepath
         # print r
         keywordIDs = models.f2w.objects.get(fileID=r).keywords.split(' ')
-        keywords = models.wordmap.objects.filter(wordID__in=keywordIDs)
-        tmp = []
-        for keyword in keywords:
-            tmp.append(keyword.word)
-
-        kwArr.append(tmp)
-        thispath = str(pre + filepath)
-        try:
-            thiscontent = open(thispath, 'r')
-            fileStr = thiscontent.read()
-            filelist.append({'content': fileStr, 'path': filepath})
-        except Exception, e:
-            print e
-    return render(request, 'resultPage.html', {'fileArr':json.dumps(wordArr), 'sel_arr':json.dumps(kwArr),
-                                               'filelist': filelist, 'bugid': bugid, 'report': bugreport})
-
-def alg_res_l2ss(request):
-    # 权限控制
-    lockflag = check_lock(request)
-    userflag = authority(request)
-    if lockflag:
-        return HttpResponseRedirect('/locator/lock/')
-    if not userflag:
-        return HttpResponseRedirect('/locator/index/')
-    pre = BASE_DIR+'/data/bughunter/'
-
-    cList = [' ', '<', '>', '\'', '"', '\n']
-    cDict = {' ': '&nbsp;',
-             '<': '&lt;',
-             '>': '&gt;',
-             '\'': '&apos;',
-             '"': 'quot;',
-             '\n': '<br>'}
-
-    filelist = []
-    bugid = utils.get_value(request, 'get', 'bugid')
-    # print bugid
-    result = get_result_l2ss(request, str(bugid))
-    wordArr = []
-    aWord = []
-    # 以下对description内容进行切分
-    bugreport = models.Report.objects.get(bugid=bugid).description
-    for char in bugreport:
-        if char.isalpha():
-            aWord.append(char)
-        elif char.isdigit():
-            aWord.append(char)
-        else:
-            wordArr.append("".join(aWord))
-            aWord = []
-            if char not in cList:
-                wordArr.append(char)
-            else:
-                wordArr.append(cDict[char])
-    # 以下读取结果中的文件内容并获取文件对应的关键词
-    kwArr = []
-    for r in result:
-        # print r
-        filepath = models.filemap.objects.get(path_l2ss=r).filepath
-        fileid = models.filemap.objects.get(path_l2ss=r).filenumber
-        # print fileid
-        keywordIDs = models.f2w.objects.get(fileID=fileid).keywords.split(' ')
-        # print keywordIDs
         keywords = models.wordmap.objects.filter(wordID__in=keywordIDs[0:-1])
-        # print keywords
-        #tmp = []
+        #print keywords
+        # tmp = []
         for keyword in keywords:
-            #tmp.append(keyword.word)
+            # tmp.append(keyword.word)
             kwArr.append(keyword.word)
-            # print tmp
-        #kwArr.append(tmp)
-        print len(kwArr)
         thispath = str(pre + filepath)
         try:
             thiscontent = open(thispath, 'r')
@@ -981,8 +920,9 @@ def alg_res_l2ss(request):
             filelist.append({'content': fileStr, 'path': filepath})
         except Exception, e:
             print e
-    return render(request, 'resultPage.html', {'fileArr': json.dumps(wordArr), 'sel_arr': kwArr,
-                                               'filelist': filelist, 'bugid': bugid, 'report': bugreport})
+    return render(request, 'resultPage.html', {'sel_arr':kwArr,
+                'filelist': filelist, 'bugid': bugid, 'report': bugreport})
+
 
 def get_result(request, bugid):
     # 权限控制
@@ -1019,6 +959,75 @@ def get_result(request, bugid):
     print "BugHunter consumed %f s."%(end-start)
     return result
 
+
+def alg_res_l2ss(request):
+    global kwArr
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+    pre = BASE_DIR+'/data/bughunter/'
+    '''
+    cList = [' ', '<', '>', '\'', '"', '\n']
+    cDict = {' ': '&nbsp;',
+             '<': '&lt;',
+             '>': '&gt;',
+             '\'': '&apos;',
+             '"': 'quot;',
+             '\n': '<br>'}
+    '''
+    filelist = []
+    bugid = utils.get_value(request, 'get', 'bugid')
+    # print bugid
+    result = get_result_l2ss(request, str(bugid))
+    # wordArr = []
+    # aWord = []
+    # 以下对description内容进行切分
+    bugreport = models.Report.objects.get(bugid=bugid).description
+    '''
+    for char in bugreport:
+        if char.isalpha():
+            aWord.append(char)
+        elif char.isdigit():
+            aWord.append(char)
+        else:
+            wordArr.append("".join(aWord))
+            aWord = []
+            if char not in cList:
+                wordArr.append(char)
+            else:
+                wordArr.append(cDict[char])
+    '''
+    # 以下读取结果中的文件内容并获取文件对应的关键词
+    kwArr = []
+    for r in result:
+        # print r
+        filepath = models.filemap.objects.get(path_l2ss=r).filepath
+        fileid = models.filemap.objects.get(path_l2ss=r).filenumber
+        # print fileid
+        keywordIDs = models.f2w.objects.get(fileID=fileid).keywords.split(' ')
+        # print keywordIDs
+        keywords = models.wordmap.objects.filter(wordID__in=keywordIDs[0:-1])
+        # print keywords
+        #tmp = []
+        for keyword in keywords:
+            #tmp.append(keyword.word)
+            kwArr.append(keyword.word)
+            # print tmp
+        #kwArr.append(tmp)
+        print len(kwArr)
+        thispath = str(pre + filepath)
+        try:
+            thiscontent = open(thispath, 'r')
+            fileStr = thiscontent.read()
+            filelist.append({'content': fileStr, 'path': filepath})
+        except Exception, e:
+            print e
+    return render(request, 'resultPage.html', {'sel_arr': kwArr,
+                'filelist': filelist, 'bugid': bugid, 'report': bugreport})
 
 def get_result_l2ss(request, bugid):
     # 权限控制
@@ -1063,15 +1072,24 @@ def get_result_l2ss(request, bugid):
 
 
 def cloud(request):
+    global kwArr
     # 权限控制
     lockflag = check_lock(request)
     userflag = authority(request)
+
     if lockflag:
         return HttpResponseRedirect('/locator/lock/')
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    return render(request, 'static_cloud.html')
+    Type = int(request.GET.get('type'))
+    print type(Type)
+    if Type != 10:
+        keywords = kwArr[Type * 20:(Type + 1) * 20]
+        print keywords
+    else:
+        keywords = []
+    return render(request, 'static_cloud.html', {'keywords' : json.dumps(keywords)})
 
 
 def premeter_to_memry(request):

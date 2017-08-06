@@ -28,7 +28,7 @@ def calc_pwds(ws):
 
 
 def llda_test(data, k_vocab_total, pl, phi, ptw, new_pws):
-    start = time.time()
+    #start = time.time()
 
     l0 = phi.keys()[0]
     w_vocab = set(phi[l0].keys())
@@ -71,8 +71,8 @@ def llda_test(data, k_vocab_total, pl, phi, ptw, new_pws):
     '''
     # test one record
     s_ptd = sorted(pzd.items(), lambda x, y: cmp(x[1], y[1]), reverse=True)
-    end = time.time()
-    print end - start
+    #end = time.time()
+    #print end - start
     # print s_ptd
 
     return s_ptd

@@ -15,10 +15,14 @@
 </style>
 
 <script type="text/javascript">
-	var data = [
-		['广州', 13, 100],
-		['浙江', 10, 123],
-		['江苏', 9, 222],
+    var tmp = {{ keywords|safe }};
+    var data;
+    if (tmp.length ===0)
+    {
+        data = [
+		['广州', 27, 100],
+		['浙江', 20, 123],
+		['江苏', 19, 222],
 		['北京', 8, 111],
 		['上海', 7, 111],
 		['河南', 6, 111],
@@ -35,20 +39,36 @@
 		['重庆', 3, 111],
 		['天津', 3, 111],
 		['云南', 2, 111],
-		['山西', 2, 111],
-		['黑龙江', 2, 111],
-		['吉林', 2, 111],
-		['内蒙古', 2, 111],
-		['贵州', 2, 111],
-		['甘肃', 2, 111],
-		['海南', 2, 111],
-		['宁夏', 2, 111],
-		['青海', 1, 111],
-		['西藏', 1, 111],
-		['香港', 1, 111],
-		['未知', 1, 111],
-		['台湾', 1, 111]
+		['山西', 2, 111]
 	];
+    }
+    else
+    {
+        data = [
+            [tmp[0], 27, 100],
+            [tmp[1], 20, 123],
+            [tmp[2], 19, 222],
+            [tmp[3], 15, 111],
+            [tmp[4], 13, 111],
+            [tmp[5], 10, 111],
+            [tmp[6], 8, 111],
+            [tmp[7], 8, 111],
+            [tmp[8], 8, 111],
+            [tmp[9], 8, 111],
+            [tmp[10], 5, 111],
+            [tmp[11], 5, 111],
+            [tmp[12], 5, 111],
+            [tmp[13], 6, 111],
+            [tmp[14], 3, 111],
+            [tmp[15], 3, 111],
+            [tmp[16], 3, 111],
+            [tmp[17], 3, 111],
+            [tmp[18], 2, 111],
+            [tmp[19], 2, 111]
+        ];
+
+    }
+
 	
 	var string_ = "";
 	for (var i = 0; i < data.length; i++) {
@@ -62,7 +82,7 @@
 		ev = ev || event;
 		$.each(data, function(i, item) {
 			if(txt == item[0]){
-				var html = item[0]+"<br />曝光数"+item[1]+"<br />"+item[2];
+				var html = item[0]/*+"<br />"+item[1]+"<br />"+item[2]*/;
 				$("#my_favorite_latin_words").after("<div class='append_div' style='left:" + ev.clientX + "px; top:" + ev.clientY + "px; '>" + html + "</div>");
 				return;
 			}
@@ -81,9 +101,9 @@
 </script>
 </head>
 
-<body>
+<body style="margin:10px 0px 0px 0px;">
 <div class="" style="width: 100%;">
-	<div id="my_favorite_latin_words" style="width: 635px; margin: 0px auto; height: 400px; border: 1px solid #ccc; "></div>
+	<div id="my_favorite_latin_words" style="width: 635px; margin: 0px ; height: 400px; "></div>
 </div>
 
 </body>
