@@ -935,6 +935,17 @@ def alg_res(request):
             common += (kw + ' ')
     print common
     str_kws.append(common)
+    # 获取全部文件的关键词
+    global all_cloud
+    all_cloud = []
+    temp = []
+    lower_report = bugreport.lower()
+    for kw in kwArr:
+        if kw in bugreport:
+            temp.append({'word': kw, 'time': lower_report.count(kw)})
+    for t in temp:
+        if t not in all_cloud:
+            all_cloud.append(t)
     return render(request, 'resultPage.html', {'sel_arr': kwArr, 'str_kws': str_kws,'method': methodid,
                                                'filelist': filelist, 'bugid': bugid, 'report': bugreport})
 
