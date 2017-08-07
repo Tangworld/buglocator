@@ -26,6 +26,7 @@ global r_pl
 global r_ptw
 global r_pws
 global kwArr
+global all_cloud
 
 
 
@@ -906,9 +907,12 @@ def alg_res(request):
 
     kwPos = []
     str_kws = []
+    filename = []
     for r in result:
         str_kw = ''
         filepath = models.filemap.objects.get(filenumber=r).filepath
+        tmp = filepath.strip().split('/')[-1][0:-5]
+        filename.append(tmp)
         # print r
         keywordIDs = models.f2w.objects.get(fileID=r).keywords.split(' ')
         keywords = models.wordmap.objects.filter(wordID__in=keywordIDs[0:-1])
@@ -934,7 +938,18 @@ def alg_res(request):
             common += (kw + ' ')
     print common
     str_kws.append(common)
-    return render(request, 'resultPage.html', {'sel_arr': kwArr, 'str_kws': str_kws,'method': methodid,
+    # 获取全部文件的关键词
+    global all_cloud
+    all_cloud = []
+    temp = []
+    lower_report = bugreport.lower()
+    for kw in kwArr:
+        if kw in bugreport:
+            temp.append({'word': kw, 'time': lower_report.count(kw)})
+    for t in temp:
+        if t not in all_cloud:
+            all_cloud.append(t)
+    return render(request, 'resultPage.html', {'sel_arr': kwArr, 'str_kws': str_kws,'method': methodid,'filename':filename,
                                                'filelist': filelist, 'bugid': bugid, 'report': bugreport})
 
 
@@ -1055,6 +1070,18 @@ def alg_res_l2ss(request):
             common += (kw + ' ')
     #print common
     str_kws.append(common)
+
+    # 获取全部文件的关键词
+    global all_cloud
+    all_cloud = []
+    temp = []
+    lower_report = bugreport.lower()
+    for kw in kwArr:
+        if kw in bugreport:
+            temp.append({'word': kw, 'time': lower_report.count(kw)})
+    for t in temp:
+        if t not in all_cloud:
+            all_cloud.append(t)
     return render(request, 'resultPage.html', {'sel_arr': kwArr, 'str_kws': str_kws, 'filename':filename,
                 'filelist': filelist, 'bugid': bugid, 'report': bugreport, 'method':methodid})
 
@@ -1112,14 +1139,23 @@ def cloud(request):
     if not userflag:
         return HttpResponseRedirect('/locator/index/')
 
-    Type = int(request.GET.get('type'))
-    print type(Type)
-    if Type != 10:
-        keywords = kwArr[Type * 20:(Type + 1) * 20]
-        print keywords
-    else:
-        keywords = []
-    return render(request, 'static_cloud.html', {'keywords' : json.dumps(keywords)})
+    global all_cloud
+    all_kw = []
+    all_tm = []
+    for a in all_cloud:
+        all_kw.append(a['word'])
+        all_tm.append(a['time'])
+    print all_kw
+    print all_tm
+
+    # Type = int(request.GET.get('type'))
+    # print type(Type)
+    # if Type != 10:
+    #     keywords = kwArr[Type * 20:(Type + 1) * 20]
+    #     print keywords
+    # else:
+    #     keywords = []
+    return render(request, 'static_cloud.html', {'keywords': json.dumps(all_kw), 'times': json.dumps(all_tm)})
 
 
 def premeter_to_memry(request):

@@ -15,9 +15,10 @@
 </style>
 
 <script type="text/javascript">
-    var tmp = {{ keywords|safe }};
-    var data;
-    if (tmp.length ===0)
+    var word = {{ keywords|safe }};
+    var time = {{ times | safe }};
+    var data = [];
+    if (word.length === 0)
     {
         data = [
 		['aspectj', 27, 100],
@@ -44,28 +45,19 @@
     }
     else
     {
-        data = [
-            [tmp[0], 27, 1],
-            [tmp[1], 20, 2],
-            [tmp[2], 19, 3],
-            [tmp[3], 15, 4],
-            [tmp[4], 13, 5],
-            [tmp[5], 10, 6],
-            [tmp[6], 8, 7],
-            [tmp[7], 8, 8],
-            [tmp[8], 8, 9],
-            [tmp[9], 8, 10],
-            [tmp[10], 5, 11],
-            [tmp[11], 5, 12],
-            [tmp[12], 5, 13],
-            [tmp[13], 6, 14],
-            [tmp[14], 3, 15],
-            [tmp[15], 3, 16],
-            [tmp[16], 3, 17],
-            [tmp[17], 3, 18],
-            [tmp[18], 2, 19],
-            [tmp[19], 2, 20]
-        ];
+        for(var i =0;i<word.length;i++){
+            data[i] = [word[i], time[i], time[i]];
+        }
+{#        data = [#}
+{#            [tmp[0]['word'], tmp[0]['time'], 1],#}
+{#            [tmp[1]['word'], tmp[1]['time'], 2],#}
+{#            [tmp[2]['word'], tmp[2]['time'], 3],#}
+{#            [tmp[3]['word'], tmp[3]['time'], 4],#}
+{#            [tmp[4]['word'], tmp[4]['time'], 5],#}
+{#            [tmp[5]['word'], tmp[5]['time'], 6],#}
+{#            [tmp[6]['word'], tmp[6]['time'], 7],#}
+{#            [tmp[7]['word'], tmp[7]['time'], 8]#}
+{#        ];#}
 
     }
 
