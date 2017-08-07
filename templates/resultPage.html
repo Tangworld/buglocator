@@ -670,7 +670,9 @@
 {#                                        </ul>#}
                                     </div>
                                     <div class="col-lg-5" style="width: 71.4%; border: 1px solid #ccc; height:750px">
-                                        <div class="tab-content-file">
+                                        <iframe id="cloud" src="{% url 'locator:cloud' %}?type=7" frameborder="0" scrolling="no"
+                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
+                                        <div id="fullfile" class="tab-content-file" style="display: none">
                                             <div class="tab-pane fade active in" id="tab">
 
                                                 <h4 style="word-wrap:break-word ">File path:<br> {{ filelist.0.path }}</h4>
@@ -714,8 +716,6 @@
                                                 </tbody>
                                                     </table>
                                                 </div> <!-- /plan-features -->
-                                                 <iframe src="{% url 'locator:cloud' %}?type=0" frameborder="0" scrolling="no"
-                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
                                             </div>
                                             <div class="tab-pane fade" id="tab" style="display: none;">
                                                 <h4 style="word-wrap:break-word;margin-bottom: 10px ">File path:<br> {{ filelist.1.path }}</h4>
@@ -757,8 +757,6 @@
                                                 </tbody>
                                                     </table>
                                                 </div> <!-- /plan-features -->
-                                                 <iframe src="{% url 'locator:cloud' %}?type=1" frameborder="0" scrolling="no"
-                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
                                             </div>
                                             <div class="tab-pane fade" id="tab" style="display: none;">
                                                 <h4 style="word-wrap:break-word;margin-bottom:10px; ">File path:<br> {{ filelist.2.path }}</h4>
@@ -801,8 +799,6 @@
                                                 </tbody>
                                                     </table>
                                                 </div> <!-- /plan-features -->
-                                                 <iframe src="{% url 'locator:cloud' %}?type=2" frameborder="0" scrolling="no"
-                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
                                             </div>
                                             <div class="tab-pane fade" id="tab" style="display: none;">
                                                 <h4 style="word-wrap:break-word;margin-bottom:10px; ">File path:<br> {{ filelist.3.path }}</h4>
@@ -844,8 +840,6 @@
                                                 </tbody>
                                                     </table>
                                                 </div> <!-- /plan-features -->
-                                                 <iframe src="{% url 'locator:cloud' %}?type=3" frameborder="0" scrolling="no"
-                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
                                             </div>
                                             <div class="tab-pane fade" id="tab" style="display: none;">
                                                 <h4 style="word-wrap:break-word;margin-bottom:10px; ">File path:<br> {{ filelist.4.path }}</h4>
@@ -887,8 +881,6 @@
                                                 </tbody>
                                                     </table>
                                                 </div> <!-- /plan-features -->
-                                                 <iframe src="{% url 'locator:cloud' %}?type=4" frameborder="0" scrolling="no"
-                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
                                             </div>
                                             <div class="tab-pane fade" id="tab" style="display: none;">
                                                 <h4 style="word-wrap:break-word;margin-bottom:10px; ">File path:<br> {{ filelist.5.path }}</h4>
@@ -930,8 +922,6 @@
                                                 </tbody>
                                                     </table>
                                                 </div> <!-- /plan-features -->
-                                                 <iframe src="{% url 'locator:cloud' %}?type=5" frameborder="0" scrolling="no"
-                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
                                             </div>
                                             <div class="tab-pane fade" id="tab" style="display: none;">
                                                 <h4 style="word-wrap:break-word;margin-bottom:10px; ">File path:<br> {{ filelist.6.path }}</h4>
@@ -973,8 +963,6 @@
                                                 </tbody>
                                                     </table>
                                                 </div> <!-- /plan-features -->
-                                                 <iframe src="{% url 'locator:cloud' %}?type=6" frameborder="0" scrolling="no"
-                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
                                             </div>
                                             <div class="tab-pane fade" id="tab" style="display: none;">
                                                 <h4 style="word-wrap:break-word;margin-bottom:10px; ">File path:<br> {{ filelist.7.path }}</h4>
@@ -1016,8 +1004,6 @@
                                                 </tbody>
                                                     </table>
                                                 </div> <!-- /plan-features -->
-                                                 <iframe src="{% url 'locator:cloud' %}?type=7" frameborder="0" scrolling="no"
-                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
                                             </div>
                                             <div class="tab-pane fade" id="tab" style="display: none;">
                                                 <h4 style="word-wrap:break-word;margin-bottom:10px; ">File path:<br> {{ filelist.8.path }}</h4>
@@ -1059,8 +1045,6 @@
                                                 </tbody>
                                                     </table>
                                                 </div> <!-- /plan-features -->
-                                                 <iframe src="{% url 'locator:cloud' %}?type=8" frameborder="0" scrolling="no"
-                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
                                             </div>
                                             <div class="tab-pane fade" id="tab" style="display: none;">
                                                 <h4 style="word-wrap:break-word;margin-bottom:10px; ">File path:<br> {{ filelist.9.path }}</h4>
@@ -1102,14 +1086,8 @@
                                                 </tbody>
                                                     </table>
                                                 </div> <!-- /plan-features -->
-                                                 <iframe src="{% url 'locator:cloud' %}?type=9" frameborder="0" scrolling="no"
-                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
                                             </div>
                                         </div>
-                                        <!--
-                                        <iframe src="{% url 'locator:cloud' %}" frameborder="0" scrolling="no"
-                                                    style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
-                                                    -->
                                     </div>
                                 </div>
                         </div>
@@ -1262,6 +1240,8 @@
             mark('{{ str_kws.8 }}', 'file8');
             mark('{{ str_kws.9 }}', 'file9');
         }
+        document.getElementById('cloud').style.display = 'none';
+        document.getElementById('fullfile').style.display = 'block';
 
         contents = document.getElementsByClassName('tab-content-file')[0].getElementsByClassName('tab-pane fade');
         tabs = document.getElementsByTagName('nav')[0].getElementsByTagName('li');
@@ -1304,6 +1284,10 @@
             mark('{{ str_kws.7 }}', 'file7');
             mark('{{ str_kws.8 }}', 'file8');
             mark('{{ str_kws.9 }}', 'file9');
+
+        document.getElementById('fullfile').style.display = 'none';
+        document.getElementById('cloud').style.display = 'block';
+
     }
 
 </script>
