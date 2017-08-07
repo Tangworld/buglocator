@@ -967,7 +967,7 @@ def get_result(request, bugid):
     result = []
     #s_ptd = test.llda_test(report, r_k_vocab, r_pl, r_phi, r_omega, r_ptw, r_pws)
     s_ptd = test.llda_test(report, r_k_vocab, r_pl, r_phi, r_ptw, r_pws)
-    for i in range(0, 10):
+    for i in range(0, 15):
         result.append(s_ptd[i][0])
     end = time.time()
     print "BugHunter consumed %f s."%(end-start)
@@ -1020,10 +1020,13 @@ def alg_res_l2ss(request):
     # 以下读取结果中的文件内容并获取文件对应的关键词
     kwArr = []
     str_kws = []
+    filename = []
     for r in result:
         str_kw = ''
         print r
         filepath = models.filemap.objects.get(path_l2ss=r).filepath
+        tmp = filepath.strip().split('/')[-1][0:-5]
+        filename.append(tmp)
         fileid = models.filemap.objects.get(path_l2ss=r).filenumber
         # print fileid
         keywordIDs = models.f2w.objects.get(fileID=fileid).keywords.split(' ')
@@ -1036,8 +1039,8 @@ def alg_res_l2ss(request):
             kwArr.append(keyword.word)
             str_kw += (keyword.word + ' ')
             # print tmp
-        #kwArr.append(tmp)
-        print len(kwArr)
+        # kwArr.append(tmp)
+        # print len(kwArr)
         thispath = str(pre + filepath)
         str_kws.append(str_kw)
         try:
@@ -1050,9 +1053,9 @@ def alg_res_l2ss(request):
     for kw in kwArr:
         if kwArr.count(kw) > 1:
             common += (kw + ' ')
-    print common
+    #print common
     str_kws.append(common)
-    return render(request, 'resultPage.html', {'sel_arr': kwArr, 'str_kws': str_kws,
+    return render(request, 'resultPage.html', {'sel_arr': kwArr, 'str_kws': str_kws, 'filename':filename,
                 'filelist': filelist, 'bugid': bugid, 'report': bugreport, 'method':methodid})
 
 
@@ -1091,7 +1094,7 @@ def get_result_l2ss(request, bugid):
 
     s_ptd = L2ss.l2ss_test(bugid, epl_l2ss, pl_l2ss, phi_l2ss, phi2_l2ss, ptw_l2ss, tr_dis_l2ss, data_l2ss)
     result = []
-    for i in range(10):
+    for i in range(15):
         result.append(s_ptd[i][0])
     end = time.time()
     print "L2SS consumed %f s." %(end - start)
