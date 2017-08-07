@@ -1055,7 +1055,7 @@ def alg_res_l2ss(request):
             str_kw += (keyword.word + ' ')
             # print tmp
         # kwArr.append(tmp)
-        # print len(kwArr)
+        print 'len:::::', len(kwArr)
         thispath = str(pre + filepath)
         str_kws.append(str_kw)
         try:
