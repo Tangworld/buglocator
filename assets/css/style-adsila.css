@@ -52,115 +52,107 @@
 	transition: transform 0.5s;
 	transition-timing-function: cubic-bezier(0.2,1,0.3,1);
 }
+
 .menu--adsila .menu__item:nth-child(1) .menu__item-name::before,
 .menu--adsila .menu__item:nth-child(1) .menu__item-label::before {
-	background: #8a6d3b;
+	background: red;
 }
 
 .menu--adsila .menu__item:nth-child(2) .menu__item-name::before,
 .menu--adsila .menu__item:nth-child(2) .menu__item-label::before {
-	background: red;
+	background: #6265fe;
 }
 
 .menu--adsila .menu__item:nth-child(3) .menu__item-name::before,
 .menu--adsila .menu__item:nth-child(3) .menu__item-label::before {
-	background: #6265fe;
+	background: yellow;
 }
 
 .menu--adsila .menu__item:nth-child(4) .menu__item-name::before,
 .menu--adsila .menu__item:nth-child(4) .menu__item-label::before {
-	background: yellow;
+	background: green;
 }
 
 .menu--adsila .menu__item:nth-child(5) .menu__item-name::before,
 .menu--adsila .menu__item:nth-child(5) .menu__item-label::before {
-	background: green;
+	background: #9ad6fc;
 }
 
 .menu--adsila .menu__item:nth-child(6) .menu__item-name::before,
 .menu--adsila .menu__item:nth-child(6) .menu__item-label::before {
-	background: #9ad6fc;
+	background: #daafe8;
 }
 
 .menu--adsila .menu__item:nth-child(7) .menu__item-name::before,
 .menu--adsila .menu__item:nth-child(7) .menu__item-label::before {
-	background: #daafe8;
+	background: #663399;
 }
 
 .menu--adsila .menu__item:nth-child(8) .menu__item-name::before,
 .menu--adsila .menu__item:nth-child(8) .menu__item-label::before {
-	background: #663399;
+	background: #c0a16b;
 }
 
 .menu--adsila .menu__item:nth-child(9) .menu__item-name::before,
 .menu--adsila .menu__item:nth-child(9) .menu__item-label::before {
-	background: #c0a16b;
+	background: #FF3778;
 }
 
 .menu--adsila .menu__item:nth-child(10) .menu__item-name::before,
 .menu--adsila .menu__item:nth-child(10) .menu__item-label::before {
-	background: #FF3778;
-}
-
-.menu--adsila .menu__item:nth-child(11) .menu__item-name::before,
-.menu--adsila .menu__item:nth-child(11) .menu__item-label::before {
 	background: blue;
 }
 
 
 /* Hover */
+
 .menu--adsila .menu__item:nth-child(1):hover,
 .menu--adsila .menu__item:nth-child(1):focus {
-	color: #8a6d3b;
+	color: red;
 }
 
 .menu--adsila .menu__item:nth-child(2):hover,
 .menu--adsila .menu__item:nth-child(2):focus {
-	color: red;
+	color: #6265fe;
 }
 
 .menu--adsila .menu__item:nth-child(3):hover,
 .menu--adsila .menu__item:nth-child(3):focus {
-	color: #6265fe;
+	color: yellow;
 }
 
 .menu--adsila .menu__item:nth-child(4):hover,
 .menu--adsila .menu__item:nth-child(4):focus {
-	color: yellow;
+	color: green;
 }
 
 .menu--adsila .menu__item:nth-child(5):hover,
 .menu--adsila .menu__item:nth-child(5):focus {
-	color: green;
+	color: #9ad6fc;
 }
 
 .menu--adsila .menu__item:nth-child(6):hover,
 .menu--adsila .menu__item:nth-child(6):focus {
-	color: #9ad6fc;
+	color: #daafe8;
 }
 
 .menu--adsila .menu__item:nth-child(7):hover,
 .menu--adsila .menu__item:nth-child(7):focus {
-	color: #daafe8;
+	color: #663399;
 }
 
 .menu--adsila .menu__item:nth-child(8):hover,
 .menu--adsila .menu__item:nth-child(8):focus {
-	color: #663399;
+	color: #c0a16b;
 }
 
 .menu--adsila .menu__item:nth-child(9):hover,
 .menu--adsila .menu__item:nth-child(9):focus {
-	color: #c0a16b;
+	color: #FF3778;
 }
 
 .menu--adsila .menu__item:nth-child(10):hover,
 .menu--adsila .menu__item:nth-child(10):focus {
-	color: #FF3778;
-}
-
-.menu--adsila .menu__item:nth-child(11):hover,
-.menu--adsila .menu__item:nth-child(11):focus {
 	color: blue;
 }
 
