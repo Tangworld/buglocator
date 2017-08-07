@@ -35,6 +35,16 @@ def index(request):
     :param request: 
     :return: 进入登录页面
     """
+    # 获取pws参数
+    pkl_pws = file(BASE_DIR + '/data/bughunter/pws.pkl', 'rb')
+    pkl_k_vocab = file(BASE_DIR + '/data/bughunter/k_vocab.pkl', 'rb')
+    global r_pws
+    global r_k_vocab
+    r_pws = pickle.load(pkl_pws)
+    r_k_vocab = pickle.load(pkl_k_vocab)
+    pkl_pws.close()
+    pkl_k_vocab.close()
+
     utils.get_lastpage(request)
     return render(request, 'login.html', )
 
@@ -45,6 +55,13 @@ def login(request):
     :param request: 
     :return: 
     """
+    pkl_pl = file(BASE_DIR + '/data/bughunter/pl.pkl', 'rb')
+    pkl_ptw = file(BASE_DIR + '/data/bughunter/ptw.pkl', 'rb')
+    r_pl = pickle.load(pkl_pl)
+    r_ptw = pickle.load(pkl_ptw)
+    pkl_pl.close()
+    pkl_ptw.close()
+
     utils.get_lastpage(request)
     v1 = ""
     v2 = ""
@@ -601,6 +618,11 @@ def unfixed(request):
         return HttpResponseRedirect('/locator/index/')
 
     utils.get_lastpage(request)
+    pkl_phi = file(BASE_DIR + '/data/bughunter/phi.pkl', 'rb')
+    global r_phi
+    r_phi = pickle.load(pkl_phi)
+    pkl_phi.close()
+
 
     current_isadmin = utils.get_value(request, 'session', 'isadmin')
     current_username = utils.get_value(request, 'session', 'username')
@@ -792,7 +814,6 @@ def show_open_bug(request):
     if request.session['isadmin'] == 'yes':
         return render(request, 'admin/show_open_admin.html', {'bug': bug})
     else:
-        premeter_to_memry(request)
         return render(request, 'show_open_bug.html', {'bug': bug})
 
 
@@ -1117,32 +1138,6 @@ def cloud(request):
     else:
         keywords = []
     return render(request, 'static_cloud.html', {'keywords' : json.dumps(keywords)})
-
-
-def premeter_to_memry(request):
-    pkl_k_vocab = file(BASE_DIR+'/data/bughunter/k_vocab.pkl', 'rb')
-    pkl_phi = file(BASE_DIR+'/data/bughunter/phi.pkl', 'rb')
-    pkl_pl = file(BASE_DIR+'/data/bughunter/pl.pkl', 'rb')
-    pkl_ptw = file(BASE_DIR+'/data/bughunter/ptw.pkl', 'rb')
-    pkl_pws = file(BASE_DIR+'/data/bughunter/pws.pkl', 'rb')
-
-    global r_k_vocab
-    global r_phi
-    global r_pl
-    global r_ptw
-    global r_pws
-
-    r_k_vocab = pickle.load(pkl_k_vocab)
-    r_phi = pickle.load(pkl_phi)
-    r_pl = pickle.load(pkl_pl)
-    r_ptw = pickle.load(pkl_ptw)
-    r_pws = pickle.load(pkl_pws)
-
-    pkl_k_vocab.close()
-    pkl_phi.close()
-    pkl_pl.close()
-    pkl_ptw.close()
-    pkl_pws.close()
 
 
 def save_assignment(request):
