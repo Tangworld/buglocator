@@ -574,7 +574,7 @@
                                 </div>
                             </div> <!-- /col-lg-5 -->
                                  <div class="col-lg-7" style="padding-left:0px;padding-right: 0;">
-                                    <div class="col-lg-2" style="width: 28.7%; border:1px solid #ccc;padding:0;margin-right:10px">
+                                    <div class="col-lg-2" style="height:750px;width: 28.7%; border:1px solid #ccc;padding:0;margin-right:10px">
                                         <h4 style="font-weight:600;margin-bottom: 10px;">&nbsp;&nbsp;Buggy Files</h4>
                                         <ul style="border-top:1px solid #ccc;border-bottom:none;">
                                             <nav class="menu menu--adsila">
@@ -598,7 +598,6 @@
                                                         <span class="menu__item-name">{{ filename.2 }}</span>
                                                     </li>
                                                 </a>
-
 
                                                 <a href="javascript:;" onclick="show(3)" data-toggle="tab" class="menu__item" onmouseover="javascript:change(3,'file3');" onmouseout="draw_all()">
                                                     <li class="file3"
@@ -695,9 +694,12 @@
 {#                                            </li>#}
 {#                                        </ul>#}
                                     </div>
-                                    <div class="col-lg-5" style="width: 70%; border: 1px solid #ccc; height:750px">
-                                        <iframe id="cloud" src="{% url 'locator:cloud' %}?type=7" frameborder="0" scrolling="no"
+                                    <div class="col-lg-5" style="width: 70%; border: 1px solid #ccc; height:750px; padding:0;">
+                                        <div id="cloud">
+                                            <h4 style="font-weight:600;padding:10px;margin:0px;border-bottom: 1px solid #ccc">&nbsp;Keywords Statistic</h4>
+                                            <iframe src="{% url 'locator:cloud' %}?type=7" frameborder="0" scrolling="no"
                                                     style="width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
+                                        </div>
                                         <div id="fullfile" class="tab-content-file" style="display: none">
                                             <h4 style="font-weight:600;margin-bottom: 10px;">&nbsp;&nbsp;File Details</h4>
                                             <div class="tab-pane fade active in" id="tab" style="">
@@ -706,7 +708,7 @@
                                                     File path</h4>
                                                     <tbody>
                                                     <tr>
-                                                        <td>{{ filelist.0.path }}</td>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.0.path }}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -786,7 +788,7 @@
                                                     File path</h4>
                                                     <tbody>
                                                     <tr>
-                                                        <td>{{ filelist.1.path }}</td>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.1.path }}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -865,7 +867,7 @@
                                                     File path</h4>
                                                     <tbody>
                                                     <tr>
-                                                        <td>{{ filelist.2.path }}</td>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.2.path }}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -943,7 +945,7 @@
                                                     File path</h4>
                                                     <tbody>
                                                     <tr>
-                                                        <td>{{ filelist.3.path }}</td>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.3.path }}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -1022,7 +1024,7 @@
                                                     File path</h4>
                                                     <tbody>
                                                     <tr>
-                                                        <td>{{ filelist.4.path }}</td>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.4.path }}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -1100,7 +1102,7 @@
                                                     File path</h4>
                                                     <tbody>
                                                     <tr>
-                                                        <td>{{ filelist.5.path }}</td>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.5.path }}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -1178,7 +1180,7 @@
                                                     File path</h4>
                                                     <tbody>
                                                     <tr>
-                                                        <td>{{ filelist.6.path }}</td>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.6.path }}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -1256,7 +1258,7 @@
                                                     File path</h4>
                                                     <tbody>
                                                     <tr>
-                                                        <td>{{ filelist.7.path }}</td>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.7.path }}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -1334,7 +1336,7 @@
                                                     File path</h4>
                                                     <tbody>
                                                     <tr>
-                                                        <td>{{ filelist.8.path }}</td>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.8.path }}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -1412,7 +1414,7 @@
                                                     File path</h4>
                                                     <tbody>
                                                     <tr>
-                                                        <td>{{ filelist.9.path }}</td>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.9.path }}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -1490,7 +1492,7 @@
                                                     File path</h4>
                                                     <tbody>
                                                     <tr>
-                                                        <td>{{ filelist.10.path }}</td>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.10.path }}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -1568,7 +1570,7 @@
                                                     File path</h4>
                                                     <tbody>
                                                     <tr>
-                                                        <td>{{ filelist.11.path }}</td>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.11.path }}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -1646,7 +1648,7 @@
                                                     File path</h4>
                                                     <tbody>
                                                     <tr>
-                                                        <td>{{ filelist.12.path }}</td>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.12.path }}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -1724,7 +1726,7 @@
                                                     File path</h4>
                                                     <tbody>
                                                     <tr>
-                                                        <td>{{ filelist.13.path }}</td>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.13.path }}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -1802,7 +1804,7 @@
                                                     File path</h4>
                                                     <tbody>
                                                     <tr>
-                                                        <td>{{ filelist.14.path }}</td>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.14.path }}</td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
