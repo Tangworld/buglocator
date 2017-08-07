@@ -35,7 +35,6 @@ def index(request):
     :param request: 
     :return: 进入登录页面
     """
-    premeter_to_memry(request)
     utils.get_lastpage(request)
     return render(request, 'login.html', )
 
@@ -1182,3 +1181,9 @@ def to_fix(request):
     report.fixdate = timestamp
     report.save()
     return HttpResponseRedirect('/locator/unfixed')
+
+
+def load(request):
+
+    premeter_to_memry(request)
+    return render(request, 'blank.html')
