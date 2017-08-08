@@ -10,7 +10,7 @@
 .menu--adsila .menu__item-name {
 	font-weight: bold;
 	line-height: 1.4;
-	padding: 0 0.35em;
+	padding: 5px 0.35em;
 	transition: color 0.5s;
 	transition-timing-function: cubic-bezier(0.2,1,0.3,1);
 }
