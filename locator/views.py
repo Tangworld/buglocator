@@ -505,7 +505,7 @@ def confirm(request):
         user = models.User.objects.get(username=username)  # 查询该条记录
         user.password = inputPassword  # 修改
         user.save()
-        return render(request, 'profile.html', {'success': 'Success！'})
+        return HttpResponseRedirect('/locator/profile/')
     else:
         return render(request, 'editprofile.html', {'infomation': infomation})
 
