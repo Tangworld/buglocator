@@ -922,7 +922,7 @@ def alg_res(request):
             str_kw += (keyword.word+' ')
             # print tmp
         #kwArr.append(tmp)
-        print len(kwArr)
+        # print len(kwArr)
         thispath = str(pre + filepath)
         str_kws.append(str_kw)
         try:
@@ -936,7 +936,7 @@ def alg_res(request):
     for kw in kwArr:
         if kwArr.count(kw) > 1:
             common += (kw + ' ')
-    print common
+    # print common
     str_kws.append(common)
     # 获取全部文件的关键词
     global all_cloud
@@ -1038,7 +1038,7 @@ def alg_res_l2ss(request):
     filename = []
     for r in result:
         str_kw = ''
-        print r
+        # print r
         filepath = models.filemap.objects.get(path_l2ss=r).filepath
         tmp = filepath.strip().split('/')[-1][0:-5]
         filename.append(tmp)
@@ -1055,7 +1055,7 @@ def alg_res_l2ss(request):
             str_kw += (keyword.word + ' ')
             # print tmp
         # kwArr.append(tmp)
-        print 'len:::::', len(kwArr)
+        # print 'len:::::', len(kwArr)
         thispath = str(pre + filepath)
         str_kws.append(str_kw)
         try:
@@ -1145,8 +1145,8 @@ def cloud(request):
     for a in all_cloud:
         all_kw.append(a['word'])
         all_tm.append(a['time'])
-    print all_kw
-    print all_tm
+    # print all_kw
+    # print all_tm
 
     # Type = int(request.GET.get('type'))
     # print type(Type)
@@ -1212,9 +1212,9 @@ def to_fix(request):
 
     bugid = utils.get_value(request, 'post', 'bugid')
     timestamp = int(time.time())
-    print type(bugid)
-    print bugid
-    print timestamp
+    # print type(bugid)
+    # print bugid
+    # print timestamp
     report = models.Report.objects.get(bugid=bugid)
     report.status = 'fixed'
     report.fixdate = timestamp
