@@ -1034,6 +1034,9 @@ def alg_res_l2ss(request):
                 wordArr.append(cDict[char])
     '''
     # 以下读取结果中的文件内容并获取文件对应的关键词
+
+
+
     kwArr = []
     str_kws = []
     filename = []
@@ -1222,6 +1225,84 @@ def to_fix(request):
     report.fixdate = timestamp
     report.save()
     return HttpResponseRedirect('/locator/unfixed')
+
+def mix(request):
+    global kwArr
+    # 权限控制
+    lockflag = check_lock(request)
+    userflag = authority(request)
+    if lockflag:
+        return HttpResponseRedirect('/locator/lock/')
+    if not userflag:
+        return HttpResponseRedirect('/locator/index/')
+    methodid = request.GET.get('method')
+    pre = BASE_DIR + '/data/bughunter/'
+
+    filelist = []
+    bugid = utils.get_value(request, 'get', 'bugid')
+
+    # 拿到了两种方法定位的结果
+    result_bh = get_result(request, bugid)
+    result_l2ss = get_result_l2ss(request, str(bugid))
+    bugreport = models.Report.objects.get(bugid=bugid).description
+
+
+    kwArr = []
+    str_kws = []
+    filename = []
+    real_result = []
+    # 拿到两种方法的公共文件
+    for rl in result_l2ss:
+        filenumber = models.filemap.objects.get(path_l2ss=rl).filenumber
+        filenumber = int(filenumber)
+        print type(filenumber), type(result_bh[0])
+        if filenumber in result_bh:
+            real_result.append(filenumber)
+
+    # 开始对两种方法的公共结果进行处理
+    for r in real_result:
+        str_kw = ''
+        filepath = models.filemap.objects.get(filenumber=r).filepath
+        tmp = filepath.strip().split('/')[-1][0:-5]
+        filename.append(tmp)
+        # print r
+        keywordIDs = models.f2w.objects.get(fileID=r).keywords.split(' ')
+        keywords = models.wordmap.objects.filter(wordID__in=keywordIDs[0:-1])
+        for keyword in keywords:
+            #tmp.append(keyword.word)
+            kwArr.append(keyword.word)
+            str_kw += (keyword.word+' ')
+            # print tmp
+        #kwArr.append(tmp)
+        # print len(kwArr)
+        thispath = str(pre + filepath)
+        str_kws.append(str_kw)
+        try:
+            thiscontent = open(thispath, 'r')
+            fileStr = thiscontent.read()
+            filelist.append({'content': fileStr, 'path': filepath})
+        except Exception, e:
+            print e
+
+    common = ''
+    for kw in kwArr:
+        if kwArr.count(kw) > 1:
+            common += (kw + ' ')
+    # print common
+    str_kws.append(common)
+    # 获取全部文件的关键词
+    global all_cloud
+    all_cloud = []
+    temp = []
+    lower_report = bugreport.lower()
+    for kw in kwArr:
+        if kw in bugreport:
+            temp.append({'word': kw, 'time': lower_report.count(kw)})
+    for t in temp:
+        if t not in all_cloud:
+            all_cloud.append(t)
+    return render(request, 'mix_resultPage.html', {'sel_arr': kwArr, 'str_kws': str_kws,'method': methodid,'filename':filename,
+                                               'filelist': filelist, 'bugid': bugid, 'report': bugreport})
 
 
 def load(request):

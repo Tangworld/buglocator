@@ -1,0 +1,2293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/img/logo.jpg">
+    <title>BugLocator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/assets/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/style-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/css/jquery.selectlist.css">
+
+    <link href="/assets/css/adminia.css" rel="stylesheet"/>
+    <link href="/assets/css/adminia-responsive.css" rel="stylesheet"/>
+    <!--标签云的link-->
+    {#    <link rel="stylesheet" type="text/css" href="/assets/css/zzsc-demo.css">#}
+
+
+    <link href="/assets/css/plans.css" rel="stylesheet"/>
+
+    <!--代码高亮的link-->
+    <link rel="stylesheet" href="/assets/css/styles_code/atom-one-dark.css">
+    <script src="/assets/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/assets/js/prefixfree.min.js"></script>
+    <script src="/assets/js/index.js"></script>
+    <!-- 鼠标经过效果-->
+    <script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this demo in a modern browser that supports CSS Variables.");</script>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700|Nunito:400,700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/assets/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="/assets/css/demo.css" />
+	<link rel="stylesheet" type="text/css" href="/assets/css/style-adsila.css" />
+    <!-- /鼠标经过效果-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        div.search span,
+        div.search input[name="keyword"] {
+            display: block;
+        }
+
+        div.search input[name="keyword"] {
+            margin-top: 4px;
+        }
+
+        div.panel {
+            padding: 1em 12em;
+            margin-bottom: 15px;
+        }
+
+        div.panel-body p {
+            text-indent: 2em;
+        }
+
+        span.file0 {
+            background: red;
+            color: black;
+        }
+
+        span.file1 {
+            background: #ff3778;
+            color: black;
+        }
+        span.file2 {
+            background: #daafe8;
+            color: black;
+        }
+        span.file3 {
+            background: #ffcccc;
+            color: black;
+        }
+        span.file4 {
+            background: yellow;
+            color: black;
+        }
+        span.file5 {
+            background: #9ad6fc;
+            color: black;
+        }
+        span.file6 {
+            background: #6265fe;
+            color: black;
+        }
+        span.file7 {
+            background: #339999;
+            color: black;
+        }
+        span.file8 {
+            background: #99ccff;
+            color: black;
+        }
+        span.file9 {
+            background: #ccff99;
+            color: black;
+        }
+        span.file10 {
+            background: #66cccc;
+            color: black;
+        }
+        span.file11 {
+            background: green;
+            color: black;
+        }
+        span.file12 {
+            background: blue;
+            color: black;
+        }
+        span.file13 {
+            background: #666699;
+            color: black;
+        }
+        span.file14 {
+            background: #c0a16b;
+            color: black;
+        }
+        span.common {
+            background: white;
+            color: black;
+        }
+    </style>
+    <style>
+        canvas {
+            background: #111;
+            border: 1px solid #171717;
+            display: block;
+            left: 50%;
+            margin: -51px 0 0 -201px;
+            position: absolute;
+            top: 50%;
+        }
+    </style>
+    <style>
+        .close {
+            /* still bad on picking color */
+            background: black;
+            color: white;
+            /* make a round button */
+            border-radius: 20px;
+            /* center text */
+            line-height: 27px;
+            text-align: center;
+            height: 30px;
+            width: 30px;
+            font-size: 18px;
+            padding: 1px;
+        }
+
+        /* use cross as close button */
+        .close::before {
+            content: "\2716";
+        }
+
+        /* place the button on top-right */
+        .close {
+            top: -10px;
+            right: -10px;
+            position: absolute;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            box-sizing: border-box;
+        }
+
+        #pop0 {
+            display: none;
+            width: 900px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            padding: 50px;
+            z-index: 10;
+            border-radius: 35px;
+            margin-top: 100px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        #pop1 {
+            display: none;
+            width: 900px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            padding: 50px;
+            z-index: 10;
+            border-radius: 35px;
+            margin-top: 100px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        #pop2 {
+            display: none;
+            width: 900px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            padding: 50px;
+            z-index: 10;
+            border-radius: 35px;
+            margin-top: 100px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        #pop3 {
+            display: none;
+            width: 900px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            padding: 50px;
+            z-index: 10;
+            border-radius: 35px;
+            margin-top: 100px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        #pop4 {
+            display: none;
+            width: 900px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            padding: 50px;
+            z-index: 10;
+            border-radius: 35px;
+            margin-top: 100px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        #pop5 {
+            display: none;
+            width: 900px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            padding: 50px;
+            z-index: 10;
+            border-radius: 35px;
+            margin-top: 100px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        #pop6 {
+            display: none;
+            width: 900px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            padding: 50px;
+            z-index: 10;
+            border-radius: 35px;
+            margin-top: 100px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        #pop7 {
+            display: none;
+            width: 900px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            padding: 50px;
+            z-index: 10;
+            border-radius: 35px;
+            margin-top: 100px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        #pop8 {
+            display: none;
+            width: 900px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            padding: 50px;
+            z-index: 10;
+            border-radius: 35px;
+            margin-top: 100px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        #pop9 {
+            display: none;
+            width: 900px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            padding: 50px;
+            z-index: 10;
+            border-radius: 35px;
+            margin-top: 100px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        #pop10 {
+            display: none;
+            width: 900px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            padding: 50px;
+            z-index: 10;
+            border-radius: 35px;
+            margin-top: 100px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        #pop11 {
+            display: none;
+            width: 900px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            padding: 50px;
+            z-index: 10;
+            border-radius: 35px;
+            margin-top: 100px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        #pop12 {
+            display: none;
+            width: 900px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            padding: 50px;
+            z-index: 10;
+            border-radius: 35px;
+            margin-top: 100px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        #pop13 {
+            display: none;
+            width: 900px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            padding: 50px;
+            z-index: 10;
+            border-radius: 35px;
+            margin-top: 100px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        #pop14 {
+            display: none;
+            width: 900px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            padding: 50px;
+            z-index: 10;
+            border-radius: 35px;
+            margin-top: 100px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+    </style>
+
+
+</head>
+
+<body>
+<!--遮罩层 -->
+<div id="pop0" class="col-md-4 mb" style="min-height: 0;z-index: 5555">
+    <div style="height: 0px; width: 900px; position: absolute;z-index: 5555">
+        <span class="close" onclick="closeDiv()"></span>
+    </div>
+    <div >
+        <pre style="height: 680px;padding:10px;">
+            <code id="source">
+{{ filelist.0.content }}
+            </code>
+        </pre>
+    </div>
+</div><!-- /col-md-4 -->
+<div id="pop1" class="col-md-4 mb" style="min-height: 0;z-index: 5555">
+    <div style="height: 0px; width: 900px; position: absolute;z-index: 5555">
+        <span class="close" onclick="closeDiv()"></span>
+    </div>
+    <div >
+        <pre style="height: 680px;padding:10px;">
+            <code id="source">
+{{ filelist.1.content }}
+            </code>
+        </pre>
+    </div>
+</div><!-- /col-md-4 -->
+<div id="pop2" class="col-md-4 mb" style="min-height: 0;z-index: 5555">
+    <div style="height: 0px; width: 900px; position: absolute;z-index: 5555">
+        <span class="close" onclick="closeDiv()"></span>
+    </div>
+    <div >
+        <pre style="height: 680px;padding:10px;">
+            <code id="source">
+{{ filelist.2.content }}
+            </code>
+        </pre>
+    </div>
+</div><!-- /col-md-4 -->
+<div id="pop3" class="col-md-4 mb" style="min-height: 0;z-index: 5555">
+    <div style="height: 0px; width: 900px; position: absolute;z-index: 5555">
+        <span class="close" onclick="closeDiv()"></span>
+    </div>
+    <div >
+        <pre style="height: 680px;padding:10px;">
+            <code id="source">
+{{ filelist.3.content }}
+            </code>
+        </pre>
+    </div>
+</div><!-- /col-md-4 -->
+<div id="pop4" class="col-md-4 mb" style="min-height: 0;z-index: 5555">
+    <div style="height: 0px; width: 900px; position: absolute;z-index: 5555">
+        <span class="close" onclick="closeDiv()"></span>
+    </div>
+    <div >
+        <pre style="height: 680px;padding:10px;">
+            <code id="source">
+{{ filelist.4.content }}
+            </code>
+        </pre>
+    </div>
+</div><!-- /col-md-4 -->
+<div id="pop5" class="col-md-4 mb" style="min-height: 0;z-index: 5555">
+    <div style="height: 0px; width: 900px; position: absolute;z-index: 5555">
+        <span class="close" onclick="closeDiv()"></span>
+    </div>
+    <div >
+        <pre style="height: 680px;padding:10px;">
+            <code id="source">
+{{ filelist.5.content }}
+            </code>
+        </pre>
+    </div>
+</div><!-- /col-md-4 -->
+<div id="pop6" class="col-md-4 mb" style="min-height: 0;z-index: 5555">
+    <div style="height: 0px; width: 900px; position: absolute;z-index: 5555">
+        <span class="close" onclick="closeDiv()"></span>
+    </div>
+    <div >
+        <pre style="height: 680px;padding:10px;">
+            <code id="source">
+{{ filelist.6.content }}
+            </code>
+        </pre>
+    </div>
+</div><!-- /col-md-4 -->
+<div id="pop7" class="col-md-4 mb" style="min-height: 0;z-index: 5555">
+    <div style="height: 0px; width: 900px; position: absolute;z-index: 5555">
+        <span class="close" onclick="closeDiv()"></span>
+    </div>
+    <div >
+        <pre style="height: 680px;padding:10px;">
+            <code id="source">
+{{ filelist.7.content }}
+            </code>
+        </pre>
+    </div>
+</div><!-- /col-md-4 -->
+<div id="pop8" class="col-md-4 mb" style="min-height: 0;z-index: 5555">
+    <div style="height: 0px; width: 900px; position: absolute;z-index: 5555">
+        <span class="close" onclick="closeDiv()"></span>
+    </div>
+    <div >
+        <pre style="height: 680px;padding:10px;">
+            <code id="source">
+{{ filelist.8.content }}
+            </code>
+        </pre>
+    </div>
+</div><!-- /col-md-4 -->
+<div id="pop9" class="col-md-4 mb" style="min-height: 0;z-index: 5555">
+    <div style="height: 0px; width: 900px; position: absolute;z-index: 5555">
+        <span class="close" onclick="closeDiv()"></span>
+    </div>
+    <div >
+        <pre style="height: 680px;padding:10px;">
+            <code id="source">
+{{ filelist.9.content }}
+            </code>
+        </pre>
+    </div>
+</div><!-- /col-md-4 -->
+<div id="pop10" class="col-md-4 mb" style="min-height: 0;z-index: 5555">
+    <div style="height: 0px; width: 900px; position: absolute;z-index: 5555">
+        <span class="close" onclick="closeDiv()"></span>
+    </div>
+    <div >
+        <pre style="height: 680px;padding:10px;">
+            <code id="source">
+{{ filelist.10.content }}
+            </code>
+        </pre>
+    </div>
+</div><!-- /col-md-4 -->
+<div id="pop11" class="col-md-4 mb" style="min-height: 0;z-index: 5555">
+    <div style="height: 0px; width: 900px; position: absolute;z-index: 5555">
+        <span class="close" onclick="closeDiv()"></span>
+    </div>
+    <div >
+        <pre style="height: 680px;padding:10px;">
+            <code id="source">
+{{ filelist.11.content }}
+            </code>
+        </pre>
+    </div>
+</div><!-- /col-md-4 -->
+<div id="pop12" class="col-md-4 mb" style="min-height: 0;z-index: 5555">
+    <div style="height: 0px; width: 900px; position: absolute;z-index: 5555">
+        <span class="close" onclick="closeDiv()"></span>
+    </div>
+    <div >
+        <pre style="height: 680px;padding:10px;">
+            <code id="source">
+{{ filelist.12.content }}
+            </code>
+        </pre>
+    </div>
+</div><!-- /col-md-4 -->
+<div id="pop13" class="col-md-4 mb" style="min-height: 0;z-index: 5555">
+    <div style="height: 0px; width: 900px; position: absolute;z-index: 5555">
+        <span class="close" onclick="closeDiv()"></span>
+    </div>
+    <div >
+        <pre style="height: 680px;padding:10px;">
+            <code id="source">
+{{ filelist.13.content }}
+            </code>
+        </pre>
+    </div>
+</div><!-- /col-md-4 -->
+<div id="pop14" class="col-md-4 mb" style="min-height: 0;z-index: 5555">
+    <div style="height: 0px; width: 900px; position: absolute;z-index: 5555">
+        <span class="close" onclick="closeDiv()"></span>
+    </div>
+    <div >
+        <pre style="height: 680px;padding:10px;">
+            <code id="source">
+{{ filelist.14.content }}
+            </code>
+        </pre>
+    </div>
+</div><!-- /col-md-4 -->
+<div id="bg" style="display:none;background-color: black;width: 100%;position:absolute;height: 100%;opacity: 0.5;z-index: 1"></div>
+<!-- /遮罩层 -->
+<div style="text-align:center;clear:both">
+    <script src="/gg_bd_ad_720x90.js" type="text/javascript"></script>
+    <script src="/follow.js" type="text/javascript"></script>
+</div>
+<section id="container">
+    <!-- **********************************************************************************************************************************************************
+    TOP BAR CONTENT & NOTIFICATIONS
+    *********************************************************************************************************************************************************** -->
+    <!--header start-->
+    <header class="header black-bg">
+        <div class="sidebar-toggle-box">
+            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+        </div>
+        <!--logo start-->
+        <a href="{% url 'locator:main' %}" class="logo"><b>BUG LOCATOR</b></a>
+        <!--logo end-->
+        <div class="top-menu">
+            <ul class="nav pull-right top-menu">
+                <li><a class="logout" href="{% url 'locator:logout' %}">Logout</a></li>
+            </ul>
+        </div>
+    </header>
+    <!--header end-->
+
+    <!-- **********************************************************************************************************************************************************
+    MAIN SIDEBAR MENU
+    *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar" class="nav-collapse ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu" id="nav-accordion">
+
+                <p class="centered"><a href="{% url 'locator:profile' %}"><img src="{{ request.session.avatarloc }}"
+                                                                               class="img-circle" width="60"></a></p>
+                <h5 class="centered">{{ request.session.username }}</h5>
+
+                <li class="mt">
+                    <a class="active" href="{% url 'locator:resultpage' %}">
+                        <i class="fa fa-file-text"></i>
+                        <span>Result</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="{% url 'locator:back' %}">
+                        <i class="fa fa-level-up"></i>
+                        <span>Back</span>
+                    </a>
+
+                </li>
+                <li class="sub-menu">
+                    <a href="{% url 'locator:lock' %}">
+                        <i class="fa fa-lock"></i>
+                        <span>Lock</span>
+                    </a>
+
+                </li>
+
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
+    <!--sidebar end-->
+
+    <!-- **********************************************************************************************************************************************************
+    MAIN CONTENT
+    *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper site-min-height" style="padding-left:0;padding-bottom:0px">
+            <div class="row mt" style="margin-top:10px">
+             <!--   <div class="col-lg-12" style="padding-right:10px">-->
+
+                    <div class="span9" style="width: 100%;padding-left: 20px">
+
+                        <div style="background: #ffffff; padding:10px;box-shadow: 0px 3px 2px #aab2bd;">
+                            <h3 style="background:#ff865c; padding: 16px;margin-top:0;margin-bottom:20px;height: 60px">
+                                <font color="#fff" size="5">&nbsp;{{ method }} Detatil Result</font>
+                            </h3>
+
+                            <!--<div class="widget" style="margin-top: 10px; border-bottom: solid;">
+
+                            </div> /widget -->
+
+                            <div class="widget" style="background: #ffffff; height: 850px;">
+                                 <div class="col-lg-5" style="overflow: auto;padding-left:0;padding-right:10px">
+                                     <div class="tab-content" style="border: 1px solid #ccc;">
+                                    <div class="tab-pane active " id="file1-pills">
+                                        <h4 style="margin:0;padding: 10px;font-weight: 600">
+                                            <font>&nbsp;Bug Report--Description：&nbsp;Bug {{ bugid }}</font>
+                                            &nbsp;</h4>
+                                        <div style="height: 710px;overflow: auto;background: #f5f5f5;">
+                                            <div id="content" style="width: 100%;font-size:1.3em;height:inherit;
+                                                 padding:5px;background: #282c34;">
+                                                <!-- 关键词高亮插件-->
+                                                <div class="col-xs-6">
+                                                    <input type="checkbox" name="opt[]" value="separateWordSearch" checked style="display: none">
+                                                    <input type="checkbox" name="opt[]" value="diacritics" checked style="display: none">
+                                                    <input type="checkbox" name="opt[]" value="debug" style="display: none">
+                                                </div>
+
+                                                <div class="panel-body context" style="word-wrap: break-word;
+                                                padding: 5px;background: #282c34;color: #abb2bf;">
+<p><pre style="color: #abb2bf;background-color: #282c34">{{ report }}</pre></p>
+                                                </div>
+
+                                            </div><!--/content-->
+                                        </div>
+                                    </div>
+                                </div>
+                                 </div> <!-- /col-lg-5 -->
+                                 <div class="col-lg-7" style="padding-left:0px;padding-right: 0;">
+                                    <div class="col-lg-3" style="height:750px;border:1px solid #ccc;padding:0;margin-right:1%;margin-left: 1.8%">
+                                        <h4 style="font-weight:600;margin-bottom: 10px;">&nbsp;&nbsp;Buggy Files</h4>
+                                        <ul style="border-top:1px solid #ccc;border-bottom:none;">
+                                            <nav class="menu menu--adsila">
+                                                <a href="javascript:;" style="margin-top:0;" onclick="show(0)" data-toggle="tab" class="menu__item" onmouseover="javascript:change(0,'file0');" onmouseout="draw_all()">
+                                                    <li class="file0" style="background: red;text-align:center;float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name" style="">{{ filename.0 }}</span>
+                                                    </li>
+                                                </a>
+
+                                                <a href="javascript:;" onclick="show(1)" data-toggle="tab" class="menu__item" onmouseover="javascript:change(1,'file1');" onmouseout="draw_all()">
+                                                    <li class="file1"
+                                                        style="background: #FF3778;text-align:center;float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name" style="">{{ filename.1 }}</span>
+                                                    </li>
+                                                </a>
+
+                                                <a href="javascript:;" onclick="show(2)" data-toggle="tab" class="menu__item" onmouseover="javascript:change(2,'file2');" onmouseout="draw_all()">
+                                                    <li class="file2"
+                                                        style="background:#daafe8;text-align:center;float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name" style="">{{ filename.2 }}</span>
+                                                    </li>
+                                                </a>
+
+                                                <a href="javascript:;" onclick="show(3)" data-toggle="tab" class="menu__item" onmouseover="javascript:change(3,'file3');" onmouseout="draw_all()">
+                                                    <li class="file3"
+                                                        style="background: #ffcccc;text-align:center;float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name"  style="">{{ filename.3 }}</span>
+                                                    </li>
+                                                </a>
+
+
+                                                <a href="javascript:;" onclick="show(4)" data-toggle="tab" class="menu__item" onmouseover="javascript:change(4,'file4');" onmouseout="draw_all()">
+                                                    <li class="file4"
+                                                        style="background: yellow;text-align:center;float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name"  style="">{{ filename.4 }}</span>
+                                                    </li>
+                                                </a>
+
+
+                                                <a href="javascript:;" onclick="show(5)" data-toggle="tab" class="menu__item" onmouseover="javascript:change(5,'file5');" onmouseout="draw_all()">
+                                                    <li class="file5"
+                                                        style="background: #9ad6fc;text-align:center;float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name"  style="">{{ filename.5 }}</span>
+                                                    </li>
+                                                </a>
+
+                                                <a href="javascript:;" onclick="show(6)" data-toggle="tab" class="menu__item" onmouseover="javascript:change(6,'file6');" onmouseout="draw_all()">
+                                                    <li class="file6"
+                                                        style="background: #6265fe;text-align:center;float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name" style="">{{ filename.6 }}</span>
+                                                    </li>
+                                                </a>
+                                                <a href="javascript:;" onclick="show(7)" data-toggle="tab" class="menu__item" onmouseover="javascript:change(7,'file7');" onmouseout="draw_all()">
+                                                    <li class="file7"
+                                                        style="background: #339999;text-align:center;float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name" style="">{{ filename.7 }}</span>
+                                                    </li>
+                                                </a>
+                                                <a href="javascript:;" onclick="show(8)" data-toggle="tab" class="menu__item" onmouseover="javascript:change(8,'file8');" onmouseout="draw_all()">
+                                                    <li class="file8"
+                                                        style="background: #99ccff;text-align:center;float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name" style="">{{ filename.8 }}</span>
+                                                    </li>
+                                                </a>
+                                                <a href="javascript:;" onclick="show(9)" data-toggle="tab" class="menu__item" onmouseover="javascript:change(9,'file9');" onmouseout="draw_all()">
+                                                    <li class="file9"
+                                                        style="background: #ccff99;text-align:center;float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name" style="">{{ filename.9 }}</span>
+                                                    </li>
+                                                </a>
+                                                <a href="javascript:;" onclick="show(10)" data-toggle="tab" class="menu__item" onmouseover="javascript:change(10,'file10');" onmouseout="draw_all()">
+                                                    <li class="file10"
+                                                        style="background: #66cccc;text-align:center;float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name" style="">{{ filename.10 }}</span>
+                                                    </li>
+                                                </a>
+
+                                                <a href="javascript:;" onclick="show(11)" data-toggle="tab" class="menu__item" onmouseover="javascript:change(11,'file11');" onmouseout="draw_all()">
+                                                    <li class="file11"
+                                                        style="background: green;text-align:center;float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name" style="">{{ filename.11 }}</span>
+                                                    </li>
+                                                </a>
+                                                <a href="javascript:;" onclick="show(12)" data-toggle="tab" class="menu__item" onmouseover="javascript:change(12,'file12');" onmouseout="draw_all()">
+                                                    <li class="file12"
+                                                        style="background: blue;text-align:center;float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name" style="">{{ filename.12 }}</span>
+                                                    </li>
+                                                </a>
+                                                <a href="javascript:;" onclick="show(13)" data-toggle="tab" class="menu__item" onmouseover="javascript:change(13,'file13');" onmouseout="draw_all()">
+                                                    <li class="file13"
+                                                        style="background: #666699;text-align:center;float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name"  style="">{{ filename.13 }}</span>
+                                                    </li>
+                                                </a>
+                                                <a href="javascript:;" onclick="show(14)" data-toggle="tab" class="menu__item" onmouseover="javascript:change(14,'file14');" onmouseout="draw_all()">
+                                                    <li class="file14"
+                                                        style="background: #c0a16b;text-align:center;float:none;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="menu__item-name"  style="">{{ filename.14 }}</span>
+                                                    </li>
+                                                </a>
+                                            </nav>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-9" style="min-width:300px;width: 70%; border: 1px solid #ccc; height:750px; padding:0;margin-left:1.8%">
+                                        <div id="cloud">
+                                            <h4 style="font-weight:600;padding:10px;margin:0px;border-bottom: 1px solid #ccc">&nbsp;Keywords Statistic</h4>
+                                            <iframe align="middle" src="{% url 'locator:cloud' %}?type=7" frameborder="0" scrolling="no"
+                                                    style="margin:0 auto;width: 100%;height: 400px;text-align: center;margin: 0 auto; border:none;"></iframe>
+                                        </div>
+                                        <div id="fullfile" class="tab-content-file" style="display: none">
+                                            <h4 style="font-weight:600;margin-bottom: 10px;">&nbsp;&nbsp;File Details</h4>
+                                            <div class="tab-pane fade active in" id="tab" style="">
+                                                <table class="table table-striped table-advance table-hover" style="table-layout: fixed;border:1px solid #ccc">
+                                                <h4 style="word-wrap:break-word; padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">
+                                                    File path</h4>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.0.path }}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="plan-features" style="margin-top:10px;">
+                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
+                                                        <h4 style="padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">
+                                                            Related Keywords
+                                                        </h4>
+                                                        <tbody>
+                                                    <tr>
+                                                        <td >{{ sel_arr.0}} <rect height="5px" width="10px" color="red"></rect></td>
+                                                        <td >{{ sel_arr.1}}</td>
+                                                        <td >{{ sel_arr.2}}</td>
+                                                        <td >{{ sel_arr.3}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.4}}</td>
+                                                        <td >{{ sel_arr.5}}</td>
+                                                        <td >{{ sel_arr.6}}</td>
+                                                        <td >{{ sel_arr.7}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.8}}</td>
+                                                        <td >{{ sel_arr.9}}</td>
+                                                        <td >{{ sel_arr.10}}</td>
+                                                        <td >{{ sel_arr.11}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.12}}</td>
+                                                        <td >{{ sel_arr.13}}</td>
+                                                        <td >{{ sel_arr.14}}</td>
+                                                        <td >{{ sel_arr.15}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.16}}</td>
+                                                        <td >{{ sel_arr.17}}</td>
+                                                        <td >{{ sel_arr.18}}</td>
+                                                        <td >{{ sel_arr.19}}</td>
+                                                    </tr>
+                                                        <tr>
+                                                        <td >{{ sel_arr.20}}</td>
+                                                        <td >{{ sel_arr.21}}</td>
+                                                        <td >{{ sel_arr.22}}</td>
+                                                        <td >{{ sel_arr.23}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.24}}</td>
+                                                        <td >{{ sel_arr.25}}</td>
+                                                        <td >{{ sel_arr.26}}</td>
+                                                        <td >{{ sel_arr.27}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.28}}</td>
+                                                        <td >{{ sel_arr.29}}</td>
+                                                        <td >{{ sel_arr.30}}</td>
+                                                        <td >{{ sel_arr.31}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.32}}</td>
+                                                        <td >{{ sel_arr.33}}</td>
+                                                        <td >{{ sel_arr.34}}</td>
+                                                        <td >{{ sel_arr.35}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.36}}</td>
+                                                        <td >{{ sel_arr.37}}</td>
+                                                        <td >{{ sel_arr.38}}</td>
+                                                        <td >{{ sel_arr.39}}</td>
+                                                    </tr>
+                                                </tbody>
+                                                    </table>
+                                                </div> <!-- /plan-features -->
+                                            </div>
+                                            <div class="tab-pane fade" id="tab" style="display: none;">
+                                                <table class="table table-striped table-advance table-hover" style="table-layout: fixed;border:1px solid #ccc">
+                                                <h4 style="word-wrap:break-word; padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">
+                                                    File path</h4>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.1.path }}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <div class="plan-features">
+                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
+                                                        <h4 style="padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">Related Keywords</h4>
+                                                        <tbody>
+                                                    <tr>
+                                                        <td >{{ sel_arr.40}}</td>
+                                                        <td >{{ sel_arr.41}}</td>
+                                                        <td >{{ sel_arr.42}}</td>
+                                                        <td >{{ sel_arr.43}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.44}}</td>
+                                                        <td >{{ sel_arr.45}}</td>
+                                                        <td >{{ sel_arr.46}}</td>
+                                                        <td >{{ sel_arr.47}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.48}}</td>
+                                                        <td >{{ sel_arr.49}}</td>
+                                                        <td >{{ sel_arr.50}}</td>
+                                                        <td >{{ sel_arr.51}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.52}}</td>
+                                                        <td >{{ sel_arr.53}}</td>
+                                                        <td >{{ sel_arr.54}}</td>
+                                                        <td >{{ sel_arr.55}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.56}}</td>
+                                                        <td >{{ sel_arr.57}}</td>
+                                                        <td >{{ sel_arr.58}}</td>
+                                                        <td >{{ sel_arr.59}}</td>
+                                                    </tr>
+                                                        <tr>
+                                                        <td >{{ sel_arr.60}}</td>
+                                                        <td >{{ sel_arr.61}}</td>
+                                                        <td >{{ sel_arr.62}}</td>
+                                                        <td >{{ sel_arr.63}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.64}}</td>
+                                                        <td >{{ sel_arr.65}}</td>
+                                                        <td >{{ sel_arr.66}}</td>
+                                                        <td >{{ sel_arr.67}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.68}}</td>
+                                                        <td >{{ sel_arr.69}}</td>
+                                                        <td >{{ sel_arr.70}}</td>
+                                                        <td >{{ sel_arr.71}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.72}}</td>
+                                                        <td >{{ sel_arr.73}}</td>
+                                                        <td >{{ sel_arr.74}}</td>
+                                                        <td >{{ sel_arr.75}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.76}}</td>
+                                                        <td >{{ sel_arr.77}}</td>
+                                                        <td >{{ sel_arr.78}}</td>
+                                                        <td >{{ sel_arr.79}}</td>
+                                                    </tr>
+                                                </tbody>
+                                                    </table>
+                                                </div> <!-- /plan-features -->
+                                            </div>
+                                            <div class="tab-pane fade" id="tab" style="display: none;">
+                                                <table class="table table-striped table-advance table-hover" style="table-layout: fixed;border:1px solid #ccc">
+                                                <h4 style="word-wrap:break-word; padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">
+                                                    File path</h4>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.2.path }}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="plan-features">
+                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
+                                                        <h4 style="padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">Related Keywords</h4>
+                                                        <tbody>
+                                                    <tr>
+                                                        <td >{{ sel_arr.80}}</td>
+                                                        <td >{{ sel_arr.81}}</td>
+                                                        <td >{{ sel_arr.82}}</td>
+                                                        <td >{{ sel_arr.83}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.84}}</td>
+                                                        <td >{{ sel_arr.85}}</td>
+                                                        <td >{{ sel_arr.86}}</td>
+                                                        <td >{{ sel_arr.87}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.88}}</td>
+                                                        <td >{{ sel_arr.89}}</td>
+                                                        <td >{{ sel_arr.90}}</td>
+                                                        <td >{{ sel_arr.91}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.92}}</td>
+                                                        <td >{{ sel_arr.93}}</td>
+                                                        <td >{{ sel_arr.94}}</td>
+                                                        <td >{{ sel_arr.95}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.96}}</td>
+                                                        <td >{{ sel_arr.97}}</td>
+                                                        <td >{{ sel_arr.98}}</td>
+                                                        <td >{{ sel_arr.99}}</td>
+                                                    </tr>
+                                                        <tr>
+                                                        <td >{{ sel_arr.100}}</td>
+                                                        <td >{{ sel_arr.101}}</td>
+                                                        <td >{{ sel_arr.102}}</td>
+                                                        <td >{{ sel_arr.103}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.104}}</td>
+                                                        <td >{{ sel_arr.105}}</td>
+                                                        <td >{{ sel_arr.106}}</td>
+                                                        <td >{{ sel_arr.107}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.108}}</td>
+                                                        <td >{{ sel_arr.109}}</td>
+                                                        <td >{{ sel_arr.110}}</td>
+                                                        <td >{{ sel_arr.111}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.112}}</td>
+                                                        <td >{{ sel_arr.113}}</td>
+                                                        <td >{{ sel_arr.114}}</td>
+                                                        <td >{{ sel_arr.115}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.116}}</td>
+                                                        <td >{{ sel_arr.117}}</td>
+                                                        <td >{{ sel_arr.118}}</td>
+                                                        <td >{{ sel_arr.119}}</td>
+                                                    </tr>
+                                                </tbody>
+                                                    </table>
+                                                </div> <!-- /plan-features -->
+                                            </div>
+                                            <div class="tab-pane fade" id="tab" style="display: none;">
+                                                <table class="table table-striped table-advance table-hover" style="table-layout: fixed;border:1px solid #ccc">
+                                                <h4 style="word-wrap:break-word; padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">
+                                                    File path</h4>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.3.path }}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="plan-features">
+                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
+                                                        <h4 style="padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">Related Keywords</h4>
+                                                        <tbody>
+                                                    <tr>
+                                                        <td >{{ sel_arr.120}}</td>
+                                                        <td >{{ sel_arr.121}}</td>
+                                                        <td >{{ sel_arr.122}}</td>
+                                                        <td >{{ sel_arr.123}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.124}}</td>
+                                                        <td >{{ sel_arr.125}}</td>
+                                                        <td >{{ sel_arr.126}}</td>
+                                                        <td >{{ sel_arr.127}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.128}}</td>
+                                                        <td >{{ sel_arr.129}}</td>
+                                                        <td >{{ sel_arr.130}}</td>
+                                                        <td >{{ sel_arr.131}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.132}}</td>
+                                                        <td >{{ sel_arr.133}}</td>
+                                                        <td >{{ sel_arr.134}}</td>
+                                                        <td >{{ sel_arr.135}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.136}}</td>
+                                                        <td >{{ sel_arr.137}}</td>
+                                                        <td >{{ sel_arr.138}}</td>
+                                                        <td >{{ sel_arr.139}}</td>
+                                                    </tr>
+                                                        <tr>
+                                                        <td >{{ sel_arr.140}}</td>
+                                                        <td >{{ sel_arr.141}}</td>
+                                                        <td >{{ sel_arr.142}}</td>
+                                                        <td >{{ sel_arr.143}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.144}}</td>
+                                                        <td >{{ sel_arr.145}}</td>
+                                                        <td >{{ sel_arr.146}}</td>
+                                                        <td >{{ sel_arr.147}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.148}}</td>
+                                                        <td >{{ sel_arr.149}}</td>
+                                                        <td >{{ sel_arr.150}}</td>
+                                                        <td >{{ sel_arr.151}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.152}}</td>
+                                                        <td >{{ sel_arr.153}}</td>
+                                                        <td >{{ sel_arr.154}}</td>
+                                                        <td >{{ sel_arr.155}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.156}}</td>
+                                                        <td >{{ sel_arr.157}}</td>
+                                                        <td >{{ sel_arr.158}}</td>
+                                                        <td >{{ sel_arr.159}}</td>
+                                                    </tr>
+
+                                                </tbody>
+                                                    </table>
+                                                </div> <!-- /plan-features -->
+                                            </div>
+                                            <div class="tab-pane fade" id="tab" style="display: none;">
+                                                <table class="table table-striped table-advance table-hover" style="table-layout: fixed;border:1px solid #ccc">
+                                                <h4 style="word-wrap:break-word; padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">
+                                                    File path</h4>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.4.path }}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="plan-features">
+                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
+                                                        <h4 style="padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">Related Keywords</h4>
+                                                        <tbody>
+                                                        <tr>
+                                                        <td >{{ sel_arr.160}}</td>
+                                                        <td >{{ sel_arr.161}}</td>
+                                                        <td >{{ sel_arr.162}}</td>
+                                                        <td >{{ sel_arr.163}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.164}}</td>
+                                                        <td >{{ sel_arr.165}}</td>
+                                                        <td >{{ sel_arr.166}}</td>
+                                                        <td >{{ sel_arr.167}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.168}}</td>
+                                                        <td >{{ sel_arr.169}}</td>
+                                                        <td >{{ sel_arr.170}}</td>
+                                                        <td >{{ sel_arr.171}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.172}}</td>
+                                                        <td >{{ sel_arr.173}}</td>
+                                                        <td >{{ sel_arr.174}}</td>
+                                                        <td >{{ sel_arr.175}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.176}}</td>
+                                                        <td >{{ sel_arr.177}}</td>
+                                                        <td >{{ sel_arr.178}}</td>
+                                                        <td >{{ sel_arr.179}}</td>
+                                                    </tr>
+                                                        <tr>
+                                                        <td >{{ sel_arr.180}}</td>
+                                                        <td >{{ sel_arr.181}}</td>
+                                                        <td >{{ sel_arr.182}}</td>
+                                                        <td >{{ sel_arr.183}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.184}}</td>
+                                                        <td >{{ sel_arr.185}}</td>
+                                                        <td >{{ sel_arr.186}}</td>
+                                                        <td >{{ sel_arr.187}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.188}}</td>
+                                                        <td >{{ sel_arr.189}}</td>
+                                                        <td >{{ sel_arr.190}}</td>
+                                                        <td >{{ sel_arr.191}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.192}}</td>
+                                                        <td >{{ sel_arr.193}}</td>
+                                                        <td >{{ sel_arr.194}}</td>
+                                                        <td >{{ sel_arr.195}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.196}}</td>
+                                                        <td >{{ sel_arr.197}}</td>
+                                                        <td >{{ sel_arr.198}}</td>
+                                                        <td >{{ sel_arr.199}}</td>
+                                                    </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div> <!-- /plan-features -->
+                                            </div>
+                                            <div class="tab-pane fade" id="tab" style="display: none;">
+                                                <table class="table table-striped table-advance table-hover" style="table-layout: fixed;border:1px solid #ccc">
+                                                <h4 style="word-wrap:break-word; padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">
+                                                    File path</h4>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.5.path }}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="plan-features">
+                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
+                                                        <h4 style="padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">Related Keywords</h4>
+                                                        <tbody>
+                                                        <tr>
+                                                        <td >{{ sel_arr.200}}</td>
+                                                        <td >{{ sel_arr.201}}</td>
+                                                        <td >{{ sel_arr.202}}</td>
+                                                        <td >{{ sel_arr.203}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.204}}</td>
+                                                        <td >{{ sel_arr.205}}</td>
+                                                        <td >{{ sel_arr.206}}</td>
+                                                        <td >{{ sel_arr.207}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.208}}</td>
+                                                        <td >{{ sel_arr.209}}</td>
+                                                        <td >{{ sel_arr.210}}</td>
+                                                        <td >{{ sel_arr.211}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.212}}</td>
+                                                        <td >{{ sel_arr.213}}</td>
+                                                        <td >{{ sel_arr.214}}</td>
+                                                        <td >{{ sel_arr.215}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.216}}</td>
+                                                        <td >{{ sel_arr.217}}</td>
+                                                        <td >{{ sel_arr.218}}</td>
+                                                        <td >{{ sel_arr.219}}</td>
+                                                    </tr>
+                                                        <tr>
+                                                        <td >{{ sel_arr.220}}</td>
+                                                        <td >{{ sel_arr.221}}</td>
+                                                        <td >{{ sel_arr.222}}</td>
+                                                        <td >{{ sel_arr.223}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.224}}</td>
+                                                        <td >{{ sel_arr.225}}</td>
+                                                        <td >{{ sel_arr.226}}</td>
+                                                        <td >{{ sel_arr.227}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.228}}</td>
+                                                        <td >{{ sel_arr.229}}</td>
+                                                        <td >{{ sel_arr.230}}</td>
+                                                        <td >{{ sel_arr.231}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.232}}</td>
+                                                        <td >{{ sel_arr.233}}</td>
+                                                        <td >{{ sel_arr.234}}</td>
+                                                        <td >{{ sel_arr.235}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.236}}</td>
+                                                        <td >{{ sel_arr.237}}</td>
+                                                        <td >{{ sel_arr.238}}</td>
+                                                        <td >{{ sel_arr.239}}</td>
+                                                    </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div> <!-- /plan-features -->
+                                            </div>
+                                            <div class="tab-pane fade" id="tab" style="display: none;">
+                                                <table class="table table-striped table-advance table-hover" style="table-layout: fixed;border:1px solid #ccc">
+                                                <h4 style="word-wrap:break-word; padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">
+                                                    File path</h4>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.6.path }}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="plan-features">
+                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
+                                                        <h4 style="padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">Related Keywords</h4>
+                                                        <tbody>
+                                                        <tr>
+                                                        <td >{{ sel_arr.240}}</td>
+                                                        <td >{{ sel_arr.241}}</td>
+                                                        <td >{{ sel_arr.242}}</td>
+                                                        <td >{{ sel_arr.243}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.244}}</td>
+                                                        <td >{{ sel_arr.245}}</td>
+                                                        <td >{{ sel_arr.246}}</td>
+                                                        <td >{{ sel_arr.247}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.248}}</td>
+                                                        <td >{{ sel_arr.249}}</td>
+                                                        <td >{{ sel_arr.250}}</td>
+                                                        <td >{{ sel_arr.251}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.252}}</td>
+                                                        <td >{{ sel_arr.253}}</td>
+                                                        <td >{{ sel_arr.254}}</td>
+                                                        <td >{{ sel_arr.255}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.256}}</td>
+                                                        <td >{{ sel_arr.257}}</td>
+                                                        <td >{{ sel_arr.258}}</td>
+                                                        <td >{{ sel_arr.259}}</td>
+                                                    </tr>
+                                                        <tr>
+                                                        <td >{{ sel_arr.260}}</td>
+                                                        <td >{{ sel_arr.261}}</td>
+                                                        <td >{{ sel_arr.262}}</td>
+                                                        <td >{{ sel_arr.263}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.264}}</td>
+                                                        <td >{{ sel_arr.265}}</td>
+                                                        <td >{{ sel_arr.266}}</td>
+                                                        <td >{{ sel_arr.267}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.268}}</td>
+                                                        <td >{{ sel_arr.269}}</td>
+                                                        <td >{{ sel_arr.270}}</td>
+                                                        <td >{{ sel_arr.271}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.272}}</td>
+                                                        <td >{{ sel_arr.273}}</td>
+                                                        <td >{{ sel_arr.274}}</td>
+                                                        <td >{{ sel_arr.275}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.276}}</td>
+                                                        <td >{{ sel_arr.277}}</td>
+                                                        <td >{{ sel_arr.278}}</td>
+                                                        <td >{{ sel_arr.279}}</td>
+                                                    </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div> <!-- /plan-features -->
+                                            </div>
+                                            <div class="tab-pane fade" id="tab" style="display: none;">
+                                                <table class="table table-striped table-advance table-hover" style="table-layout: fixed;border:1px solid #ccc">
+                                                <h4 style="word-wrap:break-word; padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">
+                                                    File path</h4>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.7.path }}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="plan-features">
+                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
+                                                        <h4 style="padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">Related Keywords</h4>
+                                                        <tbody>
+                                                        <tr>
+                                                        <td >{{ sel_arr.280}}</td>
+                                                        <td >{{ sel_arr.281}}</td>
+                                                        <td >{{ sel_arr.282}}</td>
+                                                        <td >{{ sel_arr.283}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.284}}</td>
+                                                        <td >{{ sel_arr.285}}</td>
+                                                        <td >{{ sel_arr.286}}</td>
+                                                        <td >{{ sel_arr.287}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.288}}</td>
+                                                        <td >{{ sel_arr.289}}</td>
+                                                        <td >{{ sel_arr.290}}</td>
+                                                        <td >{{ sel_arr.291}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.292}}</td>
+                                                        <td >{{ sel_arr.293}}</td>
+                                                        <td >{{ sel_arr.294}}</td>
+                                                        <td >{{ sel_arr.295}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.296}}</td>
+                                                        <td >{{ sel_arr.297}}</td>
+                                                        <td >{{ sel_arr.298}}</td>
+                                                        <td >{{ sel_arr.299}}</td>
+                                                    </tr>
+                                                        <tr>
+                                                        <td >{{ sel_arr.300}}</td>
+                                                        <td >{{ sel_arr.301}}</td>
+                                                        <td >{{ sel_arr.302}}</td>
+                                                        <td >{{ sel_arr.303}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.304}}</td>
+                                                        <td >{{ sel_arr.305}}</td>
+                                                        <td >{{ sel_arr.306}}</td>
+                                                        <td >{{ sel_arr.307}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.308}}</td>
+                                                        <td >{{ sel_arr.309}}</td>
+                                                        <td >{{ sel_arr.310}}</td>
+                                                        <td >{{ sel_arr.311}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.312}}</td>
+                                                        <td >{{ sel_arr.313}}</td>
+                                                        <td >{{ sel_arr.314}}</td>
+                                                        <td >{{ sel_arr.315}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.316}}</td>
+                                                        <td >{{ sel_arr.317}}</td>
+                                                        <td >{{ sel_arr.318}}</td>
+                                                        <td >{{ sel_arr.319}}</td>
+                                                    </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div> <!-- /plan-features -->
+                                            </div>
+                                            <div class="tab-pane fade" id="tab" style="display: none;">
+                                                <table class="table table-striped table-advance table-hover" style="table-layout: fixed;border:1px solid #ccc">
+                                                <h4 style="word-wrap:break-word; padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">
+                                                    File path</h4>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.8.path }}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="plan-features">
+                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
+                                                        <h4 style="padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">Related Keywords</h4>
+                                                        <tbody>
+                                                        <tr>
+                                                        <td >{{ sel_arr.320}}</td>
+                                                        <td >{{ sel_arr.321}}</td>
+                                                        <td >{{ sel_arr.322}}</td>
+                                                        <td >{{ sel_arr.323}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.324}}</td>
+                                                        <td >{{ sel_arr.325}}</td>
+                                                        <td >{{ sel_arr.326}}</td>
+                                                        <td >{{ sel_arr.327}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.328}}</td>
+                                                        <td >{{ sel_arr.329}}</td>
+                                                        <td >{{ sel_arr.330}}</td>
+                                                        <td >{{ sel_arr.331}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.332}}</td>
+                                                        <td >{{ sel_arr.333}}</td>
+                                                        <td >{{ sel_arr.334}}</td>
+                                                        <td >{{ sel_arr.335}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.336}}</td>
+                                                        <td >{{ sel_arr.337}}</td>
+                                                        <td >{{ sel_arr.338}}</td>
+                                                        <td >{{ sel_arr.339}}</td>
+                                                    </tr>
+                                                        <tr>
+                                                        <td >{{ sel_arr.340}}</td>
+                                                        <td >{{ sel_arr.341}}</td>
+                                                        <td >{{ sel_arr.342}}</td>
+                                                        <td >{{ sel_arr.343}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.344}}</td>
+                                                        <td >{{ sel_arr.345}}</td>
+                                                        <td >{{ sel_arr.346}}</td>
+                                                        <td >{{ sel_arr.347}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.348}}</td>
+                                                        <td >{{ sel_arr.349}}</td>
+                                                        <td >{{ sel_arr.350}}</td>
+                                                        <td >{{ sel_arr.351}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.352}}</td>
+                                                        <td >{{ sel_arr.353}}</td>
+                                                        <td >{{ sel_arr.354}}</td>
+                                                        <td >{{ sel_arr.355}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.356}}</td>
+                                                        <td >{{ sel_arr.357}}</td>
+                                                        <td >{{ sel_arr.358}}</td>
+                                                        <td >{{ sel_arr.359}}</td>
+                                                    </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div> <!-- /plan-features -->
+                                            </div>
+                                            <div class="tab-pane fade" id="tab" style="display: none;">
+                                                <table class="table table-striped table-advance table-hover" style="table-layout: fixed;border:1px solid #ccc">
+                                                <h4 style="word-wrap:break-word; padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">
+                                                    File path</h4>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.9.path }}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="plan-features">
+                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
+                                                        <h4 style="padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">Related Keywords</h4>
+                                                        <tbody>
+                                                        <tr>
+                                                        <td >{{ sel_arr.360}}</td>
+                                                        <td >{{ sel_arr.361}}</td>
+                                                        <td >{{ sel_arr.362}}</td>
+                                                        <td >{{ sel_arr.363}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.364}}</td>
+                                                        <td >{{ sel_arr.365}}</td>
+                                                        <td >{{ sel_arr.366}}</td>
+                                                        <td >{{ sel_arr.367}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.368}}</td>
+                                                        <td >{{ sel_arr.369}}</td>
+                                                        <td >{{ sel_arr.370}}</td>
+                                                        <td >{{ sel_arr.371}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.372}}</td>
+                                                        <td >{{ sel_arr.373}}</td>
+                                                        <td >{{ sel_arr.374}}</td>
+                                                        <td >{{ sel_arr.375}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.376}}</td>
+                                                        <td >{{ sel_arr.377}}</td>
+                                                        <td >{{ sel_arr.378}}</td>
+                                                        <td >{{ sel_arr.379}}</td>
+                                                    </tr>
+                                                        <tr>
+                                                        <td >{{ sel_arr.380}}</td>
+                                                        <td >{{ sel_arr.381}}</td>
+                                                        <td >{{ sel_arr.382}}</td>
+                                                        <td >{{ sel_arr.383}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.384}}</td>
+                                                        <td >{{ sel_arr.385}}</td>
+                                                        <td >{{ sel_arr.386}}</td>
+                                                        <td >{{ sel_arr.387}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.388}}</td>
+                                                        <td >{{ sel_arr.389}}</td>
+                                                        <td >{{ sel_arr.390}}</td>
+                                                        <td >{{ sel_arr.391}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.392}}</td>
+                                                        <td >{{ sel_arr.393}}</td>
+                                                        <td >{{ sel_arr.394}}</td>
+                                                        <td >{{ sel_arr.395}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.396}}</td>
+                                                        <td >{{ sel_arr.397}}</td>
+                                                        <td >{{ sel_arr.398}}</td>
+                                                        <td >{{ sel_arr.399}}</td>
+                                                    </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div> <!-- /plan-features -->
+                                            </div>
+                                            <div class="tab-pane fade" id="tab" style="display: none;">
+                                                <table class="table table-striped table-advance table-hover" style="table-layout: fixed;border:1px solid #ccc">
+                                                <h4 style="word-wrap:break-word; padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">
+                                                    File path</h4>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.10.path }}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="plan-features">
+                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
+                                                        <h4 style="padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">Related Keywords</h4>
+                                                        <tbody>
+                                                        <tr>
+                                                        <td >{{ sel_arr.400}}</td>
+                                                        <td >{{ sel_arr.401}}</td>
+                                                        <td >{{ sel_arr.402}}</td>
+                                                        <td >{{ sel_arr.403}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.404}}</td>
+                                                        <td >{{ sel_arr.405}}</td>
+                                                        <td >{{ sel_arr.406}}</td>
+                                                        <td >{{ sel_arr.407}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.408}}</td>
+                                                        <td >{{ sel_arr.409}}</td>
+                                                        <td >{{ sel_arr.410}}</td>
+                                                        <td >{{ sel_arr.411}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.412}}</td>
+                                                        <td >{{ sel_arr.413}}</td>
+                                                        <td >{{ sel_arr.414}}</td>
+                                                        <td >{{ sel_arr.415}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.416}}</td>
+                                                        <td >{{ sel_arr.417}}</td>
+                                                        <td >{{ sel_arr.418}}</td>
+                                                        <td >{{ sel_arr.419}}</td>
+                                                    </tr>
+                                                        <tr>
+                                                        <td >{{ sel_arr.420}}</td>
+                                                        <td >{{ sel_arr.421}}</td>
+                                                        <td >{{ sel_arr.422}}</td>
+                                                        <td >{{ sel_arr.423}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.424}}</td>
+                                                        <td >{{ sel_arr.425}}</td>
+                                                        <td >{{ sel_arr.426}}</td>
+                                                        <td >{{ sel_arr.427}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.428}}</td>
+                                                        <td >{{ sel_arr.429}}</td>
+                                                        <td >{{ sel_arr.430}}</td>
+                                                        <td >{{ sel_arr.431}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.432}}</td>
+                                                        <td >{{ sel_arr.433}}</td>
+                                                        <td >{{ sel_arr.434}}</td>
+                                                        <td >{{ sel_arr.435}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.436}}</td>
+                                                        <td >{{ sel_arr.437}}</td>
+                                                        <td >{{ sel_arr.438}}</td>
+                                                        <td >{{ sel_arr.439}}</td>
+                                                    </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div> <!-- /plan-features -->
+                                            </div>
+                                            <div class="tab-pane fade" id="tab" style="display: none;">
+                                                <table class="table table-striped table-advance table-hover" style="table-layout: fixed;border:1px solid #ccc">
+                                                <h4 style="word-wrap:break-word; padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">
+                                                    File path</h4>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.11.path }}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="plan-features">
+                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
+                                                        <h4 style="padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">Related Keywords</h4>
+                                                        <tbody>
+                                                        <tr>
+                                                        <td >{{ sel_arr.440}}</td>
+                                                        <td >{{ sel_arr.441}}</td>
+                                                        <td >{{ sel_arr.442}}</td>
+                                                        <td >{{ sel_arr.443}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.444}}</td>
+                                                        <td >{{ sel_arr.445}}</td>
+                                                        <td >{{ sel_arr.446}}</td>
+                                                        <td >{{ sel_arr.447}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.448}}</td>
+                                                        <td >{{ sel_arr.449}}</td>
+                                                        <td >{{ sel_arr.450}}</td>
+                                                        <td >{{ sel_arr.451}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.452}}</td>
+                                                        <td >{{ sel_arr.453}}</td>
+                                                        <td >{{ sel_arr.454}}</td>
+                                                        <td >{{ sel_arr.455}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.456}}</td>
+                                                        <td >{{ sel_arr.457}}</td>
+                                                        <td >{{ sel_arr.458}}</td>
+                                                        <td >{{ sel_arr.459}}</td>
+                                                    </tr>
+                                                        <tr>
+                                                        <td >{{ sel_arr.460}}</td>
+                                                        <td >{{ sel_arr.461}}</td>
+                                                        <td >{{ sel_arr.462}}</td>
+                                                        <td >{{ sel_arr.463}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.464}}</td>
+                                                        <td >{{ sel_arr.465}}</td>
+                                                        <td >{{ sel_arr.466}}</td>
+                                                        <td >{{ sel_arr.467}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.468}}</td>
+                                                        <td >{{ sel_arr.469}}</td>
+                                                        <td >{{ sel_arr.470}}</td>
+                                                        <td >{{ sel_arr.471}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.472}}</td>
+                                                        <td >{{ sel_arr.473}}</td>
+                                                        <td >{{ sel_arr.474}}</td>
+                                                        <td >{{ sel_arr.475}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.476}}</td>
+                                                        <td >{{ sel_arr.477}}</td>
+                                                        <td >{{ sel_arr.478}}</td>
+                                                        <td >{{ sel_arr.479}}</td>
+                                                    </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div> <!-- /plan-features -->
+                                            </div>
+                                            <div class="tab-pane fade" id="tab" style="display: none;">
+                                                <table class="table table-striped table-advance table-hover" style="table-layout: fixed;border:1px solid #ccc">
+                                                <h4 style="word-wrap:break-word; padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">
+                                                    File path</h4>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.12.path }}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="plan-features">
+                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
+                                                        <h4 style="padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">Related Keywords</h4>
+                                                        <tbody>
+                                                        <tr>
+                                                        <td >{{ sel_arr.480}}</td>
+                                                        <td >{{ sel_arr.481}}</td>
+                                                        <td >{{ sel_arr.482}}</td>
+                                                        <td >{{ sel_arr.483}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.484}}</td>
+                                                        <td >{{ sel_arr.485}}</td>
+                                                        <td >{{ sel_arr.486}}</td>
+                                                        <td >{{ sel_arr.487}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.488}}</td>
+                                                        <td >{{ sel_arr.489}}</td>
+                                                        <td >{{ sel_arr.490}}</td>
+                                                        <td >{{ sel_arr.491}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.492}}</td>
+                                                        <td >{{ sel_arr.493}}</td>
+                                                        <td >{{ sel_arr.494}}</td>
+                                                        <td >{{ sel_arr.495}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.496}}</td>
+                                                        <td >{{ sel_arr.497}}</td>
+                                                        <td >{{ sel_arr.498}}</td>
+                                                        <td >{{ sel_arr.499}}</td>
+                                                    </tr>
+                                                        <tr>
+                                                        <td >{{ sel_arr.500}}</td>
+                                                        <td >{{ sel_arr.501}}</td>
+                                                        <td >{{ sel_arr.502}}</td>
+                                                        <td >{{ sel_arr.503}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.504}}</td>
+                                                        <td >{{ sel_arr.505}}</td>
+                                                        <td >{{ sel_arr.506}}</td>
+                                                        <td >{{ sel_arr.507}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.508}}</td>
+                                                        <td >{{ sel_arr.509}}</td>
+                                                        <td >{{ sel_arr.510}}</td>
+                                                        <td >{{ sel_arr.511}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.512}}</td>
+                                                        <td >{{ sel_arr.513}}</td>
+                                                        <td >{{ sel_arr.514}}</td>
+                                                        <td >{{ sel_arr.515}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.516}}</td>
+                                                        <td >{{ sel_arr.517}}</td>
+                                                        <td >{{ sel_arr.518}}</td>
+                                                        <td >{{ sel_arr.519}}</td>
+                                                    </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div> <!-- /plan-features -->
+                                            </div>
+                                            <div class="tab-pane fade" id="tab" style="display: none;">
+                                                <table class="table table-striped table-advance table-hover" style="table-layout: fixed;border:1px solid #ccc">
+                                                <h4 style="word-wrap:break-word; padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">
+                                                    File path</h4>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.13.path }}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="plan-features">
+                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
+                                                        <h4 style="padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">Related Keywords</h4>
+                                                        <tbody>
+                                                        <tr>
+                                                        <td >{{ sel_arr.520}}</td>
+                                                        <td >{{ sel_arr.521}}</td>
+                                                        <td >{{ sel_arr.522}}</td>
+                                                        <td >{{ sel_arr.523}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.524}}</td>
+                                                        <td >{{ sel_arr.525}}</td>
+                                                        <td >{{ sel_arr.526}}</td>
+                                                        <td >{{ sel_arr.527}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.528}}</td>
+                                                        <td >{{ sel_arr.529}}</td>
+                                                        <td >{{ sel_arr.530}}</td>
+                                                        <td >{{ sel_arr.531}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.532}}</td>
+                                                        <td >{{ sel_arr.533}}</td>
+                                                        <td >{{ sel_arr.534}}</td>
+                                                        <td >{{ sel_arr.535}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.536}}</td>
+                                                        <td >{{ sel_arr.537}}</td>
+                                                        <td >{{ sel_arr.538}}</td>
+                                                        <td >{{ sel_arr.539}}</td>
+                                                    </tr>
+                                                        <tr>
+                                                        <td >{{ sel_arr.540}}</td>
+                                                        <td >{{ sel_arr.541}}</td>
+                                                        <td >{{ sel_arr.542}}</td>
+                                                        <td >{{ sel_arr.543}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.544}}</td>
+                                                        <td >{{ sel_arr.545}}</td>
+                                                        <td >{{ sel_arr.546}}</td>
+                                                        <td >{{ sel_arr.547}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.548}}</td>
+                                                        <td >{{ sel_arr.549}}</td>
+                                                        <td >{{ sel_arr.550}}</td>
+                                                        <td >{{ sel_arr.551}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.552}}</td>
+                                                        <td >{{ sel_arr.553}}</td>
+                                                        <td >{{ sel_arr.554}}</td>
+                                                        <td >{{ sel_arr.555}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.556}}</td>
+                                                        <td >{{ sel_arr.557}}</td>
+                                                        <td >{{ sel_arr.558}}</td>
+                                                        <td >{{ sel_arr.559}}</td>
+                                                    </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div> <!-- /plan-features -->
+                                            </div>
+                                            <div class="tab-pane fade" id="tab" style="display: none;">
+                                                <table class="table table-striped table-advance table-hover" style="table-layout: fixed;border:1px solid #ccc">
+                                                <h4 style="word-wrap:break-word; padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">
+                                                    File path</h4>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ filelist.14.path }}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="plan-features">
+                                                    <table class="table table-striped table-advance table-hover" style="table-layout: fixed; margin-bottom: 0;">
+                                                        <h4 style="padding: 10px; margin: 0px;background: #ff865c;color: #ffffff;font-weight: 600;">Related Keywords</h4>
+                                                        <tbody>
+                                                        <tr>
+                                                        <td >{{ sel_arr.560}}</td>
+                                                        <td >{{ sel_arr.561}}</td>
+                                                        <td >{{ sel_arr.562}}</td>
+                                                        <td >{{ sel_arr.563}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.564}}</td>
+                                                        <td >{{ sel_arr.565}}</td>
+                                                        <td >{{ sel_arr.566}}</td>
+                                                        <td >{{ sel_arr.567}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.568}}</td>
+                                                        <td >{{ sel_arr.569}}</td>
+                                                        <td >{{ sel_arr.570}}</td>
+                                                        <td >{{ sel_arr.571}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.572}}</td>
+                                                        <td >{{ sel_arr.573}}</td>
+                                                        <td >{{ sel_arr.574}}</td>
+                                                        <td >{{ sel_arr.575}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.576}}</td>
+                                                        <td >{{ sel_arr.577}}</td>
+                                                        <td >{{ sel_arr.578}}</td>
+                                                        <td >{{ sel_arr.579}}</td>
+                                                    </tr>
+                                                        <tr>
+                                                        <td >{{ sel_arr.580}}</td>
+                                                        <td >{{ sel_arr.581}}</td>
+                                                        <td >{{ sel_arr.582}}</td>
+                                                        <td >{{ sel_arr.583}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.584}}</td>
+                                                        <td >{{ sel_arr.585}}</td>
+                                                        <td >{{ sel_arr.586}}</td>
+                                                        <td >{{ sel_arr.587}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.588}}</td>
+                                                        <td >{{ sel_arr.589}}</td>
+                                                        <td >{{ sel_arr.590}}</td>
+                                                        <td >{{ sel_arr.591}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.592}}</td>
+                                                        <td >{{ sel_arr.593}}</td>
+                                                        <td >{{ sel_arr.594}}</td>
+                                                        <td >{{ sel_arr.595}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td >{{ sel_arr.596}}</td>
+                                                        <td >{{ sel_arr.597}}</td>
+                                                        <td >{{ sel_arr.598}}</td>
+                                                        <td >{{ sel_arr.599}}</td>
+                                                    </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div> <!-- /plan-features -->
+                                            </div>
+                                        </div>
+                                    </div>
+                             </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div> <!-- /span9 -->
+                <!--    </div> <!--/col-lg-12-->
+            </div><!--/row mt-->
+        </section>
+        <! --/wrapper -->
+    </section><!-- /MAIN CONTENT -->
+
+    <!--main content end-->
+
+</section>
+<!--标签云的script-->
+
+
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
+<script class="include" type="text/javascript" src="/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="/assets/js/jquery.scrollTo.min.js"></script>
+<script src="/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="/assets/js/jquery-1.9.1.min.js"></script>
+<script src="/assets/js/jquery.selectlist.js"></script>
+<script src="/assets/js/table-sort.js"></script>
+<script src="/assets/js/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script src="/assets/js/jquery.svg3dtagcloud.min.js"></script>
+<script src="/assets/js/jquery.min.js" type="text/javascript"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/jquery-1.11.0.min.js"><\/script>')</script>
+<script type="text/javascript" src="/assets/js/jquery.mark.min.js"></script>
+<!--鼠标经过效果 -->
+<script src="/assets/js/demo.js"></script>
+<!--/鼠标经过效果 -->
+<script type="text/javascript">
+    $(function() {
+
+		  var mark = function(keywords, classname) {
+
+		    // Read the keyword
+{#		    var keyword = $("input[name='keyword']").val();#}
+              var keyword = keywords;
+
+		    // Determine selected options
+		    var options = {
+		      "className": classname
+		    };
+		    $("input[name='opt[]']").each(function() {
+		      options[$(this).val()] = $(this).is(":checked");
+		    });
+
+		    // Mark the keyword inside the context
+{#		    $(".context").removeMark();#}
+		    $(".context").mark(keyword, options);
+		  };
+
+{#		  $("input[name='keyword']").on("keyup", mark);#}
+{#		  $("input[type='checkbox']").on("change", mark);#}
+        mark('{{ str_kws.15 }}', 'common');
+        mark('{{ str_kws.0 }}', 'file0');
+        mark('{{ str_kws.1 }}', 'file1');
+        mark('{{ str_kws.2 }}', 'file2');
+        mark('{{ str_kws.3 }}', 'file3');
+        mark('{{ str_kws.4 }}', 'file4');
+        mark('{{ str_kws.5 }}', 'file5');
+        mark('{{ str_kws.6 }}', 'file6');
+        mark('{{ str_kws.7 }}', 'file7');
+        mark('{{ str_kws.8 }}', 'file8');
+        mark('{{ str_kws.9 }}', 'file9');
+        mark('{{ str_kws.10 }}', 'file10');
+        mark('{{ str_kws.11 }}', 'file11');
+        mark('{{ str_kws.12 }}', 'file12');
+        mark('{{ str_kws.13 }}', 'file13');
+        mark('{{ str_kws.14 }}', 'file14');
+
+		});
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('select').selectlist({
+            zIndex: 10,
+            height: 34
+        });
+    })
+</script>
+
+
+<!--common script for all pages-->
+<script src="/assets/js/common-scripts.js"></script>
+<script>
+    function change(number, pre) {
+        var mark = function (keywords, classname) {
+            var keyword = keywords;
+
+            // Determine selected options
+            var options = {
+                "className": classname
+            };
+            $("input[name='opt[]']").each(function () {
+                options[$(this).val()] = $(this).is(":checked");
+            });
+            // Mark the keyword inside the context
+            $(".context").removeMark();
+            $(".context").mark(keyword, options);
+        };
+        if (number == 0) {
+            mark('{{ str_kws.0 }}', pre)
+        } else if (number == 1) {
+            mark('{{ str_kws.1 }}', pre)
+        } else if (number == 2) {
+            mark('{{ str_kws.2 }}', pre)
+        } else if (number == 3) {
+            mark('{{ str_kws.3 }}', pre)
+        } else if (number == 4) {
+            mark('{{ str_kws.4 }}', pre)
+        } else if (number == 5) {
+            mark('{{ str_kws.5 }}', pre)
+        } else if (number == 6) {
+            mark('{{ str_kws.6 }}', pre)
+        } else if (number == 7) {
+            mark('{{ str_kws.7 }}', pre)
+        } else if (number == 8) {
+            mark('{{ str_kws.8 }}', pre)
+        } else if (number == 9) {
+            mark('{{ str_kws.9 }}', pre)
+        } else if (number == 10) {
+            mark('{{ str_kws.10 }}', pre);
+        } else if (number == 11) {
+            mark('{{ str_kws.11 }}', pre);
+        } else if (number == 12) {
+            mark('{{ str_kws.12 }}', pre);
+        } else if (number == 13) {
+            mark('{{ str_kws.13 }}', pre);
+        } else if (number == 14) {
+            mark('{{ str_kws.14 }}', pre);
+        }
+
+        document.getElementById('cloud').style.display = 'none';
+        document.getElementById('fullfile').style.display = 'block';
+
+        contents = document.getElementsByClassName('tab-content-file')[0].getElementsByClassName('tab-pane fade');
+        tabs = document.getElementsByTagName('nav')[0].getElementsByTagName('li');
+        for (var i = 0, len = contents.length; i < len; i++) {
+            if (i === number) {
+                contents[i].className = "tab-pane fade active in";
+                contents[i].style.display = 'block';
+                tabs[i].className = 'active';
+            } else {
+                contents[i].className = 'tab-pane fade';
+                contents[i].style.display = 'none';
+                tabs[i].className = '';
+            }
+        }
+
+
+    }
+</script>
+<script>
+    function draw_all(){
+        var mark = function (keywords, classname) {
+                var keyword = keywords;
+                var options = {
+                    "className": classname
+                };
+                $("input[name='opt[]']").each(function () {
+                    options[$(this).val()] = $(this).is(":checked");
+                });
+                $(".context").mark(keyword, options);
+            };
+            $(".context").removeMark();
+            mark('{{ str_kws.10 }}', 'common');
+            mark('{{ str_kws.0 }}', 'file0');
+            mark('{{ str_kws.1 }}', 'file1');
+            mark('{{ str_kws.2 }}', 'file2');
+            mark('{{ str_kws.3 }}', 'file3');
+            mark('{{ str_kws.4 }}', 'file4');
+            mark('{{ str_kws.5 }}', 'file5');
+            mark('{{ str_kws.6 }}', 'file6');
+            mark('{{ str_kws.7 }}', 'file7');
+            mark('{{ str_kws.8 }}', 'file8');
+            mark('{{ str_kws.9 }}', 'file9');
+            mark('{{ str_kws.10 }}', 'file10');
+            mark('{{ str_kws.11 }}', 'file11');
+            mark('{{ str_kws.12 }}', 'file12');
+            mark('{{ str_kws.13 }}', 'file13');
+            mark('{{ str_kws.14 }}', 'file14');
+
+        document.getElementById('fullfile').style.display = 'none';
+        document.getElementById('cloud').style.display = 'block';
+
+    }
+
+</script>
+<!--script for this page-->
+
+<script>
+    //custom select box
+
+    $(function () {
+        $('select.styled').customSelect();
+    });
+
+</script>
+
+<script >
+    function show(number) {
+        document.getElementById('bg').style.display = 'block';
+        if (number == 0) {
+            document.getElementById('pop0').style.display = 'block';
+        } else if (number == 1) {
+            document.getElementById('pop1').style.display = 'block';
+        } else if (number == 2) {
+            document.getElementById('pop2').style.display = 'block';
+        } else if (number == 3) {
+            document.getElementById('pop3').style.display = 'block';
+        } else if (number == 4) {
+            document.getElementById('pop4').style.display = 'block';
+        } else if (number == 5) {
+            document.getElementById('pop5').style.display = 'block';
+        } else if (number == 6) {
+            document.getElementById('pop6').style.display = 'block';
+        } else if (number == 7) {
+            document.getElementById('pop7').style.display = 'block';
+        } else if (number == 8) {
+            document.getElementById('pop8').style.display = 'block';
+        } else if (number == 9) {
+            document.getElementById('pop9').style.display = 'block';
+        } else if (number == 10) {
+            document.getElementById('pop10').style.display = 'block';
+        } else if (number == 11) {
+            document.getElementById('pop11').style.display = 'block';
+        } else if (number == 12) {
+            document.getElementById('pop12').style.display = 'block';
+        } else if (number == 13) {
+            document.getElementById('pop13').style.display = 'block';
+        } else if (number == 14) {
+            document.getElementById('pop14').style.display = 'block';
+        }
+        var doc = document.documentElement;
+        relHeight = (doc.clientHeight > doc.scrollHeight) ? doc.clientHeight : doc.scrollHeight;//获取屏幕高度和当前页面高度中的较大值
+        document.getElementById('bg').style.height = relHeight+'px';//id为bg的div就是我页面中的遮罩层
+    }
+    function closeDiv() {
+        document.getElementById('bg').style.display = 'none';
+        document.getElementById('pop0').style.display = 'none';
+        document.getElementById('pop1').style.display = 'none';
+        document.getElementById('pop2').style.display = 'none';
+        document.getElementById('pop3').style.display = 'none';
+        document.getElementById('pop4').style.display = 'none';
+        document.getElementById('pop5').style.display = 'none';
+        document.getElementById('pop6').style.display = 'none';
+        document.getElementById('pop7').style.display = 'none';
+        document.getElementById('pop8').style.display = 'none';
+        document.getElementById('pop9').style.display = 'none';
+        document.getElementById('pop10').style.display = 'none';
+        document.getElementById('pop11').style.display = 'none';
+        document.getElementById('pop12').style.display = 'none';
+        document.getElementById('pop13').style.display = 'none';
+        document.getElementById('pop14').style.display = 'none';
+
+    }
+</script>
+</body>
+</html>

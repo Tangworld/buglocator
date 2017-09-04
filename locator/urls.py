@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^cloud/$', views.cloud, name='cloud'),
     url(r'^to_fix/$', views.to_fix, name='to_fix'),
     url(r'^load/$', views.load, name='load'),
+    url(r'^mix/$', views.mix, name='mix'),
 
     url(r'^index_admin/$', views.login, name='index_admin'),
     url(r'^profile_admin/$', views.profile, name='profile_admin'),
