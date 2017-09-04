@@ -983,9 +983,10 @@ def get_result(request, bugid):
     #s_ptd = test.llda_test(report, r_k_vocab, r_pl, r_phi, r_omega, r_ptw, r_pws)
     s_ptd = test.llda_test(report, r_k_vocab, r_pl, r_phi, r_ptw, r_pws)
     for i in range(0, 15):
-        result.append(s_ptd[i][0])
+        result.append(s_ptd[i][0]+1)
     end = time.time()
     print "BugHunter consumed %f s."%(end-start)
+    # print 'bughunter ', result
     return result
 
 
@@ -1125,6 +1126,7 @@ def get_result_l2ss(request, bugid):
         result.append(s_ptd[i][0])
     end = time.time()
     print "L2SS consumed %f s." %(end - start)
+    # print 'l2ss: ', result
     return result
 
 
