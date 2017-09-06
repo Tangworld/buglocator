@@ -1255,7 +1255,6 @@ def mix(request):
     for rl in result_l2ss:
         filenumber = models.filemap.objects.get(path_l2ss=rl).filenumber
         filenumber = int(filenumber)
-        print type(filenumber), type(result_bh[0])
         if filenumber in result_bh:
             real_result.append(filenumber)
 
@@ -1301,8 +1300,11 @@ def mix(request):
     for t in temp:
         if t not in all_cloud:
             all_cloud.append(t)
-    return render(request, 'mix_resultPage.html', {'sel_arr': kwArr, 'str_kws': str_kws,'method': methodid,'filename':filename,
-                                               'filelist': filelist, 'bugid': bugid, 'report': bugreport})
+    # red #ff3778 #daafe8 #ffcccc yellow #9ad6fc #6265fe #339999 #99ccff #ccff99 #66cccc green blue #666699 #c0a16b
+    color = ['red', '#ff3778', '#daafe8', '#ffcccc', 'yellow', '#9ad6fc', '#6265fe', '#339999', '#99ccff', '#ccff99', '#66cccc', 'green', 'blue', '#666699', '#c0a16b']
+    display = zip(filename, color)
+    return render(request, 'mix_resultPage.html', {'sel_arr': kwArr, 'str_kws': str_kws,'method': methodid,
+                                               'filelist': filelist, 'bugid': bugid, 'report': bugreport, 'display': display})
 
 
 def load(request):
